@@ -1,0 +1,46 @@
+deployment:
+  replicas: 2
+  startupProbe:
+    enabled: true
+    path: /auth/signin
+    timeoutSeconds: 3
+    failureThreshold: 5
+    initialDelaySeconds: 30
+  livenessProbe:
+    enabled: true
+    path: /auth/signin
+    timeoutSeconds: 3
+    failureThreshold: 5
+    initialDelaySeconds: 30
+  readinessProbe:
+    enabled: false
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+service:
+  port: 3000
+
+ingress:
+  enabled: true
+  tls: false
+  hosts:
+    - app.docuchain.io
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-body-size: 200m
+    nginx.ingress.kubernetes.io/server-snippets: |
+      location / {
+        add_header X-Frame-Options SAMEORIGIN always;
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+      }

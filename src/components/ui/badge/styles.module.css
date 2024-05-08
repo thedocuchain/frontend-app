@@ -1,0 +1,44 @@
+.badge {
+  display: flex;
+  font-size: 12px;
+  font-weight: normal;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: fit-content;
+  height: 22px;
+  padding: 3px 6px;
+  gap: 3px;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.awaiting {
+  border: solid 1px var(--bg-grey-7);
+  background: var(--bg-grey-8);
+}
+
+.awaitingText {
+  color: var(--text-primary);
+}
+
+.signed {
+  border: solid 1px var(--bg-success-200);
+  background: var(--bg-success-50);
+}
+
+.signedText {
+  color: var(--text-success);
+}
+
+.signed svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--bg-success-500);
+}
+
+.awaiting svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--bg-grey-2);
+}

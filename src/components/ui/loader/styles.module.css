@@ -1,0 +1,7 @@
+.wrapper svg > path {
+  fill: var(--bg-accent);
+}
+
+.wrapper.white svg > path {
+  fill: #fff;
+}

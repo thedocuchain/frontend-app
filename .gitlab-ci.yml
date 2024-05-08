@@ -1,0 +1,3 @@
+include:
+  - project: docuchain/docuchain-infrastructure/ci-cd-includes
+    file: common_frontend.yml

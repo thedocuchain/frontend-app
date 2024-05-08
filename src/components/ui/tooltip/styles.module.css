@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+}
+
+.tooltipTop,
+.tooltipRight,
+.tooltipLeft,
+.tooltipBottom {
+  position: absolute;
+  z-index: 10000;
+  min-width: 130px;
+  width: fit-content;
+  margin-bottom: 10px;
+  background: var(--bg-black);
+  color: #fff;
+  font-size: 11px;
+  line-height: 18px;
+  white-space: pre-wrap;
+  overflow: visible;
+  padding: 2px 8px 2px 8px;
+  border-radius: 4px;
+}
+
+.tooltipTop {
+  bottom: 100%;
+  right: 50%;
+}
+
+.tooltipRight {
+  right: calc(100% + 5px);
+}
+
+.tooltipLeft {
+  left: calc(100% + 5px);
+}
+
+.tooltipBottom {
+  bottom: unset;
+  top: calc(100% + 5px);
+}
+
+.tooltipError {
+  bottom: 100%;
+  right: 50%;
+  left: unset;
+  top: unset;
+  background: var(--bg-error);
+}
+
+.nowrap {
+  white-space: nowrap;
+}

@@ -1,0 +1,7 @@
+User-agent: *
+
+Disallow: /?_gl=
+Disallow: */embed
+Disallow: */xmlrpc.php
+
+Sitemap: https://project.com/sitemap.xml

@@ -1,0 +1,15 @@
+*.json
+*.png
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.webp
+*.jpg
+*.svg
+*.js
+*.ts
+*.tsx
+*.md
+*.lock
+*.log

@@ -1,0 +1,21 @@
+.card {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 15px, transparent 15px) 0% 0%/16px 16px no-repeat,
+    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 15px, transparent 15px) 100% 0%/16px 16px no-repeat,
+    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 15px, transparent 15px) 0% 100%/16px 16px no-repeat,
+    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 15px, transparent 15px) 100% 100%/16px 16px no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 2px) calc(100% - 32px) no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 32px) calc(100% - 2px) no-repeat,
+    linear-gradient(90deg, #a67cfa 0%, #64b4fa 33%, #40d3d6 66%, #33e58c 100%);
+    border-radius: 16px;
+    padding: 17px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 56px -20px #0016701A;
+}
+
+@media (--mobile) {
+    .card {
+        box-shadow: 0 1px 28px -8px #0016700F;
+    }
+}

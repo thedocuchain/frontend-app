@@ -1,0 +1,92 @@
+:root {
+  --font-inter: Inter, Roboto, -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, serif;
+
+  /* background colors */
+  --bg-white: #FFFFFF;
+  --bg-black: #192130;
+  --bg-grey-1: #394557;
+  --bg-grey-2: #697586;
+  --bg-grey-3: #9AA4B2;
+  --bg-grey-4: #B8C1CF;
+  --bg-grey-5: #D1D7E0;
+  --bg-grey-6: #DFE5ED;
+  --bg-grey-7: #E7EBF1;
+  --bg-grey-8: #F8FAFC;
+  --bg-grey-1-opacity: #0A1833CC;
+  --bg-grey-2-opacity: #0A183399;
+  --bg-grey-3-opacity: #0A183361;
+  --bg-grey-4-opacity: #0A18333D;
+  --bg-grey-5-opacity: #0A183329;
+  --bg-grey-6-opacity: #0A18331A;
+  --bg-grey-7-opacity: #0A18330F;
+  --bg-grey-8-opacity: #0A183305;
+
+  /* text colors */
+  --text-primary: #0D1629F5;
+  --text-secondary: #0A183399;
+  --text-tertiary: #0A183361;
+  --text-accent: #378503;
+  --text-white: #FFFFFF;
+  --text-link-default: #484FE0;
+  --text-signature-color-1: #000358;
+  --text-success: #067647;
+  --text-error: #B42318;
+
+  /* accent colors */
+  --bg-accent-extra-dark: #75BD48;
+  --bg-accent-dark: #88D656;
+  --bg-accent: #9FE870;
+  --bg-accent-light-1: #BAF593;
+  --bg-accent-light-2: #CFFAB4;
+  --bg-accent-extra-light: #E3FCD4;
+
+  /* link colors */
+  --bg-link-default: #484FE0;
+  --bg-border-gradient: linear-gradient(87.1deg, #A67CFA 0%, #64B4FA 33%, #40D3D6 70.5%, #33E68C 100%);
+
+  /* fill: background */
+  --bg-grey-bg-main: #F6F9FC;
+  --bg-green-bg: #82FABE;
+  --bg-cyan-bg: #93F3F5;
+  --bg-blue-bg: #B2DBFF;
+  --bg-purple-bg: #D3BDFF;
+
+  /* alert colors */
+  --bg-success: #079455;
+  --bg-success-500: #17B26A;
+  --bg-success-200: #ABEFC6;
+  --bg-success-50: #ECFDF3;
+  --bg-warning: #DC6803;
+  --bg-error: #D63333;
+  --bg-error-500: #EB8F3F;
+  --bg-error-300-focus: #FAB4B4;
+  --bg-error-light: #FECDCA;
+  --bg-error-extra-light: #FEF3F2;
+
+  /* border colors */
+  --border-error: #FDA29B;
+
+  /* box shadows */
+  --shadow-focus-accent: 0 0 0 4px #9FE8703D;
+  --shadow-focus-error: 0 0 0 4px #EB38381F;
+  --shadow-level-1: 0 2px 4px -2px #0016700A;
+  /*--shadow-level-2: 0px 1px 28px -8px #0016700F;*/
+  /*--shadow-level-3: 0 2px 4px -2px #0016700A;*/
+  /*--shadow-level-4: 0 2px 4px -2px #0016700A;*/
+  /*--shadow-level-5: 0 2px 4px -2px #0016700A;*/
+  /*--shadow-level-6: 0 2px 4px -2px #0016700A;*/
+  /*--shadow-level-7: 0 2px 4px -2px #0016700A;*/
+
+
+  /* sizes */
+  --shape-corner-4: 4px;
+  --shape-corner-6: 6px;
+  --shape-corner-8: 8px;
+  --shape-corner-12: 12px;
+  --shape-corner-16: 16px;
+  --shape-corner-24: 24px;
+
+  --size-container-padding: 16px;
+
+  --radius-md: 8px;
+}
