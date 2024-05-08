@@ -1,0 +1,74 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 25px;
+  color: var(--bg-white);
+  outline: none;
+  user-select: none;
+}
+
+.wrapper > input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.wrapper > .icon {
+  position: relative;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  margin-top: 1px;
+  margin-right: 10px;
+  background: var(--bg-white);
+}
+
+.wrapper input + .icon {
+  background: var(--bg-white);
+  border: 2px solid var(--bg-grey-4);
+  cursor: pointer;
+}
+
+.wrapper input:hover + .icon {
+  border-color: var(--bg-grey-3-opacity);
+}
+
+
+.error input + .icon {
+  box-shadow: var(--shadow-focus-error);
+}
+
+.isChecked input + .icon {
+  background: var(--bg-accent);
+  border-color: var(--bg-grey-7-opacity);
+}
+
+.isChecked input:hover + .icon {
+  background: var(--bg-accent-dark);
+  border-color: var(--bg-grey-7-opacity);
+}
+
+.wrapper input:checked + .icon svg {
+  display: inline;
+}
+
+.wrapper input:disabled + .icon {
+  cursor: unset;
+  background: var(--bg-grey-8);
+  border-color: var(--bg-grey-6);
+}
+
+.icon svg {
+  fill: var(--text-primary);
+}
+
+.iconDisabled svg {
+  fill: var(--bg-grey-4);
+}

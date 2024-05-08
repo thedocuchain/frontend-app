@@ -1,0 +1,65 @@
+.wrapper {
+  display: block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  width: 100%;
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  color: var(--text-primary);
+  white-space: nowrap;
+  height: 32px;
+
+  /*top: 22px;*/
+  /*left: 1268px;*/
+  /*padding: 0 16px 0 12px;*/
+  /*gap: 6px;*/
+  /*border-radius: var(--radius-md);*/
+  /*border: solid 1px var(--border-input);*/
+
+}
+
+.sm {
+  height: 32px;
+}
+
+.button:active {
+  transform: scale(0.99);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+.primary {
+  /*background: var(--background-brand-primary);*/
+  /*color: var(--text-white);*/
+}
+
+.icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  stroke: var(--text-primary)
+}
+
+@media (--mobile) {
+  .button {
+  }
+
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": "./"
+  },
+  "include": [
+    "./src/server",
+    "./src/server/**/*.json"
+  ],
+  "exclude": [
+    "./node_modules",
+    "dist"
+  ]
+}

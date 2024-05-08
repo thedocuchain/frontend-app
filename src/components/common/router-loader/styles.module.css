@@ -1,0 +1,48 @@
+.loader {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  width: 100%;
+}
+
+.loader span {
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--bg-accent);
+  box-shadow: var(--shadow-level-1);
+}
+
+.loader span.isStart {
+  animation: page-progress-loader 10s infinite ease-out;
+}
+
+@keyframes page-progress-loader {
+  0% {
+    width: 0;
+  }
+
+  25% {
+    width: 50%;
+  }
+
+  50% {
+    width: 60%;
+  }
+
+  75% {
+    width: 65%;
+  }
+
+  90% {
+    width: 80%;
+  }
+
+  95% {
+    width: 85%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
