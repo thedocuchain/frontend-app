@@ -2,15 +2,9 @@
   position: absolute;
   left: 0;
   top: 100%;
-  margin-top: -6px;
-  margin-left: 21px;
-  color: var(--text-error);
-  font-family: var(--font-inter);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: -0.02em;
+  margin-top: -20px;
   white-space: pre-wrap;
+  color: var(--text-error);
 }
 
 .wrapperInput {

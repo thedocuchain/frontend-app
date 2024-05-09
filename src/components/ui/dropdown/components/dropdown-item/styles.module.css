@@ -1,0 +1,30 @@
+.wrapper {
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 8px;
+  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon {
+  width: 16px;
+  stroke: var(--bg-accent-extra-dark);
+}
+
+@media (min-width: 640px) {
+  .wrapperList:hover {
+    background-color: var(--bg-accent-extra-light);
+    cursor: pointer;
+  }
+}
+
+.isActive {
+  background-color: var(--bg-grey-8);
+}
+
+.renderFromItem {
+  padding: 0;
+}
+

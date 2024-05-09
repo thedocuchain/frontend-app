@@ -21,6 +21,7 @@ export { default as IconStepCheck } from 'src/icons/inline/step-check.inline.svg
 export { default as IconUsers } from 'src/icons/inline/users.inline.svg'
 export { default as IconMinus } from 'src/icons/inline/minus.inline.svg'
 export { default as IconCheckDot } from 'src/icons/inline/check-dot.inline.svg'
+export { default as IconBottomSheet } from 'src/icons/inline/bottom-sheet.inline.svg'
 
 export { default as IconUpload } from 'src/icons/inline/upload-cloud.inline.svg'
 

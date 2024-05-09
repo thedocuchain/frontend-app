@@ -6,7 +6,7 @@ import React from 'react'
 import styles from './styles.module.css'
 
 type TitleProps = PropsWithChildren & {
-  theme?:
+  theme:
     | 'display-text'
     | 'button-sm'
     | 'button-standard'
