@@ -5,6 +5,8 @@ import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { IconSearch } from 'src/icons'
+import { Text } from 'src/components/ui/typography'
+import { Space } from 'src/components/ui/space'
 
 import styles from './styles.module.css'
 
@@ -13,10 +15,12 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
   onEnter?: () => void
   isVisibleError?: boolean
   isSearch?: boolean
+  label?: string
+  hint?: string
 }
 
 export function Input(props: InputProps): ReactElement<HTMLInputElement> {
-  const { onChange, className, value, onEnter, isVisibleError, isSearch, ...otherProps } = props
+  const { onChange, className, value, onEnter, isVisibleError, isSearch, label, hint, ...otherProps } = props
 
   const onChangeInput = useEvent((e: ChangeEvent<HTMLInputElement>) => {
     const regExp = /^(?!\s*$)[0-9a-zA-Z_-]*/gi
@@ -54,6 +58,14 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
   return (
     <div className={wrapperStyle}>
       {isSearch && <IconSearch className={styles.iconSearch} />}
+      {label && (
+        <>
+          <Text className={'color-text-secondary'} theme={'label-2'}>
+            {label}
+          </Text>
+          <Space size={3} />
+        </>
+      )}
       <input
         type='text'
         spellCheck='false'
@@ -65,6 +77,16 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
         onFocus={handleFocus}
         {...otherProps}
       />
+      {hint && !isVisibleError && (
+        <>
+          <Space size={3} />
+
+          <Text className={'color-text-secondary'} theme={'body-3'}>
+            {hint}
+          </Text>
+        </>
+      )}
+
       {props.children}
     </div>
   )

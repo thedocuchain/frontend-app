@@ -5,3 +5,7 @@
 .wrapper.white svg > path {
   fill: #fff;
 }
+
+.wrapper.black svg > path {
+  fill: #000;
+}

@@ -55,15 +55,15 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
     <ErrorBoundary>
       <Head>
         <meta charSet='utf-8' />
-        <title>Free Scheduling Assistant For Everyone | DocuChain</title>
+        <title>DocuChain</title>
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1' />
         <link rel='apple-touch-icon' sizes='180x180' href='/icons/apple-touch-icon.png' />
         <link rel='icon' type='image/png' sizes='32x32' href='/icons/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/icons/favicon-16x16.png' />
-        <link rel='mask-icon' href='/icons/safari-pinned-tab.svg' color='#0d6efd' />
+        <link rel='mask-icon' href='/icons/safari-pinned-tab.svg' color='#5bbad5' />
         <link rel='manifest' href='/site.webmanifest' />
-        <meta name='msapplication-TileColor' content='#ffffff' />
+        <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
         <meta name='color-scheme' content='only light' />
         <link rel='manifest' href='/manifest.json' />

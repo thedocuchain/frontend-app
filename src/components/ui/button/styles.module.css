@@ -9,41 +9,83 @@
   cursor: pointer;
   outline: none;
   text-align: center;
-  width: 100%;
-  font-family: var(--font-inter);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
+  width: fit-content;
   color: var(--text-primary);
   white-space: nowrap;
-  height: 32px;
-
-  /*top: 22px;*/
-  /*left: 1268px;*/
-  /*padding: 0 16px 0 12px;*/
-  /*gap: 6px;*/
-  /*border-radius: var(--radius-md);*/
-  /*border: solid 1px var(--border-input);*/
-
+  height: 44px;
+  padding: 0 20px;
+  border-radius: var(--shape-corner-8);
+  border: solid 1px;
+  box-shadow: var(--shadow-level-1);
 }
 
 .sm {
   height: 32px;
-}
-
-.button:active {
-  transform: scale(0.99);
-}
-
-.button:disabled {
-  cursor: not-allowed;
-  transform: scale(1);
+  padding: 0 12px;
 }
 
 .primary {
-  /*background: var(--background-brand-primary);*/
-  /*color: var(--text-white);*/
+  background: var(--bg-accent);
+  border-color: var(--bg-grey-7-opacity);
+}
+
+.primary:hover {
+  background: var(--bg-accent-dark);
+}
+
+.primary:active {
+  background: var(--bg-accent-extra-dark);
+}
+
+.primary:disabled {
+  cursor: not-allowed;
+  background: var(--bg-accent);
+}
+
+.secondary {
+  background: var(--bg-white);
+  border-color: var(--bg-grey-5);
+}
+
+.secondary:hover {
+  background: var(--bg-grey-7);
+}
+
+.secondary:active {
+  background: var(--bg-grey-5);
+}
+
+.secondary:disabled {
+  cursor: not-allowed;
+  background: var(--bg-white);
+}
+
+.linkPrimary,
+.linkSecondary {
+  height: initial;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.linkPrimary > * {
+  color: var(--bg-link-default);
+}
+
+.linkPrimary:hover > *,
+.linkSecondary:hover > * {
+  color: #2F35C2;
+}
+
+.linkPrimary:active > *,
+.linkSecondary:active > * {
+  color: #1A20A3;
+}
+
+.linkSecondary > * {
+  color: var(--text-secondary);
 }
 
 .icon {
@@ -55,11 +97,31 @@
 }
 
 .icon svg {
-  stroke: var(--text-primary)
+  stroke: var(--text-primary);
 }
 
-@media (--mobile) {
-  .button {
-  }
+.linkPrimary .icon svg {
+  stroke: var(--bg-link-default);
+}
 
+.linkPrimary:hover .icon svg,
+.linkSecondary:hover .icon svg {
+  stroke: #2F35C2;
+}
+
+.linkPrimary:active .icon svg,
+.linkSecondary:active .icon svg {
+  stroke: #1A20A3;
+}
+
+.linkSecondary .icon svg {
+  stroke: var(--text-secondary);
+}
+
+.text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }

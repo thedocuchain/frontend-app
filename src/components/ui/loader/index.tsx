@@ -7,7 +7,7 @@ type ComponentProps = {
   size: number
   className?: string
   visible?: boolean
-  color?: 'white'
+  color?: 'white' | 'black'
 }
 
 export function Loader(props: PropsWithChildren & ComponentProps) {
@@ -17,6 +17,7 @@ export function Loader(props: PropsWithChildren & ComponentProps) {
 
   const cs = cn(styles.wrapper, props.className, {
     [styles.white]: props.color === 'white',
+    [styles.black]: props.color === 'black',
   })
 
   return (

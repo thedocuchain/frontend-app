@@ -2,6 +2,8 @@ import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
 import { ValidatorField } from '@coxy/react-validator'
 import cn from 'classnames'
 
+import { Text } from 'src/components/ui/typography'
+
 import styles from './styles.module.css'
 
 type ValidatorFieldType = Parameters<typeof ValidatorField>[0] & { isVisibleErrors: boolean }
@@ -28,5 +30,9 @@ export function InputError(props: PropsWithChildren & { isVisibleError?: boolean
   if (props.isVisibleError === false) {
     return null
   }
-  return <div className={cn(styles.errorWrapper, props.className)}>{props.children}</div>
+  return (
+    <Text className={cn(styles.errorWrapper, props.className)} theme={'body-3'}>
+      {props.children}
+    </Text>
+  )
 }
