@@ -1,0 +1,12 @@
+.container {
+    width: fit-content;
+    gap: 24px;
+    margin: 0 auto;
+}
+
+@media (--mobile) {
+    .container {
+        width: 100%;
+        gap: 8px;
+    }
+}

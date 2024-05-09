@@ -61,7 +61,7 @@ export const BottomSheet = (props: BottomSheetProps): ReactElement => {
             >
               <IconBottomSheet className={styles.iconBottomSheet} />
               <Text theme='headline-2' className={styles.titleMobile}>
-                {title || 'Title'}
+                {title}
               </Text>
 
               {props.children}

@@ -1,0 +1,8 @@
+.wrapper {
+  width: 48px;
+  height: 48px;
+}
+
+.wrapper svg > path {
+  fill: var(--bg-accent);
+}
