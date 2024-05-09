@@ -1,0 +1,20 @@
+.container {
+  max-width: 320px;
+  width: 100%;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+  background: var(--bg-grey-7-opacity);
+  overflow: hidden;
+}
+
+.bar {
+  width: 0;
+  height: 8px;
+  border-radius: 10px;
+  background: var(--bg-accent);
+  transition: width 0.3s;
+}

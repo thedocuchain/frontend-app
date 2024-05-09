@@ -1,7 +1,8 @@
 .card {
   width: 100%;
   min-width: 200px;
-  min-height: 200px;
+  max-width: 800px;
+  height: 360px;
   background:
     radial-gradient(circle at 100% 100%, #fff 0, #fff 15px, transparent 15px) 0% 0%/16px 16px no-repeat,
     radial-gradient(circle at 0 100%, #fff 0, #fff 15px, transparent 15px) 100% 0%/16px 16px no-repeat,
@@ -18,6 +19,9 @@
 
 @media (--mobile) {
   .card {
+    min-width: 288px;
+    max-width: 288px;
+    height: 278px;
     box-shadow: 0 1px 28px -8px #0016700f;
   }
 }

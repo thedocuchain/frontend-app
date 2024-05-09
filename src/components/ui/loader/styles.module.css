@@ -1,11 +1,15 @@
-.wrapper svg > path {
-  fill: var(--bg-accent);
+.wrapper {
+  width: 30px;
 }
 
-.wrapper.white svg > path {
-  fill: #fff;
+.wrapper svg {
+  stroke: var(--bg-accent);
 }
 
-.wrapper.black svg > path {
-  fill: #000;
+.wrapper.white svg {
+  stroke: #fff;
+}
+
+.wrapper.black svg {
+  stroke: #000;
 }

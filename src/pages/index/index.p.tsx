@@ -1,18 +1,25 @@
 import React from 'react'
 
-import { PageDescription, PageHead } from 'src/components/common/page-head'
+import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Column, Flex } from 'src/components/ui/grid'
+import { UploadCardBg } from 'src/components/app/upload-card-bg'
+import { Header } from 'src/components/app/header'
 
 export default function IndexPage(): JSX.Element {
+  const { title } = usePageHead({ title: 'Title' })
+
   return (
     <>
-      <PageHead>Title</PageHead>
+      <PageHead>{title}</PageHead>
       <PageDescription>Description</PageDescription>
 
       <PageWrapper>
         <Flex flex='1'>
-          <Column className='column-center h100-p'>{/* <UploadCardBg></UploadCardBg> */}</Column>
+          <Header />
+          <Column className='column-center h100-p'>
+            <UploadCardBg></UploadCardBg>
+          </Column>
         </Flex>
       </PageWrapper>
     </>

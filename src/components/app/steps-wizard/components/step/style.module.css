@@ -1,0 +1,31 @@
+.step {
+    gap: 24px;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.stepMobile {
+    display: none;
+}
+
+.title {
+    gap: 6px;
+}
+
+@media (--mobile) {
+    .step {
+        display: none;
+    }
+
+    .stepMobile {
+        display: block;
+        width: 115px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--bg-grey-7);
+    }
+
+    .active {
+        background: var(--bg-accent);
+    }
+}
