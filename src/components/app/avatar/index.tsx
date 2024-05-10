@@ -25,7 +25,6 @@ const colors = [
   '#DD2590',
   '#7839EE',
   '#0086C9',
-  '#444CE7',
 ]
 
 const colorsText = [
@@ -50,7 +49,9 @@ const colorsText = [
 ]
 
 export function Avatar(props: { name: string; index: number; className?: string }) {
-  const { name, index, className } = props
+  const { name, className } = props
+  // todo index for large lists
+  const index = props.index >= 18 ? props.index - 18 : props.index
 
   const cl = cn(styles.avatar, className)
 

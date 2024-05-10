@@ -1,0 +1,20 @@
+.stars {
+  gap: 16px;
+}
+
+.stars svg {
+  stroke: var(--bg-grey-4-opacity);
+}
+
+.stars > * {
+  cursor: pointer;
+}
+
+.activeStar svg {
+  stroke: var(--bg-warning);
+}
+
+.fullStar svg {
+  stroke: none;
+  fill: var(--bg-warning);
+}

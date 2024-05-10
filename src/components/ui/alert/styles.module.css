@@ -1,0 +1,64 @@
+.wrapper {
+    width: 770px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    border-radius: 12px;
+    border: solid 1px var(--bg-grey-7-opacity);
+    background: var(--bg-grey-8-opacity);
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.button {
+    width: 220px;
+}
+
+.error {
+    background: #D6333329;
+}
+
+.warning {
+    background: #DC680329;
+}
+
+.success {
+    background: #07945529;
+}
+
+.info .icon svg {
+    stroke: var(--bg-grey-3-opacity);
+}
+
+.error .icon svg {
+    stroke: var(--bg-error);
+}
+
+.warning .icon svg {
+    stroke: var(--bg-warning);
+}
+
+.success .icon svg {
+    stroke: var(--bg-success);
+}
+
+@media (--mobile) {
+    .wrapper {
+        width: 361px;
+    }
+
+    .form {
+        flex-direction: column;
+        height: 116px;
+    }
+
+    .button {
+        width: 100%;
+    }
+}

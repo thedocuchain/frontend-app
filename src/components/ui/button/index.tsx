@@ -6,8 +6,36 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { Loader } from 'src/components/ui/loader'
 import { Text } from 'src/components/ui/typography'
+import { handleOpenLink } from 'src/utils/navigation'
 
 import styles from './styles.module.css'
+
+export function ButtonIcon(props: PropsWithChildren & { stroke?: boolean; className?: string }) {
+  return <span className={cn(styles.icon, { [styles.stroke]: props.stroke }, props.className)}>{props.children}</span>
+}
+
+export function ButtonWrapper(
+  props: PropsWithChildren & { id?: string; onClick?: () => void; href?: string; className?: string },
+) {
+  const { href, onClick, className } = props
+
+  const handleClick = useEvent(() => {
+    if (href) {
+      handleOpenLink(href)
+      return
+    }
+
+    if (onClick) {
+      onClick()
+    }
+  })
+
+  return (
+    <div onClick={handleClick} className={cn('on-click column-center', className)} id={props.id}>
+      {props.children}
+    </div>
+  )
+}
 
 type ComponentProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode
@@ -15,10 +43,6 @@ type ComponentProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: 'sm' | 'standard'
   isLoading?: boolean
   href?: string
-}
-
-export function ButtonIcon(props: PropsWithChildren & { stroke?: boolean; className?: string }) {
-  return <span className={cn(styles.icon, { [styles.stroke]: props.stroke }, props.className)}>{props.children}</span>
 }
 
 export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {

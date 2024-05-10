@@ -38,7 +38,9 @@ export const BottomSheet = (props: BottomSheetProps): ReactElement => {
 
       if (listLength >= 5) {
         setHeight(elemHeight * 5 + 45)
+        return
       }
+      setHeight(elemHeight * listLength + 45)
     }
   }, [visible])
 

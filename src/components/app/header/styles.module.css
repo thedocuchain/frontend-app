@@ -9,10 +9,24 @@
   padding: 24px 32px;
 }
 
+.headerDocumentPreview {
+  background: var(--bg-white);
+  border-bottom: solid 1px var(--bg-grey-7);
+  box-shadow: var(--shadow-level-1);
+}
+
+.title {
+  margin-left: 54px;
+  width: 100%;
+}
+
 .wrapper {
-  position: relative;
   z-index: 2000;
   display: flex;
+  position: fixed;
+  margin: 0 auto;
+  width: 100%;
+  background: transparent;
 }
 
 .container {
@@ -25,3 +39,18 @@
   gap: 24px;
 }
 
+@media (--tablet) {
+  .header {
+    padding: 14px 14px;
+  }
+}
+
+@media (--mobile) {
+  .header {
+    padding: 10px 14px;
+  }
+
+  .title {
+    display: none;
+  }
+}
