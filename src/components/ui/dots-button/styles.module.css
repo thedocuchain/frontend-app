@@ -1,0 +1,21 @@
+.dotsIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+}
+
+.dotsIcon:hover {
+  background: var(--bg-grey-8-opacity);
+}
+
+.dotsIcon:hover svg {
+  fill: var(--text-primary);
+}
+
+.dotsIcon svg {
+  fill: var(--bg-grey-2);
+}

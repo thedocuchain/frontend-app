@@ -1,4 +1,14 @@
-import React, { ReactElement, MouseEvent, useState, FocusEvent, useRef, ReactNode, useEffect } from 'react'
+import React, {
+  ReactElement,
+  MouseEvent,
+  useState,
+  FocusEvent,
+  useRef,
+  ReactNode,
+  useEffect,
+  useId,
+  useLayoutEffect,
+} from 'react'
 import { ReactClickOutside } from '@coxy/react-click-outside'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
@@ -33,6 +43,23 @@ export function Dropdown<ItemT = unknown>(props: DropdownComponentProps<ItemT>):
   const refTimer = useRef<TimeoutId>()
   const filteredData = data
   const isMobile = useIsMobile()
+  const id = useId()
+  const [height, setHeight] = useState(228)
+
+  useLayoutEffect(() => {
+    const elementById = document.getElementById(id)
+
+    if (elementById) {
+      const listLength = elementById.children.length
+      const elemHeight = Math.floor(elementById.scrollHeight / listLength)
+
+      if (listLength >= 5) {
+        setHeight(elemHeight * 5 + 8)
+        return
+      }
+      setHeight(elemHeight * listLength + 8)
+    }
+  }, [isVisible])
 
   const handleOpen = useEvent((event?: MouseEvent<HTMLElement> | FocusEvent<HTMLDivElement>) => {
     if (event) {
@@ -136,10 +163,10 @@ export function Dropdown<ItemT = unknown>(props: DropdownComponentProps<ItemT>):
 
       {!isMobile && (
         <ReactClickOutside onClose={handleClose} visible={isVisible}>
-          <div className={styles.listContainer}>
-            <div className={styles.list}>
+          <div style={{ height: `${height}px` }} className={styles.listContainer}>
+            <div id={id} className={styles.list}>
               {filteredData.map((item) => (
-                <div onClick={handleChoose(item)} className={styles.item} key={keyExtractor(item)}>
+                <div onClick={handleChoose(item)} key={keyExtractor(item)}>
                   {props.renderItem(item, { renderFrom: 'list' })}
                 </div>
               ))}
@@ -152,7 +179,7 @@ export function Dropdown<ItemT = unknown>(props: DropdownComponentProps<ItemT>):
         <BottomSheet title={titleMobile} onClose={handleClose} visible={isVisible}>
           <div className={cn(styles.list, styles.listMobile)}>
             {filteredData.map((item) => (
-              <div onClick={handleChoose(item)} className={styles.item} key={keyExtractor(item)}>
+              <div onClick={handleChoose(item)} key={keyExtractor(item)}>
                 {props.renderItem(item, { renderFrom: 'list' })}
               </div>
             ))}
