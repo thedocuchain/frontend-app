@@ -8,22 +8,17 @@ import { Text } from 'src/components/ui/typography'
 import styles from './style.module.css'
 
 type ComponentProps = {
-  step: {
-    title: string
-    isActive: boolean
-  }
+  step: string
   index: number
-  steps: {
-    title: string
-    isActive: boolean
-  }[]
+  steps: string[]
+  activeStep: string
 }
 
 export function OneStepWizard(props: ComponentProps) {
-  const { title, isActive } = props.step
-  const isDone = props.index < props.steps.findIndex((el) => el.isActive)
+  const { step, activeStep } = props
+  const isDone = props.index < props.steps.findIndex((el) => el === activeStep)
   const isLast = props.index + 1 === props.steps.length
-
+  const isActive = step === activeStep
   return (
     <>
       <RowBetweenCenter className={styles.step}>
@@ -32,7 +27,7 @@ export function OneStepWizard(props: ComponentProps) {
           {isDone && <IconStepCheck />}
           {!isDone && !isActive && <IconStepNext />}
           <Text theme='label-2' className={isActive ? 'color-text-accent' : null}>
-            {title}
+            {step}
           </Text>
         </RowCenter>
 

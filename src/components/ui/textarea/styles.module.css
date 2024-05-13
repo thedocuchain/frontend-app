@@ -26,6 +26,12 @@
   /*scrollbar-width: auto;*/
 }
 
+.id {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 .textarea::-webkit-scrollbar {
   display: initial !important;
   width: 4px;

@@ -16,10 +16,11 @@ export type TextareaProps = Omit<InputHTMLAttributes<HTMLTextAreaElement>, 'onCh
   label?: string
   hint?: string
   rows?: number
+  documentId?: string
 }
 
 export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement> {
-  const { onChange, className, value, isVisibleError, label, hint, ...otherProps } = props
+  const { onChange, className, value, isVisibleError, label, hint, documentId, ...otherProps } = props
   const id = useId()
 
   const onChangeTextarea = useEvent((e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -63,6 +64,13 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
           </Text>
           <Space size={3} />
         </>
+      )}
+      {documentId && (
+        <div className={styles.id}>
+          <Text className={'color-text-secondary'} theme={'body-3'}>
+            Document ID: {documentId}
+          </Text>
+        </div>
       )}
       <textarea
         id={id}

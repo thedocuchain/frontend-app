@@ -27,7 +27,9 @@ export function DropdownItem(props: ComponentProps): ReactElement<HTMLSelectElem
       })}
     >
       <RowBetweenCenter>
-        <Text theme='body-2'>{title}</Text>
+        <Text theme='body-2' className='capitalize'>
+          {title}
+        </Text>
         {isActive && renderFrom === 'list' && <IconCheck className={styles.icon} />}
       </RowBetweenCenter>
       {description && renderFrom === 'list' && (
