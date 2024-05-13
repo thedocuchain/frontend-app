@@ -20,8 +20,8 @@ export default function IndexPage(): JSX.Element {
 
       <PageWrapper>
         <Header setStep={setStep} step={step} />
-        <Flex flex='1'>
-          <div className={styles.bg}>
+        <Flex flex='1' className={styles.bg}>
+          <div className={styles.wrapper}>
             {step === 'new-document' && <StepNewDocument />}
             {step === 'check-status' && <StepCheckStatus />}
           </div>
