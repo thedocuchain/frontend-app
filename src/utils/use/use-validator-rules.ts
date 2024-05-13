@@ -56,6 +56,12 @@ export const useValidatorRules = () => {
         message: t('name-invalid'),
       },
     ],
+    id: [
+      {
+        rule: (value) => !!value && value !== '' && value.length !== 0,
+        message: t('id-required'),
+      },
+    ],
     username: [
       {
         rule: (value) => !!value && value !== '' && value.length !== 0,

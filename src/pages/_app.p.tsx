@@ -17,6 +17,7 @@ import { I18nWrapper } from 'src/components/common/i18n-wrapper'
 import 'src/styles/globals.css'
 import { RouterLoader } from 'src/components/common/router-loader'
 import { Metrics } from 'src/components/common/metrics'
+import { Toasts, ToastsProvider } from 'src/components/common/toast'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
@@ -74,7 +75,10 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
         <Metrics />
         <RouterLoader />
         <I18nWrapper>
-          <RenderLayoutComponent Component={Component} pageProps={pageProps} />
+          <ToastsProvider>
+            <RenderLayoutComponent Component={Component} pageProps={pageProps} />
+            <Toasts />
+          </ToastsProvider>
         </I18nWrapper>
       </Provider>
     </ErrorBoundary>

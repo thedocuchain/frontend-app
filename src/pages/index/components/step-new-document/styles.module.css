@@ -1,0 +1,46 @@
+.button {
+  width: 260px;
+  height: 55px;
+}
+
+.wrapperFile {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--bg-accent-light-2);
+  z-index: 10000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.wrapperFileDisplay {
+  opacity: 1;
+}
+
+.plus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 100px;
+  background: #bbf09a;
+}
+
+@media (--mobile) {
+  .button {
+    min-width: 100%;
+    height: 44px;
+  }
+
+  .wrapperFile {
+    display: none;
+  }
+}
+
