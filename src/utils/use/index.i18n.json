@@ -10,6 +10,7 @@
     "email-invalid": "Email is invalid, please enter correct email address",
     "name-required": "Please enter your name",
     "username-required": "Please enter Username",
+    "id-required": "Please enter ID",
     "username-short": "Username is too short. Please, make it at least 5 characters long",
     "description-required": "Please enter a description",
     "username-invalid": "Username is invalid",

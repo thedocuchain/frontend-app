@@ -3,6 +3,10 @@ import cn from 'classnames'
 
 import styles from './styles.module.css'
 
-export function UploadCardBg(props: PropsWithChildren & { className?: string }) {
-  return <div className={cn(styles.card, props.className)}>{props.children}</div>
+export function UploadCardBg(props: PropsWithChildren & { className?: string; onClick?: () => void }) {
+  return (
+    <div onClick={props.onClick} className={cn(styles.card, props.className)}>
+      {props.children}
+    </div>
+  )
 }

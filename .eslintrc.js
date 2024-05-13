@@ -5,5 +5,6 @@ module.exports = {
   rules: {
     'react-hooks/exhaustive-deps': [0],
     'comma-dangle': ['error', 'always-multiline'],
+    'react/display-name': 'off',
   },
 }

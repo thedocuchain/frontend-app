@@ -11,11 +11,19 @@ import { Text } from 'src/components/ui/typography'
 
 import styles from './styles.module.css'
 
-export function Header(props: { isDocumentPreview?: boolean; isSteps?: boolean; title?: string }) {
-  const { isDocumentPreview, isSteps, title } = props
+type HeaderProps = {
+  step?: 'check-status' | 'new-document'
+  setStep?: (step: 'check-status' | 'new-document') => void
+  isDocumentPreview?: boolean
+  isSteps?: boolean
+  title?: string
+}
+
+export function Header(props: HeaderProps) {
+  const { step, setStep, isDocumentPreview, isSteps, title } = props
   const isMobile = useIsMobile()
   const [hasScrolled, setHasScrolled] = useState(false)
-  const isSearch = true
+  const isNewDocument = step === 'new-document'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,15 +74,15 @@ export function Header(props: { isDocumentPreview?: boolean; isSteps?: boolean; 
             </div>
           )}
 
-          {isSearch ? (
-            <Button theme='secondary' size='sm'>
+          {isNewDocument ? (
+            <Button theme='secondary' size='sm' onClick={() => setStep('check-status')}>
               <ButtonIcon>
                 <IconSearch />
               </ButtonIcon>
               Check status
             </Button>
           ) : (
-            <Button theme='secondary' size='sm'>
+            <Button theme='secondary' size='sm' onClick={() => setStep('new-document')}>
               <ButtonIcon>
                 <IconPlusBlack />
               </ButtonIcon>

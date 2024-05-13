@@ -1,5 +1,5 @@
 .card {
-  width: 100%;
+  width: calc(100% - 40px);
   min-width: 200px;
   max-width: 800px;
   height: 360px;
@@ -15,6 +15,12 @@
   padding: 17px;
   box-sizing: border-box;
   box-shadow: 0 8px 56px -20px #0016701a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin: 0 20px;
 }
 
 @media (--mobile) {

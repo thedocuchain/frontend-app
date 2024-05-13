@@ -1,0 +1,36 @@
+.cardWrapper {
+    height: fit-content;
+    padding: 32px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    width: 100%;
+}
+
+@media (--mobile) {
+    .cardWrapper {
+        padding: 16px;
+        max-width: 361px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .button {
+        width: 100%;
+
+    }
+}
+
+@media (--mobile-sm) {
+    .text {
+        text-align: center;
+        font-size: 16px !important;
+        margin: 0 8px;
+    }
+}
