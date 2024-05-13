@@ -7,6 +7,7 @@ import { Text } from 'src/components/ui/typography'
 import { Avatar } from 'src/components/app/avatar'
 import { Space } from 'src/components/ui/space'
 import { DotsTable } from 'src/components/app/app-table/components/dots'
+import { Recipient } from 'src/store/reducers/document/types'
 
 import styles from './styles.module.css'
 
@@ -14,13 +15,7 @@ export function TableRow(props: {
   index: number
   participantLength: number
   isDoneSigned: boolean
-  participant: {
-    name: string
-    email: string
-    role: 'signer' | 'watcher'
-    status?: 'awaiting' | 'signed'
-    lastRemind?: string
-  }
+  participant: Recipient
 }) {
   const { name, email, role, status, lastRemind } = props.participant
   const isSigner = role === 'signer'

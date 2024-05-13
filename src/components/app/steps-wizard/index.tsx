@@ -6,17 +6,21 @@ import { RowCenter } from 'src/components/ui/grid'
 import styles from './style.module.css'
 
 type ComponentProps = {
-  steps: {
-    title: string
-    isActive: boolean
-  }[]
+  steps: string[]
+  activeStep: string
 }
 
 export function StepsWizard(props: ComponentProps) {
   return (
     <RowCenter className={styles.container}>
       {props.steps.map((el, index) => (
-        <OneStepWizard key={`${el.title}${index}`} index={index} steps={props.steps} step={el} />
+        <OneStepWizard
+          key={`${el}${index}`}
+          index={index}
+          steps={props.steps}
+          activeStep={props.activeStep}
+          step={el}
+        />
       ))}
     </RowCenter>
   )

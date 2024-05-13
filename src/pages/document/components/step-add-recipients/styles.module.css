@@ -1,0 +1,29 @@
+.buttonsContainer {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 8px;
+}
+
+.desc {
+    margin-bottom: 24px;
+}
+
+@media (--mobile) {
+    .buttonsContainer {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .title {
+        margin-bottom: 4px;
+    }
+}

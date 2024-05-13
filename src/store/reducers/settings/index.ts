@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { setCookie } from 'cookies-next'
+import { objectKeys } from '@coxy/utils'
 
 import { AppState } from 'src/store'
 import { DEFAULT_LANG } from 'src/configs/common'
@@ -22,7 +23,7 @@ const initialState: SettingsState = {
   language: undefined,
 }
 
-export const whitelist = ['theme', 'language']
+export const whitelist = objectKeys(initialState)
 
 export const settingsSlice = createSlice({
   name: storeKey,

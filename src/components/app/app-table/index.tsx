@@ -3,18 +3,11 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { TableRow } from 'src/components/app/app-table/components/table-row'
 import { SortOrder, SortType, TableHead } from 'src/components/app/app-table/components/table-head'
 import { SortingTag } from 'src/components/app/app-table/components/sorting-tag'
+import { Recipient } from 'src/store/reducers/document/types'
 
 import styles from './styles.module.css'
 
-export function AppTable(props: {
-  participants: {
-    name: string
-    email: string
-    role: 'signer' | 'watcher'
-    status: 'awaiting' | 'signed'
-    lastRemind?: string
-  }[]
-}) {
+export function AppTable(props: { participants: Recipient[] }) {
   const { participants } = props
   const [sortType, setSortType] = useState<SortType>('participants')
   const [sortOrder, setOrder] = useState<SortOrder>('ASC')

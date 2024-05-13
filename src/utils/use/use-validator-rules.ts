@@ -43,7 +43,7 @@ export const useValidatorRules = () => {
     email: [
       {
         rule: (value) => !!value && value !== '' && value.length !== 0,
-        message: t('email-required'),
+        message: t('field-required'),
       },
       {
         rule: (value) => emailReg.test(trim(String(value).toLowerCase())),
@@ -51,6 +51,10 @@ export const useValidatorRules = () => {
       },
     ],
     name: [
+      {
+        rule: (value) => !!value && value !== '' && value.length !== 0,
+        message: t('field-required'),
+      },
       {
         rule: (value) => userNameReg.test(trim(String(value).toLowerCase())),
         message: t('name-invalid'),
@@ -80,6 +84,12 @@ export const useValidatorRules = () => {
       {
         rule: (value) => !!value && value !== '' && value.length !== 0,
         message: t('description-required'),
+      },
+    ],
+    documentName: [
+      {
+        rule: (value) => !!value && value !== '' && value.length !== 0,
+        message: t('document-required'),
       },
     ],
     surname: [

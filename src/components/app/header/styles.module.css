@@ -9,7 +9,8 @@
   padding: 24px 32px;
 }
 
-.headerDocumentPreview {
+.headerDocumentPreview,
+.headerSteps {
   background: var(--bg-white);
   border-bottom: solid 1px var(--bg-grey-7);
   box-shadow: var(--shadow-level-1);
@@ -52,5 +53,11 @@
 
   .title {
     display: none;
+  }
+
+  .headerSteps {
+    background: var(--bg-grey-bg-main);
+    border-bottom: none;
+    box-shadow: none;
   }
 }

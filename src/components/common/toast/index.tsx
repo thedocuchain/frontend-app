@@ -62,6 +62,7 @@ export const ToastsProvider = ({ children }: PropsWithChildren) => {
   }, [])
 
   const addToast = useCallback((el: Omit<Toast, 'uuid'>) => {
+    removeAll()
     const newElement = { ...el, uuid: uuid(5) }
     dispatch(addItemToast(newElement))
     const timeout = newElement.timeout || 3000

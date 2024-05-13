@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
+import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { useRouter } from 'next/router'
 
 import { Logotype } from 'src/components/app/logotype'
 import { Button, ButtonIcon } from 'src/components/ui/button'
@@ -15,15 +17,18 @@ type HeaderProps = {
   step?: 'check-status' | 'new-document'
   setStep?: (step: 'check-status' | 'new-document') => void
   isDocumentPreview?: boolean
-  isSteps?: boolean
+  isStepsWizard?: boolean
+  stepsWizard?: string[]
+  activeStepWizard?: string
   title?: string
 }
 
 export function Header(props: HeaderProps) {
-  const { step, setStep, isDocumentPreview, isSteps, title } = props
+  const { step, setStep, isDocumentPreview, isStepsWizard, stepsWizard, activeStepWizard, title } = props
   const isMobile = useIsMobile()
   const [hasScrolled, setHasScrolled] = useState(false)
   const isNewDocument = step === 'new-document'
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,24 +46,26 @@ export function Header(props: HeaderProps) {
     }
   }, [])
 
-  const steps = [
-    {
-      title: 'Upload',
-      isActive: false,
-    },
-    {
-      title: 'Add recipients',
-      isActive: true,
-    },
-    {
-      title: 'Preview and send',
-      isActive: false,
-    },
-  ]
+  const handleSetStep = useEvent(async () => {
+    if (router.pathname !== '/') {
+      void router.push('/')
+      return
+    }
+    if (step === 'new-document') {
+      setStep('check-status')
+      return
+    }
+    setStep('new-document')
+  })
 
   return (
     <div className={styles.wrapper}>
-      <header className={cn(styles.header, { [styles.headerDocumentPreview]: isDocumentPreview })}>
+      <header
+        className={cn(styles.header, {
+          [styles.headerDocumentPreview]: isDocumentPreview,
+          [styles.headerSteps]: isStepsWizard,
+        })}
+      >
         <div className={styles.container}>
           <Logotype />
 
@@ -68,21 +75,21 @@ export function Header(props: HeaderProps) {
             </div>
           )}
 
-          {isSteps && (
+          {isStepsWizard && stepsWizard && (
             <div className='hide-mobile'>
-              <StepsWizard steps={steps} />
+              <StepsWizard steps={stepsWizard} activeStep={activeStepWizard} />
             </div>
           )}
 
           {isNewDocument ? (
-            <Button theme='secondary' size='sm' onClick={() => setStep('check-status')}>
+            <Button theme='secondary' size='sm' onClick={handleSetStep}>
               <ButtonIcon>
                 <IconSearch />
               </ButtonIcon>
               Check status
             </Button>
           ) : (
-            <Button theme='secondary' size='sm' onClick={() => setStep('new-document')}>
+            <Button theme='secondary' size='sm' onClick={handleSetStep}>
               <ButtonIcon>
                 <IconPlusBlack />
               </ButtonIcon>
@@ -91,10 +98,10 @@ export function Header(props: HeaderProps) {
           )}
         </div>
 
-        {isSteps && (
+        {isStepsWizard && stepsWizard && (
           <div className='show-mobile w100-p'>
             <Space size={10} />
-            <StepsWizard steps={steps} />
+            <StepsWizard steps={stepsWizard} activeStep={activeStepWizard} />
           </div>
         )}
       </header>

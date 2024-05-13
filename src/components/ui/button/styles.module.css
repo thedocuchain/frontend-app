@@ -70,6 +70,11 @@
   box-shadow: none;
 }
 
+.linkPrimary > *,
+.linkSecondary > * {
+  font-size: 14px !important;
+}
+
 .linkPrimary > * {
   color: var(--bg-link-default);
 }
@@ -90,8 +95,8 @@
 
 .icon {
   display: flex;
-  width: 16px;
-  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
   align-items: center;
   justify-content: center;
 }

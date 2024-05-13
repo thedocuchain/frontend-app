@@ -6,7 +6,7 @@ import { Text } from 'src/components/ui/typography'
 
 import styles from './styles.module.css'
 
-const colors = [
+export const colorsBorders = [
   '#444CE7',
   '#0086C9',
   '#099250',
@@ -48,15 +48,19 @@ const colorsText = [
   '#0079B5',
 ]
 
+export const indexToColorIndex = (index: number) => {
+  const arrayLength = colorsText.length
+  return index >= arrayLength ? indexToColorIndex(index - arrayLength) : index
+}
+
 export function Avatar(props: { name: string; index: number; className?: string }) {
   const { name, className } = props
-  // todo index for large lists
-  const index = props.index >= 18 ? props.index - 18 : props.index
+  const index = indexToColorIndex(props.index)
 
   const cl = cn(styles.avatar, className)
 
   const colorText = colorsText[index]
-  const colorBorder = colors[index]
+  const colorBorder = colorsBorders[index]
 
   return (
     <div className={cl} style={{ backgroundColor: `${colorBorder}08`, border: `1px solid ${colorBorder}` }}>
