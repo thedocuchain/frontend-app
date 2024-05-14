@@ -29,6 +29,7 @@ export function Header(props: HeaderProps) {
   const [hasScrolled, setHasScrolled] = useState(false)
   const isNewDocument = step === 'new-document'
   const router = useRouter()
+  const queryCheckId = router.query.checkId as string
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +44,12 @@ export function Header(props: HeaderProps) {
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (queryCheckId) {
+      setStep('check-status')
     }
   }, [])
 

@@ -8,9 +8,10 @@ export function AppLink(
     href: string
     target?: '_blank'
     theme?: 'primary' | 'secondary'
+    className?: string
   },
 ) {
-  const cs = cn(styles.link, {
+  const cs = cn(styles.link, props.className, {
     [styles.secondary]: props.theme === 'secondary',
   })
 
