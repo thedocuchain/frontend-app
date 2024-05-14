@@ -1,12 +1,12 @@
 .iconWrapper {
     position: fixed;
-    top: 97px;
+    top: calc(var(--header-size) + 16px);
     left: 16px;
 }
 
 .wrapper {
     position: fixed;
-    top: 81px;
+    top: var(--header-size);
     left: 0;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .sidePanelContent {
-    height: calc(100vh - 125px);
+    height: calc(100vh - var(--header-size) - 44px);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -165,20 +165,6 @@
 .img {
     width: 146px;
     height: 190px;
-}
-
-@media (--tablet) {
-    .iconWrapper {
-        top: 77px;
-    }
-
-    .wrapper {
-        top: 61px;
-    }
-
-    .sidePanelContent {
-        height: calc(100vh - 105px);
-    }
 }
 
 @media (max-width: 1090px) {

@@ -14,7 +14,7 @@
   white-space: nowrap;
   height: 44px;
   padding: 0 20px;
-  border-radius: var(--shape-corner-8);
+  border-radius: 8px;
   border: solid 1px;
   box-shadow: var(--shadow-level-1);
 }

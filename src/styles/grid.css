@@ -167,6 +167,24 @@
   display: none !important;
 }
 
+.hide-tablet {
+  display: initial;
+}
+
+.show-tablet {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .hide-tablet {
+    display: none !important;
+  }
+
+  .show-tablet {
+    display: initial !important;
+  }
+}
+
 @media (--mobile) {
   .hide-mobile {
     display: none !important;

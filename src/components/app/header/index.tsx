@@ -89,7 +89,7 @@ export function Header(props: HeaderProps) {
           )}
 
           {isStepsWizard && stepsWizard && (
-            <div className='hide-mobile'>
+            <div className='hide-tablet'>
               <StepsWizard steps={stepsWizard} activeStep={activeStepWizard} />
             </div>
           )}

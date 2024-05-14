@@ -17,7 +17,7 @@
   text-align: left;
   outline: none !important;
   padding: 10px 12px;
-  border-radius: var(--shape-corner-8);
+  border-radius: 8px;
   border: solid 1px var(--bg-grey-5);
   box-shadow: var(--shadow-level-1);
   transition: all 0.1s ease;
@@ -70,7 +70,7 @@
   width: 320px;
   background: var(--bg-white);
   font-family: var(--font-inter);
-  border-radius: var(--shape-corner-8);
+  border-radius: 8px;
   border: solid 1px var(--bg-grey-5);
   box-shadow: var(--shadow-level-1);
   padding: 2px 4px 2px 4px;

@@ -8,6 +8,7 @@ import { Column, Container, Flex, RowBetween } from 'src/components/ui/grid'
 import { documentMock } from 'src/pages/document-status-page/data'
 import { Text } from 'src/components/ui/typography'
 import { SidePanelPagesPreview } from 'pages/document-view/components/side-panel-pages-preview'
+import { Space } from 'src/components/ui/space'
 
 import styles from './styles.module.css'
 
@@ -31,7 +32,7 @@ export default function DocumentViewPage(): JSX.Element {
             <Column className={styles.textColumn}>
               <RowBetween className={styles.textWrapper}>
                 <Text theme={'headline-1'}>{document.name}</Text>
-                <Text theme={'body-3'} className='color-text-secondary'>
+                <Text theme={'body-3'} className='color-text-secondary white-space-nowrap'>
                   Document ID: {document.id}
                 </Text>
               </RowBetween>
@@ -43,6 +44,8 @@ export default function DocumentViewPage(): JSX.Element {
             <div className={styles.mockPage} />
             <div className={styles.mockPage} />
             <div className={styles.mockPage} />
+
+            <Space size={74} />
           </Container>
         </Flex>
       </PageWrapper>
