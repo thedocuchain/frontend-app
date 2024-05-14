@@ -35,9 +35,14 @@ export function Header(props: HeaderProps) {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY
-      const shouldBeVisible = offset > 50
+      const shouldBeVisible = offset > 100
+      const shouldBeNotVisible = offset < 100
+
       if (shouldBeVisible !== hasScrolled) {
         setHasScrolled(shouldBeVisible)
+      }
+      if (shouldBeNotVisible) {
+        setHasScrolled(false)
       }
     }
 
