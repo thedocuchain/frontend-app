@@ -4,6 +4,13 @@
     margin-top: 109px;
 }
 
+@media (min-width: 1090px) {
+    .containerIfOpen {
+        transition: all 0.2s ease;
+        margin-left: 234px;
+    }
+}
+
 .textColumn {
     width: 100%;
     gap: 8px;

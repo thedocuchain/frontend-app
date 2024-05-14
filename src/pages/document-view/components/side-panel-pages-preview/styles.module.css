@@ -123,6 +123,7 @@
     justify-content: flex-start;
     gap: 12px;
     scrollbar-width: auto;
+    padding-bottom: 16px;
 }
 
 .sidePanelContent::-webkit-scrollbar {
@@ -166,7 +167,21 @@
     height: 190px;
 }
 
-@media (max-width: 1300px) {
+@media (--tablet) {
+    .iconWrapper {
+        top: 77px;
+    }
+
+    .wrapper {
+        top: 61px;
+    }
+
+    .sidePanelContent {
+        height: calc(100vh - 105px);
+    }
+}
+
+@media (max-width: 1090px) {
     .iconWrapper,
     .wrapper {
         display: none;

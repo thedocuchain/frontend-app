@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import cn from 'classnames'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
@@ -13,6 +14,7 @@ import styles from './styles.module.css'
 export default function DocumentViewPage(): JSX.Element {
   const { title } = usePageHead({ title: 'View Page' })
   const document = documentMock
+  const [isOpen, setOpen] = useState(false)
 
   return (
     <>
@@ -21,10 +23,11 @@ export default function DocumentViewPage(): JSX.Element {
 
       <PageWrapper className={'column'}>
         <Header isDocumentPreview title={document.name} />
-        <SidePanelPagesPreview document={document} />
 
         <Flex flex='1' className={styles.wrapper}>
-          <Container className='column'>
+          <SidePanelPagesPreview document={document} isOpen={isOpen} setOpen={setOpen} />
+
+          <Container className={cn('column', { [styles.containerIfOpen]: isOpen })}>
             <Column className={styles.textColumn}>
               <RowBetween className={styles.textWrapper}>
                 <Text theme={'headline-1'}>{document.name}</Text>
@@ -42,8 +45,6 @@ export default function DocumentViewPage(): JSX.Element {
             <div className={styles.mockPage} />
           </Container>
         </Flex>
-
-        {/* <Footer /> */}
       </PageWrapper>
     </>
   )
