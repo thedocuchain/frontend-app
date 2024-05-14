@@ -27,6 +27,10 @@
   position: fixed;
   margin: 0 auto;
   width: 100%;
+  background: var(--bg-grey-bg-main);
+}
+
+.transparent {
   background: transparent;
 }
 

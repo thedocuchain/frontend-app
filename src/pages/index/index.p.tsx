@@ -19,7 +19,7 @@ export default function IndexPage(): JSX.Element {
       <PageDescription>Description</PageDescription>
 
       <PageWrapper>
-        <Header setStep={setStep} step={step} />
+        <Header isTransparent setStep={setStep} step={step} />
         <Flex flex='1' className={styles.bg}>
           <div className={styles.wrapper}>
             {step === 'new-document' && <StepNewDocument />}

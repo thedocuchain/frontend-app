@@ -5,7 +5,7 @@ import { AppLink } from 'src/components/ui/app-link'
 
 import styles from './styles.module.css'
 
-export function Footer() {
+export function FooterSuccessPage() {
   return (
     <div className={styles.wrapper}>
       <footer>

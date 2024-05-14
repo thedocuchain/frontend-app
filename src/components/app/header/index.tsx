@@ -16,6 +16,7 @@ import styles from './styles.module.css'
 type HeaderProps = {
   step?: 'check-status' | 'new-document'
   setStep?: (step: 'check-status' | 'new-document') => void
+  isTransparent?: boolean
   isDocumentPreview?: boolean
   isStepsWizard?: boolean
   stepsWizard?: string[]
@@ -24,7 +25,7 @@ type HeaderProps = {
 }
 
 export function Header(props: HeaderProps) {
-  const { step, setStep, isDocumentPreview, isStepsWizard, stepsWizard, activeStepWizard, title } = props
+  const { step, setStep, isTransparent, isDocumentPreview, isStepsWizard, stepsWizard, activeStepWizard, title } = props
   const isMobile = useIsMobile()
   const [hasScrolled, setHasScrolled] = useState(false)
   const isNewDocument = step === 'new-document'
@@ -66,7 +67,7 @@ export function Header(props: HeaderProps) {
   })
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cn(styles.wrapper, { [styles.transparent]: isTransparent })}>
       <header
         className={cn(styles.header, {
           [styles.headerDocumentPreview]: isDocumentPreview,

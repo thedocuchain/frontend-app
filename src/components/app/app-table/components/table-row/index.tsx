@@ -22,10 +22,10 @@ export function TableRow(props: {
   const isLastRow = props.index + 1 === props.participantLength
 
   return (
-    <tr className={isLastRow ? styles.isLastRow : null}>
+    <tr className={cn(styles.tableRow, { [styles.isLastRow]: isLastRow })}>
       <td>
         <Row className='align-center'>
-          <Avatar name={name} index={props.index} />
+          <Avatar name={name || email} index={props.index} />
           <Space horizontal size={12} />
           <Column className='w100-p white-space-nowrap'>
             <RowBetweenCenter className='gap10'>

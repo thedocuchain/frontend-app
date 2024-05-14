@@ -1,0 +1,35 @@
+.wrapperImage {
+    width: 178px;
+    height: 222px;
+    border-radius: 8px;
+    background: var(--bg-grey-7);
+    margin-bottom: 12px;
+}
+
+.img {
+    width: 146px;
+    height: 190px;
+}
+
+.textBlock {
+    gap: 4px;
+}
+
+.textBlock > * {
+    color: var(--text-secondary);
+}
+
+.iconBlock {
+    align-items: center;
+    gap: 6px;
+}
+
+.iconBlock > * {
+    color: var(--text-secondary);
+}
+
+@media (--mobile) {
+    .wrapperImage {
+        display: none;
+    }
+}

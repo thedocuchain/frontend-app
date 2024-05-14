@@ -30,7 +30,6 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
 
-  // todo documentName & documentId
   const documentName = 'Contractor Agreement'
   const documentId = 'Y16334'
 

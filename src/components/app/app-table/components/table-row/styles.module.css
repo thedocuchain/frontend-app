@@ -1,3 +1,7 @@
+.tableRow td {
+  height: 72px;
+}
+
 .isLastRow td:first-child {
   border-bottom-left-radius: 12px;
 }
@@ -6,7 +10,49 @@
   border-bottom-right-radius: 12px;
 }
 
+@media (max-width: 900px) {
+  .name,
+  .text {
+    width: fit-content;
+    max-width: 180px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 850px) {
+  .name,
+  .text {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 800px) {
+  .name,
+  .text {
+    max-width: 130px;
+  }
+}
+
+@media (max-width: 750px) {
+  .name,
+  .text {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 700px) {
+  .name,
+  .text {
+    max-width: 50px;
+  }
+}
+
 @media (--mobile) {
+  .tableRow td {
+    height: 70px;
+  }
+
   .hide {
     display: none;
   }
@@ -21,6 +67,10 @@
     max-width: 400px;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  .text {
+    max-width: unset;
   }
 
   .isLastRow td:first-child {
