@@ -6,7 +6,8 @@
   flex-direction: column;
   display: flex;
   align-items: center;
-  padding: 24px 32px;
+  padding: 0 40px;
+  height: var(--header-size);
 }
 
 .headerDocumentPreview,
@@ -17,8 +18,14 @@
 }
 
 .title {
-  margin-left: 54px;
-  width: 100%;
+  width: calc(100% - 168px - 153px - 80px - 48px);
+  max-width: 800px;
+}
+
+.title > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .wrapper {
@@ -44,15 +51,9 @@
   gap: 24px;
 }
 
-@media (--tablet) {
-  .header {
-    padding: 14px 14px;
-  }
-}
-
 @media (--mobile) {
   .header {
-    padding: 10px 14px;
+    padding: 0 16px;
   }
 
   .title {

@@ -77,16 +77,6 @@
   /*--shadow-level-6: 0 2px 4px -2px #0016700A;*/
   /*--shadow-level-7: 0 2px 4px -2px #0016700A;*/
 
-
   /* sizes */
-  --shape-corner-4: 4px;
-  --shape-corner-6: 6px;
-  --shape-corner-8: 8px;
-  --shape-corner-12: 12px;
-  --shape-corner-16: 16px;
-  --shape-corner-24: 24px;
-
-  --size-container-padding: 16px;
-
-  --radius-md: 8px;
+  --header-size: 70px;
 }
