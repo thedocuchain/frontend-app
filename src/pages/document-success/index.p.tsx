@@ -3,7 +3,7 @@ import React from 'react'
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
-import { Footer } from 'pages/document-success/components/footer'
+import { FooterSuccessPage } from 'pages/document-success/components/footer'
 import { SuccessStatusComponent } from 'src/components/app/success-status-component'
 
 export default function DocumentSuccessPage(): JSX.Element {
@@ -15,9 +15,9 @@ export default function DocumentSuccessPage(): JSX.Element {
       <PageDescription>Description</PageDescription>
 
       <PageWrapper>
-        <Header />
+        <Header isTransparent />
         <SuccessStatusComponent isAllSigned />
-        <Footer />
+        <FooterSuccessPage />
       </PageWrapper>
     </>
   )

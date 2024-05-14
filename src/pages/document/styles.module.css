@@ -9,6 +9,12 @@
     overflow: hidden;
 }
 
+@media (--tablet) {
+    .wrapper {
+        margin-top: 180px;
+    }
+}
+
 @media (--mobile) {
     .wrapper {
         padding: 0 16px;

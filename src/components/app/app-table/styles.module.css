@@ -39,6 +39,8 @@
     border-radius: 0;
     border: none;
     padding: 0;
+    width: calc(100% + 32px);
+    margin-left: -16px;
   }
 
   .table thead {
@@ -51,7 +53,7 @@
   }
 
   .table td:first-child {
-    padding: 10px 4px 10px 10px;
+    padding: 0 4px 0 16px;
   }
 
   .table tr {

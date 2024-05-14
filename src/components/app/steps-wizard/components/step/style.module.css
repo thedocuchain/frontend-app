@@ -19,7 +19,8 @@
 
     .stepMobile {
         display: block;
-        width: 115px;
+        width: 100%;
+        min-width: 115px;
         height: 4px;
         border-radius: 2px;
         background: var(--bg-grey-7);

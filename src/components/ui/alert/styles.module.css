@@ -1,5 +1,5 @@
 .wrapper {
-    width: 770px;
+    width: 100%;
     padding: 16px;
     display: flex;
     flex-direction: row;
@@ -7,17 +7,6 @@
     border-radius: 12px;
     border: solid 1px var(--bg-grey-7-opacity);
     background: var(--bg-grey-8-opacity);
-}
-
-.form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.button {
-    width: 220px;
 }
 
 .error {
@@ -50,15 +39,6 @@
 
 @media (--mobile) {
     .wrapper {
-        width: 361px;
-    }
-
-    .form {
-        flex-direction: column;
-        height: 116px;
-    }
-
-    .button {
         width: 100%;
     }
 }

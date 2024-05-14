@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import cn from 'classnames'
 
 import { Text } from 'src/components/ui/typography'
@@ -6,24 +6,34 @@ import { Button } from 'src/components/ui/button'
 import { Column, Row } from 'src/components/ui/grid'
 import { IconCheckCircle, IconInfoCircle } from 'src/icons'
 import { Space } from 'src/components/ui/space'
-import { Input } from 'src/components/ui/input'
 
 import styles from './styles.module.css'
 
-export function Alert(props: {
-  type?: 'error' | 'warning' | 'info' | 'success'
-  isForm?: boolean
-  title?: string
-  description?: string
-  buttonNamePrimary?: string
-  buttonNameSecondary?: string
-  onSubmit?: () => void
-  onSubmitSecondary?: () => void
-}) {
-  const { type, isForm, title, description, buttonNamePrimary, buttonNameSecondary, onSubmit, onSubmitSecondary } =
-    props
+export function Alert(
+  props: PropsWithChildren & {
+    type?: 'error' | 'warning' | 'info' | 'success'
+    title?: string
+    description?: string
+    buttonNamePrimary?: string
+    buttonNameSecondary?: string
+    onSubmit?: () => void
+    onSubmitSecondary?: () => void
+    className?: string
+  },
+) {
+  const {
+    type,
+    children,
+    title,
+    description,
+    buttonNamePrimary,
+    buttonNameSecondary,
+    onSubmit,
+    onSubmitSecondary,
+    className,
+  } = props
 
-  const cl = cn(styles.wrapper, {
+  const cl = cn(styles.wrapper, className, {
     [styles.info]: type === 'info' || type === undefined,
     [styles.error]: type === 'error',
     [styles.warning]: type === 'warning',
@@ -46,23 +56,15 @@ export function Alert(props: {
           </>
         )}
 
-        {isForm && onSubmit && (
+        {children && (
           <>
             <Space size={10} />
-
-            <div className={styles.form}>
-              <Input placeholder={'john.doe@gmail.com'} />
-
-              <Button onClick={onSubmit} theme='secondary' className={styles.button}>
-                Confirm
-              </Button>
-            </div>
-
+            {children}
             <Space size={10} />
           </>
         )}
 
-        {!isForm && (
+        {!children && (
           <>
             <Space size={16} />
             <Row className='gap10'>

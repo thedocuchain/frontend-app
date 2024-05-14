@@ -20,7 +20,7 @@ export function DotsTable(props: { title: string; lastRemind: string }) {
     setVisible(false)
   })
 
-  const handleRemind = useEvent(() => (event: MouseEvent<HTMLDivElement>) => {
+  const handleRemind = useEvent((event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation()
     handleClose()
   })
@@ -45,15 +45,13 @@ export function DotsTable(props: { title: string; lastRemind: string }) {
 
       {!isMobile && isVisible && (
         <div className={styles.listContainer}>
-          <div className={styles.list}>
-            <div onClick={handleRemind} className={styles.item}>
-              <Column>
-                <Text theme={'body-2'}>Remind to sign</Text>
-                <Text theme={'body-3'} className='color-text-secondary'>
-                  Last time was sent on {lastRemind}
-                </Text>
-              </Column>
-            </div>
+          <div onClick={handleRemind} className={styles.item}>
+            <Column>
+              <Text theme={'body-2'}>Remind to sign</Text>
+              <Text theme={'body-3'} className='color-text-secondary'>
+                Last time was sent on {lastRemind}
+              </Text>
+            </Column>
           </div>
         </div>
       )}
