@@ -142,9 +142,9 @@ export default function DocumentStatusPage(): JSX.Element {
               </div>
             </Column>
           </div>
-
-          <Footer />
         </Flex>
+
+        <Footer />
       </PageWrapper>
     </>
   )
