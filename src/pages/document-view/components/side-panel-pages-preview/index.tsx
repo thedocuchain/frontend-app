@@ -10,9 +10,9 @@ import { Text } from 'src/components/ui/typography'
 import DocPreview from './doc-preview.png'
 import styles from './styles.module.css'
 
-export function SidePanelPagesPreview(props: { document: DocumentType }) {
+export function SidePanelPagesPreview(props: { document: DocumentType; isOpen: boolean; setOpen: (boolean) => void }) {
   const { pages } = props.document
-  const [isOpen, setOpen] = useState(false)
+  const { isOpen, setOpen } = props
   const [isDeleted, setDeleted] = useState(false)
   const activePage = 1
   const listPages = Array.from(Array(pages).keys())
