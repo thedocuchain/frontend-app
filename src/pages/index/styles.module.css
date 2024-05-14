@@ -17,13 +17,14 @@
 
 @media (--tablet) {
     .bg {
-        background-size: cover;
-        background-image: url("./images/bg-pattern-tablet.png");
+        /*background-size: cover;*/
+        /*background-image: url("./images/bg-pattern-tablet.png");*/
     }
 }
 
 @media (--mobile) {
     .bg {
+        background-size: cover;
         background-image: url("./images/bg-pattern-mobile.png");
     }
 }

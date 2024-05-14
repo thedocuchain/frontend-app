@@ -1,0 +1,66 @@
+.wrapper {
+    margin: auto;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.bg {
+    background-image: url("./images/bg-pattern-bottom.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    width: 100%;
+    height: 100%;
+}
+
+.desc {
+    margin-top: 6px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.icon {
+    margin-bottom: -16px;
+}
+
+.buttonsContainer {
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.button {
+    width: 212px;
+}
+
+.space {
+    margin-top: 72px;
+}
+
+.name {
+    word-break: break-word;
+}
+
+@media (--mobile) {
+    .wrapper {
+        padding: 0 16px;
+    }
+
+    .bg {
+        background-position: bottom;
+        background-image: url("./images/bg-pattern-bottom-mobile.png");
+    }
+
+    .buttonsContainer {
+        gap: 8px;
+    }
+
+    .button {
+        width: 170px;
+    }
+
+    .space {
+        margin-top: 44px;
+    }
+}

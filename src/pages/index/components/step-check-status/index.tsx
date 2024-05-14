@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { ValidatorWrapper } from '@coxy/react-validator'
+import { useRouter } from 'next/router'
 
 import { UploadCardBg } from 'src/components/app/upload-card-bg'
 import { Text } from 'src/components/ui/typography'
@@ -18,8 +19,11 @@ import styles from './styles.module.css'
 export function StepCheckStatus(): JSX.Element {
   const toast = useContext(ToastContext)
   const rules = useValidatorRules()
+  const router = useRouter()
+  const queryCheckId = router.query.checkId as string
+
   const [form, setValue] = useStateForm({
-    id: '',
+    id: queryCheckId || '',
   })
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
 
@@ -60,7 +64,13 @@ export function StepCheckStatus(): JSX.Element {
         <div className={styles.row}>
           <ValidatorWrapper ref={validator}>
             <InputValidatorField required rules={rules.id} value={form.id} isVisibleErrors={isShowError}>
-              <Input isSearch onEnter={handleCheckStatus} placeholder='Enter ID' onChange={setValue('id')} />
+              <Input
+                isSearch
+                onEnter={handleCheckStatus}
+                placeholder='Enter ID'
+                value={form.id}
+                onChange={setValue('id')}
+              />
             </InputValidatorField>
           </ValidatorWrapper>
 
