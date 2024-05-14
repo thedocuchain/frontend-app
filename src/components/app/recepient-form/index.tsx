@@ -11,7 +11,7 @@ import { Text } from 'src/components/ui/typography'
 import { colorsBorders, indexToColorIndex } from 'src/components/app/avatar'
 import { Dropdown } from 'src/components/ui/dropdown'
 import { DropdownItem } from 'src/components/ui/dropdown/components/dropdown-item'
-import { IconClose } from 'src/icons'
+import { IconCloseCircle } from 'src/icons'
 import { RowBetweenCenter } from 'src/components/ui/grid'
 import { Button } from 'src/components/ui/button'
 
@@ -84,7 +84,7 @@ export function RecepientForm(props: {
         </Button>
       </RowBetweenCenter>
       <div className={styles.block}>
-        <IconClose onClick={() => onDelete(index)} className={cn(styles.iconClose, 'on-click')} />
+        <IconCloseCircle onClick={() => onDelete(index)} className={cn(styles.iconClose, 'on-click')} />
         <div className={styles.leftColorPanel} style={{ background: color }} />
         <InputValidatorField
           required={selectedRole.title === 'signer'}
