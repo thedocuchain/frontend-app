@@ -27,7 +27,7 @@ export function SuccessStatusComponent(props: { isAllSigned?: boolean; isSend?: 
   })
 
   const handleCheckStatus = useEvent(() => {
-    void router.push(`/?checkId=${checkId}`)
+    void router.push(`/?searchId=${checkId}`)
   })
 
   const handleViewDocument = useEvent(() => {
