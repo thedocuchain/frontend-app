@@ -24,7 +24,7 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
   const { onChange, className, value, onEnter, isVisibleError, isSearch, isEmail, label, hint, ...otherProps } = props
 
   const onChangeInput = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-    const regExp = isEmail ? /^(?!\s*$)[0-9a-zA-Z@._-]*/gi : /^(?!\s*$)[ 0-9a-zA-Zа-яА-Я_-]*/gi
+    const regExp = isEmail ? /^(?!\s*$)[0-9a-zA-Z@._-]*/gi : /^(?!\s*$)[ 0-9a-zA-Z_-]*/gi
     const newStr = e.target.value.match(regExp)
 
     if (!newStr && onChange) {

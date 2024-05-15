@@ -22,7 +22,7 @@ body {
   margin: 0;
   background-color: var(--bg-grey-bg-main);
   color: var(--text-primary);
-  font-family: var(--font-inter);
+  font-family: var(--font-nacelle);
   font-size: 14px;
   scroll-behavior: smooth;
   -webkit-scroll-behavior: smooth;

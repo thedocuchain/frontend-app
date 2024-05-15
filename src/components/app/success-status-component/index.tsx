@@ -69,7 +69,8 @@ export function SuccessStatusComponent(props: { isAllSigned?: boolean; isSend?: 
           <>
             <IconDocumentSigned className={styles.icon} />
             <Text theme={'headline-2'} className={styles.name}>
-              {documentName} has been signed! 🔥🔥🔥
+              {/* eslint-disable-next-line no-irregular-whitespace */}
+              {documentName} has been signed! 🔥 🔥 🔥
             </Text>
             <Text theme={'body-2'} className={styles.desc}>
               All participants sign your document and received a notification with the link to the file. Now, you can

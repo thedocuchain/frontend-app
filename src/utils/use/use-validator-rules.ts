@@ -8,7 +8,7 @@ import locales from './index.i18n.json'
 
 const emailReg =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-const userNameReg = /[A-Za-zа-яА-Я0-9_-]+/
+const userNameReg = /[A-Za-z0-9_-]+/
 
 export const useValidatorRules = () => {
   const { t } = useI18N(locales)
