@@ -1,6 +1,6 @@
 import { DocumentType, Recipient } from 'src/store/reducers/document/types'
 
-export const data: Recipient[] = [
+export const signersData: Recipient[] = [
   {
     name: 'Zig Moore',
     email: 'zig.moore@example.com',
@@ -100,7 +100,7 @@ export const data: Recipient[] = [
 
 export const documentMock: DocumentType = {
   id: 'Y16334',
-  signers: data,
+  signers: signersData,
   pages: 6,
   name: 'Contractor Agreement',
   status: 'signing',

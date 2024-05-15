@@ -9,6 +9,7 @@ import { StepAddRecipients } from 'src/pages/document/components/step-add-recipi
 import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
+import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
 
 import styles from './styles.module.css'
 
@@ -23,8 +24,20 @@ export default function DocumentPage(): JSX.Element {
   ])
 
   const steps = ['Upload', 'Add recipients', 'Preview and send']
-  // const [activeStep, setActiveStep] = useState('Preview and send')
-  const [activeStep, setActiveStep] = useState('Add recipients')
+  const [activeStep, setActiveStep] = useState('Preview and send')
+  // const [activeStep, setActiveStep] = useState('Add recipients')
+
+  const stepsHints: StepByStepBlockType[] = [
+    {
+      title: 'Please check the document before giving the required consents and sending.',
+      buttonText: "I've read the document",
+    },
+    {
+      title: 'Give the required consents and send document.',
+      isCheckBoxTermsAndPrivacy: true,
+      buttonText: 'Send for signing',
+    },
+  ]
 
   return (
     <>
@@ -45,7 +58,7 @@ export default function DocumentPage(): JSX.Element {
             <StepAddRecipients signers={signers} setSigners={setSigners} setActiveStep={setActiveStep} />
           )}
 
-          {activeStep === 'Preview and send' && <DocumentViewComponent />}
+          {activeStep === 'Preview and send' && <DocumentViewComponent stepsHints={stepsHints} />}
         </Flex>
       </PageWrapper>
     </>

@@ -5,7 +5,7 @@ import { PageDescription, PageHead, usePageHead } from 'src/components/common/pa
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
 import { Column, Flex } from 'src/components/ui/grid'
-import { data, documentMock } from 'src/pages/document-status-page/data'
+import { signersData, documentMock } from 'src/pages/document-status-page/data'
 import { AppTable } from 'src/components/app/app-table'
 import { Footer } from 'src/components/app/footer'
 import { DocumentPreview } from 'src/components/app/document-preview'
@@ -22,7 +22,7 @@ import styles from './styles.module.css'
 export default function DocumentStatusPage(): JSX.Element {
   const { title } = usePageHead({ title: 'Document Status Page' })
 
-  const users = data
+  const users = signersData
   const document = documentMock
   const signedBy = `Signed by ${document.signers.filter((el) => el.status === 'signed').length} of ${
     document.signers.length
