@@ -80,20 +80,20 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
         setIsShowError(true)
         await validator.current.setCustomError({
           id: 'role',
-          message: 'Select at least 1 signer.',
+          message: 'Select at least 1 signer',
           isValid: false,
         })
 
         if (!errors?.length) {
           toast.addToast({
-            text: 'Select at least 1 signer.',
+            text: 'Select at least 1 signer',
           })
         }
       }
 
       if ((isNoSigners && errors?.length >= 1) || errors?.length > 1) {
         toast.addToast({
-          text: 'Check all fields are filled correctly.',
+          text: 'Check all fields are correct',
         })
       }
 

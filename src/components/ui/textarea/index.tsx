@@ -24,7 +24,8 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
   const id = useId()
 
   const onChangeTextarea = useEvent((e: ChangeEvent<HTMLTextAreaElement>) => {
-    const regExp = /^(?!\s*$)[-'"., 0-9a-zA-Zа-яА-Я]*/gi
+    // document name regExp
+    const regExp = /[-'".,_?!:; A-Za-z0-9]+/gi
     const newStr = e.target.value.match(regExp)
 
     const textField = document.getElementById(id)
