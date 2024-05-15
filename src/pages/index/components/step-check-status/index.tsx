@@ -20,7 +20,7 @@ export function StepCheckStatus(): JSX.Element {
   const toast = useContext(ToastContext)
   const rules = useValidatorRules()
   const router = useRouter()
-  const queryCheckId = router.query.checkId as string
+  const queryCheckId = router.query.searchId as string
 
   const [form, setValue] = useStateForm({
     id: queryCheckId || '',

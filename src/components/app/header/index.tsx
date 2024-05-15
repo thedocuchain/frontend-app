@@ -30,7 +30,7 @@ export function Header(props: HeaderProps) {
   const [hasScrolled, setHasScrolled] = useState(false)
   const isNewDocument = step === 'new-document'
   const router = useRouter()
-  const queryCheckId = router.query.checkId as string
+  const queryCheckId = router.query.searchId as string
 
   useEffect(() => {
     const handleScroll = () => {

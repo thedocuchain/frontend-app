@@ -8,6 +8,7 @@ import { IconPlus, IconUpload } from 'src/icons'
 import { Space } from 'src/components/ui/space'
 import { Button } from 'src/components/ui/button'
 import { FileUploadProgress } from 'src/components/app/file-upload-progress'
+import { isFormatAllowedFn } from 'src/utils/files'
 
 import styles from './styles.module.css'
 
@@ -16,7 +17,9 @@ export function StepNewDocument(): JSX.Element {
   const inputRef = React.useRef(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    const isFormatAllowed = isFormatAllowedFn(e.target.files[0].type)
+
+    if (e.target.files && isFormatAllowed) {
       setFile(e.target.files[0])
     }
   }
@@ -36,7 +39,10 @@ export function StepNewDocument(): JSX.Element {
     e.preventDefault()
     e.stopPropagation()
     setDragActive(false)
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+
+    const isFormatAllowed = isFormatAllowedFn(e.dataTransfer.files[0].type)
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0] && isFormatAllowed) {
       setFile(e.dataTransfer.files[0])
     }
   }
