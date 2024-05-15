@@ -13,7 +13,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
   return (
     <Column>
       <RowCenter className={styles.wrapperImage}>
-        <img src={DocPreview.src} alt='' className={styles.img} />
+        <img width={146} height={190} src={DocPreview.src} alt='' className={styles.img} />
       </RowCenter>
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>

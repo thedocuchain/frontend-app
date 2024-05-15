@@ -62,7 +62,6 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
   const handleCheckRecipients = useEvent(async () => {
     setIsShowError(false)
     const { isValid, message } = validate()
-    // const isNoSigners = signers.every((el) => el.role === 'watcher')
 
     if (validator.current) {
       validator.current.clearCustomErrors()

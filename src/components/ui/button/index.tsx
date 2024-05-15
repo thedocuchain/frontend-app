@@ -72,12 +72,8 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
     <div className={styles.wrapper}>
       <button {...otherProps} onClick={handleClick} className={cs}>
         {isLoading && <Loader size={20} color={'black'} />}
-        {!isLoading && size === 'sm' && (
-          <Text theme='button-sm' className={styles.text}>
-            {otherProps.children}
-          </Text>
-        )}
-        {!isLoading && (size === 'standard' || size === undefined) && (
+
+        {!isLoading && (
           <Text theme='button-standard' className={styles.text}>
             {otherProps.children}
           </Text>

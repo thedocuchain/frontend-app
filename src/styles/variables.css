@@ -69,13 +69,14 @@
   /* box shadows */
   --shadow-focus-accent: 0 0 0 4px #9FE8703D;
   --shadow-focus-error: 0 0 0 4px #EB38381F;
-  --shadow-level-1: 0 2px 4px -2px #0016700A;
-  --shadow-level-2: 0px 1px 28px -8px #0016700F;
-  /*--shadow-level-3: 0 2px 4px -2px #0016700A;*/
-  /*--shadow-level-4: 0 2px 4px -2px #0016700A;*/
-  /*--shadow-level-5: 0 2px 4px -2px #0016700A;*/
-  /*--shadow-level-6: 0 2px 4px -2px #0016700A;*/
-  /*--shadow-level-7: 0 2px 4px -2px #0016700A;*/
+  --shadow-level-1: 0px 2px 4px -2px rgba(0, 22, 112, 0.04);
+  --shadow-level-2: 0px 2px 4px -2px rgba(0, 22, 112, 0.04), 0px 1px 28px -8px rgba(0, 22, 112, 0.06);
+  --shadow-level-3: 0px 4px 8px -2px rgba(0, 22, 112, 0.04), 0px 4px 40px -12px rgba(0, 22, 112, 0.08);
+  --shadow-level-4: 0px 6px 12px -3px rgba(0, 22, 112, 0.06), 0px 8px 56px -20px rgba(0, 22, 112, 0.10);
+  --shadow-level-5: 0px 7px 14px -4px rgba(0, 22, 112, 0.08), 0px 12px 68px -24px rgba(0, 22, 112, 0.14);
+  --shadow-level-6: 0px 8px 16px -5px rgba(0, 22, 112, 0.10), 0px 16px 100px -32px rgba(0, 22, 112, 0.24);
+  --shadow-level-7: 0px 11px 22px -6px rgba(0, 22, 112, 0.12), 0px 20px 140px -36px rgba(0, 22, 112, 0.32);
+
 
   /* sizes */
   --header-size: 70px;

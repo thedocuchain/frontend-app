@@ -23,8 +23,8 @@ export default function DocumentPage(): JSX.Element {
   ])
 
   const steps = ['Upload', 'Add recipients', 'Preview and send']
-  const [activeStep, setActiveStep] = useState('Preview and send')
-  // const [activeStep, setActiveStep] = useState('Add recipients')
+  // const [activeStep, setActiveStep] = useState('Preview and send')
+  const [activeStep, setActiveStep] = useState('Add recipients')
 
   return (
     <>

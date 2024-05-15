@@ -48,7 +48,7 @@ export function SidePanelPagesPreview(props: { document: DocumentType; isOpen: b
         <div className={styles.sidePanelContent}>
           {listPages?.map((el, index) => (
             <Column key={el} className={cn(styles.page, { [styles.activePage]: activePage === index })}>
-              <img src={DocPreview.src} alt='' className={styles.img} />
+              <img width={146} height={190} src={DocPreview.src} alt='' className={styles.img} />
               <Text theme={'body-3'} className={'color-text-secondary'}>
                 {index + 1}
               </Text>

@@ -87,6 +87,7 @@ export function RecepientForm(props: {
         <IconCloseCircle onClick={() => onDelete(index)} className={cn(styles.iconClose, 'on-click')} />
         <div className={styles.leftColorPanel} style={{ background: color }} />
         <InputValidatorField
+          id={'name'}
           required={selectedRole.title === 'signer'}
           rules={rules.name}
           value={form.name}
@@ -101,7 +102,7 @@ export function RecepientForm(props: {
           />
         </InputValidatorField>
 
-        <InputValidatorField required rules={rules.email} value={form.email} isVisibleErrors={isShowError}>
+        <InputValidatorField id={'email'} required rules={rules.email} value={form.email} isVisibleErrors={isShowError}>
           <Input
             onBlur={handleChange}
             label='Email'
