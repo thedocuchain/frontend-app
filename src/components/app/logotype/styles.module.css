@@ -1,9 +1,9 @@
 .logo {
-  width: 168px;
+  width: 180px;
 }
 
 @media (--mobile) {
   .logo {
-    width: 120px;
+    width: 132px;
   }
 }

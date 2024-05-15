@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   max-width: 820px;
-  height: 44px;
+  height: 52px;
   background-color: var(--bg-white);
   font-family: var(--font-nacelle);
   font-size: 16px;
@@ -16,8 +16,12 @@
   line-height: 24px;
   text-align: left;
   outline: none !important;
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
   border: solid 1px var(--bg-grey-5);
   box-shadow: var(--shadow-level-1);
   transition: all 0.1s ease;
@@ -51,8 +55,8 @@
 
 .arrow {
   position: absolute;
-  right: 12px;
-  top: 9px;
+  right: 16px;
+  top: 12px;
   transition: transform 0.1s;
   stroke: var(--text-secondary);
 }
@@ -66,6 +70,7 @@
   position: absolute;
   z-index: 50;
   right: 0;
+  top: 100%;
   overflow: auto;
   width: 320px;
   background: var(--bg-white);
@@ -75,7 +80,6 @@
   box-shadow: var(--shadow-level-1);
   padding: 2px 4px 2px 4px;
   margin-top: 4px;
-  /*margin-top: -20px;*/
   user-select: none;
 }
 
