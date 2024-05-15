@@ -9,6 +9,7 @@ import { IconDocumentSent, IconDocumentSigned } from 'src/icons'
 import { Button } from 'src/components/ui/button'
 import { RateUs } from 'src/components/app/rate-us'
 import { Share } from 'src/components/app/share'
+import { documentMock } from 'src/pages/document-status-page/data'
 
 import styles from './styles.module.css'
 
@@ -16,8 +17,10 @@ export function SuccessStatusComponent(props: { isAllSigned?: boolean; isSend?: 
   const { isAllSigned, isSend } = props
   const isOneSigned = !isAllSigned && !isSend
   const router = useRouter()
-  const checkId = 'Y12345'
-  const documentName = 'Contractor Agreement'
+
+  const document = documentMock
+  const checkId = document.id
+  const documentName = document.name
 
   const handleNewDocument = useEvent(() => {
     void router.push('/')

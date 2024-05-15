@@ -8,6 +8,12 @@
     overflow: hidden;
 }
 
+@media (max-width: 900px) {
+    .wrapper {
+        margin-top: calc(var(--header-size) + 16px);
+    }
+}
+
 @media (--mobile) {
     .wrapper {
         padding: 0 16px;

@@ -1,0 +1,175 @@
+import cn from 'classnames'
+import React, { useState } from 'react'
+import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { format } from 'date-fns'
+
+import { colorsBorders, indexToColorIndex } from 'src/components/app/avatar'
+import { Text } from 'src/components/ui/typography'
+import { Column, Row, RowCenter } from 'src/components/ui/grid'
+import { IconEdit, IconRefreshSignature } from 'src/icons'
+import { Recipient } from 'src/store/reducers/document/types'
+import { Space } from 'src/components/ui/space'
+import { TextSize } from 'src/components/ui/text-size'
+import { Tooltip } from 'src/components/ui/tooltip'
+import { fontsSignatures } from 'src/components/app/document-view-component/components/edit-tools/fonts'
+
+import styles from './styles.module.css'
+
+type ComponentProps = {
+  index: number
+  isJustCreated?: boolean
+  isEdited?: boolean
+  isSigned?: boolean
+  setSigned?: (boolean) => void
+  dateSigned?: string
+  name?: string
+}
+
+export function DateBlock(props: ComponentProps) {
+  const { isJustCreated, dateSigned, index } = props
+  const colorBorder = colorsBorders[index]
+  const style = isJustCreated ? { backgroundColor: `${colorBorder}08`, borderColor: `${colorBorder}` } : null
+
+  if (dateSigned)
+    return (
+      <div className={styles.dateWrapperSigned}>
+        <Text theme={'label-2'}>{format(new Date(dateSigned.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
+      </div>
+    )
+
+  return (
+    <div className={styles.dateWrapper} style={style}>
+      <Text theme={'label-2'} className='color-text-secondary'>
+        MM.DD.YYYY
+      </Text>
+    </div>
+  )
+}
+
+export function Signature(props: ComponentProps) {
+  const { isJustCreated, isEdited, isSigned, setSigned, index, name } = props
+  const colorBorder = colorsBorders[index]
+  const isSignedDone = isSigned && !isEdited
+
+  const cl = cn(styles.signatureWrapper, {
+    [styles.isEdited]: isEdited,
+    [styles.isSigned]: isSigned,
+    [styles.isSignedDone]: isSignedDone,
+  })
+  const style = isJustCreated ? { backgroundColor: `${colorBorder}08`, borderColor: `${colorBorder}` } : null
+
+  const handeSignDocument = useEvent(() => {
+    if (!isEdited) return
+
+    if (isSigned) {
+      const newIndex = fontIndex + 1 < fonts.length ? fontIndex + 1 : 0
+      setFontIndex(newIndex)
+      setFont(fonts[newIndex])
+      return
+    }
+
+    setSigned(true)
+  })
+
+  const fonts = fontsSignatures
+  const [fontIndex, setFontIndex] = useState(0)
+  const [font, setFont] = useState(fonts[fontIndex])
+
+  return (
+    <div className={cl} style={style} onClick={handeSignDocument}>
+      {!isEdited && !isSigned && (
+        <RowCenter className='gap4'>
+          <IconEdit className={styles.icon} />
+          <Text theme={'label-2'} className='color-text-secondary'>
+            Signature
+          </Text>
+        </RowCenter>
+      )}
+
+      {isSigned && isEdited && (
+        <Column className='align-center jc-between h100-p text-center'>
+          <TextSize maxLen={30} className={font}>
+            {name}
+          </TextSize>
+
+          <RowCenter className='gap6'>
+            <IconRefreshSignature className={styles.iconEdited} />
+            <Text theme={'button-standard'} className={cn('color-link-default', styles.textHover)}>
+              Change signature
+            </Text>
+          </RowCenter>
+        </Column>
+      )}
+
+      {isSignedDone && (
+        <Column className='column-center'>
+          <TextSize maxLen={30} className={font}>
+            {name}
+          </TextSize>
+        </Column>
+      )}
+
+      {isEdited && !isSigned && (
+        <RowCenter className='gap6'>
+          <IconEdit className={styles.iconEdited} />
+          <Text theme={'button-sm'} className={cn('color-link-default', styles.textHover)}>
+            Click here to sign
+          </Text>
+        </RowCenter>
+      )}
+    </div>
+  )
+}
+
+type ParticipantSignatureDetailsProps = {
+  participant: Recipient
+  index: number
+  isJustCreated?: boolean
+  isEdited?: boolean
+  isError?: boolean
+}
+
+export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsProps) {
+  const { name, email, dateSigned } = props.participant
+  const { isJustCreated, isEdited, isError } = props
+  const [isSigned, setSigned] = useState(false)
+  const index = indexToColorIndex(props.index)
+
+  return (
+    <Row className={styles.participantWrapper}>
+      <Column>
+        <Space size={9} />
+        <Text theme={'headline-4'}>{name}</Text>
+        <Space size={5} />
+        <Text theme={'body-3'}>{email}</Text>
+      </Column>
+
+      <Row>
+        <DateBlock isJustCreated={isJustCreated} isEdited={isEdited} index={index} dateSigned={dateSigned} />
+        <Space size={80} horizontal />
+
+        <Tooltip isError={isError} isShow={isError} content={'Signature is required.'}>
+          <Signature
+            setSigned={setSigned}
+            isSigned={isSigned}
+            isJustCreated={isJustCreated}
+            isEdited={isEdited}
+            index={index}
+            name={name}
+          />
+        </Tooltip>
+      </Row>
+    </Row>
+  )
+}
+
+// {document.signers.map((item, index) => (
+//     <ParticipantSignatureDetails
+//         isJustCreated={false}
+//         isEdited={true}
+//         isError={false}
+//         key={`${item.email}${index}`}
+//         participant={item}
+//         index={index}
+//     />
+// ))}

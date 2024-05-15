@@ -1,14 +1,4 @@
-import React, {
-  ReactElement,
-  MouseEvent,
-  useState,
-  FocusEvent,
-  useRef,
-  ReactNode,
-  useEffect,
-  useId,
-  useLayoutEffect,
-} from 'react'
+import React, { ReactElement, MouseEvent, useState, FocusEvent, useRef, ReactNode, useId, useLayoutEffect } from 'react'
 import { ReactClickOutside } from '@coxy/react-click-outside'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
@@ -121,14 +111,6 @@ export function Dropdown<ItemT = unknown>(props: DropdownComponentProps<ItemT>):
     [styles.disabled]: disabled,
     'color-text-secondary': !renderItem,
   })
-
-  useEffect(() => {
-    // scroll list element into view
-    if (isVisible) {
-      const element = document.getElementById('dropdown-item-active')
-      element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-  }, [isVisible])
 
   return (
     <div className={cw} onClick={handleOpen} onKeyUp={handleOpenWithKeyboard}>
