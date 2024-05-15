@@ -7,6 +7,7 @@ export const data: Recipient[] = [
     role: 'signer',
     status: 'signed',
     lastRemind: '2024-03-20 13:45',
+    dateSigned: '10.10.2024',
   },
   {
     name: 'Charlotte Moore',
@@ -14,6 +15,7 @@ export const data: Recipient[] = [
     role: 'signer',
     status: 'signed',
     lastRemind: '2024-03-20 13:45',
+    dateSigned: '10.10.2024',
   },
   {
     name: 'Alex Johnson',

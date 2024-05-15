@@ -3,6 +3,7 @@ export type Recipient = {
   email: string
   role: 'signer' | 'watcher'
   status?: 'awaiting' | 'signed'
+  dateSigned?: string
   lastRemind?: string
 }
 

@@ -14,6 +14,7 @@ import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
 import { Recipient } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
+import { documentMock } from 'src/pages/document-status-page/data'
 
 import styles from './styles.module.css'
 
@@ -21,17 +22,16 @@ type ComponentProps = {
   signers: Recipient[]
   setSigners: (signers: Recipient[]) => void
   setActiveStep: (step: string) => void
-  steps: string[]
-  activeStep: string
 }
 
 export function StepAddRecipients(props: ComponentProps): JSX.Element {
-  const { signers, setSigners, setActiveStep, steps, activeStep } = props
+  const { signers, setSigners, setActiveStep } = props
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
 
-  const documentName = 'Contractor Agreement'
-  const documentId = 'Y16334'
+  const document = documentMock
+  const documentId = document.id
+  const documentName = document.name
 
   const [form, setValue] = useStateForm({
     documentName,
@@ -100,13 +100,6 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
 
   return (
     <>
-      <div className='show-mobile'>
-        <Text theme={'label-2'} className='color-text-secondary'>
-          Step {steps.findIndex((el) => el === activeStep) + 1} of {steps.length} - {activeStep}
-        </Text>
-        <Space size={24} />
-      </div>
-
       <Text theme={'headline-1'} className={styles.title}>
         Add recepients
       </Text>

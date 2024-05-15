@@ -2,6 +2,10 @@
   color: var(--text-secondary) !important;
 }
 
+.color-link-default {
+  color: var(--text-link-default) !important;
+}
+
 .color-text-error {
   color: var(--text-error) !important;
 }

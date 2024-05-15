@@ -63,7 +63,7 @@ export function Avatar(props: { name: string; index: number; className?: string 
   const colorBorder = colorsBorders[index]
 
   return (
-    <div className={cl} style={{ backgroundColor: `${colorBorder}08`, border: `1px solid ${colorBorder}` }}>
+    <div className={cl} style={{ backgroundColor: `${colorBorder}08`, borderColor: `${colorBorder}` }}>
       <Text theme='label-2' className='uppercase' style={{ color: colorText }}>
         {nameToIcon(name)}
       </Text>

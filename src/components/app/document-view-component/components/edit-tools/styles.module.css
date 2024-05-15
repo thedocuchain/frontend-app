@@ -1,0 +1,78 @@
+.signatureWrapper {
+    display: flex;
+    width: 216px;
+    height: 80px;
+    padding: 8px 10px;
+    align-items: flex-start;
+    border-radius: 4px;
+    border: 1px solid var(--bg-grey-5);
+    background: var(--bg-grey-8);
+    user-select: none;
+}
+
+.isEdited {
+    box-shadow: var(--shadow-focus-accent);
+    border: 1px solid var(--bg-accent);
+    background: var(--bg-white);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 10px 2px 10px;
+}
+
+.isEdited:hover .textHover {
+    font-size: 16px !important;
+    color: #2F35C2 !important;
+}
+
+.iconEdited {
+    stroke: var(--text-link-default);
+}
+
+.isEdited:hover .iconEdited {
+    stroke: #2F35C2 !important;
+}
+
+.isSignedDone {
+    display: flex;
+    justify-content: center;
+    width: 216px;
+    height: 80px;
+    border-radius: 0;
+    border: none;
+    background: none;
+    user-select: auto;
+    box-shadow: none;
+    padding: 4px;
+    cursor: auto;
+}
+
+.signatureText {
+}
+
+.dateWrapper {
+    display: flex;
+    width: 96px;
+    height: 36px;
+    padding: 8px 2px;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid var(--bg-grey-5);
+    background: var(--bg-grey-8);
+    user-select: none;
+}
+
+.dateWrapperSigned {
+    width: 96px;
+    margin-top: 8px;
+}
+
+.icon {
+    stroke: var(--bg-grey-2-opacity);
+}
+
+.participantWrapper {
+    width: 700px;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
