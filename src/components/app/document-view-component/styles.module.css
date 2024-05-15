@@ -34,4 +34,12 @@
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .mockPageContainer {
+        width: 100%;
+    }
+
+    .mockPage {
+        width: 100%;
+    }
 }
