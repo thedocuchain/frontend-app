@@ -61,7 +61,7 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
 
   const handleCheckRecipients = useEvent(async () => {
     setIsShowError(false)
-    const { isValid, message } = validate()
+    const { isValid, message, errors } = validate()
 
     if (validator.current) {
       validator.current.clearCustomErrors()
@@ -70,9 +70,11 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
     if (!isValid || isNoSigners) {
       setIsShowError(true)
 
-      toast.addToast({
-        text: message,
-      })
+      if (errors?.length === 1 && !isNoSigners) {
+        toast.addToast({
+          text: message,
+        })
+      }
 
       if (isNoSigners) {
         setIsShowError(true)
@@ -82,8 +84,16 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
           isValid: false,
         })
 
+        if (!errors?.length) {
+          toast.addToast({
+            text: 'Select at least 1 signer.',
+          })
+        }
+      }
+
+      if ((isNoSigners && errors?.length >= 1) || errors?.length > 1) {
         toast.addToast({
-          text: 'Select at least 1 signer.',
+          text: 'Check all fields are filled correctly.',
         })
       }
 
