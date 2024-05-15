@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   color: var(--text-primary);
   outline: none;
   user-select: none;
