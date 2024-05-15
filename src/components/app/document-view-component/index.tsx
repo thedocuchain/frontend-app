@@ -36,9 +36,11 @@ export function DocumentViewComponent(props: { stepsHints: StepByStepBlockType[]
 
         <GuideLabel positionY={300} title={'Sign'} />
 
-        <div className={styles.mockPage} />
-        <div className={styles.mockPage} />
-        <div className={styles.mockPage} />
+        <div className={styles.mockPageContainer}>
+          <div className={styles.mockPage} />
+          <div className={styles.mockPage} />
+          <div className={styles.mockPage} />
+        </div>
       </Container>
 
       <Space size={136} />
