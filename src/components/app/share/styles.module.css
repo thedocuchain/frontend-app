@@ -1,3 +1,35 @@
 .row {
-  gap: 24px;
+  gap: 10px;
+}
+
+.iconX {
+  fill: #0A18333D;
+}
+
+.iconX:hover {
+  fill: #1D9BF0;
+}
+
+.iconFb {
+  fill: #0A18333D;
+}
+
+.iconFb:hover {
+  fill: #1877F2;
+}
+
+.iconTg {
+  fill: #0A18333D;
+}
+
+.iconTg:hover {
+  fill: #29A9EB;
+}
+
+.iconIn {
+  fill: #0A18333D;
+}
+
+.iconIn:hover {
+  fill: #0A66C2;
 }

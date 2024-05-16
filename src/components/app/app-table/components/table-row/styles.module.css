@@ -3,11 +3,15 @@
 }
 
 .isLastRow td:first-child {
-  border-bottom-left-radius: 12px;
+  border-bottom-left-radius: 16px;
 }
 
 .isLastRow td:last-child {
-  border-bottom-right-radius: 12px;
+  border-bottom-right-radius: 16px;
+}
+
+.name {
+  margin-bottom: 2px;
 }
 
 @media (max-width: 900px) {
@@ -67,6 +71,7 @@
     max-width: 400px;
     text-overflow: ellipsis;
     overflow: hidden;
+    margin-bottom: 4px;
   }
 
   .text {

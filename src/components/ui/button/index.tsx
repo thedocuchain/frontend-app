@@ -31,7 +31,7 @@ export function ButtonWrapper(
   })
 
   return (
-    <div onClick={handleClick} className={cn('on-click column-center', className)} id={props.id}>
+    <div onClick={handleClick} className={cn('on-click', className)} id={props.id}>
       {props.children}
     </div>
   )
