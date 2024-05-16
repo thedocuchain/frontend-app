@@ -1,21 +1,606 @@
+.alex-brush-regular {
+  font-family: "Alex Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.allison-regular {
+  font-family: "Allison", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.allura-regular {
+  font-family: "Allura", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.annie-use-your-telescope-regular {
+  font-family: "Annie Use Your Telescope", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.architects-daughter-regular {
+  font-family: "Architects Daughter", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.arizonia-regular {
+  font-family: "Arizonia", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bad-script-regular {
+  font-family: "Bad Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.briem-hand-400 {
+  font-family: "Briem Hand", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.butterfly-kids-regular {
+  font-family: "Butterfly Kids", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.calligraffitti-regular {
+  font-family: "Calligraffitti", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.caveat-400 {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cedarville-cursive-regular {
+  font-family: "Cedarville Cursive", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.charm-regular {
+  font-family: "Charm", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.charmonman-regular {
+  font-family: "Charmonman", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.comic-neue-regular {
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.coming-soon-regular {
+  font-family: "Coming Soon", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cookie-regular {
+  font-family: "Cookie", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.courgette-regular {
+  font-family: "Courgette", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.covered-by-your-grace-regular {
+  font-family: "Covered By Your Grace", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.crafty-girls-regular {
+  font-family: "Crafty Girls", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dancing-script-400 {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dawning-of-a-new-day-regular {
+  font-family: "Dawning of a New Day", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dekko-regular {
+  font-family: "Dekko", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.delicious-handrawn-regular {
+  font-family: "Delicious Handrawn", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.edu-sa-beginner-400 {
+  font-family: "Edu SA Beginner", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.engagement-regular {
+  font-family: "Engagement", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ephesis-regular {
+  font-family: "Ephesis", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.estonia-regular {
+  font-family: "Estonia", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.euphoria-script-regular {
+  font-family: "Euphoria Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .fasthand-regular {
   font-family: "Fasthand", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
-.roboto-cursive {
-  font-family: 'Roboto', cursive;
+.give-you-glory-regular {
+  font-family: "Give You Glory", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
-.fs10 {
-  font-size: 10px;
+.gloria-hallelujah-regular {
+  font-family: "Gloria Hallelujah", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.fs11 {
-  font-size: 11px;
+.grand-hotel-regular {
+  font-family: "Grand Hotel", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.great-vibes-regular {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.grechen-fuemen-regular {
+  font-family: "Grechen Fuemen", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.handlee-regular {
+  font-family: "Handlee", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.herr-von-muellerhoff-regular {
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.homemade-apple-regular {
+  font-family: "Homemade Apple", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.hurricane-regular {
+  font-family: "Hurricane", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.indie-flower-regular {
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.italianno-regular {
+  font-family: "Italianno", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.julee-regular {
+  font-family: "Julee", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.just-another-hand-regular {
+  font-family: "Just Another Hand", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.just-me-again-down-here-regular {
+  font-family: "Just Me Again Down Here", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kalam-regular {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kaushan-script-regular {
+  font-family: "Kaushan Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kolker-brush-regular {
+  font-family: "Kolker Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kristi-regular {
+  font-family: "Kristi", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.la-belle-aurore-regular {
+  font-family: "La Belle Aurore", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.league-script-regular {
+  font-family: "League Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.licorice-regular {
+  font-family: "Licorice", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.liu-jian-mao-cao-regular {
+  font-family: "Liu Jian Mao Cao", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.long-cang-regular {
+  font-family: "Long Cang", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.love-ya-like-a-sister-regular {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.marck-script-regular {
+  font-family: "Marck Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.meddon-regular {
+  font-family: "Meddon", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.medievalsharp-regular {
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.meow-script-regular {
+  font-family: "Meow Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.merienda-400 {
+  font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.miniver-regular {
+  font-family: "Miniver", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montez-regular {
+  font-family: "Montez", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.moon-dance-regular {
+  font-family: "Moon Dance", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mr-dafoe-regular {
+  font-family: "Mr Dafoe", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mrs-saint-delafield-regular {
+  font-family: "Mrs Saint Delafield", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ms-madi-regular {
+  font-family: "Ms Madi", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-brush-script-regular {
+  font-family: "Nanum Brush Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-pen-script-regular {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.neonderthaw-regular {
+  font-family: "Neonderthaw", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.neucha-regular {
+  font-family: "Neucha", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nothing-you-could-do-regular {
+  font-family: "Nothing You Could Do", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.oooh-baby-regular {
+  font-family: "Oooh Baby", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.over-the-rainbow-regular {
+  font-family: "Over the Rainbow", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.parisienne-regular {
+  font-family: "Parisienne", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pinyon-script-regular {
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.playball-regular {
+  font-family: "Playball", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.qwigley-regular {
+  font-family: "Qwigley", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.qwitcher-grypen-regular {
+  font-family: "Qwitcher Grypen", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.rancho-regular {
+  font-family: "Rancho", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.reenie-beanie-regular {
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.rochester-regular {
+  font-family: "Rochester", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.rock-salt-regular {
+  font-family: "Rock Salt", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sacramento-regular {
+  font-family: "Sacramento", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.satisfy-regular {
+  font-family: "Satisfy", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.schoolbell-regular {
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.seaweed-script-regular {
+  font-family: "Seaweed Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shadows-into-light-regular {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shadows-into-light-two-regular {
+  font-family: "Shadows Into Light Two", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shalimar-regular {
+  font-family: "Shalimar", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.smooch-regular {
+  font-family: "Smooch", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.square-peg-regular {
+  font-family: "Square Peg", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.stalemate-regular {
+  font-family: "Stalemate", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sue-ellen-francisco-regular {
+  font-family: "Sue Ellen Francisco", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sunshiney-regular {
+  font-family: "Sunshiney", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.swanky-and-moo-moo-regular {
+  font-family: "Swanky and Moo Moo", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tangerine-regular {
+  font-family: "Tangerine", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.vujahday-script-regular {
+  font-family: "Vujahday Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.waiting-for-the-sunrise-regular {
+  font-family: "Waiting for the Sunrise", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.yellowtail-regular {
+  font-family: "Yellowtail", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zeyada-regular {
+  font-family: "Zeyada", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .fs12 {
@@ -36,4 +621,20 @@
 
 .fs16 {
   font-size: 16px;
+}
+
+.fs17 {
+  font-size: 17px;
+}
+
+.fs18 {
+  font-size: 18px;
+}
+
+.fs19 {
+  font-size: 19px;
+}
+
+.fs20 {
+  font-size: 20px;
 }

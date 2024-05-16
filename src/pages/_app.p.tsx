@@ -68,10 +68,6 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
         <meta name='theme-color' content='#ffffff' />
         <meta name='color-scheme' content='only light' />
         <link rel='manifest' href='/manifest.json' />
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin={'true'} />
-
-        <link href='https://fonts.googleapis.com/css2?family=Fasthand&display=swap' rel='stylesheet' />
       </Head>
       <Provider store={store}>
         <Metrics />
