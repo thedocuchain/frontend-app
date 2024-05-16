@@ -43,7 +43,7 @@
   height: 43px;
   padding: 10px 20px;
   gap: 8px;
-  border-radius: 100px;
+  border-radius: 10px;
   pointer-events: auto !important;
 
   -webkit-animation: slide-in-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;

@@ -35,6 +35,7 @@ export { default as IconUpload } from 'src/icons/inline/upload-cloud.inline.svg'
 export { default as IconXLogo } from 'src/icons/socials/x.inline.svg'
 export { default as IconLinkedinLogo } from 'src/icons/socials/in.inline.svg'
 export { default as IconInstagramLogo } from 'src/icons/socials/instagram.inline.svg'
+export { default as IconInstagramDefaultLogo } from 'src/icons/socials/instagram-default.inline.svg'
 export { default as IconFacebookLogo } from 'src/icons/socials/facebook.inline.svg'
 export { default as IconTelegramLogo } from 'src/icons/socials/tg.inline.svg'
 

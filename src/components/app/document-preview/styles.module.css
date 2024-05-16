@@ -1,7 +1,7 @@
 .wrapperImage {
     width: 178px;
     height: 222px;
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--bg-grey-7);
     margin-bottom: 12px;
 }

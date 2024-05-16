@@ -24,7 +24,7 @@ export function RateUs() {
   return (
     <Column className='column-center'>
       <Text theme={'headline-3'}>Rate us</Text>
-      <Space size={16} />
+      <Space size={12} />
       <RowCenter className={styles.stars}>
         {[1, 2, 3, 4, 5].map((star) => (
           <div

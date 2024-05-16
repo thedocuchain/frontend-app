@@ -34,7 +34,7 @@ export function DateBlock(props: ComponentProps) {
   if (dateSigned)
     return (
       <div className={styles.dateWrapperSigned}>
-        <Text theme={'label-2'}>{format(new Date(dateSigned.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
+        <Text theme={'body-3'}>{format(new Date(dateSigned.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
       </div>
     )
 

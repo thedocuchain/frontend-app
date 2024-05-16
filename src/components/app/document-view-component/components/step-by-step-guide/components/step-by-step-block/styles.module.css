@@ -5,7 +5,7 @@
     padding: 16px;
     flex-direction: column;
     gap: 24px;
-    border-radius: 12px;
+    border-radius: 24px;
     border: 1px solid var(--bg-grey-7-opacity);
     background: var(--bg-accent-extra-light);
     box-shadow: var(--shadow-level-4);
@@ -38,7 +38,7 @@
 @media (--mobile) {
     .stepBlock {
         width: 100%;
-        border-radius: 12px 12px 0 0;
+        border-radius: 16px 16px 0 0;
         border-bottom: none;
         box-shadow: var(--shadow-level-2);
         left: 0;

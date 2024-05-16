@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Logotype } from 'src/components/app/logotype'
 import { Button, ButtonIcon } from 'src/components/ui/button'
-import { IconPlusBlack, IconSearch } from 'src/icons'
+import { IconPlusBlack } from 'src/icons'
 import { StepsWizard } from 'src/components/app/steps-wizard'
 import { Space } from 'src/components/ui/space'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
@@ -96,9 +96,6 @@ export function Header(props: HeaderProps) {
 
           {isNewDocument ? (
             <Button theme='secondary' size='sm' onClick={handleSetStep}>
-              <ButtonIcon>
-                <IconSearch />
-              </ButtonIcon>
               Check status
             </Button>
           ) : (

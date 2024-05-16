@@ -27,7 +27,7 @@
     height: 64px;
     padding: 14px 16px 14px 16px;
     gap: 16px;
-    border-radius: 8px;
+    border-radius: 16px;
     border: 1px solid var(--bg-grey-8-opacity);
     background: var(--bg-grey-8-opacity);
     flex-direction: column;

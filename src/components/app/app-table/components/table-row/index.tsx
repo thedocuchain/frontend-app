@@ -29,7 +29,7 @@ export function TableRow(props: {
           <Space horizontal size={12} />
           <Column className='w100-p white-space-nowrap'>
             <RowBetweenCenter className='gap10'>
-              <Text theme={'body-3'} className={styles.name}>
+              <Text theme={'headline-4'} className={styles.name}>
                 {name}
               </Text>
 
