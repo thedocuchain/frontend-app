@@ -36,6 +36,17 @@ export function DocumentViewComponent(props: { stepsHints: StepByStepBlockType[]
 
         <GuideLabel positionY={300} title={'Sign'} />
 
+        {/* {document.signers.map((item, index) => ( */}
+        {/*  <ParticipantSignatureDetails */}
+        {/*    isJustCreated={false} */}
+        {/*    isEdited={true} */}
+        {/*    isError={false} */}
+        {/*    key={`${item.email}${index}`} */}
+        {/*    participant={item} */}
+        {/*    index={index} */}
+        {/*  /> */}
+        {/* ))} */}
+
         <div className={styles.mockPageContainer}>
           <div className={styles.mockPage} />
           <div className={styles.mockPage} />

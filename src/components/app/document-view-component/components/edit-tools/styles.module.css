@@ -35,6 +35,11 @@
     stroke: #2F35C2 !important;
 }
 
+.changeBlock {
+    position: absolute;
+    bottom: 4px;
+}
+
 .isSignedDone {
     display: flex;
     justify-content: center;
@@ -47,9 +52,6 @@
     box-shadow: none;
     padding: 4px;
     cursor: auto;
-}
-
-.signatureText {
 }
 
 .dateWrapper {

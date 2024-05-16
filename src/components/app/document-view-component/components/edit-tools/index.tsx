@@ -2,6 +2,7 @@ import cn from 'classnames'
 import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { format } from 'date-fns'
+import { randomNumber } from '@coxy/utils'
 
 import { colorsBorders, indexToColorIndex } from 'src/components/app/avatar'
 import { Text } from 'src/components/ui/typography'
@@ -62,7 +63,7 @@ export function Signature(props: ComponentProps) {
     if (!isEdited) return
 
     if (isSigned) {
-      const newIndex = fontIndex + 1 < fonts.length ? fontIndex + 1 : 0
+      const newIndex = randomNumber(0, fonts.length)
       setFontIndex(newIndex)
       setFont(fonts[newIndex])
       return
@@ -72,7 +73,8 @@ export function Signature(props: ComponentProps) {
   })
 
   const fonts = fontsSignatures
-  const [fontIndex, setFontIndex] = useState(0)
+  const randomIndex = randomNumber(0, fonts.length)
+  const [fontIndex, setFontIndex] = useState(randomIndex)
   const [font, setFont] = useState(fonts[fontIndex])
 
   return (
@@ -88,11 +90,11 @@ export function Signature(props: ComponentProps) {
 
       {isSigned && isEdited && (
         <Column className='align-center jc-between h100-p text-center'>
-          <TextSize maxLen={30} className={font}>
+          <TextSize maxLen={20} className={font} minSize={16}>
             {name}
           </TextSize>
 
-          <RowCenter className='gap6'>
+          <RowCenter className={cn('gap6', styles.changeBlock)}>
             <IconRefreshSignature className={styles.iconEdited} />
             <Text theme={'button-standard'} className={cn('color-link-default', styles.textHover)}>
               Change signature
@@ -103,7 +105,7 @@ export function Signature(props: ComponentProps) {
 
       {isSignedDone && (
         <Column className='column-center'>
-          <TextSize maxLen={30} className={font}>
+          <TextSize maxLen={20} className={font} minSize={16}>
             {name}
           </TextSize>
         </Column>
@@ -162,14 +164,3 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
     </Row>
   )
 }
-
-// {document.signers.map((item, index) => (
-//     <ParticipantSignatureDetails
-//         isJustCreated={false}
-//         isEdited={true}
-//         isError={false}
-//         key={`${item.email}${index}`}
-//         participant={item}
-//         index={index}
-//     />
-// ))}

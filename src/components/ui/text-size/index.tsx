@@ -11,7 +11,7 @@ type ComponentProps = {
 
 export const calculateFontSizeByLength = (value: string, { minSize, maxLen }: ComponentProps) => {
   const len = String(value).trim().length
-  const defaultSize = 16
+  const defaultSize = 20
   const proportion = maxLen / len
   const size = defaultSize * Math.min(proportion, 1)
 
