@@ -57,7 +57,6 @@
     "@react-email/components": "^0.0.16",
     "@reduxjs/toolkit": "1.9.1",
     "@vercel/og": "^0.6.2",
-    "@wojtekmaj/react-hooks": "^1.20.0",
     "axios": "1.6.7",
     "classnames": "2.3.2",
     "cookies-next": "2.1.1",
@@ -69,7 +68,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-email": "2.1.1",
-    "react-pdf": "^8.0.2",
     "react-portal": "4.2.2",
     "react-redux": "8.0.5",
     "redux-logger": "3.0.6"
