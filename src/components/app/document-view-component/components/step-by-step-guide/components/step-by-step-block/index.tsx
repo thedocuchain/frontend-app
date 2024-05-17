@@ -12,10 +12,11 @@ import { CheckboxSquare } from 'src/components/ui/checkbox-square'
 import { AppLink } from 'src/components/ui/app-link'
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { Signature } from 'src/components/app/document-view-component/components/edit-tools'
-import { signersData } from 'src/pages/document/[id]/components/step-check-status/data'
 import { Tooltip } from 'src/components/ui/tooltip'
 import { indexToColorIndex } from 'src/components/app/avatar'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -82,7 +83,8 @@ export function StepByStepBlock(props: ComponentProps) {
     setSigned(true)
   })
 
-  const recipient = signersData[0]
+  const document = useAppSelector(selectedDocument)
+  const recipient = document.signers[0]
   const [isSigned, setSigned] = useState(false)
   const [isError, setError] = useState(false)
   const indexRecipient = indexToColorIndex(10)

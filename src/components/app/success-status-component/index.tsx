@@ -8,9 +8,10 @@ import { Text } from 'src/components/ui/typography'
 import { Button } from 'src/components/ui/button'
 import { RateUs } from 'src/components/app/rate-us'
 import { Share } from 'src/components/app/share'
-import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 import { AppLink } from 'src/components/ui/app-link'
 import { IconPlaneColor, IconSuccessfullySigned } from 'src/icons'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -24,7 +25,7 @@ export function SuccessStatusComponent(props: {
   const isOneSigned = !isAllSigned && !isSend
   const router = useRouter()
 
-  const document = documentMock
+  const document = useAppSelector(selectedDocument)
   const checkId = document.id
   const documentName = document.name
 

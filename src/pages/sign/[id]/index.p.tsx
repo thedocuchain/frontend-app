@@ -4,11 +4,12 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
-import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
 import { Flex } from 'src/components/ui/grid'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
 import { SuccessStatusComponent } from 'src/components/app/success-status-component'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -16,7 +17,7 @@ export type StepsSignPage = 'sign-the-document' | 'document-view' | 'success-sig
 
 export default function DocumentViewPage(): JSX.Element {
   const { title } = usePageHead({ title: 'View Page' })
-  const document = documentMock
+  const document = useAppSelector(selectedDocument)
   const stepsHints: StepByStepBlockType[] = [
     {
       title: 'Please check the document before giving the required consents and sending.',
