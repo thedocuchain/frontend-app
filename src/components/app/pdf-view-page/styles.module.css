@@ -1,0 +1,16 @@
+.page {
+    width: 820px;
+    background: var(--text-white);
+    box-shadow: var(--shadow-level-2);
+    margin: 0 auto 26px;
+}
+
+@media (--mobile) {
+    .pageContainer {
+        width: 100%;
+    }
+
+    .page {
+        width: 100%;
+    }
+}
