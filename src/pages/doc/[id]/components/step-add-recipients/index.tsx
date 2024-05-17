@@ -14,7 +14,7 @@ import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
 import { Recipient } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
-import { StepsDocumentPage } from 'src/pages/document/[id]/index.p'
+import { StepsDocumentPage } from 'src/pages/doc/[id]/index.p'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 
