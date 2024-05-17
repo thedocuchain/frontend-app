@@ -66,6 +66,8 @@ export function StepCheckStatus(props: { setDocumentViewPage: () => void }): JSX
   })
 
   const handleViewDocument = useEvent(() => {
+    // todo open in new tab
+    // handleOpenLink(`/doc/${document.id}?view=true`)
     props.setDocumentViewPage()
   })
 

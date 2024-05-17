@@ -2,7 +2,7 @@ import React from 'react'
 
 import { OneStepWizard } from 'src/components/app/steps-wizard/components/step'
 import { RowCenter } from 'src/components/ui/grid'
-import { StepsDocumentPage, StepWizardType } from 'src/pages/document/[id]/index.p'
+import { StepsDocumentPage, StepWizardType } from 'src/pages/doc/[id]/index.p'
 
 import styles from './style.module.css'
 

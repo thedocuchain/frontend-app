@@ -19,7 +19,7 @@ import { RouterLoader } from 'src/components/common/router-loader'
 import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
 import { patchDocumentState } from 'src/store/reducers/document'
-import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
+import { documentMock } from 'src/pages/doc/[id]/components/step-check-status/data'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
