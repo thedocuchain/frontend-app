@@ -1,7 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
 
-import { IconDOC, IconDOCX, IconPDF } from 'src/icons'
 import { Text } from 'src/components/ui/typography'
 import { ProgressBar } from 'src/components/app/progress-bar'
 import { Space } from 'src/components/ui/space'
@@ -12,18 +11,18 @@ import styles from './styles.module.css'
 export function FileUploadProgress(props: { file: File; setFile: (file: File | null) => void }) {
   const { name, size } = props.file
   const isShowError = size / 1048576 > 5
-  const isDoc = name.includes('.doc') && !name.includes('.docx')
-  const isPdf = name.includes('.pdf')
-  const isDocx = name.includes('.docx')
+  // const isDoc = name.includes('.doc') && !name.includes('.docx')
+  // const isPdf = name.includes('.pdf')
+  // const isDocx = name.includes('.docx')
   const sizeFile = size / 1024 < 1024 ? size / 1024 : size / 1024 / 1024
   const sizeName = size / 1024 < 1024 ? 'KB' : 'MB'
 
   return (
     <div className={cn(styles.wrapper, { [styles.error]: isShowError })}>
       <div>
-        {isPdf && <IconPDF />}
-        {isDocx && <IconDOCX />}
-        {isDoc && <IconDOC />}
+        {/* {isPdf && <IconPDF />} */}
+        {/* {isDocx && <IconDOCX />} */}
+        {/* {isDoc && <IconDOC />} */}
       </div>
 
       {!isShowError && (
@@ -37,7 +36,6 @@ export function FileUploadProgress(props: { file: File; setFile: (file: File | n
           </Text>
           <Space size={8} />
 
-          {/* todo ProgressBar */}
           <ProgressBar value={10} />
         </div>
       )}

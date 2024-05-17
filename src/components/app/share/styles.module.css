@@ -2,6 +2,10 @@
   gap: 10px;
 }
 
+.text {
+  font-size: 18px !important;
+}
+
 .iconX {
   fill: #0A18333D;
 }

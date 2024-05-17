@@ -1,5 +1,5 @@
 .bg {
-    background-image: url("./images/bg-pattern-bottom.png");
+    background-image: url("images/bg-pattern-bottom.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right;
@@ -70,7 +70,7 @@
 
     .bg {
         background-position: bottom;
-        background-image: url("./images/bg-pattern-bottom-mobile.png");
+        background-image: url("images/bg-pattern-bottom-mobile.png");
     }
 
     .firstColumn {

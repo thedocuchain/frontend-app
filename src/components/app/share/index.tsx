@@ -20,7 +20,9 @@ export function Share() {
 
   return (
     <Column className='column-center'>
-      <Text theme={'headline-3'}>Share your experience</Text>
+      <Text theme={'headline-3'} className={styles.text}>
+        Share your experience
+      </Text>
       <Space size={12} />
       <RowCenter className={styles.row}>
         <ButtonWrapper href={'https://twitter.com/'}>

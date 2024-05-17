@@ -14,14 +14,15 @@ import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
 import { Recipient } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
-import { documentMock } from 'src/pages/document-status-page/data'
+import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
+import { StepsDocumentPage } from 'src/pages/document/[id]/index.p'
 
 import styles from './styles.module.css'
 
 type ComponentProps = {
   signers: Recipient[]
   setSigners: (signers: Recipient[]) => void
-  setActiveStep: (step: string) => void
+  setActiveStep: (step: StepsDocumentPage) => void
 }
 
 export function StepAddRecipients(props: ComponentProps): JSX.Element {
@@ -100,7 +101,7 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
       return
     }
 
-    setActiveStep('Preview and send')
+    setActiveStep('preview-and-send')
   })
 
   useEffect(() => {

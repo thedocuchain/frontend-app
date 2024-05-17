@@ -8,6 +8,7 @@ import styles from './styles.module.css'
 type TitleProps = PropsWithChildren & {
   theme:
     | 'display-text'
+    | 'button-big'
     | 'button-sm'
     | 'button-standard'
     | 'body-1'
@@ -25,6 +26,7 @@ type TitleProps = PropsWithChildren & {
     | 'link-1'
     | 'link-2'
     | 'link-3'
+    | 'script-text'
   header?: 'h1' | 'h2' | 'h3' | 'h4'
   className?: string
   style?: React.CSSProperties
@@ -37,6 +39,7 @@ export function Text(props: TitleProps): ReactElement {
     styles.text,
     {
       [styles.displayText]: theme === 'display-text',
+      [styles.buttonBig]: theme === 'button-big',
       [styles.buttonSm]: theme === 'button-sm',
       [styles.buttonStandard]: theme === 'button-standard',
       [styles.body1]: theme === 'body-1',
@@ -54,6 +57,7 @@ export function Text(props: TitleProps): ReactElement {
       [styles.link1]: theme === 'link-1',
       [styles.link2]: theme === 'link-2',
       [styles.link3]: theme === 'link-3',
+      [styles.scriptText]: theme === 'script-text',
     },
     props.className,
   )

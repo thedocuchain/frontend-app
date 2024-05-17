@@ -65,4 +65,8 @@
     border-bottom: none;
     box-shadow: none;
   }
+
+  .transparent {
+    background: var(--bg-grey-bg-main);
+  }
 }

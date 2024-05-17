@@ -2,8 +2,13 @@
     margin: auto;
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 634px;
+    padding: 96px 0 0;
     overflow: hidden;
+}
+
+.wrapperOneSigned {
+    padding: 78px 0 0;
 }
 
 .bg {
@@ -15,52 +20,134 @@
     height: 100%;
 }
 
-.desc {
-    margin-top: 6px;
-    color: var(--text-secondary);
-    text-align: center;
+.scriptText {
+    color: var(--text-script-color-for-success-page);
+    margin-top: -20px;
 }
 
-.icon {
-    margin-bottom: -16px;
+.iconPlane {
+    width: 181px;
+    height: 69px;
 }
 
-.buttonsContainer {
-    gap: 16px;
-    margin-top: 24px;
-}
-
-.button {
-    width: 212px;
-}
-
-.space {
-    margin-top: 72px;
+.iconSuccessfullySigned {
+    width: 200px;
+    height: 124px;
 }
 
 .name {
-    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-align: center;
+    width: 100%;
+    margin-top: 32px;
+}
+
+.desc {
+    margin-top: 12px;
+    color: #0E0E0EB2;
+    text-align: center;
+    max-width: 520px;
+}
+
+.buttonsContainer {
+    gap: 24px;
+    margin-top: 36px;
+}
+
+.button {
+    width: 208px;
+}
+
+.footer {
+    margin-bottom: 28px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.shareBlock {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.rateBlock {
+    margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 @media (--mobile) {
-    .wrapper {
-        padding: 0 16px;
-    }
-
     .bg {
         background-position: bottom;
         background-image: url("./images/bg-pattern-bottom-mobile.png");
     }
 
+    .iconPlane {
+        width: 130px;
+        height: 46px;
+    }
+
+    .iconSuccessfullySigned {
+        width: 150px;
+        height: 94px;
+    }
+
+    .name {
+        margin-top: 16px;
+    }
+
+    .scriptText {
+        margin-top: -10px;
+    }
+
+    .desc {
+        margin-top: 8px;
+        font-size: 16px !important;
+        line-height: 24px;
+    }
+
     .buttonsContainer {
-        gap: 8px;
+        flex-direction: column-reverse;
+        width: 100%;
+        gap: 16px;
+        margin-top: 28px;
     }
 
     .button {
-        width: 170px;
+        width: 100%;
     }
 
-    .space {
-        margin-top: 44px;
+    .footer {
+        margin-bottom: 40px;
+    }
+
+    .wrapper {
+        padding: 0 16px;
+        margin: auto;
+    }
+}
+
+
+@media screen and (--mobile) and (max-height: 650px) {
+    .wrapper {
+        margin: 78px auto 40px;
+    }
+}
+
+@media screen and (--mobile) and (max-height: 770px) {
+    .wrapperOneSigned {
+        margin: 96px auto 20px;
+    }
+}
+
+
+@media (--mobile-sm) {
+    .scriptText {
+        font-size: 42px !important;
     }
 }

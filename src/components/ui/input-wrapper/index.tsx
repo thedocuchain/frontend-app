@@ -8,11 +8,11 @@ import styles from './styles.module.css'
 
 type ValidatorFieldType = Parameters<typeof ValidatorField>[0] & { isVisibleErrors: boolean }
 
-export function InputValidatorField(props: ValidatorFieldType) {
+export function InputValidatorField(props: ValidatorFieldType & { className?: string }) {
   return (
     <ValidatorField {...props}>
       {({ isValid, message }) => (
-        <div className={styles.wrapperInput}>
+        <div className={cn(styles.wrapperInput, props.className)}>
           {React.Children.map(props.children as ReactNode, (el: ReactElement) => {
             return React.cloneElement(el, {
               isVisibleError: !isValid && props.isVisibleErrors,

@@ -2,12 +2,13 @@ import React from 'react'
 
 import { OneStepWizard } from 'src/components/app/steps-wizard/components/step'
 import { RowCenter } from 'src/components/ui/grid'
+import { StepsDocumentPage, StepWizardType } from 'src/pages/document/[id]/index.p'
 
 import styles from './style.module.css'
 
 type ComponentProps = {
-  steps: string[]
-  activeStep: string
+  steps: StepWizardType[]
+  activeStep: StepsDocumentPage
 }
 
 export function StepsWizard(props: ComponentProps) {

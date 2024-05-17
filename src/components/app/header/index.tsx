@@ -10,6 +10,7 @@ import { StepsWizard } from 'src/components/app/steps-wizard'
 import { Space } from 'src/components/ui/space'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
 import { Text } from 'src/components/ui/typography'
+import { StepsDocumentPage, StepWizardType } from 'src/pages/document/[id]/index.p'
 
 import styles from './styles.module.css'
 
@@ -19,8 +20,8 @@ type HeaderProps = {
   isTransparent?: boolean
   isDocumentPreview?: boolean
   isStepsWizard?: boolean
-  stepsWizard?: string[]
-  activeStepWizard?: string
+  stepsWizard?: StepWizardType[]
+  activeStepWizard?: StepsDocumentPage
   title?: string
 }
 

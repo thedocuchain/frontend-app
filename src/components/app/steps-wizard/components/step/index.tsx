@@ -4,21 +4,22 @@ import cn from 'classnames'
 import { RowBetweenCenter, RowCenter } from 'src/components/ui/grid'
 import { IconArrowRightLight, IconStepActive, IconStepCheck, IconStepNext } from 'src/icons'
 import { Text } from 'src/components/ui/typography'
+import { StepsDocumentPage, StepWizardType } from 'src/pages/document/[id]/index.p'
 
 import styles from './style.module.css'
 
 type ComponentProps = {
-  step: string
+  step: StepWizardType
   index: number
-  steps: string[]
-  activeStep: string
+  steps: StepWizardType[]
+  activeStep: StepsDocumentPage
 }
 
 export function OneStepWizard(props: ComponentProps) {
   const { step, activeStep } = props
-  const isDone = props.index < props.steps.findIndex((el) => el === activeStep)
+  const isDone = props.index < props.steps.findIndex((el) => el.value === activeStep)
   const isLast = props.index + 1 === props.steps.length
-  const isActive = step === activeStep
+  const isActive = step.value === activeStep
   return (
     <>
       <RowBetweenCenter className={styles.step}>
@@ -27,7 +28,7 @@ export function OneStepWizard(props: ComponentProps) {
           {isDone && <IconStepCheck />}
           {!isDone && !isActive && <IconStepNext />}
           <Text theme='label-2' className={isActive ? 'color-text-accent' : null}>
-            {step}
+            {step.title}
           </Text>
         </RowCenter>
 

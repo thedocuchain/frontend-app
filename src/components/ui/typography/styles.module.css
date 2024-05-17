@@ -22,6 +22,13 @@
   line-height: 24px; /* 150% */
 }
 
+.buttonBig {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px; /* 155.556% */
+  letter-spacing: -0.18px;
+}
+
 .body1 {
   font-size: 18px;
   font-weight: 400;
@@ -114,6 +121,15 @@
   line-height: 20px; /* 142.857% */
 }
 
+.scriptText {
+  font-family: "Caveat", cursive;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.96px;
+}
+
 @media (--mobile) {
   .displayText {
     font-size: 24px;
@@ -140,5 +156,12 @@
   .headline4 {
     font-size: 12px;
     line-height: 130%;
+  }
+
+  .scriptText {
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 100%; /* 48px */
+    letter-spacing: -0.48px;
   }
 }

@@ -5,7 +5,13 @@ import {
   StepByStepBlockType,
 } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
 
-export function StepByStepGuideWrapper(props: PropsWithChildren & { steps: StepByStepBlockType[]; isOpen: boolean }) {
+export function StepByStepGuideWrapper(
+  props: PropsWithChildren & {
+    steps: StepByStepBlockType[]
+    isOpen: boolean
+    setSuccessPage: () => void
+  },
+) {
   const steps = props.steps
   const [activeStep, setActiveStep] = useState(0)
 
@@ -17,6 +23,7 @@ export function StepByStepGuideWrapper(props: PropsWithChildren & { steps: StepB
         <StepByStepBlock
           index={index}
           activeStep={activeStep}
+          setSuccessPage={props.setSuccessPage}
           setActiveStep={setActiveStep}
           item={step}
           key={`${step.title}${index}`}
