@@ -13,6 +13,8 @@ import { StepPreviewAndSend } from 'src/pages/doc/[id]/components/step-preview-a
 import { StepCheckStatus } from 'src/pages/doc/[id]/components/step-check-status'
 import { SuccessStatusComponent } from 'src/components/app/success-status-component'
 import { StepViewDocument } from 'src/pages/doc/[id]/components/step-view-document'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -30,7 +32,8 @@ export type StepWizardType = {
 }
 
 export default function DocumentPage(): JSX.Element {
-  const { title } = usePageHead({ title: 'Document Page' })
+  const document = useAppSelector(selectedDocument)
+  const { title } = usePageHead({ title: ` | ${document?.title}` })
   const [signers, setSigners] = useState<Recipient[]>([
     {
       name: '',

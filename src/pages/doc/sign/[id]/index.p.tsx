@@ -17,9 +17,9 @@ import styles from './styles.module.css'
 export type StepsSignPage = 'sign-the-document' | 'success-sign'
 
 export default function DocumentViewPage(): JSX.Element {
-  const { title } = usePageHead({ title: 'View Page' })
-  const router = useRouter()
   const document = useAppSelector(selectedDocument)
+  const { title } = usePageHead({ title: ` | ${document?.title}` })
+  const router = useRouter()
   const stepsHints: StepByStepBlockType[] = [
     {
       title: 'Please check the document before giving the required consents and sending.',
