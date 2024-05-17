@@ -33,7 +33,7 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
 
   const document = useAppSelector(selectedDocument)
   const documentId = document.id
-  const documentName = document.name
+  const documentName = document.title
 
   const [form, setValue] = useStateForm({
     documentName,

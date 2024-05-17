@@ -27,7 +27,7 @@ export function SuccessStatusComponent(props: {
 
   const document = useAppSelector(selectedDocument)
   const checkId = document.id
-  const documentName = document.name
+  const documentName = document.title
 
   const handleNewDocument = useEvent(() => {
     void router.push('/')

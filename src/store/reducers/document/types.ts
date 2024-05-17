@@ -11,6 +11,6 @@ export type DocumentType = {
   id: string
   signers: Recipient[]
   pages: number
-  name: string
+  title: string
   status?: 'uploaded' | 'signing' | 'completed'
 }

@@ -102,6 +102,6 @@ export const documentMock: DocumentType = {
   id: 'Y16334',
   signers: signersData,
   pages: 6,
-  name: 'Contractor Agreement',
+  title: 'Contractor Agreement',
   status: 'signing',
 }

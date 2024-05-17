@@ -70,7 +70,7 @@ export default function DocumentViewPage(): JSX.Element {
 
       {activeStep === 'sign-the-document' && (
         <PageWrapper className={'column'}>
-          <Header isDocumentPreview title={document.name} />
+          <Header isDocumentPreview title={document.title} />
 
           <Flex flex='1' className={styles.wrapper}>
             <DocumentViewComponent setSuccessPage={handleSetSuccessPage} stepsHints={stepsHints} />
@@ -80,7 +80,7 @@ export default function DocumentViewPage(): JSX.Element {
 
       {activeStep === 'document-view' && (
         <PageWrapper className={'column'}>
-          <Header isDocumentPreview title={document.name} />
+          <Header isDocumentPreview title={document.title} />
 
           <Flex flex='1' className={styles.wrapper}></Flex>
         </PageWrapper>
