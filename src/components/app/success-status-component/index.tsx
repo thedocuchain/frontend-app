@@ -38,7 +38,7 @@ export function SuccessStatusComponent(props: {
       setCheckStatusPage()
       return
     }
-    void router.push(`/document/${checkId}`)
+    void router.push(`/doc/${checkId}`)
   })
 
   const handleViewDocument = useEvent(() => {

@@ -18,7 +18,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
-export function StepCheckStatus(props: { setDocumentViewPage: () => void }): JSX.Element {
+export function StepCheckStatus(): JSX.Element {
   const document = useAppSelector(selectedDocument)
   const users = document.signers
   const signedBy = `Signed by ${document.signers.filter((el) => el.status === 'signed').length} of ${
@@ -68,7 +68,6 @@ export function StepCheckStatus(props: { setDocumentViewPage: () => void }): JSX
   const handleViewDocument = useEvent(() => {
     // todo open in new tab
     // handleOpenLink(`/doc/${document.id}?view=true`)
-    props.setDocumentViewPage()
   })
 
   return (
