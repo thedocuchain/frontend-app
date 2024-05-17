@@ -3,7 +3,6 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { Header } from 'src/components/app/header'
 import { Column, Flex } from 'src/components/ui/grid'
-import { signersData, documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 import { AppTable } from 'src/components/app/app-table'
 import { Footer } from 'src/components/app/footer'
 import { DocumentPreview } from 'src/components/app/document-preview'
@@ -14,12 +13,14 @@ import { IconEye } from 'src/icons'
 import { Space } from 'src/components/ui/space'
 import { Alert } from 'src/components/ui/alert'
 import { Input } from 'src/components/ui/input'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
 export function StepCheckStatus(props: { setDocumentViewPage: () => void }): JSX.Element {
-  const users = signersData
-  const document = documentMock
+  const document = useAppSelector(selectedDocument)
+  const users = document.signers
   const signedBy = `Signed by ${document.signers.filter((el) => el.status === 'signed').length} of ${
     document.signers.length
   }`

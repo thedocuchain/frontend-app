@@ -14,8 +14,9 @@ import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
 import { Recipient } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
-import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 import { StepsDocumentPage } from 'src/pages/document/[id]/index.p'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -30,7 +31,7 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
 
-  const document = documentMock
+  const document = useAppSelector(selectedDocument)
   const documentId = document.id
   const documentName = document.name
 

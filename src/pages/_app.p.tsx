@@ -18,12 +18,11 @@ import 'src/styles/globals.css'
 import { RouterLoader } from 'src/components/common/router-loader'
 import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
+import { patchDocumentState } from 'src/store/reducers/document'
+import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
-
-// const requiredAuth = []
-// const redirectIfAuthorized = ['/auth/signup', '/auth/signin']
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -101,51 +100,14 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
     cookies = getCookies()
   }
 
-  // const token = selectedAccessToken(store.getState())
-  //
-  // // login if token found
-  // if (token && isServer) {
-  //   await dispatch(getUser())
-  //   const user = selectedUser(store.getState())
-  //
-  //   if (user) {
-  //     await Promise.all([
-  //       dispatch(setUserIsLogin(true)),
-  //       // dispatch(getWorkCalendarList()),
-  //       // dispatch(getIntegrationList()),
-  //       // dispatch(getGoogleCalendarList()),
-  //     ])
-  //   }
-  // }
-  //
-  // // only for backend
-  // if (isServer) {
-  //   const isLogin = selectedIsUserLogin(store.getState())
-  //
-  //   if (!isLogin) {
-  //     requiredAuth.forEach((item) => {
-  //       if (context.router.pathname.includes(item)) {
-  //         ;[CookiesTokens.accessToken].forEach((token) => {
-  //           deleteCookie(token, {
-  //             req: context.ctx.req,
-  //             res: context.ctx.res,
-  //           })
-  //         })
-  //
-  //         context.ctx.res.writeHead(302, { Location: '/' })
-  //         context.ctx.res.end()
-  //       }
-  //     })
-  //   }
-  //   // } else {
-  //   // redirectIfAuthorized.forEach((item) => {
-  //   //   if (context.router.pathname.includes(item)) {
-  //   //     context.ctx.res.writeHead(302, { Location: `/${user?.username}` })
-  //   //     context.ctx.res.end()
-  //   //   }
-  //   // })
-  //   // }
-  // }
+  // todo change for fetchDocument
+  if (isServer) {
+    await dispatch(
+      patchDocumentState({
+        document: documentMock,
+      }),
+    )
+  }
 
   let pageProps = {}
   if (context.Component.getInitialProps) {

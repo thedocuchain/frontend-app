@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import cn from 'classnames'
 
 import { Column, Container, RowBetween } from 'src/components/ui/grid'
-import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 import { Text } from 'src/components/ui/typography'
 import { SidePanelPagesPreview } from 'src/components/app/document-view-component/components/side-panel-pages-preview'
 import { Space } from 'src/components/ui/space'
 import { StepByStepGuideWrapper } from 'src/components/app/document-view-component/components/step-by-step-guide'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -16,7 +17,7 @@ export function DocumentViewComponent(props: {
   stepsHints: StepByStepBlockType[]
   setSuccessPage: () => void
 }): JSX.Element {
-  const document = documentMock
+  const document = useAppSelector(selectedDocument)
   const [isOpen, setOpen] = useState(false)
   const { stepsHints } = props
 
