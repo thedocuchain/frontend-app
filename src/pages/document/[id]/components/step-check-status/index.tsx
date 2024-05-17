@@ -86,7 +86,7 @@ export function StepCheckStatus(props: { setDocumentViewPage: () => void }): JSX
           </Column>
           <Column className={styles.secondColumn}>
             <Text theme={'headline-1'} className={styles.name}>
-              {document.name}
+              {document.title}
             </Text>
 
             {isCompleted && (
