@@ -52,7 +52,7 @@ export default function DocumentPage(): JSX.Element {
 
   const activeStepTitle = steps.find((el) => el.value === activeStep)
 
-  // todo match documentId
+  // todo match documentId and move logic to getInitialProps
   // const router = useRouter()
   // const documentId = router.query.id as string
   // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
@@ -70,10 +70,6 @@ export default function DocumentPage(): JSX.Element {
 
   const handleSetCheckStatusPage = useEvent(() => {
     setActiveStep('check-status')
-  })
-
-  const handleSetDocumentView = useEvent(() => {
-    setActiveStep('document-view')
   })
 
   return (
@@ -97,7 +93,7 @@ export default function DocumentPage(): JSX.Element {
 
         {activeStep === 'document-view' && <StepViewDocument />}
 
-        {activeStep === 'check-status' && <StepCheckStatus setDocumentViewPage={handleSetDocumentView} />}
+        {activeStep === 'check-status' && <StepCheckStatus />}
 
         {(activeStep === 'preview-and-send' || activeStep === 'add-recipients') && (
           <>

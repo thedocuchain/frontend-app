@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { useRouter } from 'next/router'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
@@ -13,10 +14,11 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
-export type StepsSignPage = 'sign-the-document' | 'document-view' | 'success-sign'
+export type StepsSignPage = 'sign-the-document' | 'success-sign'
 
 export default function DocumentViewPage(): JSX.Element {
   const { title } = usePageHead({ title: 'View Page' })
+  const router = useRouter()
   const document = useAppSelector(selectedDocument)
   const stepsHints: StepByStepBlockType[] = [
     {
@@ -37,17 +39,16 @@ export default function DocumentViewPage(): JSX.Element {
 
   const [activeStep, setActiveStep] = useState<StepsSignPage>('sign-the-document')
   // const [activeStep, setActiveStep] = useState<StepsSignPage>('success-sign')
-  // const [activeStep, setActiveStep] = useState<StepsSignPage>('document-view')
 
   const handleSetSuccessPage = useEvent(() => {
     setActiveStep('success-sign')
   })
 
   const handleSetDocumentView = useEvent(() => {
-    setActiveStep('document-view')
+    void router.push(`/doc/${document.id}?view=true`)
   })
 
-  // todo match documentId
+  // todo match documentId and move logic to getInitialProps
   // const router = useRouter()
   // const documentId = router.query.id as string
   // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
@@ -75,14 +76,6 @@ export default function DocumentViewPage(): JSX.Element {
           <Flex flex='1' className={styles.wrapper}>
             <DocumentViewComponent setSuccessPage={handleSetSuccessPage} stepsHints={stepsHints} />
           </Flex>
-        </PageWrapper>
-      )}
-
-      {activeStep === 'document-view' && (
-        <PageWrapper className={'column'}>
-          <Header isDocumentPreview title={document.title} />
-
-          <Flex flex='1' className={styles.wrapper}></Flex>
         </PageWrapper>
       )}
 
