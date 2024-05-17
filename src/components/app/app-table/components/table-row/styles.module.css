@@ -3,11 +3,11 @@
 }
 
 .isLastRow td:first-child {
-  border-bottom-left-radius: 16px;
+  border-bottom-left-radius: 15px;
 }
 
 .isLastRow td:last-child {
-  border-bottom-right-radius: 16px;
+  border-bottom-right-radius: 15px;
 }
 
 .name {

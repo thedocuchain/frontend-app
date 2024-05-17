@@ -12,7 +12,7 @@ import { CheckboxSquare } from 'src/components/ui/checkbox-square'
 import { AppLink } from 'src/components/ui/app-link'
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { Signature } from 'src/components/app/document-view-component/components/edit-tools'
-import { signersData } from 'src/pages/document-status-page/data'
+import { signersData } from 'src/pages/document/[id]/components/step-check-status/data'
 import { Tooltip } from 'src/components/ui/tooltip'
 import { indexToColorIndex } from 'src/components/app/avatar'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
@@ -34,11 +34,12 @@ export type ComponentProps = {
   setActiveStep: (number) => void
   index: number
   isOpen: boolean
+  setSuccessPage: () => void
 }
 
 export function StepByStepBlock(props: ComponentProps) {
   const { title, isCheckBoxTermsAndPrivacy, isCheckBoxConsents, isSignatureMobileBlock, buttonText } = props.item
-  const { stepsLength, activeStep, index, setActiveStep, isOpen } = props
+  const { stepsLength, activeStep, index, setActiveStep, isOpen, setSuccessPage } = props
   const isVisible = activeStep === index
   const [isDeleted, setDeleted] = useState(false)
   const isMobile = useIsMobile()
@@ -46,6 +47,7 @@ export function StepByStepBlock(props: ComponentProps) {
   const [checkBoxTermsPolicy, setCheckBoxTermsPolicy] = useState(false)
   const [checkBoxAds, setCheckBoxAds] = useState(true)
   const [checkBoxConsents, setCheckBoxConsents] = useState(false)
+  const [checkBoxError, setCheckBoxError] = useState(false)
 
   const handleNextStep = useEvent(async () => {
     if (isSignatureMobileBlock && isMobile && !isSigned) {
@@ -54,16 +56,19 @@ export function StepByStepBlock(props: ComponentProps) {
     }
 
     if (isCheckBoxTermsAndPrivacy && !checkBoxTermsPolicy) {
+      setCheckBoxError(true)
       return
     }
 
     if (isCheckBoxConsents && !checkBoxConsents) {
+      setCheckBoxError(true)
       return
     }
 
     if (activeStep + 1 === stepsLength) {
       setDeleted(true)
       await wait(200)
+      setSuccessPage()
       return
     }
 
@@ -114,7 +119,11 @@ export function StepByStepBlock(props: ComponentProps) {
             <Space size={16} />
 
             <Column className='gap12'>
-              <CheckboxSquare checked={checkBoxConsents} onChange={setCheckBoxConsents}>
+              <CheckboxSquare
+                isVisibleError={checkBoxError && !checkBoxConsents}
+                checked={checkBoxConsents}
+                onChange={setCheckBoxConsents}
+              >
                 I read the{' '}
                 <AppLink target={'_blank'} href={'/'}>
                   Electronic Records
@@ -135,7 +144,11 @@ export function StepByStepBlock(props: ComponentProps) {
             <Space size={16} />
 
             <Column className='gap12'>
-              <CheckboxSquare checked={checkBoxTermsPolicy} onChange={setCheckBoxTermsPolicy}>
+              <CheckboxSquare
+                isVisibleError={checkBoxError && !checkBoxTermsPolicy}
+                checked={checkBoxTermsPolicy}
+                onChange={setCheckBoxTermsPolicy}
+              >
                 I agree with the{' '}
                 <AppLink target={'_blank'} href={'/terms'}>
                   Terms of use

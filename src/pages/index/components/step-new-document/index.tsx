@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import cn from 'classnames'
 
 import { Column } from 'src/components/ui/grid'
@@ -50,15 +50,6 @@ export function StepNewDocument(): JSX.Element {
   const onButtonClick = () => {
     inputRef.current.click()
   }
-
-  useEffect(() => {
-    ;(async () => {
-      if (file) {
-        // todo ProgressBar
-        // console.log(file, 'file')
-      }
-    })()
-  }, [file])
 
   return (
     <>

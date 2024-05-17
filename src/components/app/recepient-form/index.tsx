@@ -92,6 +92,7 @@ export function RecepientForm(props: {
           rules={rules.name}
           value={form.name}
           isVisibleErrors={isShowError}
+          className={styles.formWrapper}
         >
           <Input
             onBlur={handleChange}
@@ -102,7 +103,14 @@ export function RecepientForm(props: {
           />
         </InputValidatorField>
 
-        <InputValidatorField id={'email'} required rules={rules.email} value={form.email} isVisibleErrors={isShowError}>
+        <InputValidatorField
+          id={'email'}
+          required
+          rules={rules.email}
+          value={form.email}
+          isVisibleErrors={isShowError}
+          className={styles.formWrapper}
+        >
           <Input
             onBlur={handleChange}
             label='Email'
@@ -113,7 +121,13 @@ export function RecepientForm(props: {
           />
         </InputValidatorField>
 
-        <InputValidatorField id={'role'} rules={rules.name} value={selectedRole} isVisibleErrors={isShowError}>
+        <InputValidatorField
+          id={'role'}
+          rules={rules.name}
+          value={selectedRole}
+          isVisibleErrors={isShowError}
+          className={styles.formWrapper}
+        >
           <Dropdown
             titleMobile={'Role types'}
             label={'Role'}

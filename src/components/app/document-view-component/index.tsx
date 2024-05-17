@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import cn from 'classnames'
 
 import { Column, Container, RowBetween } from 'src/components/ui/grid'
-import { documentMock } from 'src/pages/document-status-page/data'
+import { documentMock } from 'src/pages/document/[id]/components/step-check-status/data'
 import { Text } from 'src/components/ui/typography'
 import { SidePanelPagesPreview } from 'src/components/app/document-view-component/components/side-panel-pages-preview'
 import { Space } from 'src/components/ui/space'
@@ -12,13 +12,16 @@ import { GuideLabel } from 'src/components/app/document-view-component/component
 
 import styles from './styles.module.css'
 
-export function DocumentViewComponent(props: { stepsHints: StepByStepBlockType[] }): JSX.Element {
+export function DocumentViewComponent(props: {
+  stepsHints: StepByStepBlockType[]
+  setSuccessPage: () => void
+}): JSX.Element {
   const document = documentMock
   const [isOpen, setOpen] = useState(false)
   const { stepsHints } = props
 
   return (
-    <StepByStepGuideWrapper steps={stepsHints} isOpen={isOpen}>
+    <StepByStepGuideWrapper setSuccessPage={props.setSuccessPage} steps={stepsHints} isOpen={isOpen}>
       <SidePanelPagesPreview document={document} isOpen={isOpen} setOpen={setOpen} />
 
       <Container className={cn('column', { [styles.containerIfOpen]: isOpen })}>

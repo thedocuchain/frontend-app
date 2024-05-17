@@ -34,12 +34,18 @@
     right: -12px;
 }
 
+.formWrapper {
+    height: 96px;
+    min-height: 96px;
+    max-height: 96px;
+}
+
 @media (--mobile) {
     .block {
         height: 322px;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 6px;
+        justify-content: space-evenly;
+        gap: 0;
         padding: 12px 12px 32px 12px;
     }
 
