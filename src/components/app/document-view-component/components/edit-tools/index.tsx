@@ -29,7 +29,7 @@ type ComponentProps = {
 export function DateBlock(props: ComponentProps) {
   const { isJustCreated, dateSigned, index } = props
   const colorBorder = colorsBorders[index]
-  const style = isJustCreated ? { backgroundColor: `${colorBorder}08`, borderColor: `${colorBorder}` } : null
+  const style = isJustCreated ? { backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}` } : null
 
   if (dateSigned)
     return (
@@ -57,7 +57,7 @@ export function Signature(props: ComponentProps) {
     [styles.isSigned]: isSigned,
     [styles.isSignedDone]: isSignedDone,
   })
-  const style = isJustCreated ? { backgroundColor: `${colorBorder}08`, borderColor: `${colorBorder}` } : null
+  const style = isJustCreated ? { backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}` } : null
 
   const handeSignDocument = useEvent(() => {
     if (!isEdited) return

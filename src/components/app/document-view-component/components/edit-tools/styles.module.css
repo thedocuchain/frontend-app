@@ -78,7 +78,16 @@
 }
 
 .participantWrapper {
-    width: 700px;
+    width: 100%;
+    /*width: 820px;*/
+    padding: 0 100px;
     justify-content: space-between;
     margin-bottom: 40px;
+    z-index: 1000;
 }
+
+/*@media (min-width: 860px) {*/
+/*    .participantWrapper {*/
+/*        transform: scale(0.9);*/
+/*    }*/
+/*}*/
