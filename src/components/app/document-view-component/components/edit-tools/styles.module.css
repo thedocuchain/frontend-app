@@ -9,6 +9,7 @@
     background: var(--bg-grey-8);
     user-select: none;
     transition: all 0.2s ease;
+    cursor: auto;
 }
 
 .isEdited {
@@ -50,6 +51,7 @@
     background: none;
     user-select: auto;
     box-shadow: none;
+    background: transparent !important;
     padding: 4px;
     cursor: auto;
 }
