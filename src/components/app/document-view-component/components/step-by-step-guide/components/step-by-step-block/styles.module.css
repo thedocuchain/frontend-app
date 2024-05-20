@@ -2,6 +2,7 @@
     display: none;
     width: 520px;
     min-height: 140px;
+    z-index: 1000;
     padding: 16px;
     flex-direction: column;
     gap: 24px;

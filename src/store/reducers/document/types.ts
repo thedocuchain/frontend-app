@@ -13,4 +13,6 @@ export type DocumentType = {
   pages: number
   title: string
   status?: 'uploaded' | 'signing' | 'completed'
+  xOffset: number
+  url: string
 }

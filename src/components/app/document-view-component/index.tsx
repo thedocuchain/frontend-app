@@ -10,6 +10,7 @@ import { StepByStepBlockType } from 'src/components/app/document-view-component/
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { PdfViewPage } from 'src/components/app/pdf-view-page'
 
 import styles from './styles.module.css'
 
@@ -23,9 +24,9 @@ export function DocumentViewComponent(props: {
 
   return (
     <StepByStepGuideWrapper setSuccessPage={props.setSuccessPage} steps={stepsHints} isOpen={isOpen}>
-      <SidePanelPagesPreview document={document} isOpen={isOpen} setOpen={setOpen} />
+      <SidePanelPagesPreview isOpen={isOpen} setOpen={setOpen} />
 
-      <Container className={cn('column', { [styles.containerIfOpen]: isOpen })}>
+      <Container className={cn(styles.container, 'column', { [styles.containerIfOpen]: isOpen })}>
         <Column className={styles.textColumn}>
           <RowBetween className={styles.textWrapper}>
             <Text theme={'headline-1'}>{document.title}</Text>
@@ -38,26 +39,9 @@ export function DocumentViewComponent(props: {
           </Text>
         </Column>
 
-        <GuideLabel positionY={300} title={'Sign'} />
+        <GuideLabel positionY={document.xOffset + 100} title={'Sign'} />
 
-        {/* {document.signers.map((item, index) => ( */}
-        {/*  <ParticipantSignatureDetails */}
-        {/*    isJustCreated={false} */}
-        {/*    isEdited={true} */}
-        {/*    isError={false} */}
-        {/*    key={`${item.email}${index}`} */}
-        {/*    participant={item} */}
-        {/*    index={index} */}
-        {/*  /> */}
-        {/* ))} */}
-
-        {/* <PdfViewPage /> */}
-
-        <div className={styles.mockPageContainer}>
-          <div className={styles.mockPage} />
-          <div className={styles.mockPage} />
-          <div className={styles.mockPage} />
-        </div>
+        <PdfViewPage />
       </Container>
 
       <Space size={136} />

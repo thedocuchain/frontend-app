@@ -6,6 +6,7 @@ import { Text } from 'src/components/ui/typography'
 import { IconFile, IconUsers } from 'src/icons'
 
 import styles from './styles.module.css'
+// todo changed DocPreview
 import DocPreview from './doc-preview.png'
 
 export function DocumentPreview(props: { document: DocumentType }) {
