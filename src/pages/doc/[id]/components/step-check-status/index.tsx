@@ -66,8 +66,7 @@ export function StepCheckStatus(): JSX.Element {
   })
 
   const handleViewDocument = useEvent(() => {
-    // todo open in new tab
-    // handleOpenLink(`/doc/${document.id}?view=true`)
+    window.open(`/doc/${document.id}?view=true`, '_blank')
   })
 
   return (

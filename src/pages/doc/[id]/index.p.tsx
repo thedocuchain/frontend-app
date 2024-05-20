@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { useRouter } from 'next/router'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
@@ -74,6 +75,15 @@ export default function DocumentPage(): JSX.Element {
   const handleSetCheckStatusPage = useEvent(() => {
     setActiveStep('check-status')
   })
+
+  const router = useRouter()
+  const isDocumentViewPage = router.query.view as string
+
+  useEffect(() => {
+    if (isDocumentViewPage) {
+      setActiveStep('document-view')
+    }
+  }, [])
 
   return (
     <>
