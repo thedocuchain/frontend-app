@@ -4,6 +4,25 @@
     background: var(--text-white);
     box-shadow: var(--shadow-level-2);
     margin: 0 auto 26px;
+    -webkit-animation: fade-in 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .documentPreviewContainer {
@@ -49,17 +68,6 @@
 
 .isDocumentPreview {
     margin: 0;
-}
-
-.nonclickOverlay {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    pointer-events: none;
-    cursor: pointer !important;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .activePage {

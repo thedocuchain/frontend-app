@@ -79,7 +79,7 @@ export function PdfViewPage(props: { isSidePanel?: boolean; isDocumentPreview?: 
       <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
         {Array.from(new Array(numPages), (el, index) => (
           <div
-            id={!isSidePanel ? `page_${index + 1}` : undefined}
+            id={isSidePanel ? `side-panel-page_${index + 1}` : `page_${index + 1}`}
             key={`page_${index + 1}`}
             className={cn('column', {
               [styles.sidePanelPageWrapper]: isSidePanel || isDocumentPreview,

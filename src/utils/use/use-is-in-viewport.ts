@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 export function useIsInViewport(id: string) {
   const [isInViewport, setIsInViewport] = useState(false)
-  const offset = id.split('_')[1] === '1' ? 200 : 340
+  const offset = id.split('_')[1] === '1' ? 200 : 260
 
   useEffect(() => {
     const handleScroll = () => {
