@@ -24,17 +24,19 @@ type ComponentProps = {
   setSigned?: (boolean) => void
   dateSigned?: string
   name?: string
+  date?: string
+  setDate?: (string) => void
 }
 
 export function DateBlock(props: ComponentProps) {
-  const { isJustCreated, dateSigned, index } = props
+  const { isJustCreated, dateSigned, index, date } = props
   const colorBorder = colorsBorders[index]
   const style = isJustCreated ? { backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}` } : null
 
-  if (dateSigned)
+  if (dateSigned || date)
     return (
       <div className={styles.dateWrapperSigned}>
-        <Text theme={'body-3'}>{format(new Date(dateSigned.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
+        <Text theme={'body-3'}>{format(new Date(dateSigned || date.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
       </div>
     )
 
@@ -48,7 +50,7 @@ export function DateBlock(props: ComponentProps) {
 }
 
 export function Signature(props: ComponentProps) {
-  const { isJustCreated, isEdited, isSigned, setSigned, index, name } = props
+  const { isJustCreated, isEdited, isSigned, setSigned, index, name, setDate } = props
   const colorBorder = colorsBorders[index]
   const isSignedDone = isSigned && !isEdited
 
@@ -70,6 +72,7 @@ export function Signature(props: ComponentProps) {
     }
 
     setSigned(true)
+    setDate(new Date().toString())
   })
 
   const fonts = fontsSignatures
@@ -135,6 +138,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
   const { name, email, dateSigned } = props.participant
   const { isJustCreated, isEdited, isError } = props
   const [isSigned, setSigned] = useState(false)
+  const [date, setDate] = useState('')
   const index = indexToColorIndex(props.index)
 
   return (
@@ -147,11 +151,18 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
       </Column>
 
       <Row>
-        <DateBlock isJustCreated={isJustCreated} isEdited={isEdited} index={index} dateSigned={dateSigned} />
+        <DateBlock
+          date={date}
+          isJustCreated={isJustCreated}
+          isEdited={isEdited}
+          index={index}
+          dateSigned={dateSigned}
+        />
         <Space size={80} horizontal />
 
         <Tooltip isError={isError} isShow={isError} content={'Signature is required.'}>
           <Signature
+            setDate={setDate}
             setSigned={setSigned}
             isSigned={isSigned}
             isJustCreated={isJustCreated}

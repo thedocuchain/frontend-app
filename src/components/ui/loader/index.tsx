@@ -27,9 +27,9 @@ export function Loader(props: PropsWithChildren & ComponentProps) {
       <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'>
         <g>
           <circle
-            stroke-dasharray='164.93361431346415 56.97787143782138'
+            strokeDasharray='164.93361431346415 56.97787143782138'
             r='35'
-            stroke-width='10'
+            strokeWidth='10'
             stroke=''
             fill='none'
             cy='50'

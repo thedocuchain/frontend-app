@@ -78,16 +78,17 @@
 }
 
 .participantWrapper {
-    /*width: 100%;*/
-    width: 820px;
-    padding: 0 100px;
+    width: 100%;
+    min-width: 780px;
+    padding: 0 60px;
     justify-content: space-between;
     margin-bottom: 40px;
     z-index: 1000;
 }
 
-/*@media (min-width: 860px) {*/
+/*@media (max-width: 860px) {*/
 /*    .participantWrapper {*/
 /*        transform: scale(0.9);*/
+/*        !*padding: 0;*!*/
 /*    }*/
 /*}*/
