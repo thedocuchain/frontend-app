@@ -38,7 +38,7 @@ export default function MyTemplate() {
                   margin: '10px 0',
                 }}
               >
-                What
+                Title
               </Text>
             </Column>
             <Column>
