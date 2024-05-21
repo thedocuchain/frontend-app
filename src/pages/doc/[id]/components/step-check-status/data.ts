@@ -101,9 +101,9 @@ export const signersData: Recipient[] = [
 export const documentMock: DocumentType = {
   id: 'Y16334',
   signers: signersData,
-  pages: 6,
+  pages: 4,
   title: 'Contractor Agreement',
   status: 'signing',
-  xOffset: 4000,
+  xOffset: 480,
   url: 'http://localhost:3000/sample.pdf',
 }

@@ -7,7 +7,6 @@ import { SidePanelPagesPreview } from 'src/components/app/document-view-componen
 import { Space } from 'src/components/ui/space'
 import { StepByStepGuideWrapper } from 'src/components/app/document-view-component/components/step-by-step-guide'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
-import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { PdfViewPage } from 'src/components/app/pdf-view-page'
@@ -38,8 +37,6 @@ export function DocumentViewComponent(props: {
             {document.pages} pages
           </Text>
         </Column>
-
-        <GuideLabel positionY={document.xOffset + 100} title={'Sign'} />
 
         <PdfViewPage />
       </Container>

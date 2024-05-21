@@ -19,9 +19,4 @@
         margin-top: calc(var(--header-size) + 6px);
         margin-bottom: 44px;
     }
-
-    .wrapperDocumentView {
-        margin-top: calc(var(--header-size) + 24px);
-        margin-bottom: 44px;
-    }
 }
