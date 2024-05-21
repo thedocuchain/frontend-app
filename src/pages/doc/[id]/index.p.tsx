@@ -47,8 +47,8 @@ export default function DocumentPage(): JSX.Element {
     { title: 'Add recipients', value: 'add-recipients' },
     { title: 'Preview and send', value: 'preview-and-send' },
   ]
-  const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('preview-and-send')
+  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
+  const [activeStep, setActiveStep] = useState<StepsDocumentPage>('preview-and-send')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-send')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-all-signed')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('check-status')

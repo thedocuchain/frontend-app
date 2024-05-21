@@ -12,8 +12,10 @@ import { Text } from 'src/components/ui/typography'
 import { PageView } from 'src/components/app/pdf-view-page/page'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { Loader } from 'src/components/ui/loader'
 
 import styles from './styles.module.css'
+
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 
@@ -28,12 +30,11 @@ const resizeObserverOptions = {}
 
 const maxWidth = 800
 
-export function PdfViewPage(props: { isSidePanel?: boolean }) {
-  const { isSidePanel } = props
+export function PdfViewPage(props: { isSidePanel?: boolean; isDocumentPreview?: boolean }) {
+  const { isSidePanel, isDocumentPreview } = props
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
-  // const [isLoadingPage, setIsLoadingPage] = useState(true)
 
   const onResize = useCallback<ResizeObserverCallback>((entries) => {
     const [entry] = entries
@@ -47,11 +48,11 @@ export function PdfViewPage(props: { isSidePanel?: boolean }) {
 
   function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
     setNumPages(nextNumPages)
-    // setIsLoadingPage(false)
   }
 
   const handleClick = useEvent((index: number) => {
     if (!isSidePanel) return
+    if (isDocumentPreview) return
 
     const element = document.getElementById(`page_${index + 1}`)
     element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -60,9 +61,31 @@ export function PdfViewPage(props: { isSidePanel?: boolean }) {
   const documentData = useAppSelector(selectedDocument)
   const local = documentData.url
 
+  if (isDocumentPreview)
+    return (
+      <div className={''} ref={setContainerRef}>
+        <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
+          <div
+            id={undefined}
+            className={cn('column', {
+              [styles.documentPreviewContainer]: isDocumentPreview,
+            })}
+          >
+            <PageView
+              isDocumentPreview={isDocumentPreview}
+              id={`page_${1}`}
+              index={0}
+              containerWidth={containerWidth}
+              maxWidth={maxWidth}
+            />
+          </div>
+        </Document>
+      </div>
+    )
+
   return (
     <div className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })} ref={setContainerRef}>
-      <Document loading={null} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
+      <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
         {Array.from(new Array(numPages), (el, index) => (
           <div
             id={!isSidePanel ? `page_${index + 1}` : undefined}
@@ -87,21 +110,6 @@ export function PdfViewPage(props: { isSidePanel?: boolean }) {
             )}
           </div>
         ))}
-
-        {/* {!isSidePanel && ( */}
-        {/*  <div className={styles.mockSignatures} style={{ top: documentData.xOffset }}> */}
-        {/*    {documentData.signers.map((item, index) => ( */}
-        {/*      <ParticipantSignatureDetails */}
-        {/*        isJustCreated={true} */}
-        {/*        // isEdited={true} */}
-        {/*        isError={false} */}
-        {/*        key={`${item.email}${index}`} */}
-        {/*        participant={item} */}
-        {/*        index={index} */}
-        {/*      /> */}
-        {/*    ))} */}
-        {/*  </div> */}
-        {/* )} */}
       </Document>
     </div>
   )

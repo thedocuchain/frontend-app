@@ -4,17 +4,16 @@ import { Column, Row, RowCenter } from 'src/components/ui/grid'
 import { DocumentType } from 'src/store/reducers/document/types'
 import { Text } from 'src/components/ui/typography'
 import { IconFile, IconUsers } from 'src/icons'
+import { PdfViewPage } from 'src/components/app/pdf-view-page'
 
 import styles from './styles.module.css'
-// todo changed DocPreview
-import DocPreview from './doc-preview.png'
 
 export function DocumentPreview(props: { document: DocumentType }) {
   const { id, signers, pages } = props.document
   return (
     <Column>
       <RowCenter className={styles.wrapperImage}>
-        <img width={146} height={190} src={DocPreview.src} alt='' className={styles.img} />
+        <PdfViewPage isDocumentPreview />
       </RowCenter>
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>
