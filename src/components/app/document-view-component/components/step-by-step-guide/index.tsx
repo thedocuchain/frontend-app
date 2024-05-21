@@ -10,10 +10,13 @@ export function StepByStepGuideWrapper(
     steps: StepByStepBlockType[]
     isOpen: boolean
     setSuccessPage: () => void
+    isViewPage?: boolean
   },
 ) {
   const steps = props.steps
   const [activeStep, setActiveStep] = useState(0)
+
+  if (props.isViewPage) return <>{props.children}</>
 
   return (
     <>

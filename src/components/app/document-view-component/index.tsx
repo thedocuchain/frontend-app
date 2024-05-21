@@ -14,15 +14,16 @@ import { PdfViewPage } from 'src/components/app/pdf-view-page'
 import styles from './styles.module.css'
 
 export function DocumentViewComponent(props: {
-  stepsHints: StepByStepBlockType[]
-  setSuccessPage: () => void
+  stepsHints?: StepByStepBlockType[]
+  setSuccessPage?: () => void
+  isViewPage?: boolean
 }): JSX.Element {
   const document = useAppSelector(selectedDocument)
   const [isOpen, setOpen] = useState(false)
-  const { stepsHints } = props
+  const { stepsHints, setSuccessPage, isViewPage } = props
 
   return (
-    <StepByStepGuideWrapper setSuccessPage={props.setSuccessPage} steps={stepsHints} isOpen={isOpen}>
+    <StepByStepGuideWrapper isViewPage={isViewPage} setSuccessPage={setSuccessPage} steps={stepsHints} isOpen={isOpen}>
       <SidePanelPagesPreview isOpen={isOpen} setOpen={setOpen} />
 
       <Container className={cn(styles.container, 'column', { [styles.containerIfOpen]: isOpen })}>

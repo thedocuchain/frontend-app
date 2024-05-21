@@ -29,23 +29,33 @@ export function PageView(props: {
     if (!isSidePanel) return
     if (isDocumentPreview) return
 
-    const element = document.getElementById(`page_${index + 1}`)
+    const element = document.getElementById(id)
     element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   })
+
+  const isActivePage = isSidePanel && isInVP
+  // console.log(isActivePage, 'isActivePage')
+
+  // useEffect(() => {
+  //   if (isActivePage) {
+  //     const element = document.getElementById(`side-panel-${id}`)
+  //     console.log(element)
+  //
+  //     element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  //   }
+  // }, [isActivePage])
 
   return (
     <Page
       className={cn(styles.page, {
         [styles.sidePanelPage]: isSidePanel,
         [styles.isDocumentPreview]: isDocumentPreview,
-        [styles.activePage]: isSidePanel && isInVP,
+        [styles.activePage]: isActivePage,
       })}
       pageNumber={index + 1}
       onClick={handleClick}
       width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
     >
-      {(isSidePanel || isDocumentPreview) && <div className={styles.nonclickOverlay} />}
-
       {/* {!isSidePanel && isLastPage && <GuideLabel positionY={documentData.xOffset} title={'Sign'} />} */}
 
       {/* {!isSidePanel && isLastPage && ( */}
