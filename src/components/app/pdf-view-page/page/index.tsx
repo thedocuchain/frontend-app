@@ -52,8 +52,8 @@ export function PageView(props: {
       {/*  <div className={styles.mockSignatures} style={{ top: documentData.xOffset }}> */}
       {/*    {documentData.signers.map((item, index) => ( */}
       {/*      <ParticipantSignatureDetails */}
-      {/*        isJustCreated={true} */}
-      {/*        // isEdited={true} */}
+      {/*        // isJustCreated={true} */}
+      {/*        isEdited={true} */}
       {/*        isError={false} */}
       {/*        key={`${item.email}${index}`} */}
       {/*        participant={item} */}

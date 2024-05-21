@@ -1,21 +1,28 @@
 import { DocumentType, Recipient } from 'src/store/reducers/document/types'
 
 export const signersData: Recipient[] = [
+  // {
+  //   name: 'Zig Moore',
+  //   email: 'zig.moore@example.com',
+  //   role: 'signer',
+  //   status: 'signed',
+  //   lastRemind: '2024-03-20 13:45',
+  //   dateSigned: '10.10.2024',
+  // },
+  // {
+  //   name: 'Charlotte Moore',
+  //   email: 'charlotte.moore@example.com',
+  //   role: 'signer',
+  //   status: 'signed',
+  //   lastRemind: '2024-03-20 13:45',
+  //   dateSigned: '10.10.2024',
+  // },
   {
-    name: 'Zig Moore',
-    email: 'zig.moore@example.com',
+    name: 'Benjamin Carter',
+    email: 'benjamin.carter@example.com',
     role: 'signer',
-    status: 'signed',
+    status: 'awaiting',
     lastRemind: '2024-03-20 13:45',
-    dateSigned: '10.10.2024',
-  },
-  {
-    name: 'Charlotte Moore',
-    email: 'charlotte.moore@example.com',
-    role: 'signer',
-    status: 'signed',
-    lastRemind: '2024-03-20 13:45',
-    dateSigned: '10.10.2024',
   },
   {
     name: 'Alex Johnson',
@@ -31,23 +38,16 @@ export const signersData: Recipient[] = [
     status: 'awaiting',
     lastRemind: '2024-03-20 13:45',
   },
-  // {
-  //   name: 'Benjamin Carter',
-  //   email: 'benjamin.carter@example.com',
-  //   role: 'signer',
-  //   status: 'awaiting',
-  //   lastRemind: '2024-03-20 13:45',
-  // },
+  {
+    name: 'Ethan Brown',
+    email: 'ethan.brown@example.com',
+    role: 'signer',
+    status: 'awaiting',
+    lastRemind: '2024-03-20 13:45',
+  },
   // {
   //   email: 'info11041967watcher@gmail.com',
   //   role: 'watcher',
-  // },
-  // {
-  //   name: 'Ethan Brown',
-  //   email: 'ethan.brown@example.com',
-  //   role: 'signer',
-  //   status: 'awaiting',
-  //   lastRemind: '2024-03-20 13:45',
   // },
   // {
   //   name: 'Abby Goldman',
