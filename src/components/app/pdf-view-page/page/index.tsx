@@ -2,6 +2,8 @@
 
 import { Page } from 'react-pdf'
 import cn from 'classnames'
+import React from 'react'
+import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { useIsInViewport } from 'src/utils/use/use-is-in-viewport'
 
@@ -19,6 +21,17 @@ export function PageView(props: {
 
   const isInVP = useIsInViewport(id)
   // const documentData = useAppSelector(selectedDocument)
+  // const isLastPage = documentData.pages === index + 1
+
+  const handleClick = useEvent((e: Event) => {
+    e.preventDefault()
+
+    if (!isSidePanel) return
+    if (isDocumentPreview) return
+
+    const element = document.getElementById(`page_${index + 1}`)
+    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
 
   return (
     <Page
@@ -28,13 +41,15 @@ export function PageView(props: {
         [styles.activePage]: isSidePanel && isInVP,
       })}
       pageNumber={index + 1}
+      onClick={handleClick}
       width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
     >
-      {/* {index === 3 && ( */}
-      {/*  <div */}
-      {/*    className={styles.mockSignatures} */}
-      {/*    // style={{ top: documentData.xOffset }} */}
-      {/*  > */}
+      {(isSidePanel || isDocumentPreview) && <div className={styles.nonclickOverlay} />}
+
+      {/* {!isSidePanel && isLastPage && <GuideLabel positionY={documentData.xOffset} title={'Sign'} />} */}
+
+      {/* {!isSidePanel && isLastPage && ( */}
+      {/*  <div className={styles.mockSignatures} style={{ top: documentData.xOffset }}> */}
       {/*    {documentData.signers.map((item, index) => ( */}
       {/*      <ParticipantSignatureDetails */}
       {/*        isJustCreated={true} */}

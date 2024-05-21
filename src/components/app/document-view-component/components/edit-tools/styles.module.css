@@ -78,8 +78,8 @@
 }
 
 .participantWrapper {
-    width: 100%;
-    /*width: 820px;*/
+    /*width: 100%;*/
+    width: 820px;
     padding: 0 100px;
     justify-content: space-between;
     margin-bottom: 40px;
