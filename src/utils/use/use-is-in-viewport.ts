@@ -7,10 +7,10 @@ export function useIsInViewport(id: string) {
   useEffect(() => {
     const handleScroll = () => {
       const element = document.getElementById(id)
-      const rect = element.getBoundingClientRect()
+      const rect = element?.getBoundingClientRect()
       const html = document.documentElement
 
-      const isView = rect.top <= offset && rect.top >= -(window.innerHeight || html.clientHeight)
+      const isView = rect?.top <= offset && rect?.top >= -(window.innerHeight || html.clientHeight)
 
       setIsInViewport(isView)
     }
