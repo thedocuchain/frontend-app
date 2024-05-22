@@ -1,113 +1,115 @@
 .stepBlock {
-    display: none;
-    width: 520px;
-    min-height: 140px;
-    z-index: 1000;
-    padding: 16px;
-    flex-direction: column;
-    gap: 24px;
-    border-radius: 24px;
-    border: 1px solid var(--bg-grey-7-opacity);
-    background: var(--bg-accent-extra-light);
-    box-shadow: var(--shadow-level-4);
-    position: fixed;
-    bottom: 24px;
-    left: calc(50% - 520px / 2);
-    -webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  display: none;
+  width: 520px;
+  min-height: 140px;
+  z-index: 1000;
+  padding: 16px;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--bg-grey-7-opacity);
+  background: var(--bg-accent-extra-light);
+  box-shadow: var(--shadow-level-4);
+  position: fixed;
+  bottom: 24px;
+  left: calc(50% - 520px / 2);
+  -webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .isVisible {
-    display: flex;
+  display: flex;
 }
 
 .buttonNext {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 .signatureWrapper {
-    display: none;
+  display: none;
 }
 
 @media (min-width: 1090px) {
-    .containerIfOpen {
-        transition: all 0.2s ease;
-        left: calc(50% - 520px / 2 + 117px);
-    }
+  .containerIfOpen {
+    transition: all 0.2s ease;
+    left: calc(50% - 520px / 2 + 117px);
+  }
 }
 
 @media (--mobile) {
-    .stepBlock {
-        width: 100%;
-        border-radius: 16px 16px 0 0;
-        border-bottom: none;
-        box-shadow: var(--shadow-level-2);
-        left: 0;
-        bottom: 0;
-    }
+  .stepBlock {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+    box-shadow: var(--shadow-level-2);
+    left: 0;
+    bottom: 0;
+  }
 
-    .signatureWrapper {
-        display: block;
-        margin: 0 auto;
-        width: 216px;
-    }
+  .signatureWrapper {
+    display: block;
+    margin: 0 auto;
+    width: 216px;
+  }
 }
 
-
 @-webkit-keyframes slide-in-bottom {
-    0% {
-        -webkit-transform: translateY(400px);
-        transform: translateY(400px);
-        opacity: 0;
-    }
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    -webkit-transform: translateY(400px);
+    transform: translateY(400px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-bottom {
-    0% {
-        -webkit-transform: translateY(400px);
-        transform: translateY(400px);
-        opacity: 0;
-    }
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    -webkit-transform: translateY(400px);
+    transform: translateY(400px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-
 .slideOut {
-    -webkit-animation: slide-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-    animation: slide-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
 @-webkit-keyframes slide-out-bottom {
-    0% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        -webkit-transform: translateY(400px);
-        transform: translateY(400px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translateY(400px);
+    transform: translateY(400px);
+    opacity: 0;
+  }
 }
 
 @keyframes slide-out-bottom {
-    0% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        -webkit-transform: translateY(400px);
-        transform: translateY(400px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translateY(400px);
+    transform: translateY(400px);
+    opacity: 0;
+  }
 }

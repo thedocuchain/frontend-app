@@ -82,12 +82,12 @@
 
 .linkPrimary:hover > *,
 .linkSecondary:hover > * {
-  color: #2F35C2;
+  color: #2f35c2;
 }
 
 .linkPrimary:active > *,
 .linkSecondary:active > * {
-  color: #1A20A3;
+  color: #1a20a3;
 }
 
 .linkSecondary > * {
@@ -112,12 +112,12 @@
 
 .linkPrimary:hover .icon svg,
 .linkSecondary:hover .icon svg {
-  stroke: #2F35C2;
+  stroke: #2f35c2;
 }
 
 .linkPrimary:active .icon svg,
 .linkSecondary:active .icon svg {
-  stroke: #1A20A3;
+  stroke: #1a20a3;
 }
 
 .linkSecondary .icon svg {

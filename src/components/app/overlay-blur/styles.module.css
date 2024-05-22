@@ -9,7 +9,7 @@
   width: 100%;
   height: 100%;
   background: var(--bg-black);
-  opacity: 76%;
+  opacity: 0.76;
 }
 
 .overlay > * > * {

@@ -8,7 +8,6 @@ import { Store } from '@reduxjs/toolkit'
 import React, { ReactElement } from 'react'
 import { NextPage } from 'next'
 
-import { ErrorBoundary } from 'src/components/common/error-boundary'
 import { __setApiStore } from 'src/store/apis'
 import { createLocalStore } from 'src/store/store'
 import { CookiesPayload } from 'src/store/constants'
@@ -20,6 +19,7 @@ import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
 import { patchDocumentState } from 'src/store/reducers/document'
 import { documentMock } from 'src/pages/doc/[id]/components/step-check-status/data'
+import { ErrorBoundary } from 'src/components/common/error-boundary'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
@@ -50,8 +50,11 @@ function RenderLayoutComponent(props) {
 
 export default function MyCustomApp({ Component, pageProps, initialState }: AppPropsWithLayout) {
   const store = createLocalStore(initialState)
+  // todo fix
 
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <ErrorBoundary>
       <Head>
         <meta charSet='utf-8' />

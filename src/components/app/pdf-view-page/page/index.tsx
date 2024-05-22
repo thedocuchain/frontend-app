@@ -34,16 +34,20 @@ export function PageView(props: {
   })
 
   const isActivePage = isSidePanel && isInVP
+  // console.log(isInVP, id, 'isInVP')
   // console.log(isActivePage, 'isActivePage')
-
-  // useEffect(() => {
-  //   if (isActivePage) {
-  //     const element = document.getElementById(`side-panel-${id}`)
-  //     console.log(element)
   //
-  //     element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  // useEffect(() => {
+  //   if (isInVP && isActivePage) {
+  //     const element = document.getElementById(`side-panel-${id}`)
+  //     element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+  //
+  //     // const element = document.getElementById('side-panel-container')
+  //     // element?.scrollBy(0, 100)
+  //
+  //     console.log(element)
   //   }
-  // }, [isActivePage])
+  // }, [isInVP, isActivePage])
 
   return (
     <Page

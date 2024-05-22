@@ -72,7 +72,6 @@
   margin-top: 10px;
 }
 
-
 .relative {
   position: relative;
 }
@@ -86,9 +85,11 @@
   user-select: none;
 }
 
-/*.on-click:hover {*/
-  /*opacity: 0.8;*/
-/*}*/
+/* .on-click:hover { */
+
+/* opacity: 0.8; */
+
+/* } */
 
 .on-click:active {
   transform: scale(0.95);

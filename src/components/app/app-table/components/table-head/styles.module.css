@@ -1,34 +1,34 @@
 .arrowRotate {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .row {
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .row > * {
-    font-size: 12px !important;
+  font-size: 12px !important;
 }
 
 .arrowRotate,
 .arrow {
-    fill: var(--bg-grey-2-opacity);
+  fill: var(--bg-grey-2-opacity);
 }
 
 .arrowLong {
-    stroke: var(--text-primary);
+  stroke: var(--text-primary);
 }
 
 .row:hover > * {
-    color: #2F35C2 !important;
+  color: #2f35c2 !important;
 }
 
 .row:hover > .arrowLong {
-    stroke: #2F35C2;
+  stroke: #2f35c2;
 }
 
 .row:hover > svg {
-    fill: #2F35C2;
+  fill: #2f35c2;
 }

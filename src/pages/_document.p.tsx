@@ -6,10 +6,13 @@ export default class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
+  // todo fix
 
   render() {
     return (
       <Html lang='en'>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
         <Head>
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin={'true'} />
@@ -20,6 +23,8 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-ignore */}
           <NextScript />
         </body>
       </Html>
