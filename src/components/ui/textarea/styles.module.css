@@ -23,7 +23,8 @@
   box-shadow: var(--shadow-level-1);
   transition: all 0.1s ease;
   overflow-y: scroll;
-  /*scrollbar-width: auto;*/
+
+  /* scrollbar-width: auto; */
 }
 
 .id {

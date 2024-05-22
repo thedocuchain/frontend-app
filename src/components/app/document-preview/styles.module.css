@@ -1,34 +1,34 @@
 .wrapperImage {
-    border-radius: 10px;
-    background: var(--bg-grey-7);
-    margin-bottom: 12px;
-    width: 100%;
-    height: 100%;
-    min-height: 222px;
-    padding: 16px;
-    user-select: none;
-    cursor: initial;
+  border-radius: 10px;
+  background: var(--bg-grey-7);
+  margin-bottom: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 222px;
+  padding: 16px;
+  user-select: none;
+  cursor: initial;
 }
 
 .textBlock {
-    gap: 4px;
+  gap: 4px;
 }
 
 .textBlock > * {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .iconBlock {
-    align-items: center;
-    gap: 6px;
+  align-items: center;
+  gap: 6px;
 }
 
 .iconBlock > * {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 @media (--mobile) {
-    .wrapperImage {
-        display: none;
-    }
+  .wrapperImage {
+    display: none;
+  }
 }

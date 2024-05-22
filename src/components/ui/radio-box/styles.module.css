@@ -40,7 +40,6 @@
   border-color: var(--bg-grey-3-opacity);
 }
 
-
 .error input + .icon {
   box-shadow: var(--shadow-focus-error);
 }

@@ -1,32 +1,32 @@
 .step {
-    gap: 24px;
-    width: fit-content;
-    white-space: nowrap;
+  gap: 24px;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .stepMobile {
-    display: none;
+  display: none;
 }
 
 .title {
-    gap: 6px;
+  gap: 6px;
 }
 
 @media (--mobile) {
-    .step {
-        display: none;
-    }
+  .step {
+    display: none;
+  }
 
-    .stepMobile {
-        display: block;
-        width: 100%;
-        min-width: 90px;
-        height: 4px;
-        border-radius: 2px;
-        background: var(--bg-grey-7);
-    }
+  .stepMobile {
+    display: block;
+    width: 100%;
+    min-width: 90px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--bg-grey-7);
+  }
 
-    .active {
-        background: var(--bg-accent);
-    }
+  .active {
+    background: var(--bg-accent);
+  }
 }

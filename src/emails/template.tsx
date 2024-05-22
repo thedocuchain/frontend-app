@@ -1,18 +1,25 @@
 import React from 'react'
-import { Html, Head, Font, Text, Column, Row, Section, Container } from '@react-email/components'
+import { Html, Link, Head, Font, Text, Column, Row, Section, Container } from '@react-email/components'
+
+import Header from 'src/emails/_components/header'
+import Footer from 'src/emails/_components/footer'
+import Preview from 'src/emails/_components/preview'
+import Signers from 'src/emails/_components/signers'
 
 export default function MyTemplate() {
   const meeting = {
-    title: 'title',
+    id: 'Y16334',
+    title: 'Contractor Agreement',
+    status: 'signing',
   }
-  const { title } = meeting || {}
+  const { title, id } = meeting || {}
 
   return (
     <Html
       lang='en'
       style={{
-        backgroundColor: '#FFFFFF',
         fontFamily: 'Inter',
+        backgroundColor: '#F6F9FC',
       }}
     >
       <Head>
@@ -28,42 +35,71 @@ export default function MyTemplate() {
         />
       </Head>
 
-      <Container>
-        <Section style={form}>
+      <body
+        style={{
+          backgroundColor: '#F6F9FC',
+        }}
+      >
+        <Container>
+          <Section style={form}>
+            <Header id={id} />
+            <Preview />
+
+            <Row>
+              {/* <Text style={titleText}>You have {title} to review and sign in Docuchain</Text> */}
+              <Text style={titleText}>🖊 New signature! Elon Musk signed {title}</Text>
+              {/* <Text style={titleText}>🎉 All signers completed with {title}</Text> */}
+            </Row>
+            <Signers />
+
+            <Footer />
+          </Section>
+
           <Row>
-            <Column width={100}>
-              <Text
-                style={{
-                  fontWeight: 600,
-                  margin: '10px 0',
-                }}
-              >
-                Title
+            <Column align='center'>
+              <Text style={linkText}>
+                DocuChain,{' '}
+                <Link style={link} href='https://docuchain.io'>
+                  DocuChain.io
+                </Link>
               </Text>
             </Column>
-            <Column>
-              <Text style={text}>{title}</Text>
-            </Column>
           </Row>
-        </Section>
-      </Container>
+        </Container>
+      </body>
     </Html>
   )
 }
 
-const text = {
-  margin: '10px 0',
+const titleText = {
+  fontSize: 20,
+  fontWeight: 600,
+  lineHeight: '27px',
+  margin: '20px 0 0 0',
+  color: '#000',
+}
+
+const linkText = {
+  margin: '0 0 32px 0',
+  color: '#626C7F',
+}
+
+const link = {
+  textDecoration: 'underline',
+  color: '#626C7F',
 }
 
 const form = {
-  margin: '20px auto',
+  margin: '40px auto 12px',
   display: 'flex',
-  maxWidth: 620,
+  maxWidth: 600,
   width: '100%',
-  minWidth: 350,
-  maxHeight: 760,
+  minWidth: 200,
   height: '100%',
-  padding: 10,
   TextAlign: 'left',
   WhiteSpace: 'pre-wrap',
+  backgroundColor: '#FFFFFF',
+  border: '1px solid #D0D5DD',
+  borderRadius: 16,
+  padding: '20px 24px 60px',
 }

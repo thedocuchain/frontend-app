@@ -1,77 +1,77 @@
 .wrapper {
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid var(--bg-grey-5);
-    background: var(--bg-white);
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    width: 100%;
-    max-width: 512px;
-    min-width: 512px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--bg-grey-5);
+  background: var(--bg-white);
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
+  max-width: 512px;
+  min-width: 512px;
 }
 
 .error {
-    border: 2px solid var(--bg-error);
-    max-width: 660px;
-    min-width: 660px;
+  border: 2px solid var(--bg-error);
+  max-width: 660px;
+  min-width: 660px;
 }
 
 .column {
-    width: calc(100% - 12px - 40px);
+  width: calc(100% - 12px - 40px);
 }
 
 .error .column {
-    width: calc(100% - 12px - 40px - 106px);
-    white-space: nowrap;
+  width: calc(100% - 12px - 40px - 106px);
+  white-space: nowrap;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
 }
 
 .name {
-    text-overflow: ellipsis;
-    overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media (--mobile) {
-    .wrapper {
-        max-width: 361px;
-        min-width: 361px;
-    }
+  .wrapper {
+    max-width: 361px;
+    min-width: 361px;
+  }
 
-    .error .column {
-        width: unset;
-        white-space: pre-wrap;
-    }
+  .error .column {
+    width: unset;
+    white-space: pre-wrap;
+  }
 
-    .row {
-        width: 80%;
-        flex-direction: column;
-        align-items: unset;
-        justify-content: unset;
-    }
+  .row {
+    width: 80%;
+    flex-direction: column;
+    align-items: unset;
+    justify-content: unset;
+  }
 
-    .button {
-        width: 100%;
-        min-width: 277px;
-        height: 44px;
-    }
+  .button {
+    width: 100%;
+    min-width: 277px;
+    height: 44px;
+  }
 }
 
 @media (--mobile-sm) {
-    .wrapper {
-        max-width: 320px;
-        min-width: 320px;
-    }
+  .wrapper {
+    max-width: 320px;
+    min-width: 320px;
+  }
 
-    .button {
-        min-width: 230px;
-    }
+  .button {
+    min-width: 230px;
+  }
 }

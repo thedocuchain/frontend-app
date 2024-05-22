@@ -1,33 +1,33 @@
 .wrapper {
-    width: 24px;
-    height: 24px;
-    position: relative;
+  width: 24px;
+  height: 24px;
+  position: relative;
 }
 
 .item {
-    padding: 10px 8px 10px 8px;
-    cursor: pointer;
-    border-radius: 8px;
-    width: 100%;
+  padding: 10px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
 }
 
 .item:hover {
-    background-color: var(--bg-accent-extra-light);
+  background-color: var(--bg-accent-extra-light);
 }
 
 .listContainer {
-    position: absolute;
-    z-index: 50;
-    right: 12px;
-    top: 32px;
-    overflow: auto;
-    width: 320px;
-    background: var(--bg-white);
-    font-family: var(--font-nacelle);
-    border-radius: 8px;
-    border: solid 1px var(--bg-grey-5);
-    box-shadow: var(--shadow-level-1);
-    padding: 2px 4px 2px 4px;
-    margin-top: -20px;
-    user-select: none;
+  position: absolute;
+  z-index: 50;
+  right: 12px;
+  top: 32px;
+  overflow: auto;
+  width: 320px;
+  background: var(--bg-white);
+  font-family: var(--font-nacelle);
+  border-radius: 8px;
+  border: solid 1px var(--bg-grey-5);
+  box-shadow: var(--shadow-level-1);
+  padding: 2px 4px;
+  margin-top: -20px;
+  user-select: none;
 }

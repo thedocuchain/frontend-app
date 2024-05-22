@@ -1,153 +1,151 @@
 .wrapper {
-    margin: auto;
-    position: relative;
-    width: 100%;
-    max-width: 634px;
-    padding: 96px 0 0;
-    overflow: hidden;
+  margin: auto;
+  position: relative;
+  width: 100%;
+  max-width: 634px;
+  padding: 96px 0 0;
+  overflow: hidden;
 }
 
 .wrapperOneSigned {
-    padding: 78px 0 0;
+  padding: 78px 0 0;
 }
 
 .bg {
-    background-image: url("./images/bg-pattern-bottom.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: right;
-    width: 100%;
-    height: 100%;
+  background-image: url("./images/bg-pattern-bottom.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+  width: 100%;
+  height: 100%;
 }
 
 .scriptText {
-    color: var(--text-script-color-for-success-page);
-    margin-top: -20px;
+  color: var(--text-script-color-for-success-page);
+  margin-top: -20px;
 }
 
 .iconPlane {
-    width: 181px;
-    height: 69px;
+  width: 181px;
+  height: 69px;
 }
 
 .iconSuccessfullySigned {
-    width: 200px;
-    height: 124px;
+  width: 200px;
+  height: 124px;
 }
 
 .name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-break: keep-all;
-    text-align: center;
-    width: 100%;
-    margin-top: 32px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  text-align: center;
+  width: 100%;
+  margin-top: 32px;
 }
 
 .desc {
-    margin-top: 12px;
-    color: #0E0E0EB2;
-    text-align: center;
-    max-width: 520px;
+  margin-top: 12px;
+  color: #0e0e0eb2;
+  text-align: center;
+  max-width: 520px;
 }
 
 .buttonsContainer {
-    gap: 24px;
-    margin-top: 36px;
+  gap: 24px;
+  margin-top: 36px;
 }
 
 .button {
-    width: 208px;
+  width: 208px;
 }
 
 .footer {
-    margin-bottom: 28px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  margin-bottom: 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .shareBlock {
-    margin-bottom: 40px;
-    margin-top: 40px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .rateBlock {
-    margin-bottom: 40px;
-    margin-top: 40px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 @media (--mobile) {
-    .bg {
-        background-position: bottom;
-        background-image: url("./images/bg-pattern-bottom-mobile.png");
-    }
+  .bg {
+    background-position: bottom;
+    background-image: url("./images/bg-pattern-bottom-mobile.png");
+  }
 
-    .iconPlane {
-        width: 130px;
-        height: 46px;
-    }
+  .iconPlane {
+    width: 130px;
+    height: 46px;
+  }
 
-    .iconSuccessfullySigned {
-        width: 150px;
-        height: 94px;
-    }
+  .iconSuccessfullySigned {
+    width: 150px;
+    height: 94px;
+  }
 
-    .name {
-        margin-top: 16px;
-    }
+  .name {
+    margin-top: 16px;
+  }
 
-    .scriptText {
-        margin-top: -10px;
-    }
+  .scriptText {
+    margin-top: -10px;
+  }
 
-    .desc {
-        margin-top: 8px;
-        font-size: 16px !important;
-        line-height: 24px;
-    }
+  .desc {
+    margin-top: 8px;
+    font-size: 16px !important;
+    line-height: 24px;
+  }
 
-    .buttonsContainer {
-        flex-direction: column-reverse;
-        width: 100%;
-        gap: 16px;
-        margin-top: 28px;
-    }
+  .buttonsContainer {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 16px;
+    margin-top: 28px;
+  }
 
-    .button {
-        width: 100%;
-    }
+  .button {
+    width: 100%;
+  }
 
-    .footer {
-        margin-bottom: 40px;
-    }
+  .footer {
+    margin-bottom: 40px;
+  }
 
-    .wrapper {
-        padding: 0 16px;
-        margin: auto;
-    }
+  .wrapper {
+    padding: 0 16px;
+    margin: auto;
+  }
 }
 
-
 @media screen and (--mobile) and (max-height: 650px) {
-    .wrapper {
-        margin: 78px auto 40px;
-    }
+  .wrapper {
+    margin: 78px auto 40px;
+  }
 }
 
 @media screen and (--mobile) and (max-height: 770px) {
-    .wrapperOneSigned {
-        margin: 96px auto 20px;
-    }
+  .wrapperOneSigned {
+    margin: 96px auto 20px;
+  }
 }
 
-
 @media (--mobile-sm) {
-    .scriptText {
-        font-size: 42px !important;
-    }
+  .scriptText {
+    font-size: 42px !important;
+  }
 }

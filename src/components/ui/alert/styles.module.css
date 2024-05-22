@@ -1,44 +1,44 @@
 .wrapper {
-    width: 100%;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    border-radius: 16px;
-    border: solid 1px var(--bg-grey-7-opacity);
-    background: var(--bg-grey-8-opacity);
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  border-radius: 16px;
+  border: solid 1px var(--bg-grey-7-opacity);
+  background: var(--bg-grey-8-opacity);
 }
 
 .error {
-    background: #D6333329;
+  background: #d6333329;
 }
 
 .warning {
-    background: #DC680329;
+  background: #dc680329;
 }
 
 .success {
-    background: #07945529;
+  background: #07945529;
 }
 
 .info .icon svg {
-    stroke: var(--bg-grey-3-opacity);
+  stroke: var(--bg-grey-3-opacity);
 }
 
 .error .icon svg {
-    stroke: var(--bg-error);
+  stroke: var(--bg-error);
 }
 
 .warning .icon svg {
-    stroke: var(--bg-warning);
+  stroke: var(--bg-warning);
 }
 
 .success .icon svg {
-    stroke: var(--bg-success);
+  stroke: var(--bg-success);
 }
 
 @media (--mobile) {
-    .wrapper {
-        width: 100%;
-    }
+  .wrapper {
+    width: 100%;
+  }
 }

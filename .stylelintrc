@@ -7,6 +7,8 @@
     "color-hex-case": "lower",
     "no-descending-specificity": null,
     "value-keyword-case": null,
+    "property-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": null,
     "property-no-unknown": [true, {
       "ignoreProperties": ["font-smoothing", "composes"]
     }],

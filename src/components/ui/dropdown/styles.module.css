@@ -78,7 +78,7 @@
   border-radius: 16px;
   border: solid 1px var(--bg-grey-5);
   box-shadow: var(--shadow-level-1);
-  padding: 2px 4px 2px 4px;
+  padding: 2px 4px;
   margin-top: 4px;
   user-select: none;
 }
@@ -100,13 +100,13 @@
   margin-top: 0;
 }
 
- .list::-webkit-scrollbar {
+.list::-webkit-scrollbar {
   display: initial !important;
   width: 4px;
   border-radius: 4px;
- }
+}
 
- .list::-webkit-scrollbar-thumb {
+.list::-webkit-scrollbar-thumb {
   background: var(--bg-grey-7-opacity);
   border-radius: 4px;
- }
+}

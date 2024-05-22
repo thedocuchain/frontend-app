@@ -1,16 +1,16 @@
 .wrapperDocumentView {
-    height: 100%;
-    margin: calc(var(--header-size) + 34px) auto 96px;
-    position: relative;
-    width: 100%;
-    max-width: 820px;
-    display: flex;
-    padding: 0 20px;
+  height: 100%;
+  margin: calc(var(--header-size) + 34px) auto 96px;
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  padding: 0 20px;
 }
 
 @media (--mobile) {
-    .wrapperDocumentView {
-        margin-bottom: 44px;
-        padding: 0 16px;
-    }
+  .wrapperDocumentView {
+    margin-bottom: 44px;
+    padding: 0 16px;
+  }
 }

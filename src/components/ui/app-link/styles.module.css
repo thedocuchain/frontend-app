@@ -1,29 +1,29 @@
 .link {
-    font-family: var(--font-nacelle);
-    font-size: inherit !important;
-    font-weight: 500;
-    color: var(--bg-link-default);
+  font-family: var(--font-nacelle);
+  font-size: inherit !important;
+  font-weight: 500;
+  color: var(--bg-link-default);
 }
 
 .link:hover {
-    color: #2F35C2;
+  color: #2f35c2;
 }
 
 .link:active {
-    color: #1A20A3;
+  color: #1a20a3;
 }
 
 .secondary {
-    color: inherit;
-    text-decoration: underline;
+  color: inherit;
+  text-decoration: underline;
 }
 
 .secondary:hover {
-    color: #2F35C2;
-    text-decoration: none;
+  color: #2f35c2;
+  text-decoration: none;
 }
 
 .secondary:active {
-    color: #1A20A3;
-    text-decoration: none;
+  color: #1a20a3;
+  text-decoration: none;
 }

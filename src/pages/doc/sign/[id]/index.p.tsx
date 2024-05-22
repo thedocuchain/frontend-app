@@ -14,7 +14,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
-export type StepsSignPage = 'sign-the-document' | 'success-sign'
+export type StepsSignPage = 'sign-the-document' | 'success-sign' | 'expired-link'
 
 export default function DocumentViewPage(): JSX.Element {
   const document = useAppSelector(selectedDocument)
@@ -38,6 +38,7 @@ export default function DocumentViewPage(): JSX.Element {
   ]
 
   const [activeStep, setActiveStep] = useState<StepsSignPage>('sign-the-document')
+  // const [activeStep, setActiveStep] = useState<StepsSignPage>('expired-link')
   // const [activeStep, setActiveStep] = useState<StepsSignPage>('success-sign')
 
   const handleSetSuccessPage = useEvent(() => {
@@ -83,6 +84,12 @@ export default function DocumentViewPage(): JSX.Element {
         <PageWrapper>
           <Header isTransparent />
           <SuccessStatusComponent setDocumentViewPage={handleSetDocumentView} />
+        </PageWrapper>
+      )}
+
+      {activeStep === 'expired-link' && (
+        <PageWrapper>
+          <Header isTransparent />
         </PageWrapper>
       )}
     </>

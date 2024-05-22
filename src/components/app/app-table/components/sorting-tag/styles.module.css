@@ -1,58 +1,58 @@
 .tag {
-    width: fit-content;
-    height: 28px;
-    padding: 4px 12px 4px 12px;
-    gap: 8px;
-    border-radius: 100px;
-    border: solid 1px var(--bg-grey-8-opacity);
-    background: var(--bg-grey-7);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    margin-left: 16px;
+  width: fit-content;
+  height: 28px;
+  padding: 4px 12px;
+  gap: 8px;
+  border-radius: 100px;
+  border: solid 1px var(--bg-grey-8-opacity);
+  background: var(--bg-grey-7);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  margin-left: 16px;
 }
 
 .arrowLong {
-    stroke: var(--text-primary);
+  stroke: var(--text-primary);
 }
 
 .list {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px;
-    padding: 14px 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;
+  padding: 14px 8px;
 }
 
 .order {
-    gap: 10px;
-    margin-right: 10px;
+  gap: 10px;
+  margin-right: 10px;
 }
 
 .order > * {
-    color: var(--text-link-default);
+  color: var(--text-link-default);
 }
 
 .arrowRotate {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .order svg {
-    stroke: var(--text-link-default);
+  stroke: var(--text-link-default);
 }
 
 .itemActive {
-    background: var(--bg-grey-8);
+  background: var(--bg-grey-8);
 }
 
 .button {
-    width: 100%;
-    margin-top: 16px;
+  width: 100%;
+  margin-top: 16px;
 }
