@@ -13,17 +13,30 @@ import { IconExpired, IconPlaneColor, IconSuccessfullySigned } from 'src/icons'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 
+import Image404Mobile from './images/404-image-mobile.png'
+import Image404 from './images/404-image-desktop.png'
 import styles from './styles.module.css'
 
 export function StatusScreenTemplate(props: {
   isAllSigned?: boolean
+  isOneSigned?: boolean
   isSend?: boolean
+  is404Page?: boolean
+  isServerErrorPage?: boolean
   isExpired?: boolean
   setCheckStatusPage?: () => void
   setDocumentViewPage?: () => void
 }): JSX.Element {
-  const { isAllSigned, isSend, isExpired, setCheckStatusPage, setDocumentViewPage } = props
-  const isOneSigned = !isAllSigned && !isSend && !isExpired
+  const {
+    isAllSigned,
+    isOneSigned,
+    is404Page,
+    isServerErrorPage,
+    isSend,
+    isExpired,
+    setCheckStatusPage,
+    setDocumentViewPage,
+  } = props
   const router = useRouter()
 
   const document = useAppSelector(selectedDocument)
@@ -55,7 +68,53 @@ export function StatusScreenTemplate(props: {
   return (
     <>
       <Flex flex='1' className={styles.bg}>
-        <Column className={cn(styles.wrapper, 'column-center', { [styles.wrapperOneSigned]: isOneSigned })}>
+        <Column
+          className={cn(styles.wrapper, 'column-center', {
+            [styles.wrapperOneSigned]: isOneSigned,
+            [styles.wrapper404]: is404Page || isServerErrorPage,
+          })}
+        >
+          {isServerErrorPage && (
+            <>
+              <img src={Image404Mobile.src} width={184} className={''} alt='' />
+
+              <Text theme='display-text' header='h1' className={styles.name}>
+                Server Error
+              </Text>
+
+              <Text theme='body-1' className={cn(styles.desc, 'color-text-secondary text-center')}>
+                But don&apos;t worry, try refreshing the page later
+              </Text>
+
+              <Row className={styles.buttonsContainer}>
+                <Button href='/' className={styles.buttonHome}>
+                  Refresh
+                </Button>
+              </Row>
+            </>
+          )}
+
+          {is404Page && (
+            <>
+              <img src={Image404Mobile.src} width={184} className={styles.imgMobile} alt='' />
+              <img src={Image404.src} width={720} className={styles.img} alt='' />
+
+              <Text theme='display-text' header='h1' className={styles.name}>
+                Page not found
+              </Text>
+
+              <Text theme='body-1' className={cn(styles.desc, 'color-text-secondary text-center')}>
+                Allow us to point you in a different direction.
+              </Text>
+
+              <Row className={styles.buttonsContainer}>
+                <Button href='/' className={styles.buttonHome}>
+                  Take me home
+                </Button>
+              </Row>
+            </>
+          )}
+
           {isSend && (
             <>
               <IconPlaneColor className={styles.iconPlane} />

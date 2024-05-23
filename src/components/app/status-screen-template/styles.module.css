@@ -11,6 +11,10 @@
   padding: 78px 0 0;
 }
 
+.wrapper404 {
+  padding: 0;
+}
+
 .bg {
   background-image: url("./images/bg-pattern-bottom.png");
   background-size: cover;
@@ -38,6 +42,17 @@
 .iconExpired {
   width: 200px;
   height: 124px;
+}
+
+.imgMobile {
+  display: none;
+  width: 100%;
+  max-width: 200px;
+}
+
+.img {
+  width: 100%;
+  display: block;
 }
 
 .name {
@@ -94,6 +109,14 @@
   .bg {
     background-position: bottom;
     background-image: url("./images/bg-pattern-bottom-mobile.png");
+  }
+
+  .imgMobile {
+    display: block;
+  }
+
+  .img {
+    display: none;
   }
 
   .iconPlane {
