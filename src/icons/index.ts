@@ -40,3 +40,4 @@ export { default as IconTelegramLogo } from 'src/icons/socials/tg.inline.svg'
 
 export { default as IconSuccessfullySigned } from 'src/icons/inline/successfully-signed.inline.svg'
 export { default as IconPlaneColor } from 'src/icons/inline/plane-color.inline.svg'
+export { default as IconExpired } from 'src/icons/inline/icon-expired.inline.svg'

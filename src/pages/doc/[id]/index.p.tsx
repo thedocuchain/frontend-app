@@ -12,10 +12,10 @@ import { Space } from 'src/components/ui/space'
 import { StepAddRecipients } from 'src/pages/doc/[id]/components/step-add-recipients'
 import { StepPreviewAndSend } from 'src/pages/doc/[id]/components/step-preview-and-send'
 import { StepCheckStatus } from 'src/pages/doc/[id]/components/step-check-status'
-import { SuccessStatusComponent } from 'src/components/app/success-status-component'
 import { StepViewDocument } from 'src/pages/doc/[id]/components/step-view-document'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 
 import styles from './styles.module.css'
 
@@ -93,14 +93,14 @@ export default function DocumentPage(): JSX.Element {
         {activeStep === 'success-send' && (
           <>
             <Header isTransparent />
-            <SuccessStatusComponent setCheckStatusPage={handleSetCheckStatusPage} isSend />
+            <StatusScreenTemplate setCheckStatusPage={handleSetCheckStatusPage} isSend />
           </>
         )}
 
         {activeStep === 'success-all-signed' && (
           <>
             <Header isTransparent />
-            <SuccessStatusComponent setCheckStatusPage={handleSetCheckStatusPage} isAllSigned />
+            <StatusScreenTemplate setCheckStatusPage={handleSetCheckStatusPage} isAllSigned />
           </>
         )}
 

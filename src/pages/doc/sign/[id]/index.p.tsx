@@ -8,9 +8,9 @@ import { Header } from 'src/components/app/header'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
 import { Flex } from 'src/components/ui/grid'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
-import { SuccessStatusComponent } from 'src/components/app/success-status-component'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 
 import styles from './styles.module.css'
 
@@ -83,13 +83,14 @@ export default function DocumentViewPage(): JSX.Element {
       {activeStep === 'success-sign' && (
         <PageWrapper>
           <Header isTransparent />
-          <SuccessStatusComponent setDocumentViewPage={handleSetDocumentView} />
+          <StatusScreenTemplate setDocumentViewPage={handleSetDocumentView} />
         </PageWrapper>
       )}
 
       {activeStep === 'expired-link' && (
         <PageWrapper>
           <Header isTransparent />
+          <StatusScreenTemplate isExpired />
         </PageWrapper>
       )}
     </>

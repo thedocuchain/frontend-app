@@ -42,7 +42,7 @@ export function SidePanelPagesPreview(props: { isOpen: boolean; setOpen: (boolea
           <IconClose onClick={() => setDeleted(true)} className='on-click' />
         </RowBetweenCenter>
 
-        <PdfViewPage isSidePanel />
+        <PdfViewPage isOpenSidePanel={isOpen} isSidePanel />
       </div>
     </div>
   )

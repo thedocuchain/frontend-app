@@ -1,0 +1,49 @@
+.page {
+  -webkit-animation: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.isDocumentPreview {
+  cursor: initial !important;
+  margin: 0;
+}
+
+.sidePanelPage {
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.activePage {
+  position: relative;
+}
+
+.activePage::before {
+  display: flex;
+  content: "";
+  width: 99%;
+  height: 99%;
+  position: absolute;
+  top: 0;
+  z-index: 9999999;
+  border: 2px solid var(--bg-accent);
+}

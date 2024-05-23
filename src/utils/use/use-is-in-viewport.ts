@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
-export function useIsInViewport(id: string) {
+export function useIsInViewportPartially(id: string) {
   const [isInViewport, setIsInViewport] = useState(false)
-  const offset = id.split('_')[1] === '1' ? 200 : 260
+  const offset = id.split('_')[1] === '1' ? 200 : 160
+  // const offset = id.split('_')[1] === '1' ? 200 : 260
 
   useEffect(() => {
     const handleScroll = () => {
@@ -10,7 +11,36 @@ export function useIsInViewport(id: string) {
       const rect = element?.getBoundingClientRect()
       const html = document.documentElement
 
-      const isView = rect?.top <= offset && rect?.top >= -(window.innerHeight || html.clientHeight)
+      const isView = rect?.top <= offset && rect?.top + offset >= -(window.innerHeight || html.clientHeight)
+
+      setIsInViewport(isView)
+    }
+    handleScroll()
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return isInViewport
+}
+
+export function useIsInViewport(id: string) {
+  const [isInViewport, setIsInViewport] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = document.getElementById(id)
+      const rect = element?.getBoundingClientRect()
+      const html = document.documentElement
+
+      const isView =
+        rect?.top >= 0 &&
+        rect?.left >= 0 &&
+        rect?.bottom <= (window.innerHeight || html.clientHeight) &&
+        rect?.right <= (window.innerWidth || html.clientWidth)
 
       setIsInViewport(isView)
     }
