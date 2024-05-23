@@ -117,9 +117,6 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
       <Text theme={'body-2'} className={styles.desc}>
         Check the document name and choose who needs to sign it.
       </Text>
-      {/* todo fix */}
-      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-      {/* @ts-ignore */}
       <ValidatorWrapper ref={validator}>
         <InputValidatorField
           required

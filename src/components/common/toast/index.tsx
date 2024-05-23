@@ -34,13 +34,9 @@ function ToastElement({ toast }: { toast: LocalToast }) {
     [styles.slideOut]: isDeleted,
   })
 
-  // todo fix
-
   return (
     <>
       {createPortal(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         <div className={styles.root}>
           <div className={styles.wrapperPopup}>
             <div className={styles.overlay}></div>
