@@ -50,11 +50,8 @@ function RenderLayoutComponent(props) {
 
 export default function MyCustomApp({ Component, pageProps, initialState }: AppPropsWithLayout) {
   const store = createLocalStore(initialState)
-  // todo fix
 
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     <ErrorBoundary>
       <Head>
         <meta charSet='utf-8' />

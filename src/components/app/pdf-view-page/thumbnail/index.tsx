@@ -46,6 +46,7 @@ export function ThumbnailView(props: {
     })
   })
 
+  // todo fix when open
   useEffect(() => {
     if (isInVPPage && isOpenSidePanel && !isInVPSidePanel) {
       handleScrollSidePanelIntoView()
