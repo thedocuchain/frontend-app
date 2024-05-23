@@ -83,7 +83,7 @@ export default function DocumentViewPage(): JSX.Element {
       {activeStep === 'success-sign' && (
         <PageWrapper>
           <Header isTransparent />
-          <StatusScreenTemplate setDocumentViewPage={handleSetDocumentView} />
+          <StatusScreenTemplate isOneSigned setDocumentViewPage={handleSetDocumentView} />
         </PageWrapper>
       )}
 
