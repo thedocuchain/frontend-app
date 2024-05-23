@@ -12,6 +12,7 @@ import { PageView } from 'src/components/app/pdf-view-page/page'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { Loader } from 'src/components/ui/loader'
+import { ThumbnailView } from 'src/components/app/pdf-view-page/thumbnail'
 
 import styles from './styles.module.css'
 
@@ -29,8 +30,8 @@ const resizeObserverOptions = {}
 
 const maxWidth = 800
 
-export function PdfViewPage(props: { isSidePanel?: boolean; isDocumentPreview?: boolean }) {
-  const { isSidePanel, isDocumentPreview } = props
+export function PdfViewPage(props: { isOpenSidePanel?: boolean; isSidePanel?: boolean; isDocumentPreview?: boolean }) {
+  const { isOpenSidePanel, isSidePanel, isDocumentPreview } = props
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
@@ -54,52 +55,50 @@ export function PdfViewPage(props: { isSidePanel?: boolean; isDocumentPreview?: 
 
   if (isDocumentPreview)
     return (
-      <div className={''} ref={setContainerRef}>
+      <div ref={setContainerRef}>
         <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
-          <div
-            id={undefined}
-            className={cn('column', {
-              [styles.documentPreviewContainer]: isDocumentPreview,
-            })}
-          >
-            <PageView
-              isDocumentPreview={isDocumentPreview}
-              id={`page_${1}`}
-              index={0}
-              containerWidth={containerWidth}
-              maxWidth={maxWidth}
-            />
-          </div>
+          <ThumbnailView index={0} pageId={'page_1'} />
         </Document>
       </div>
     )
 
   return (
-    <div className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })} ref={setContainerRef}>
+    <div
+      id={isSidePanel ? 'side-panel-container' : ''}
+      className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })}
+      ref={setContainerRef}
+    >
       <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
-        {Array.from(new Array(numPages), (el, index) => (
-          <div
-            id={isSidePanel ? `side-panel-page_${index + 1}` : `page_${index + 1}`}
-            key={`page_${index + 1}`}
-            className={cn('column', {
-              [styles.sidePanelPageWrapper]: isSidePanel || isDocumentPreview,
-            })}
-          >
-            <PageView
-              isSidePanel={isSidePanel}
-              id={`page_${index + 1}`}
-              index={index}
-              containerWidth={containerWidth}
-              maxWidth={maxWidth}
-            />
+        {isSidePanel ? (
+          <>
+            {Array.from(new Array(numPages), (el, index) => (
+              <div
+                id={`side-panel-page_${index + 1}`}
+                key={`page_${index + 1}`}
+                className={cn('column', styles.sidePanelPageWrapper)}
+              >
+                <ThumbnailView
+                  isOpenSidePanel={isOpenSidePanel}
+                  isSidePanel={isSidePanel}
+                  pageId={`page_${index + 1}`}
+                  index={index}
+                />
 
-            {isSidePanel && (
-              <Text theme={'body-3'} className={'color-text-secondary'}>
-                {index + 1}
-              </Text>
-            )}
-          </div>
-        ))}
+                <Text theme={'body-3'} className={'color-text-secondary'}>
+                  {index + 1}
+                </Text>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            {Array.from(new Array(numPages), (el, index) => (
+              <div id={`page_${index + 1}`} key={`page_${index + 1}`}>
+                <PageView index={index} containerWidth={containerWidth} maxWidth={maxWidth} />
+              </div>
+            ))}
+          </>
+        )}
       </Document>
     </div>
   )

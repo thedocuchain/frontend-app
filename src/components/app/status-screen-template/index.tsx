@@ -9,20 +9,21 @@ import { Button } from 'src/components/ui/button'
 import { RateUs } from 'src/components/app/rate-us'
 import { Share } from 'src/components/app/share'
 import { AppLink } from 'src/components/ui/app-link'
-import { IconPlaneColor, IconSuccessfullySigned } from 'src/icons'
+import { IconExpired, IconPlaneColor, IconSuccessfullySigned } from 'src/icons'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
-export function SuccessStatusComponent(props: {
+export function StatusScreenTemplate(props: {
   isAllSigned?: boolean
   isSend?: boolean
+  isExpired?: boolean
   setCheckStatusPage?: () => void
   setDocumentViewPage?: () => void
 }): JSX.Element {
-  const { isAllSigned, isSend, setCheckStatusPage, setDocumentViewPage } = props
-  const isOneSigned = !isAllSigned && !isSend
+  const { isAllSigned, isSend, isExpired, setCheckStatusPage, setDocumentViewPage } = props
+  const isOneSigned = !isAllSigned && !isSend && !isExpired
   const router = useRouter()
 
   const document = useAppSelector(selectedDocument)
@@ -105,6 +106,26 @@ export function SuccessStatusComponent(props: {
             </>
           )}
 
+          {isExpired && (
+            <>
+              <IconExpired className={styles.iconExpired} />
+
+              <Text theme={'display-text'} className={styles.name}>
+                Expired signing link
+              </Text>
+              <Text theme={'body-1'} className={styles.desc}>
+                For your security, our links are time-limited. Protecting your data is our top priority. A new link has
+                been sent to your email. Please check your inbox to continue signing the document.
+              </Text>
+
+              <Row className={styles.buttonsContainer}>
+                <Button theme='primary' className={styles.buttonHome} onClick={handleNewDocument}>
+                  Back to home
+                </Button>
+              </Row>
+            </>
+          )}
+
           {isAllSigned && (
             <>
               <IconSuccessfullySigned className={styles.iconSuccessfullySigned} />
@@ -139,20 +160,20 @@ export function SuccessStatusComponent(props: {
         )}
 
         {isOneSigned && (
-          <>
-            <div className={styles.rateBlock}>
-              <RateUs />
-            </div>
+          <div className={styles.rateBlock}>
+            <RateUs />
+          </div>
+        )}
 
-            <div className={styles.footer}>
-              <Text theme={'body-3'} className={'color-text-secondary'}>
-                Want to send a document like this one?
-              </Text>
-              <AppLink href={'/'} theme={'primary'} className='underline-hover'>
-                Check out DocuChain.
-              </AppLink>
-            </div>
-          </>
+        {(isExpired || isOneSigned) && (
+          <div className={styles.footer}>
+            <Text theme={'body-3'} className={'color-text-secondary'}>
+              Want to send a document like this one?
+            </Text>
+            <AppLink href={'/'} theme={'primary'} className='underline-hover'>
+              Check out DocuChain.
+            </AppLink>
+          </div>
         )}
       </Flex>
     </>
