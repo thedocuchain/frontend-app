@@ -63,11 +63,7 @@ export function PdfViewPage(props: { isOpenSidePanel?: boolean; isSidePanel?: bo
     )
 
   return (
-    <div
-      id={isSidePanel ? 'side-panel-container' : ''}
-      className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })}
-      ref={setContainerRef}
-    >
+    <div className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })} ref={setContainerRef}>
       <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
         {isSidePanel ? (
           <>

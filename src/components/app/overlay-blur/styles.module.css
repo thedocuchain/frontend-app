@@ -10,6 +10,7 @@
   height: 100%;
   background: var(--bg-black);
   opacity: 0.76;
+  z-index: 1000000;
 }
 
 .overlay > * > * {

@@ -2,10 +2,11 @@
 
 import { Thumbnail } from 'react-pdf'
 import cn from 'classnames'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { wait } from '@coxy/utils'
 
-import { useIsInViewportPartially } from 'src/utils/use/use-is-in-viewport'
+import { useIsInViewport, useIsInViewportPartially } from 'src/utils/use/use-is-in-viewport'
 
 import styles from './styles.module.css'
 
@@ -15,12 +16,12 @@ export function ThumbnailView(props: {
   index: number
   pageId: string
 }) {
-  const { index, pageId, isSidePanel } = props
-  // const { index, pageId, isSidePanel, isOpenSidePanel } = props
-  // const sidePanelId = `side-panel-${pageId}`
+  const { index, pageId, isSidePanel, isOpenSidePanel } = props
+  const sidePanelId = `side-panel-${pageId}`
   const isInVPPage = useIsInViewportPartially(pageId)
-  // const isInVPSidePanel = useIsInViewport(sidePanelId)
+  const isInVPSidePanel = useIsInViewport(sidePanelId)
   const isActivePage = isSidePanel && isInVPPage
+  const [firstTimeOpen, setFirstTimeOpen] = useState(true)
 
   const handleClickSidePanel = useEvent((e: Event) => {
     e.preventDefault()
@@ -31,37 +32,39 @@ export function ThumbnailView(props: {
 
     window.scrollTo({
       top: offsetPosition,
-      behavior: 'smooth',
+      behavior: 'auto',
     })
   })
 
-  // todo fix Scroll Side Panel
-  // const handleScrollSidePanelIntoView = useEvent(() => {
-  //   const elementPage = document.getElementById(sidePanelId)
-  //   const elementPosition = elementPage.getBoundingClientRect().top
-  //   const container = document.getElementById('side-panel-container')
-  //
-  //   container?.scrollTo({
-  //     top: elementPosition,
-  //     behavior: 'smooth',
-  //   })
-  // })
+  const handleScrollSidePanelIntoView = useEvent(() => {
+    const elementPage = document.getElementById(sidePanelId)
 
-  // useEffect(() => {
-  //   ;(async () => {
-  //     if (isOpenSidePanel && pageId !== 'page_1') {
-  //       await wait(300)
-  //       if (isInVPPage && !isInVPSidePanel) {
-  //         handleScrollSidePanelIntoView()
-  //       }
-  //       return
-  //     }
-  //
-  //     if (isInVPPage && !isInVPSidePanel) {
-  //       handleScrollSidePanelIntoView()
-  //     }
-  //   })()
-  // }, [isOpenSidePanel, isInVPPage, isInVPSidePanel])
+    elementPage.scrollIntoView({
+      block: 'end',
+      inline: 'nearest',
+      behavior: 'auto',
+    })
+  })
+
+  useEffect(() => {
+    if (isInVPPage && !isInVPSidePanel) {
+      handleScrollSidePanelIntoView()
+    }
+
+    if (!isOpenSidePanel) {
+      setFirstTimeOpen(true)
+    }
+
+    ;(async () => {
+      if (isOpenSidePanel && firstTimeOpen) {
+        await wait(300)
+        setFirstTimeOpen(false)
+        if (isInVPPage && !isInVPSidePanel) {
+          handleScrollSidePanelIntoView()
+        }
+      }
+    })()
+  }, [isOpenSidePanel, isInVPPage, isInVPSidePanel])
 
   if (isSidePanel)
     return (
