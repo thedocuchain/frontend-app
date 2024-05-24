@@ -6,7 +6,7 @@ import { PageDescription, PageHead, usePageHead } from 'src/components/common/pa
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
 import { Flex } from 'src/components/ui/grid'
-import { Recipient } from 'src/store/reducers/document/types'
+import { User } from 'src/store/reducers/document/types'
 import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
 import { StepAddRecipients } from 'src/pages/doc/[id]/components/step-add-recipients'
@@ -34,12 +34,12 @@ export type StepWizardType = {
 
 export default function DocumentPage(): JSX.Element {
   const document = useAppSelector(selectedDocument)
-  const { title } = usePageHead({ title: ` | ${document?.title}` })
-  const [signers, setSigners] = useState<Recipient[]>([
+  const { title } = usePageHead({ title: ` | ${document?.name}` })
+  const [signers, setSigners] = useState<Partial<User>[]>([
     {
       name: '',
       email: '',
-      role: 'signer',
+      role: { name: 'signer' },
     },
   ])
   const steps: StepWizardType[] = [
@@ -47,11 +47,11 @@ export default function DocumentPage(): JSX.Element {
     { title: 'Add recipients', value: 'add-recipients' },
     { title: 'Preview and send', value: 'preview-and-send' },
   ]
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
+  const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('preview-and-send')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-send')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-all-signed')
-  const [activeStep, setActiveStep] = useState<StepsDocumentPage>('check-status')
+  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('check-status')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('document-view')
 
   const activeStepTitle = steps.find((el) => el.value === activeStep)

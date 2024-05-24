@@ -8,7 +8,7 @@ import { colorsBorders, indexToColorIndex } from 'src/components/app/avatar'
 import { Text } from 'src/components/ui/typography'
 import { Column, Row, RowCenter } from 'src/components/ui/grid'
 import { IconEdit, IconRefreshSignature } from 'src/icons'
-import { Recipient } from 'src/store/reducers/document/types'
+import { User } from 'src/store/reducers/document/types'
 import { Space } from 'src/components/ui/space'
 import { TextSize } from 'src/components/ui/text-size'
 import { Tooltip } from 'src/components/ui/tooltip'
@@ -36,6 +36,7 @@ export function DateBlock(props: ComponentProps) {
   if (dateSigned || date)
     return (
       <div className={styles.dateWrapperSigned}>
+        {/* todo fix date to ISO string */}
         <Text theme={'body-3'}>{format(new Date(dateSigned || date.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
       </div>
     )
@@ -127,7 +128,7 @@ export function Signature(props: ComponentProps) {
 }
 
 type ParticipantSignatureDetailsProps = {
-  participant: Recipient
+  participant: User
   index: number
   isJustCreated?: boolean
   isEdited?: boolean
@@ -135,11 +136,12 @@ type ParticipantSignatureDetailsProps = {
 }
 
 export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsProps) {
-  const { name, email, dateSigned } = props.participant
+  const { name, email, signature } = props.participant
   const { isJustCreated, isEdited, isError } = props
   const [isSigned, setSigned] = useState(false)
   const [date, setDate] = useState('')
   const index = indexToColorIndex(props.index)
+  const dateSigned = format(new Date(signature.signDate), 'MM.dd.yyyy')
 
   return (
     <Row className={styles.participantWrapper}>

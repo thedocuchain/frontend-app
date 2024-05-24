@@ -3,3 +3,7 @@ export type DefaultApiResponse = {
   status: boolean
   code: number
 }
+
+export type SuccessApiResponse = {
+  success: boolean
+}

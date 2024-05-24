@@ -20,11 +20,9 @@ import styles from './styles.module.css'
 
 export function StepCheckStatus(): JSX.Element {
   const document = useAppSelector(selectedDocument)
-  const users = document.signers
-  const signedBy = `Signed by ${document.signers.filter((el) => el.status === 'signed').length} of ${
-    document.signers.length
-  }`
-  const valueSigners = (document.signers.filter((el) => el.status === 'signed').length / document.signers.length) * 100
+  const users = document.users
+  const signedBy = `Signed by ${document.users.filter((el) => el.signature?.signed).length} of ${document.users.length}`
+  const valueSigners = (document.users.filter((el) => el.signature?.signed).length / document.users.length) * 100
   const steps = [
     {
       title: 'Document uploaded',
@@ -86,7 +84,7 @@ export function StepCheckStatus(): JSX.Element {
           </Column>
           <Column className={styles.secondColumn}>
             <Text theme={'headline-1'} className={styles.name}>
-              {document.title}
+              {document.name}
             </Text>
 
             {isCompleted && (

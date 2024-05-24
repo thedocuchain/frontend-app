@@ -1,6 +1,7 @@
 import React, { FocusEvent, MouseEvent, useRef, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
+import { format } from 'date-fns'
 
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
 import { BottomSheet } from 'src/components/ui/dropdown/components/bottomsheet-mobile'
@@ -10,11 +11,12 @@ import { Column } from 'src/components/ui/grid'
 
 import styles from './styles.module.css'
 
-export function DotsTable(props: { title: string; lastRemind: string }) {
-  const { title, lastRemind } = props
+export function DotsTable(props: { title: string; lastNotifyDate: string }) {
+  const { title, lastNotifyDate } = props
   const isMobile = useIsMobile()
   const [isVisible, setVisible] = useState(false)
   const refTimer = useRef<TimeoutId>()
+  const lastRemind = lastNotifyDate && format(new Date(lastNotifyDate), 'yyyy-MM-dd hh:mm')
 
   const handleClose = useEvent(() => {
     setVisible(false)
@@ -48,9 +50,11 @@ export function DotsTable(props: { title: string; lastRemind: string }) {
           <div onClick={handleRemind} className={styles.item}>
             <Column>
               <Text theme={'body-2'}>Remind to sign</Text>
-              <Text theme={'body-3'} className='color-text-secondary'>
-                Last time was sent on {lastRemind}
-              </Text>
+              {lastRemind && (
+                <Text theme={'body-3'} className='color-text-secondary'>
+                  Last time was sent on {lastRemind}
+                </Text>
+              )}
             </Column>
           </div>
         </div>
@@ -61,9 +65,11 @@ export function DotsTable(props: { title: string; lastRemind: string }) {
           <div onClick={handleRemind} className={styles.item}>
             <Column>
               <Text theme={'body-2'}>Remind to sign</Text>
-              <Text theme={'body-3'} className='color-text-secondary'>
-                Last time was sent on {lastRemind}
-              </Text>
+              {lastRemind && (
+                <Text theme={'body-3'} className='color-text-secondary'>
+                  Last time was sent on {lastRemind}
+                </Text>
+              )}
             </Column>
           </div>
         </BottomSheet>

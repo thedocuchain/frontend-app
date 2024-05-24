@@ -84,7 +84,7 @@ export function StepByStepBlock(props: ComponentProps) {
   })
 
   const document = useAppSelector(selectedDocument)
-  const recipient = document.signers[0]
+  const recipient = document.users[0]
   const [isSigned, setSigned] = useState(false)
   const [isError, setError] = useState(false)
   const indexRecipient = indexToColorIndex(10)
