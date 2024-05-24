@@ -12,7 +12,7 @@ import { Textarea } from 'src/components/ui/textarea'
 import { Space } from 'src/components/ui/space'
 import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
-import { Recipient } from 'src/store/reducers/document/types'
+import { User } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
 import { StepsDocumentPage } from 'src/pages/doc/[id]/index.p'
 import { useAppSelector } from 'src/store/hooks'
@@ -21,8 +21,8 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 import styles from './styles.module.css'
 
 type ComponentProps = {
-  signers: Recipient[]
-  setSigners: (signers: Recipient[]) => void
+  signers: Partial<User>[]
+  setSigners: (signers: Partial<User>[]) => void
   setActiveStep: (step: StepsDocumentPage) => void
 }
 
@@ -33,7 +33,7 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
 
   const document = useAppSelector(selectedDocument)
   const documentId = document.id
-  const documentName = document.title
+  const documentName = document.name
 
   const [form, setValue] = useStateForm({
     documentName,
@@ -46,13 +46,13 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
       {
         name: '',
         email: '',
-        role: 'signer',
+        role: { name: 'signer' },
       },
     ])
   })
-  const isNoSigners = useMemo(() => signers.every((el) => el.role === 'watcher'), [signers])
+  const isNoSigners = useMemo(() => signers.every((el) => el.role.name === 'watcher'), [signers])
 
-  const handleAddRecipients = useEvent((form: Recipient, indexFind: number) => {
+  const handleAddRecipients = useEvent((form: User, indexFind: number) => {
     setSigners(signers.map((el, index) => (index === indexFind ? form : el)))
   })
 

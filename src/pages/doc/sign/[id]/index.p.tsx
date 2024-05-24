@@ -18,7 +18,7 @@ export type StepsSignPage = 'sign-the-document' | 'success-sign' | 'expired-link
 
 export default function DocumentViewPage(): JSX.Element {
   const document = useAppSelector(selectedDocument)
-  const { title } = usePageHead({ title: ` | ${document?.title}` })
+  const { title } = usePageHead({ title: ` | ${document?.name}` })
   const router = useRouter()
   const stepsHints: StepByStepBlockType[] = [
     {
@@ -72,7 +72,7 @@ export default function DocumentViewPage(): JSX.Element {
 
       {activeStep === 'sign-the-document' && (
         <PageWrapper className={'column'}>
-          <Header isDocumentPreview title={document.title} />
+          <Header isDocumentPreview title={document.name} />
 
           <Flex flex='1' className={styles.wrapper}>
             <DocumentViewComponent setSuccessPage={handleSetSuccessPage} stepsHints={stepsHints} />

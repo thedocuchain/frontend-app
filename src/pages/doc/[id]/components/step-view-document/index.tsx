@@ -13,7 +13,7 @@ export function StepViewDocument(): JSX.Element {
 
   return (
     <>
-      <Header isDocumentPreview title={document.title} />
+      <Header isDocumentPreview title={document.name} />
 
       <Flex flex='1' className={styles.wrapperDocumentView}>
         <DocumentViewComponent isViewPage />

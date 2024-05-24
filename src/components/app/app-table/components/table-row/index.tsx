@@ -7,7 +7,7 @@ import { Text } from 'src/components/ui/typography'
 import { Avatar } from 'src/components/app/avatar'
 import { Space } from 'src/components/ui/space'
 import { DotsTable } from 'src/components/app/app-table/components/dots'
-import { Recipient } from 'src/store/reducers/document/types'
+import { User } from 'src/store/reducers/document/types'
 
 import styles from './styles.module.css'
 
@@ -15,10 +15,12 @@ export function TableRow(props: {
   index: number
   participantLength: number
   isDoneSigned: boolean
-  participant: Recipient
+  participant: User
 }) {
-  const { name, email, role, status, lastRemind } = props.participant
-  const isSigner = role === 'signer'
+  const { name, email, role, signature } = props.participant
+  const isSigner = role.name === 'signer'
+  const status = signature?.signed ? 'signed' : 'awaiting'
+  const lastNotifyDate = signature?.lastNotifyDate
   const isLastRow = props.index + 1 === props.participantLength
 
   return (
@@ -37,7 +39,7 @@ export function TableRow(props: {
             </RowBetweenCenter>
 
             <Text theme={'body-3'} className={cn(styles.text, 'color-text-secondary')}>
-              <span className='show-mobile capitalize'>{role} &#183; </span>
+              <span className='show-mobile capitalize'>{role.name} &#183; </span>
               {email}
             </Text>
           </Column>
@@ -45,7 +47,7 @@ export function TableRow(props: {
       </td>
       <td className={styles.hide}>
         <Text theme={'body-3'} className='hide-mobile color-text-secondary capitalize'>
-          {role}
+          {role.name}
         </Text>
       </td>
       <td className={styles.hide}>
@@ -53,7 +55,9 @@ export function TableRow(props: {
       </td>
       {!props.isDoneSigned && (
         <td>
-          {isSigner && status !== 'signed' && <DotsTable lastRemind={lastRemind} title={`Actions for ${name}`} />}
+          {isSigner && status !== 'signed' && (
+            <DotsTable lastNotifyDate={lastNotifyDate} title={`Actions for ${name}`} />
+          )}
         </td>
       )}
     </tr>

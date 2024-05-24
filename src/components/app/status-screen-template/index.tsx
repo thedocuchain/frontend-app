@@ -41,7 +41,7 @@ export function StatusScreenTemplate(props: {
 
   const document = useAppSelector(selectedDocument)
   const checkId = document.id
-  const documentName = document.title
+  const documentName = document.name
 
   const handleNewDocument = useEvent(() => {
     void router.push('/')

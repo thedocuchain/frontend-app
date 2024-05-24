@@ -1,18 +1,41 @@
-export type Recipient = {
+export type Role = {
+  id?: string
+  name: 'signer' | 'watcher'
+  description?: string
+}
+
+export type Signature = {
+  id?: string
+  signed: boolean
+  signDate?: string // ISO dateTimeString with TZ
+  notified: boolean
+  lastNotifyDate?: string // ISO dateTimeString with TZ
+}
+
+export type User = {
+  id?: string
   name?: string
   email: string
-  role: 'signer' | 'watcher'
-  status?: 'awaiting' | 'signed'
-  dateSigned?: string
-  lastRemind?: string
+  readDocument?: boolean
+  agreedWithPolicy?: boolean
+  readRecordsDislosure?: boolean
+  firstToHear?: boolean
+  role: Role
+  signature?: Signature
 }
 
 export type DocumentType = {
   id: string
-  signers: Recipient[]
+  name: string
+  signedBy?: number
+  status: 'uploaded' | 'signing' | 'completed' // todo add statuses
+  file: string // document download link
+  linkExpiredAt?: string // ISO dateTimeString with TZ
+  hash?: string
+
+  // todo add on backend
+  users: User[]
+  roles?: Role[]
   pages: number
-  title: string
-  status?: 'uploaded' | 'signing' | 'completed'
   xOffset: number
-  url: string
 }

@@ -4,34 +4,37 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { TableRow } from 'src/components/app/app-table/components/table-row'
 import { SortOrder, SortType, TableHead } from 'src/components/app/app-table/components/table-head'
 import { SortingTag } from 'src/components/app/app-table/components/sorting-tag'
-import { Recipient } from 'src/store/reducers/document/types'
+import { User } from 'src/store/reducers/document/types'
 
 import styles from './styles.module.css'
 
-export function AppTable(props: { participants: Recipient[] }) {
+export function AppTable(props: { participants: User[] }) {
   const { participants } = props
   const [sortType, setSortType] = useState<SortType>('role')
   const [sortOrder, setOrder] = useState<SortOrder>('ASC')
   const [isDoneSigned, setDoneSigned] = useState(false)
   const awaiting = useMemo(
-    () => [...participants].filter((el) => el.status === 'awaiting').sort((a, b) => a.name?.localeCompare(b?.name)),
+    () =>
+      [...participants]
+        .filter((el) => el.signature?.signed !== undefined && !el.signature.signed)
+        .sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
   const signed = useMemo(
-    () => [...participants].filter((el) => el.status === 'signed').sort((a, b) => a.name?.localeCompare(b?.name)),
+    () => [...participants].filter((el) => el.signature?.signed).sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
   const watchers = useMemo(
-    () => [...participants].filter((el) => el.role === 'watcher').sort((a, b) => a.name?.localeCompare(b?.name)),
+    () => [...participants].filter((el) => el.role.name === 'watcher').sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
   const signers = useMemo(
-    () => [...participants].filter((el) => el.role === 'signer').sort((a, b) => a.name?.localeCompare(b?.name)),
+    () => [...participants].filter((el) => el.role.name === 'signer').sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
 
   useEffect(() => {
-    const isDone = participants.filter((el) => el.status).every((el) => el.status === 'signed')
+    const isDone = participants.filter((el) => el.role.name === 'signer').every((el) => el.signature?.signed)
     setDoneSigned(isDone)
   }, [participants])
 

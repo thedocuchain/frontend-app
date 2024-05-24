@@ -29,7 +29,7 @@ export function DocumentViewComponent(props: {
       <Container className={cn(styles.container, 'column', { [styles.containerIfOpen]: isOpen })}>
         <Column className={styles.textColumn}>
           <RowBetween className={styles.textWrapper}>
-            <Text theme={'headline-1'}>{document.title}</Text>
+            <Text theme={'headline-1'}>{document.name}</Text>
             <Text theme={'body-3'} className='color-text-secondary white-space-nowrap'>
               Document ID: {document.id}
             </Text>

@@ -2,11 +2,10 @@
 
 import { Thumbnail } from 'react-pdf'
 import cn from 'classnames'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { wait } from '@coxy/utils'
 
-import { useIsInViewport, useIsInViewportPartially } from 'src/utils/use/use-is-in-viewport'
+import { useIsInViewportPartially } from 'src/utils/use/use-is-in-viewport'
 
 import styles from './styles.module.css'
 
@@ -16,10 +15,11 @@ export function ThumbnailView(props: {
   index: number
   pageId: string
 }) {
-  const { index, pageId, isSidePanel, isOpenSidePanel } = props
-  const sidePanelId = `side-panel-${pageId}`
+  const { index, pageId, isSidePanel } = props
+  // const { index, pageId, isSidePanel, isOpenSidePanel } = props
+  // const sidePanelId = `side-panel-${pageId}`
   const isInVPPage = useIsInViewportPartially(pageId)
-  const isInVPSidePanel = useIsInViewport(sidePanelId)
+  // const isInVPSidePanel = useIsInViewport(sidePanelId)
   const isActivePage = isSidePanel && isInVPPage
 
   const handleClickSidePanel = useEvent((e: Event) => {
@@ -35,32 +35,33 @@ export function ThumbnailView(props: {
     })
   })
 
-  const handleScrollSidePanelIntoView = useEvent(() => {
-    const elementPage = document.getElementById(sidePanelId)
-    const elementPosition = elementPage.getBoundingClientRect().top
-    const container = document.getElementById('side-panel-container')
+  // todo fix Scroll Side Panel
+  // const handleScrollSidePanelIntoView = useEvent(() => {
+  //   const elementPage = document.getElementById(sidePanelId)
+  //   const elementPosition = elementPage.getBoundingClientRect().top
+  //   const container = document.getElementById('side-panel-container')
+  //
+  //   container?.scrollTo({
+  //     top: elementPosition,
+  //     behavior: 'smooth',
+  //   })
+  // })
 
-    container?.scrollTo({
-      top: elementPosition,
-      behavior: 'smooth',
-    })
-  })
-
-  useEffect(() => {
-    ;(async () => {
-      if (isOpenSidePanel && pageId !== 'page_1') {
-        await wait(300)
-        if (isInVPPage && !isInVPSidePanel) {
-          handleScrollSidePanelIntoView()
-        }
-        return
-      }
-
-      if (isInVPPage && !isInVPSidePanel) {
-        handleScrollSidePanelIntoView()
-      }
-    })()
-  }, [isOpenSidePanel, isInVPPage, isInVPSidePanel])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     if (isOpenSidePanel && pageId !== 'page_1') {
+  //       await wait(300)
+  //       if (isInVPPage && !isInVPSidePanel) {
+  //         handleScrollSidePanelIntoView()
+  //       }
+  //       return
+  //     }
+  //
+  //     if (isInVPPage && !isInVPSidePanel) {
+  //       handleScrollSidePanelIntoView()
+  //     }
+  //   })()
+  // }, [isOpenSidePanel, isInVPPage, isInVPSidePanel])
 
   if (isSidePanel)
     return (

@@ -3,7 +3,7 @@ import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
-import { Recipient } from 'src/store/reducers/document/types'
+import { Role, User } from 'src/store/reducers/document/types'
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { Input } from 'src/components/ui/input'
 import { useValidatorRules } from 'src/utils/use/use-validator-rules'
@@ -18,11 +18,11 @@ import { Button } from 'src/components/ui/button'
 import styles from './styles.module.css'
 
 export function RecepientForm(props: {
-  signer: Recipient
+  signer: Partial<User>
   index: number
   isShowError: boolean
   onDelete: (index: number) => void
-  onAddRecepient: (form: Recipient, index: number) => void
+  onAddRecepient: (form: Partial<User>, index: number) => void
 }) {
   const { signer, index, isShowError, onDelete, onAddRecepient } = props
   const rules = useValidatorRules()
@@ -32,13 +32,13 @@ export function RecepientForm(props: {
     email: signer.email,
   })
 
-  const roles: { title: 'signer' | 'watcher'; description: string }[] = [
-    { title: 'signer', description: 'Reviews and signs the document.' },
-    { title: 'watcher', description: 'Tracks document status, does not sign.' },
+  const roles: Role[] = [
+    { name: 'signer', description: 'Reviews and signs the document.' },
+    { name: 'watcher', description: 'Tracks document status, does not sign.' },
   ]
 
-  const [selectedRole, setSelectedRole] = useState<{ title: 'signer' | 'watcher'; description: string }>({
-    title: signer.role,
+  const [selectedRole, setSelectedRole] = useState<Role>({
+    name: signer.role.name,
     description: 'Reviews and signs the document.',
   })
 
@@ -48,21 +48,21 @@ export function RecepientForm(props: {
         {
           name: form.name,
           email: form.email,
-          role: selectedRole.title,
+          role: { name: selectedRole.name },
         },
         index,
       )
     }
   })
 
-  const handleChangeRole = useEvent((item: { title: 'signer' | 'watcher'; description: string }) => {
+  const handleChangeRole = useEvent((item: Role) => {
     setSelectedRole(item)
-    if (item.title !== signer.role) {
+    if (item.name !== signer.role.name) {
       onAddRecepient(
         {
           name: form.name,
           email: form.email,
-          role: item.title,
+          role: { name: item.name },
         },
         index,
       )
@@ -88,7 +88,7 @@ export function RecepientForm(props: {
         <div className={styles.leftColorPanel} style={{ background: color }} />
         <InputValidatorField
           id={'name'}
-          required={selectedRole.title === 'signer'}
+          required={selectedRole.name === 'signer'}
           rules={rules.name}
           value={form.name}
           isVisibleErrors={isShowError}
@@ -134,14 +134,14 @@ export function RecepientForm(props: {
             value={selectedRole}
             onChange={(item) => handleChangeRole(item)}
             data={roles}
-            keyExtractor={(item) => item.title}
+            keyExtractor={(item) => item.name}
             renderItem={(item, props) => (
               <DropdownItem
                 renderFrom={props.renderFrom}
-                title={item.title}
+                title={item.name}
                 description={item.description}
-                key={item.title}
-                isActive={item.title === selectedRole?.title}
+                key={item.name}
+                isActive={item.name === selectedRole?.name}
               />
             )}
           />

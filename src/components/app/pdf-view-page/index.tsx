@@ -51,7 +51,7 @@ export function PdfViewPage(props: { isOpenSidePanel?: boolean; isSidePanel?: bo
   }
 
   const documentData = useAppSelector(selectedDocument)
-  const local = documentData.url
+  const local = documentData.file
 
   if (isDocumentPreview)
     return (
