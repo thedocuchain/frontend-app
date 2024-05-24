@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 export function useIsInViewportPartially(id: string) {
   const [isInViewport, setIsInViewport] = useState(false)
-  const offset = id.split('_')[1] === '1' ? 200 : 160
-  // const offset = id.split('_')[1] === '1' ? 200 : 260
+  const offset = id.split('_')[1] === '1' ? 200 : 210
+  const headerSize = 70
 
   useEffect(() => {
     const handleScroll = () => {
@@ -11,7 +11,7 @@ export function useIsInViewportPartially(id: string) {
       const rect = element?.getBoundingClientRect()
       const html = document.documentElement
 
-      const isView = rect?.top <= offset && rect?.top + offset >= -(window.innerHeight || html.clientHeight)
+      const isView = rect?.top <= offset && rect?.top + headerSize >= -(window.innerHeight || html.clientHeight)
 
       setIsInViewport(isView)
     }

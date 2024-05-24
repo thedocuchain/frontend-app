@@ -4,6 +4,7 @@ import { Thumbnail } from 'react-pdf'
 import cn from 'classnames'
 import React, { useEffect } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { wait } from '@coxy/utils'
 
 import { useIsInViewport, useIsInViewportPartially } from 'src/utils/use/use-is-in-viewport'
 
@@ -17,7 +18,6 @@ export function ThumbnailView(props: {
 }) {
   const { index, pageId, isSidePanel, isOpenSidePanel } = props
   const sidePanelId = `side-panel-${pageId}`
-
   const isInVPPage = useIsInViewportPartially(pageId)
   const isInVPSidePanel = useIsInViewport(sidePanelId)
   const isActivePage = isSidePanel && isInVPPage
@@ -46,11 +46,20 @@ export function ThumbnailView(props: {
     })
   })
 
-  // todo fix when open
   useEffect(() => {
-    if (isInVPPage && isOpenSidePanel && !isInVPSidePanel) {
-      handleScrollSidePanelIntoView()
-    }
+    ;(async () => {
+      if (isOpenSidePanel && pageId !== 'page_1') {
+        await wait(300)
+        if (isInVPPage && !isInVPSidePanel) {
+          handleScrollSidePanelIntoView()
+        }
+        return
+      }
+
+      if (isInVPPage && !isInVPSidePanel) {
+        handleScrollSidePanelIntoView()
+      }
+    })()
   }, [isOpenSidePanel, isInVPPage, isInVPSidePanel])
 
   if (isSidePanel)
