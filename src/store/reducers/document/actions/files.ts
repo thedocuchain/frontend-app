@@ -9,14 +9,14 @@ export const uploadDocument = createAsyncThunk(
     file: File
   }): Promise<
     | {
-        documentID: string
+        redirectUrl: string
       }
     | DefaultApiResponse
   > => {
     const fd = new FormData()
     fd.append('file', payload.file)
 
-    const { data } = await api.post('/v1/documents/upload', fd, {
+    const { data } = await api.post('/api/v1/documents/upload', fd, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -37,7 +37,7 @@ export const downloadDocument = createAsyncThunk(
     | DefaultApiResponse
   > => {
     // todo id?
-    const { data } = await api.get(`/v1/documents/download/${payload.id}`)
+    const { data } = await api.get(`/api/v1/documents/download/${payload.id}`)
     // const { data } = await api.get('/v1/documents/download')
 
     return data

@@ -37,10 +37,10 @@ export const BottomSheet = (props: BottomSheetProps): ReactElement => {
       const elemHeight = Math.floor(popup.children[2].scrollHeight / listLength)
 
       if (listLength >= 5) {
-        setHeight(elemHeight * 5 + 45)
+        setHeight(elemHeight * 5 + 45 + 48)
         return
       }
-      setHeight(elemHeight * listLength + 45)
+      setHeight(elemHeight * listLength + 45 + 48)
     }
   }, [visible])
 

@@ -10,7 +10,7 @@ export const remindUser = createAsyncThunk(
     documentId: string
     signatureId: string
   }): Promise<SuccessApiResponse | DefaultApiResponse> => {
-    const { data } = await api.post(`/v1/users/${payload.userId}/remind`, {
+    const { data } = await api.post(`/api/v1/users/${payload.userId}/remind`, {
       documentId: payload.documentId,
       signatureId: payload.signatureId,
     })

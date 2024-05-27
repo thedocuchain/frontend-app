@@ -9,7 +9,6 @@ import { RowCenter } from 'src/components/ui/grid'
 import { SortOrder, SortType } from 'src/components/app/app-table/components/table-head'
 import { IconArrowDownLong } from 'src/icons'
 import { Button } from 'src/components/ui/button'
-import { Space } from 'src/components/ui/space'
 
 import styles from './styles.module.css'
 
@@ -123,7 +122,6 @@ export function SortingTag(props: {
           <Button className={styles.button} onClick={handleClose}>
             Done
           </Button>
-          <Space size={16} />
         </div>
       </BottomSheet>
     </div>

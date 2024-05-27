@@ -6,7 +6,7 @@ import { api } from 'src/store/apis'
 export const subscribeUser = createAsyncThunk(
   'user/subscribe',
   async (payload: { documentId: string; userEmail: string }): Promise<SuccessApiResponse | DefaultApiResponse> => {
-    const { data } = await api.post(`/v1/users/subscribe`, {
+    const { data } = await api.post(`/api/v1/users/subscribe`, {
       documentId: payload.documentId,
       userEmail: payload.userEmail,
     })

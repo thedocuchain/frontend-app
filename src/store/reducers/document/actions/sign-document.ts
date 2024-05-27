@@ -12,13 +12,13 @@ export type SignDocumentRequest = {
   firstToHear: boolean
   signed: boolean
   signDate: string // ISO dateTimeString with TZ,
-  file: File // formData with new sign todo fix type ot delete
+  file: File // todo formData with new sign todo fix type ot delete
 }
 
 export const signDocument = createAsyncThunk(
   'document/sign',
   async (payload: SignDocumentRequest): Promise<SuccessApiResponse | DefaultApiResponse> => {
-    const { data } = await api.put(`/v1/documents/${payload.documentId}/signatures/${payload.signatureId}`, {
+    const { data } = await api.put(`/api/v1/documents/${payload.documentId}/signatures/${payload.signatureId}`, {
       userId: payload.userId,
       agreedWithPolicy: payload.agreedWithPolicy,
       readRecordsDislosure: payload.readRecordsDislosure,

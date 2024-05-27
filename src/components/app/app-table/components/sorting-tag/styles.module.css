@@ -18,10 +18,6 @@
   stroke: var(--text-primary);
 }
 
-.list {
-  padding-top: 10px;
-}
-
 .item {
   display: flex;
   flex-direction: row;

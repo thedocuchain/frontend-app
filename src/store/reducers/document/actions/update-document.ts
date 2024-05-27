@@ -10,7 +10,7 @@ export const updateDocument = createAsyncThunk(
     name: string
     users: { name?: string; email: string; roleId: string }[]
   }): Promise<{ documentLink: string } | DefaultApiResponse> => {
-    const { data } = await api.put(`/v1/documents/${payload.id}`, { name: payload.name, users: payload.users })
+    const { data } = await api.put(`/api/v1/documents/${payload.id}`, { name: payload.name, users: payload.users })
 
     return data
   },
