@@ -3,7 +3,7 @@
   background: var(--bg-grey-7);
   margin-bottom: 12px;
   width: 178px;
-  height: 238px;
+  min-height: 212px;
   padding: 16px;
   user-select: none;
   cursor: initial;

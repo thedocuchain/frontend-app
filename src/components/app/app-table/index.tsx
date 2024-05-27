@@ -25,16 +25,16 @@ export function AppTable(props: { participants: User[] }) {
     [participants],
   )
   const watchers = useMemo(
-    () => [...participants].filter((el) => el.role.name === 'watcher').sort((a, b) => a.name?.localeCompare(b?.name)),
+    () => [...participants].filter((el) => el.role === 'watcher').sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
   const signers = useMemo(
-    () => [...participants].filter((el) => el.role.name === 'signer').sort((a, b) => a.name?.localeCompare(b?.name)),
+    () => [...participants].filter((el) => el.role === 'signer').sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
 
   useEffect(() => {
-    const isDone = participants.filter((el) => el.role.name === 'signer').every((el) => el.signature?.signed)
+    const isDone = participants.filter((el) => el.role === 'signer').every((el) => el.signature?.signed)
     setDoneSigned(isDone)
   }, [participants])
 

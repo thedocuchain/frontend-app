@@ -8,6 +8,7 @@ import { BottomSheet } from 'src/components/ui/dropdown/components/bottomsheet-m
 import { DotsButton } from 'src/components/ui/dots-button'
 import { Text } from 'src/components/ui/typography'
 import { Column } from 'src/components/ui/grid'
+import { isMoreThan24HoursString } from 'src/utils/convert-time'
 
 import styles from './styles.module.css'
 
@@ -16,40 +17,64 @@ export function DotsTable(props: { title: string; lastNotifyDate: string }) {
   const isMobile = useIsMobile()
   const [isVisible, setVisible] = useState(false)
   const refTimer = useRef<TimeoutId>()
-  const lastRemind = lastNotifyDate && format(new Date(lastNotifyDate), 'yyyy-MM-dd hh:mm')
+  const lastRemind = lastNotifyDate && format(new Date(lastNotifyDate), 'yyyy-MM-dd HH:mm')
 
   const handleClose = useEvent(() => {
     setVisible(false)
   })
 
   const handleRemind = useEvent((event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation()
-    handleClose()
+    if (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    if (!stringLastRemind && !isSuccessSent) {
+      setIsSuccessSent(true)
+    }
   })
 
   const handleOpen = useEvent((event?: MouseEvent<HTMLElement> | FocusEvent<HTMLDivElement>) => {
     if (event) {
+      event.preventDefault()
       event.stopPropagation()
     }
     clearTimeout(refTimer.current)
     refTimer.current = setTimeout(() => {
       if (!isVisible) {
         setVisible(true)
-      } else {
-        setVisible(false)
       }
     })
   })
+
+  const stringLastRemind = isMoreThan24HoursString(lastRemind)
+  const [isSuccessSent, setIsSuccessSent] = useState(false)
 
   return (
     <div className={styles.wrapper} onClick={handleOpen} onMouseEnter={handleOpen} onMouseLeave={handleClose}>
       <DotsButton />
 
       {!isMobile && isVisible && (
-        <div className={styles.listContainer}>
-          <div onClick={handleRemind} className={styles.item}>
+        <div onClick={handleRemind} className={styles.listContainer}>
+          <div className={styles.item}>
             <Column>
-              <Text theme={'body-2'}>Remind to sign</Text>
+              {!isSuccessSent && (
+                <>
+                  {!stringLastRemind && <Text theme={'body-2'}>Remind to sign</Text>}
+
+                  {stringLastRemind && (
+                    <Text theme={'body-2'} className='color-text-warning'>
+                      {stringLastRemind}
+                    </Text>
+                  )}
+                </>
+              )}
+
+              {isSuccessSent && (
+                <Text theme={'body-2'} className='color-text-accent'>
+                  Reminder sent successfully!
+                </Text>
+              )}
               {lastRemind && (
                 <Text theme={'body-3'} className='color-text-secondary'>
                   Last time was sent on {lastRemind}
@@ -64,7 +89,23 @@ export function DotsTable(props: { title: string; lastNotifyDate: string }) {
         <BottomSheet title={title} onClose={handleClose} visible={isVisible}>
           <div onClick={handleRemind} className={styles.item}>
             <Column>
-              <Text theme={'body-2'}>Remind to sign</Text>
+              {!isSuccessSent && (
+                <>
+                  {!stringLastRemind && <Text theme={'body-2'}>Remind to sign</Text>}
+
+                  {stringLastRemind && (
+                    <Text theme={'body-2'} className='color-text-warning'>
+                      {stringLastRemind}
+                    </Text>
+                  )}
+                </>
+              )}
+
+              {isSuccessSent && (
+                <Text theme={'body-2'} className='color-text-accent'>
+                  Reminder sent successfully!
+                </Text>
+              )}
               {lastRemind && (
                 <Text theme={'body-3'} className='color-text-secondary'>
                   Last time was sent on {lastRemind}
