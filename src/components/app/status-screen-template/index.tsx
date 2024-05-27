@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { useRouter } from 'next/router'
 
-import { Column, Flex, Row } from 'src/components/ui/grid'
+import { Column, Row } from 'src/components/ui/grid'
 import { Text } from 'src/components/ui/typography'
 import { Button } from 'src/components/ui/button'
 import { RateUs } from 'src/components/app/rate-us'
@@ -12,6 +12,7 @@ import { AppLink } from 'src/components/ui/app-link'
 import { IconExpired, IconPlaneColor, IconSuccessfullySigned } from 'src/icons'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { GradientBg } from 'src/components/ui/gradient-bg'
 
 import Image404Mobile from './images/404-image-mobile.png'
 import Image404 from './images/404-image-desktop.png'
@@ -67,7 +68,7 @@ export function StatusScreenTemplate(props: {
 
   return (
     <>
-      <Flex flex='1' className={styles.bg}>
+      <GradientBg>
         <Column
           className={cn(styles.wrapper, 'column-center', {
             [styles.wrapperOneSigned]: isOneSigned,
@@ -234,7 +235,7 @@ export function StatusScreenTemplate(props: {
             </AppLink>
           </div>
         )}
-      </Flex>
+      </GradientBg>
     </>
   )
 }
