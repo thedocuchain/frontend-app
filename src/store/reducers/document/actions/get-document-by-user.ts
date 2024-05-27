@@ -13,13 +13,8 @@ export const getDocumentByUser = createAsyncThunk(
 
       await thunkAPI.dispatch(patchDocumentState({ document: data }))
       return data
-    } catch (e) {
-      return {
-        // todo try catch
-        message: e.response.data.message,
-        status: e.response.data.status,
-        code: e.response.data.code,
-      }
+    } catch (ignore) {
+      thunkAPI.dispatch(patchDocumentState({ document: undefined }))
     }
   },
 )

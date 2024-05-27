@@ -46,7 +46,6 @@ export function StepByStepBlock(props: ComponentProps) {
   const isMobile = useIsMobile()
 
   const [checkBoxTermsPolicy, setCheckBoxTermsPolicy] = useState(false)
-  const [checkBoxAds, setCheckBoxAds] = useState(true)
   const [checkBoxConsents, setCheckBoxConsents] = useState(false)
   const [checkBoxError, setCheckBoxError] = useState(false)
 
@@ -134,8 +133,12 @@ export function StepByStepBlock(props: ComponentProps) {
                 <AppLink target={'_blank'} href={'/'}>
                   Signature Dislosure
                 </AppLink>{' '}
+                <div className='hide-mobile'>
+                  <br />
+                </div>
                 and agree to use electronic record and signatures.
               </CheckboxSquare>
+
               <GuideLabel title={'Accept'} />
             </Column>
           </>
@@ -162,10 +165,6 @@ export function StepByStepBlock(props: ComponentProps) {
               </CheckboxSquare>
 
               <GuideLabel title={'Accept'} />
-
-              <CheckboxSquare checked={checkBoxAds} onChange={setCheckBoxAds}>
-                First to hear DocuChain&apos;s new features.
-              </CheckboxSquare>
             </Column>
           </>
         )}

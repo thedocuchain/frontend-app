@@ -3,7 +3,7 @@ import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
-import { Role, User } from 'src/store/reducers/document/types'
+import { User } from 'src/store/reducers/document/types'
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { Input } from 'src/components/ui/input'
 import { useValidatorRules } from 'src/utils/use/use-validator-rules'
@@ -32,13 +32,13 @@ export function RecepientForm(props: {
     email: signer.email,
   })
 
-  const roles: Role[] = [
+  const roles = [
     { name: 'signer', description: 'Reviews and signs the document.' },
     { name: 'watcher', description: 'Tracks document status, does not sign.' },
   ]
 
-  const [selectedRole, setSelectedRole] = useState<Role>({
-    name: signer.role.name,
+  const [selectedRole, setSelectedRole] = useState({
+    name: signer.role,
     description: 'Reviews and signs the document.',
   })
 
@@ -48,21 +48,21 @@ export function RecepientForm(props: {
         {
           name: form.name,
           email: form.email,
-          role: { name: selectedRole.name },
+          role: selectedRole.name,
         },
         index,
       )
     }
   })
 
-  const handleChangeRole = useEvent((item: Role) => {
+  const handleChangeRole = useEvent((item) => {
     setSelectedRole(item)
-    if (item.name !== signer.role.name) {
+    if (item.name !== signer.role) {
       onAddRecepient(
         {
           name: form.name,
           email: form.email,
-          role: { name: item.name },
+          role: item.name,
         },
         index,
       )

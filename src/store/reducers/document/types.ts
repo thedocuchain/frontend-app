@@ -1,9 +1,3 @@
-export type Role = {
-  id?: string
-  name: 'signer' | 'watcher'
-  description?: string
-}
-
 export type Signature = {
   id?: string
   signed: boolean
@@ -19,23 +13,26 @@ export type User = {
   readDocument?: boolean
   agreedWithPolicy?: boolean
   readRecordsDislosure?: boolean
-  firstToHear?: boolean
-  role: Role
+  role: 'signer' | 'watcher'
   signature?: Signature
 }
+
+export type StatusDocumentType = 'draft' | 'uploaded' | 'signing' | 'completed' // todo add statuses
 
 export type DocumentType = {
   id: string
   name: string
-  signedBy?: number
-  status: 'uploaded' | 'signing' | 'completed' // todo add statuses
+  type: string
+  hash: string
+  blockchainTransaction: string
+  fileStorageId: string
+  signedBy: number
+  status: StatusDocumentType
   file: string // document download link
   linkExpiredAt?: string // ISO dateTimeString with TZ
-  hash?: string
+  users: User[]
 
   // todo add on backend
-  users: User[]
-  roles?: Role[]
   pages: number
   xOffset: number
 }

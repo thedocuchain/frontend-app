@@ -46,11 +46,11 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
       {
         name: '',
         email: '',
-        role: { name: 'signer' },
+        role: 'signer',
       },
     ])
   })
-  const isNoSigners = useMemo(() => signers.every((el) => el.role.name === 'watcher'), [signers])
+  const isNoSigners = useMemo(() => signers.every((el) => el.role === 'watcher'), [signers])
 
   const handleAddRecipients = useEvent((form: User, indexFind: number) => {
     setSigners(signers.map((el, index) => (index === indexFind ? form : el)))

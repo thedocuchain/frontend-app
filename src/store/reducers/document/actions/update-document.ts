@@ -10,8 +10,12 @@ export const updateDocument = createAsyncThunk(
     name: string
     users: { name?: string; email: string; roleId: string }[]
   }): Promise<{ documentLink: string } | DefaultApiResponse> => {
-    const { data } = await api.put(`/api/v1/documents/${payload.id}`, { name: payload.name, users: payload.users })
+    try {
+      const { data } = await api.patch(`/api/v1/documents/${payload.id}`, { name: payload.name, users: payload.users })
 
-    return data
+      return data
+    } catch (ignore) {
+      return null
+    }
   },
 )

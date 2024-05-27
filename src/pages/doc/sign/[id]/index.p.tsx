@@ -50,9 +50,8 @@ export default function DocumentViewPage(): JSX.Element {
   })
 
   // todo match documentId and move logic to getInitialProps
-  // const router = useRouter()
   // const documentId = router.query.id as string
-  // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
+  // const isMatchId = documentId.match(/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/)
   // const [isLoadingPage, setIsLoadingPage] = useState(true)
   // useEffect(() => {
   //   if (!isMatchId) {

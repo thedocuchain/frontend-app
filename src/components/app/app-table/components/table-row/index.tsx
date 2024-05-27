@@ -18,7 +18,7 @@ export function TableRow(props: {
   participant: User
 }) {
   const { name, email, role, signature } = props.participant
-  const isSigner = role.name === 'signer'
+  const isSigner = role === 'signer'
   const status = signature?.signed ? 'signed' : 'awaiting'
   const lastNotifyDate = signature?.lastNotifyDate
   const isLastRow = props.index + 1 === props.participantLength
@@ -39,7 +39,7 @@ export function TableRow(props: {
             </RowBetweenCenter>
 
             <Text theme={'body-3'} className={cn(styles.text, 'color-text-secondary')}>
-              <span className='show-mobile capitalize'>{role.name} &#183; </span>
+              <span className='show-mobile capitalize'>{role} &#183; </span>
               {email}
             </Text>
           </Column>
@@ -47,7 +47,7 @@ export function TableRow(props: {
       </td>
       <td className={styles.hide}>
         <Text theme={'body-3'} className='hide-mobile color-text-secondary capitalize'>
-          {role.name}
+          {role}
         </Text>
       </td>
       <td className={styles.hide}>

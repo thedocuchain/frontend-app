@@ -10,6 +10,10 @@
   color: var(--text-error) !important;
 }
 
+.color-text-warning {
+  color: var(--text-warning) !important;
+}
+
 .color-text-accent {
   color: var(--text-accent) !important;
 }

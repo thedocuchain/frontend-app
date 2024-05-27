@@ -18,16 +18,20 @@ export type SignDocumentRequest = {
 export const signDocument = createAsyncThunk(
   'document/sign',
   async (payload: SignDocumentRequest): Promise<SuccessApiResponse | DefaultApiResponse> => {
-    const { data } = await api.put(`/api/v1/documents/${payload.documentId}/signatures/${payload.signatureId}`, {
-      userId: payload.userId,
-      agreedWithPolicy: payload.agreedWithPolicy,
-      readRecordsDislosure: payload.readRecordsDislosure,
-      firstToHear: payload.firstToHear,
-      signed: payload.signed,
-      signDate: payload.signDate,
-      file: payload.file,
-    })
+    try {
+      const { data } = await api.put(`/api/v1/documents/${payload.documentId}/signatures/${payload.signatureId}`, {
+        userId: payload.userId,
+        agreedWithPolicy: payload.agreedWithPolicy,
+        readRecordsDislosure: payload.readRecordsDislosure,
+        firstToHear: payload.firstToHear,
+        signed: payload.signed,
+        signDate: payload.signDate,
+        file: payload.file,
+      })
 
-    return data
+      return data
+    } catch (ignore) {
+      return null
+    }
   },
 )

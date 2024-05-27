@@ -39,7 +39,7 @@ export default function DocumentPage(): JSX.Element {
     {
       name: '',
       email: '',
-      role: { name: 'signer' },
+      role: 'signer',
     },
   ])
   const steps: StepWizardType[] = [
@@ -47,11 +47,11 @@ export default function DocumentPage(): JSX.Element {
     { title: 'Add recipients', value: 'add-recipients' },
     { title: 'Preview and send', value: 'preview-and-send' },
   ]
-  const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
+  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('preview-and-send')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-send')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-all-signed')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('check-status')
+  const [activeStep, setActiveStep] = useState<StepsDocumentPage>('check-status')
   // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('document-view')
 
   const activeStepTitle = steps.find((el) => el.value === activeStep)
@@ -59,7 +59,7 @@ export default function DocumentPage(): JSX.Element {
   // todo match documentId and move logic to getInitialProps
   // const router = useRouter()
   // const documentId = router.query.id as string
-  // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
+  // const isMatchId = documentId.match(/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/)
   // const [isLoadingPage, setIsLoadingPage] = useState(true)
   // useEffect(() => {
   //   if (!isMatchId) {
