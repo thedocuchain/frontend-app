@@ -15,15 +15,6 @@
   padding: 0;
 }
 
-.bg {
-  background-image: url("./images/bg-pattern-bottom.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right;
-  width: 100%;
-  height: 100%;
-}
-
 .scriptText {
   color: var(--text-script-color-for-success-page);
   margin-top: -20px;
@@ -106,11 +97,6 @@
 }
 
 @media (--mobile) {
-  .bg {
-    background-position: bottom;
-    background-image: url("./images/bg-pattern-bottom-mobile.png");
-  }
-
   .imgMobile {
     display: block;
   }
