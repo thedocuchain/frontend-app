@@ -46,6 +46,7 @@ export function StepByStepBlock(props: ComponentProps) {
   const isMobile = useIsMobile()
 
   const [checkBoxTermsPolicy, setCheckBoxTermsPolicy] = useState(false)
+  const [checkBoxAds, setCheckBoxAds] = useState(true)
   const [checkBoxConsents, setCheckBoxConsents] = useState(false)
   const [checkBoxError, setCheckBoxError] = useState(false)
 
@@ -68,6 +69,7 @@ export function StepByStepBlock(props: ComponentProps) {
     if (activeStep + 1 === stepsLength) {
       setDeleted(true)
       await wait(200)
+      // todo add function that changed document status to 'Sent' and checkBoxAds
       setSuccessPage()
       return
     }
@@ -165,6 +167,10 @@ export function StepByStepBlock(props: ComponentProps) {
               </CheckboxSquare>
 
               <GuideLabel title={'Accept'} />
+
+              <CheckboxSquare checked={checkBoxAds} onChange={setCheckBoxAds}>
+                First to hear DocuChain&apos;s new features.
+              </CheckboxSquare>
             </Column>
           </>
         )}

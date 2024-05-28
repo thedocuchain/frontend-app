@@ -12,24 +12,25 @@ import { Textarea } from 'src/components/ui/textarea'
 import { Space } from 'src/components/ui/space'
 import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
-import { User } from 'src/store/reducers/document/types'
+import { User, UserInfo } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
-import { StepsDocumentPage } from 'src/pages/doc/[id]/index.p'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { StepsDocumentPage } from 'src/pages/doc/[id]/index'
 
 import styles from './styles.module.css'
 
 type ComponentProps = {
-  signers: Partial<User>[]
-  setSigners: (signers: Partial<User>[]) => void
+  signers: UserInfo[]
+  setSigners: (signers: UserInfo[]) => void
   setActiveStep: (step: StepsDocumentPage) => void
 }
 
-export function StepAddRecipients(props: ComponentProps): JSX.Element {
+export function StepAddRecipients(props: ComponentProps) {
   const { signers, setSigners, setActiveStep } = props
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
+  // const [addUsers, { isSuccess }] = useApi(addUsersToDocument)
 
   const document = useAppSelector(selectedDocument)
   const documentId = document.id
@@ -102,6 +103,15 @@ export function StepAddRecipients(props: ComponentProps): JSX.Element {
       return
     }
 
+    // todo addUsers
+    // await addUsers({
+    //   id: documentId,
+    //   name: form.documentName,
+    //   users: signers,
+    // })
+    // if (isSuccess) {
+    //   setActiveStep('preview-and-send')
+    // }
     setActiveStep('preview-and-send')
   })
 

@@ -17,6 +17,12 @@ export type User = {
   signature?: Signature
 }
 
+export type UserInfo = {
+  name?: string
+  email: string
+  role: 'signer' | 'watcher'
+}
+
 export type StatusDocumentType = 'draft' | 'uploaded' | 'signing' | 'completed' // todo add statuses
 
 export type DocumentType = {

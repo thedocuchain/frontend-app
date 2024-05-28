@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { RowBetweenCenter, RowCenter } from 'src/components/ui/grid'
 import { IconArrowRightLight, IconStepActive, IconStepCheck, IconStepNext } from 'src/icons'
 import { Text } from 'src/components/ui/typography'
-import { StepsDocumentPage, StepWizardType } from 'src/pages/doc/[id]/index.p'
+import { StepsDocumentPage, StepWizardType } from 'src/pages/doc/[id]/index'
 
 import styles from './style.module.css'
 
