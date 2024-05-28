@@ -41,8 +41,9 @@ export function StatusScreenTemplate(props: {
   const router = useRouter()
 
   const document = useAppSelector(selectedDocument)
-  const checkId = document.id
-  const documentName = document.name
+  const checkId = document?.id
+  const documentName = document?.name
+  // const dispatch = useAppDispatch()
 
   const handleNewDocument = useEvent(() => {
     void router.push('/')
@@ -62,8 +63,13 @@ export function StatusScreenTemplate(props: {
     }
   })
 
-  const handleDownload = useEvent(() => {
-    // ...
+  const handleDownload = useEvent(async () => {
+    // todo handleDownload
+    // const response = await dispatch(downloadDocument({ id: document.id })).unwrap()
+    //
+    // if (response?.fileLink) {
+    //   window.open(response.fileLink)
+    // }
   })
 
   return (

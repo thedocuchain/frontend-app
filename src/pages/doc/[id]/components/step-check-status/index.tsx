@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { ValidatorWrapper } from '@coxy/react-validator'
+import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 
 import { Header } from 'src/components/app/header'
 import { Column, Flex } from 'src/components/ui/grid'
@@ -15,10 +17,19 @@ import { Alert } from 'src/components/ui/alert'
 import { Input } from 'src/components/ui/input'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { subscribeUser } from 'src/store/reducers/document/actions/subscribe'
+import { useApi } from 'src/utils/use/use-api'
+import { InputValidatorField } from 'src/components/ui/input-wrapper'
+import { useFormValidator } from 'src/utils/use/use-form-validator'
+import { useValidatorRules } from 'src/utils/use/use-validator-rules'
+import { ToastContext } from 'src/components/common/toast/context'
 
 import styles from './styles.module.css'
 
-export function StepCheckStatus(): JSX.Element {
+export function StepCheckStatus() {
+  const [subscribe, { isLoading }] = useApi(subscribeUser)
+  // const [subscribe, { isSuccess, isError, isLoading }] = useApi(subscribeUser)
+  const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
   const users = document.users
   const signedBy = `Signed by ${document.users.filter((el) => el.signature?.signed).length} of ${document.users.length}`
@@ -57,10 +68,45 @@ export function StepCheckStatus(): JSX.Element {
   const [activeStep, setActiveStep] = useState(signedBy)
   const isCompleted = activeStep === 'Completed'
 
-  const [email, setEmail] = useState('')
+  const [form, setValue] = useStateForm({
+    email: '',
+  })
+  const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
+  const rules = useValidatorRules()
 
-  const handleSubmitForm = useEvent(() => {
-    // ...
+  const handleSubmitForm = useEvent(async () => {
+    const { isValid, message } = validate()
+
+    if (validator.current) {
+      validator.current.clearCustomErrors()
+    }
+
+    if (!isValid) {
+      setIsShowError(true)
+
+      toast.addToast({
+        text: message,
+      })
+
+      return
+    }
+
+    const isDuplicateEmail = document.users.some((el) => el.email === form.email)
+    if (isDuplicateEmail) {
+      setIsShowError(true)
+      await validator.current.setCustomError({
+        id: 'email',
+        message: 'You have already been added as a Watcher/Signer, we will send updates on the signing process',
+        isValid: false,
+      })
+
+      toast.addToast({
+        text: 'You have already been added as a Watcher/Signer, we will send updates on the signing process',
+      })
+      return
+    }
+
+    await subscribe({ documentId: document.id, userEmail: form.email })
   })
 
   const handleViewDocument = useEvent(() => {
@@ -114,14 +160,47 @@ export function StepCheckStatus(): JSX.Element {
             {!isCompleted && (
               <Alert title='Enter your email to receive updates on the signing process.' className={styles.alert}>
                 <div className={styles.form}>
-                  <Input isEmail value={email} onChange={setEmail} placeholder={'john.doe@gmail.com'} />
-
-                  <Button onClick={handleSubmitForm} theme='secondary' className={styles.button}>
-                    Confirm
-                  </Button>
+                  <ValidatorWrapper ref={validator}>
+                    <InputValidatorField
+                      id={'email'}
+                      required
+                      rules={rules.email}
+                      value={form.email}
+                      isVisibleErrors={isShowError}
+                      className={styles.formWrapper}
+                    >
+                      <Input
+                        id={'email'}
+                        isEmail
+                        value={form.email}
+                        onChange={setValue('email')}
+                        placeholder={'john.doe@gmail.com'}
+                      />
+                    </InputValidatorField>
+                    <Button
+                      isLoading={isLoading}
+                      onClick={handleSubmitForm}
+                      theme='secondary'
+                      className={styles.button}
+                    >
+                      Confirm
+                    </Button>
+                  </ValidatorWrapper>
                 </div>
               </Alert>
             )}
+
+            {/* todo add error and success state */}
+            {/* {isSuccess && ( */}
+            {/*  <Text theme={'body-3'} className='color-text-accent'> */}
+            {/*    Success */}
+            {/*  </Text> */}
+            {/* )} */}
+            {/* {isError && ( */}
+            {/*  <Text theme={'body-3'} className='color-text-error'> */}
+            {/*    Error */}
+            {/*  </Text> */}
+            {/* )} */}
 
             <Text theme={'headline-2'} className={styles.titleSecondary}>
               Signing status

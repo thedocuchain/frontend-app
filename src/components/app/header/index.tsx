@@ -10,7 +10,7 @@ import { StepsWizard } from 'src/components/app/steps-wizard'
 import { Space } from 'src/components/ui/space'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
 import { Text } from 'src/components/ui/typography'
-import { StepsDocumentPage, StepWizardType } from 'src/pages/doc/[id]/index.p'
+import { StepsDocumentPage, StepWizardType } from 'src/pages/doc/[id]/index'
 
 import styles from './styles.module.css'
 

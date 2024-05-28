@@ -20,7 +20,6 @@ export function TableRow(props: {
   const { name, email, role, signature } = props.participant
   const isSigner = role === 'signer'
   const status = signature?.signed ? 'signed' : 'awaiting'
-  const lastNotifyDate = signature?.lastNotifyDate
   const isLastRow = props.index + 1 === props.participantLength
 
   return (
@@ -53,13 +52,7 @@ export function TableRow(props: {
       <td className={styles.hide}>
         <div className='hide-mobile'>{isSigner && <Badge type={status} />}</div>
       </td>
-      {!props.isDoneSigned && (
-        <td>
-          {isSigner && status !== 'signed' && (
-            <DotsTable lastNotifyDate={lastNotifyDate} title={`Actions for ${name}`} />
-          )}
-        </td>
-      )}
+      {!props.isDoneSigned && <td>{isSigner && status !== 'signed' && <DotsTable user={props.participant} />}</td>}
     </tr>
   )
 }

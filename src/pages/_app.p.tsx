@@ -89,6 +89,9 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
   const isServer = !!context.ctx.res
   const dispatch = store.dispatch as ApiDispatch
 
+  // const documentId = context.ctx.query.id as string
+  // const userId = context.ctx.query.userId as string
+
   let cookies
   if (isServer) {
     cookies = getCookies({
@@ -100,8 +103,22 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
     cookies = getCookies()
   }
 
-  // todo change for fetchDocument
+  // todo change for getDocument or getDocumentByUser
   if (isServer) {
+    // if (userId) {
+    //   await dispatch(
+    //     getDocumentByUser({
+    //       documentId,
+    //       userId,
+    //     }),
+    //   )
+    // } else {
+    //   await dispatch(
+    //     getDocument({
+    //       id: documentId,
+    //     }),
+    //   )
+    // }
     await dispatch(
       patchDocumentState({
         document: documentMock,

@@ -13,6 +13,7 @@ import { Space } from 'src/components/ui/space'
 import { TextSize } from 'src/components/ui/text-size'
 import { Tooltip } from 'src/components/ui/tooltip'
 import { fontsSignatures } from 'src/components/app/document-view-component/components/edit-tools/fonts'
+import { toIsoString } from 'src/utils/convert-time'
 
 import styles from './styles.module.css'
 
@@ -36,8 +37,7 @@ export function DateBlock(props: ComponentProps) {
   if (dateSigned || date)
     return (
       <div className={styles.dateWrapperSigned}>
-        {/* todo fix date to ISO string */}
-        <Text theme={'body-3'}>{format(new Date(dateSigned || date.replaceAll('.', '/')), 'MM.dd.yyyy')}</Text>
+        <Text theme={'body-3'}>{format(new Date(dateSigned || date), 'MM.dd.yyyy')}</Text>
       </div>
     )
 
@@ -73,7 +73,7 @@ export function Signature(props: ComponentProps) {
     }
 
     setSigned(true)
-    setDate(new Date().toString())
+    setDate(toIsoString(new Date()))
   })
 
   const fonts = fontsSignatures
@@ -141,7 +141,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
   const [isSigned, setSigned] = useState(false)
   const [date, setDate] = useState('')
   const index = indexToColorIndex(props.index)
-  const dateSigned = format(new Date(signature.signDate), 'MM.dd.yyyy')
+  const dateSigned = signature?.signDate
 
   return (
     <Row className={styles.participantWrapper}>

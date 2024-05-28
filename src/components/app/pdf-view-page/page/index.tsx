@@ -19,18 +19,18 @@ export function PageView(props: { index: number; containerWidth?: number; maxWid
       {/* {isLastPage && <GuideLabel positionY={documentData.xOffset} title={'Sign'} />} */}
 
       {/* {isLastPage && ( */}
-      {/* <div className={styles.mockSignatures} style={{ top: documentData.xOffset }}> */}
-      {/*   {documentData.signers.map((item, index) => ( */}
-      {/*     <ParticipantSignatureDetails */}
-      {/*       // isJustCreated={true} */}
-      {/*       isEdited={true} */}
-      {/*       isError={false} */}
-      {/*       key={`${item.email}${index}`} */}
-      {/*       participant={item} */}
-      {/*       index={index} */}
-      {/*     /> */}
-      {/*   ))} */}
-      {/* </div> */}
+      {/*  <div className={styles.mockSignatures} style={{ top: documentData.xOffset }}> */}
+      {/*    {documentData.users.map((item, index) => ( */}
+      {/*      <ParticipantSignatureDetails */}
+      {/*        // isJustCreated={true} */}
+      {/*        isEdited={true} */}
+      {/*        isError={false} */}
+      {/*        key={`${item.email}${index}`} */}
+      {/*        participant={item} */}
+      {/*        index={index} */}
+      {/*      /> */}
+      {/*    ))} */}
+      {/*  </div> */}
       {/* )} */}
     </Page>
   )

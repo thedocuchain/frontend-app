@@ -1,7 +1,7 @@
 export type DefaultApiResponse = {
   message: string
-  status: boolean
-  code: number
+  error: string
+  statusCode: number
 }
 
 export type SuccessApiResponse = {

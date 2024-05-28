@@ -86,7 +86,8 @@
 .list {
   overflow-x: hidden;
   overflow-y: scroll;
-  scrollbar-width: auto;
+
+  /* scrollbar-width: auto; // if will need scrollbar */
   padding-right: 4px;
 }
 

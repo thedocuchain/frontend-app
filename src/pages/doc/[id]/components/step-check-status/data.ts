@@ -18,7 +18,7 @@ export const signersData: User[] = [
     signature: {
       signed: true,
       notified: true,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
       signDate: '2024-05-08T23:41:54.000Z',
     },
   },
@@ -30,7 +30,7 @@ export const signersData: User[] = [
     signature: {
       signed: true,
       notified: true,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
       signDate: '2024-05-08T23:41:54.000Z',
     },
   },
@@ -42,7 +42,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -53,7 +53,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -64,7 +64,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -75,7 +75,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -86,7 +86,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -97,7 +97,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -108,7 +108,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -119,7 +119,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -130,7 +130,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
   {
@@ -141,7 +141,7 @@ export const signersData: User[] = [
     signature: {
       signed: false,
       notified: false,
-      lastNotifyDate: '2024-05-27T16:00:00.000000+03:00',
+      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
     },
   },
 ]
@@ -157,6 +157,7 @@ export const documentMock: DocumentType = {
   blockchainTransaction: '91f775524508900f300ffff6872bb5f806398440',
   fileStorageId: 'fc027ff1-5e94-4933-9875-78d1b8a9676f',
   name: 'Contractor Agreement',
+  // status: 'uploaded',
   status: 'signing',
   xOffset: 480,
   file: 'https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/pdfreference1.0.pdf',
