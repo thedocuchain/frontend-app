@@ -9,16 +9,17 @@ import { PdfViewPage } from 'src/components/app/pdf-view-page'
 import styles from './styles.module.css'
 
 export function DocumentPreview(props: { document: DocumentType }) {
-  const { id, users, pages } = props.document
+  const { shortId, users, pages } = props.document
   return (
     <Column>
       <RowCenter className={styles.wrapperImage}>
+        {/* todo change to image png */}
         <PdfViewPage isDocumentPreview />
       </RowCenter>
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>
           <Text theme={'label-2'}>Document ID:</Text>
-          <Text theme={'body-3'}>{id}</Text>
+          <Text theme={'body-3'}>{shortId}</Text>
         </Row>
         <Row className={styles.iconBlock}>
           <IconUsers />

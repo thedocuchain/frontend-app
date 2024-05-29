@@ -15,11 +15,12 @@ export function ThumbnailView(props: {
   isSidePanel?: boolean
   index: number
   pageId: string
+  isLoading?: boolean
 }) {
-  const { index, pageId, isSidePanel, isOpenSidePanel } = props
+  const { index, pageId, isSidePanel, isOpenSidePanel, isLoading } = props
   const sidePanelId = `side-panel-${pageId}`
-  const isInVPPage = useIsInViewportPartially(pageId)
-  const isInVPSidePanel = useIsInViewport(sidePanelId)
+  const isInVPPage = useIsInViewportPartially(pageId, isLoading)
+  const isInVPSidePanel = useIsInViewport(sidePanelId, isOpenSidePanel)
   const isActivePage = isSidePanel && isInVPPage
   const [firstTimeOpen, setFirstTimeOpen] = useState(true)
 

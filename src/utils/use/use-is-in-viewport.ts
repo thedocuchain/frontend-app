@@ -1,33 +1,38 @@
 import { useEffect, useState } from 'react'
 
-export function useIsInViewportPartially(id: string) {
+export function useIsInViewportPartially(id: string, isLoading: boolean) {
   const [isInViewport, setIsInViewport] = useState(false)
   const offsetTop = 200
-  const offsetBottom = 10
+  const offsetBottom = offsetTop - 26
 
   useEffect(() => {
     const handleScroll = () => {
       const element = document.getElementById(id)
       const rect = element?.getBoundingClientRect()
-      const html = document.documentElement
+      const isTopElementLessThanOffsetTop = rect?.top <= offsetTop
+      const isBottomElementMoreThanZero = rect?.top + rect?.height - offsetBottom > 0
 
-      const isView = rect?.top <= offsetTop && rect?.top - offsetBottom >= -(window.innerHeight || html.clientHeight)
+      const isView = isTopElementLessThanOffsetTop && isBottomElementMoreThanZero
 
       setIsInViewport(isView)
     }
-    handleScroll()
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+    if (!isLoading) {
+      handleScroll()
     }
-  }, [])
+
+    if (!isLoading) {
+      window.addEventListener('scroll', handleScroll)
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [isLoading])
 
   return isInViewport
 }
 
-export function useIsInViewport(id: string) {
+export function useIsInViewport(id: string, isOpen: boolean) {
   const [isInViewport, setIsInViewport] = useState(false)
 
   useEffect(() => {
@@ -35,23 +40,26 @@ export function useIsInViewport(id: string) {
       const element = document.getElementById(id)
       const rect = element?.getBoundingClientRect()
       const html = document.documentElement
-
-      const isView =
+      const isInViewFully =
         rect?.top >= 0 &&
         rect?.left >= 0 &&
         rect?.bottom <= (window.innerHeight || html.clientHeight) &&
         rect?.right <= (window.innerWidth || html.clientWidth)
 
-      setIsInViewport(isView)
+      setIsInViewport(isInViewFully)
     }
-    handleScroll()
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+    if (isOpen) {
+      handleScroll()
     }
-  }, [])
+
+    if (isOpen) {
+      window.addEventListener('scroll', handleScroll)
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [isOpen])
 
   return isInViewport
 }

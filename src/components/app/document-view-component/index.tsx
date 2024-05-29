@@ -17,21 +17,22 @@ export function DocumentViewComponent(props: {
   stepsHints?: StepByStepBlockType[]
   setSuccessPage?: () => void
   isViewPage?: boolean
-}): JSX.Element {
+}) {
   const document = useAppSelector(selectedDocument)
   const [isOpen, setOpen] = useState(false)
+  const [isErrorLoadingPdf, setErrorLoadingPdf] = useState(false)
   const { stepsHints, setSuccessPage, isViewPage } = props
 
   return (
     <StepByStepGuideWrapper isViewPage={isViewPage} setSuccessPage={setSuccessPage} steps={stepsHints} isOpen={isOpen}>
-      <SidePanelPagesPreview isOpen={isOpen} setOpen={setOpen} />
+      <SidePanelPagesPreview isOpen={isOpen} setOpen={setOpen} isErrorLoadingPdf={isErrorLoadingPdf} />
 
       <Container className={cn(styles.container, 'column', { [styles.containerIfOpen]: isOpen })}>
         <Column className={styles.textColumn}>
           <RowBetween className={styles.textWrapper}>
             <Text theme={'headline-1'}>{document.name}</Text>
             <Text theme={'body-3'} className='color-text-secondary white-space-nowrap'>
-              Document ID: {document.id}
+              Document ID: {document.shortId}
             </Text>
           </RowBetween>
           <Text theme={'body-3'} className='color-text-secondary'>
@@ -39,7 +40,7 @@ export function DocumentViewComponent(props: {
           </Text>
         </Column>
 
-        <PdfViewPage />
+        <PdfViewPage setErrorLoadingPdf={setErrorLoadingPdf} />
       </Container>
 
       <Space size={136} />
