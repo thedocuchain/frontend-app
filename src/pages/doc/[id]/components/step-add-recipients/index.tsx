@@ -33,7 +33,7 @@ export function StepAddRecipients(props: ComponentProps) {
   // const [addUsers, { isSuccess }] = useApi(addUsersToDocument)
 
   const document = useAppSelector(selectedDocument)
-  const documentId = document.id
+  const documentShortId = document.shortId
   const documentName = document.name
 
   const [form, setValue] = useStateForm({
@@ -135,7 +135,7 @@ export function StepAddRecipients(props: ComponentProps) {
           isVisibleErrors={isShowError}
         >
           <Textarea
-            documentId={documentId}
+            documentShortId={documentShortId}
             label={'Document name'}
             placeholder='Enter document name'
             value={form.documentName}

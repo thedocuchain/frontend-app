@@ -6,6 +6,7 @@ import { pdfjs, Document } from 'react-pdf'
 import { useCallback, useState } from 'react'
 import { useResizeObserver } from '@wojtekmaj/react-hooks'
 import cn from 'classnames'
+import { wait } from '@coxy/utils'
 
 import { Text } from 'src/components/ui/typography'
 import { PageView } from 'src/components/app/pdf-view-page/page'
@@ -13,6 +14,8 @@ import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { Loader } from 'src/components/ui/loader'
 import { ThumbnailView } from 'src/components/app/pdf-view-page/thumbnail'
+import { OverlayBlur } from 'src/components/app/overlay-blur'
+import { useIsMobile } from 'src/utils/use/use-is-mobile'
 
 import styles from './styles.module.css'
 
@@ -30,11 +33,19 @@ const resizeObserverOptions = {}
 
 const maxWidth = 800
 
-export function PdfViewPage(props: { isOpenSidePanel?: boolean; isSidePanel?: boolean; isDocumentPreview?: boolean }) {
-  const { isOpenSidePanel, isSidePanel, isDocumentPreview } = props
+type ComponentProps = {
+  isOpenSidePanel?: boolean
+  isSidePanel?: boolean
+  isDocumentPreview?: boolean
+  setErrorLoadingPdf?: (boolean) => void
+}
+
+export function PdfViewPage(props: ComponentProps) {
+  const { isOpenSidePanel, isSidePanel, isDocumentPreview, setErrorLoadingPdf } = props
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
+  const isMobile = useIsMobile()
 
   const onResize = useCallback<ResizeObserverCallback>((entries) => {
     const [entry] = entries
@@ -46,17 +57,32 @@ export function PdfViewPage(props: { isOpenSidePanel?: boolean; isSidePanel?: bo
 
   useResizeObserver(containerRef, resizeObserverOptions, onResize)
 
-  function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
+  const [isLoading, setIsLoading] = useState(true)
+
+  async function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): Promise<void> {
+    if (setErrorLoadingPdf) {
+      setErrorLoadingPdf(false)
+    }
     setNumPages(nextNumPages)
+
+    await wait(500)
+    setIsLoading(false)
+  }
+
+  function onDocumentLoadError() {
+    setIsLoading(false)
+    if (setErrorLoadingPdf) {
+      setErrorLoadingPdf(true)
+    }
   }
 
   const documentData = useAppSelector(selectedDocument)
-  const local = documentData.file
+  const url = documentData.file
 
   if (isDocumentPreview)
     return (
       <div ref={setContainerRef}>
-        <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
+        <Document file={url} loading={<Loader />} onLoadSuccess={onDocumentLoadSuccess} options={options}>
           <ThumbnailView index={0} pageId={'page_1'} />
         </Document>
       </div>
@@ -64,27 +90,47 @@ export function PdfViewPage(props: { isOpenSidePanel?: boolean; isSidePanel?: bo
 
   return (
     <div className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })} ref={setContainerRef}>
-      <Document loading={<Loader />} file={local} onLoadSuccess={onDocumentLoadSuccess} options={options}>
+      {isLoading && isSidePanel && <Loader />}
+      {isLoading && !isSidePanel && <OverlayBlur title={'Loading file...'} />}
+
+      <Document
+        file={url}
+        className={isLoading ? 'display-none' : null}
+        loading={null}
+        error={
+          <Text theme={'body-3'} className={'color-text-error'}>
+            Error
+          </Text>
+        }
+        onLoadSuccess={onDocumentLoadSuccess}
+        onLoadError={onDocumentLoadError}
+        options={options}
+      >
         {isSidePanel ? (
           <>
-            {Array.from(new Array(numPages), (el, index) => (
-              <div
-                id={`side-panel-page_${index + 1}`}
-                key={`page_${index + 1}`}
-                className={cn('column', styles.sidePanelPageWrapper)}
-              >
-                <ThumbnailView
-                  isOpenSidePanel={isOpenSidePanel}
-                  isSidePanel={isSidePanel}
-                  pageId={`page_${index + 1}`}
-                  index={index}
-                />
+            {!isMobile && (
+              <>
+                {Array.from(new Array(numPages), (el, index) => (
+                  <div
+                    id={`side-panel-page_${index + 1}`}
+                    key={`page_${index + 1}`}
+                    className={cn('column', styles.sidePanelPageWrapper)}
+                  >
+                    <ThumbnailView
+                      isOpenSidePanel={isOpenSidePanel}
+                      isSidePanel={isSidePanel}
+                      pageId={`page_${index + 1}`}
+                      index={index}
+                      isLoading={isLoading}
+                    />
 
-                <Text theme={'body-3'} className={'color-text-secondary'}>
-                  {index + 1}
-                </Text>
-              </div>
-            ))}
+                    <Text theme={'body-3'} className={'color-text-secondary'}>
+                      {index + 1}
+                    </Text>
+                  </div>
+                ))}
+              </>
+            )}
           </>
         ) : (
           <>

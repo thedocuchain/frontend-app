@@ -39,6 +39,7 @@ export type DocumentType = {
   users: User[]
 
   // todo add on backend
+  shortId: string
   pages: number
   xOffset: number
 }
