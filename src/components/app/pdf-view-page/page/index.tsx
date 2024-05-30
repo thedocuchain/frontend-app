@@ -9,15 +9,10 @@ export function PageView(props: { index: number; containerWidth?: number; maxWid
   const { index, containerWidth, maxWidth } = props
   // const documentData = useAppSelector(selectedDocument)
   // const isLastPage = documentData.pages === index + 1
+  const width = containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
 
   return (
-    <Page
-      className={styles.page}
-      width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
-      // width={794}
-      // height={1123}
-      pageNumber={index + 1}
-    >
+    <Page className={styles.page} width={width} pageNumber={index + 1}>
       {/* {isLastPage && <GuideLabel positionY={documentData.xOffset} title={'Sign'} />} */}
 
       {/* {isLastPage && ( */}
