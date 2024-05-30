@@ -16,6 +16,8 @@ import { Loader } from 'src/components/ui/loader'
 import { ThumbnailView } from 'src/components/app/pdf-view-page/thumbnail'
 import { OverlayBlur } from 'src/components/app/overlay-blur'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
+import { MockPage } from 'src/components/ui/mock-page'
+import { EmptyState } from 'src/components/ui/empty-state'
 
 import styles from './styles.module.css'
 
@@ -98,9 +100,9 @@ export function PdfViewPage(props: ComponentProps) {
         className={isLoading ? 'display-none' : null}
         loading={null}
         error={
-          <Text theme={'body-3'} className={'color-text-error'}>
-            Error
-          </Text>
+          <MockPage containerWidth={containerWidth} maxWidth={maxWidth}>
+            <EmptyState type={'error'} />
+          </MockPage>
         }
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={onDocumentLoadError}

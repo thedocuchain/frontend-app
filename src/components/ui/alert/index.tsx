@@ -60,7 +60,6 @@ export function Alert(
           <>
             <Space size={10} />
             {children}
-            <Space size={10} />
           </>
         )}
 

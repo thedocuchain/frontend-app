@@ -1,6 +1,6 @@
 .container {
   box-sizing: content-box;
-  max-width: 820px;
+  width: var(--page-width-size);
 }
 
 @media (min-width: 1090px) {
@@ -23,6 +23,11 @@
 }
 
 @media (--mobile) {
+  .container {
+    width: 100%;
+    max-width: var(--page-width-size);
+  }
+
   .textColumn {
     gap: 4px;
   }

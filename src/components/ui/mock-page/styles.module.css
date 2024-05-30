@@ -1,4 +1,4 @@
-.page {
+.mockPage {
   width: 100%;
   max-width: var(--page-width-size);
   max-height: var(--page-height-size);
@@ -29,14 +29,8 @@
   }
 }
 
-.mockSignatures {
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-}
-
 @media (--mobile) {
-  .page {
+  .mockPage {
     width: 100%;
   }
 }

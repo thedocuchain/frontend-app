@@ -23,12 +23,12 @@ import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { useFormValidator } from 'src/utils/use/use-form-validator'
 import { useValidatorRules } from 'src/utils/use/use-validator-rules'
 import { ToastContext } from 'src/components/common/toast/context'
+import { InputSuccess } from 'src/components/ui/input-success'
 
 import styles from './styles.module.css'
 
 export function StepCheckStatus() {
-  const [subscribe, { isLoading }] = useApi(subscribeUser)
-  // const [subscribe, { isSuccess, isError, isLoading }] = useApi(subscribeUser)
+  const [subscribe, { isSuccess, isLoading }] = useApi(subscribeUser)
   const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
   const users = document.users
@@ -96,12 +96,12 @@ export function StepCheckStatus() {
       setIsShowError(true)
       await validator.current.setCustomError({
         id: 'email',
-        message: 'You have already been added as a Watcher/Signer, we will send updates on the signing process',
+        message: 'You’ve already subscribed to updates.',
         isValid: false,
       })
 
       toast.addToast({
-        text: 'You have already been added as a Watcher/Signer, we will send updates on the signing process',
+        text: 'You’ve already subscribed to updates.',
       })
       return
     }
@@ -176,6 +176,9 @@ export function StepCheckStatus() {
                         onChange={setValue('email')}
                         placeholder={'john.doe@gmail.com'}
                       />
+                      <InputSuccess isVisibleSuccess={isSuccess}>
+                        You’ve successfully subscribed to updates!
+                      </InputSuccess>
                     </InputValidatorField>
                     <Button
                       isLoading={isLoading}
@@ -189,18 +192,6 @@ export function StepCheckStatus() {
                 </div>
               </Alert>
             )}
-
-            {/* todo add error and success state */}
-            {/* {isSuccess && ( */}
-            {/*  <Text theme={'body-3'} className='color-text-accent'> */}
-            {/*    Success */}
-            {/*  </Text> */}
-            {/* )} */}
-            {/* {isError && ( */}
-            {/*  <Text theme={'body-3'} className='color-text-error'> */}
-            {/*    Error */}
-            {/*  </Text> */}
-            {/* )} */}
 
             <Text theme={'headline-2'} className={styles.titleSecondary}>
               Signing status

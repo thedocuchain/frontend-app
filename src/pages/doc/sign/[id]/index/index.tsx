@@ -85,6 +85,7 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
 
 DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const documentId = context.query.id as string
+  // todo fix match
   const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
   const state = store.getState()
   const document = selectedDocument(state)
