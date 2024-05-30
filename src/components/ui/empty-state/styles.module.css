@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  margin: 0 auto;
+  padding-top: 120px;
+}
+
+@media (--mobile) {
+  .wrapper {
+    padding: 70px 20px 0;
+    width: 100%;
+  }
+}

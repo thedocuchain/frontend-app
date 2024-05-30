@@ -13,8 +13,10 @@ export function PageView(props: { index: number; containerWidth?: number; maxWid
   return (
     <Page
       className={styles.page}
-      pageNumber={index + 1}
       width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
+      // width={794}
+      // height={1123}
+      pageNumber={index + 1}
     >
       {/* {isLastPage && <GuideLabel positionY={documentData.xOffset} title={'Sign'} />} */}
 

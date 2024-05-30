@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
 .button {
@@ -52,6 +52,12 @@
 .name {
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.formWrapper {
+  height: 72px;
+  min-height: 72px;
+  max-height: 72px;
 }
 
 @media (--tablet) {
@@ -84,7 +90,6 @@
 
   .form {
     flex-direction: column;
-    height: 116px;
   }
 
   .button {

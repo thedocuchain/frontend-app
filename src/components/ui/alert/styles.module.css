@@ -1,6 +1,6 @@
 .wrapper {
   width: 100%;
-  padding: 16px;
+  padding: 16px 16px 10px;
   display: flex;
   flex-direction: row;
   gap: 16px;
@@ -40,5 +40,6 @@
 @media (--mobile) {
   .wrapper {
     width: 100%;
+    padding: 16px 16px 32px;
   }
 }

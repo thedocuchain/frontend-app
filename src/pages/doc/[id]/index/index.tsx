@@ -113,6 +113,7 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
 DocumentPage.getInitialProps = async (context, store: AppStore) => {
   const documentId = context.query.id as string
   const isDocumentViewPage = context.query.view as string
+  // todo fix match
   const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
   const state = store.getState()
   const document = selectedDocument(state)
