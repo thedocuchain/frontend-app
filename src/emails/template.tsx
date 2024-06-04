@@ -10,9 +10,9 @@ export default function MyTemplate() {
   const meeting = {
     id: 'Y16334',
     title: 'Contractor Agreement',
-    status: 'signing',
+    name: 'Carol Example',
   }
-  const { title, id } = meeting || {}
+  const { title, id, name } = meeting || {}
 
   return (
     <Html
@@ -46,7 +46,9 @@ export default function MyTemplate() {
             <Preview />
 
             <Row>
-              <Text style={titleText}>🖊 New signature! Carol Example signed {title}</Text>
+              <Text style={titleText}>
+                🖊 New signature! {name} signed {title}
+              </Text>
             </Row>
             <Signers />
 

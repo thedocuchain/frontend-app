@@ -24,6 +24,7 @@ import { useFormValidator } from 'src/utils/use/use-form-validator'
 import { useValidatorRules } from 'src/utils/use/use-validator-rules'
 import { ToastContext } from 'src/components/common/toast/context'
 import { InputSuccess } from 'src/components/ui/input-success'
+import { DocumentStatuses } from 'src/store/reducers/document/types'
 
 import styles from './styles.module.css'
 
@@ -32,8 +33,9 @@ export function StepCheckStatus() {
   const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
   const users = document.users
-  const signedBy = `Signed by ${document.users.filter((el) => el.signature?.signed).length} of ${document.users.length}`
-  const valueSigners = (document.users.filter((el) => el.signature?.signed).length / document.users.length) * 100
+  const signers = users.filter((el) => el.role === 'signer')
+  const signedBy = `Signed by ${signers.filter((el) => el.signatures[0]?.signed).length} of ${signers.length}`
+  const valueSigners = (signers.filter((el) => el.signatures[0]?.signed).length / signers.length) * 100
   const steps = [
     {
       title: 'Document uploaded',
@@ -41,11 +43,11 @@ export function StepCheckStatus() {
     },
     {
       title: 'Sent to participants',
-      value: document.status === 'signing' ? 100 : 0,
+      value: 100,
     },
     {
       title: signedBy,
-      value: document.status === 'signing' ? valueSigners : 0,
+      value: valueSigners,
     },
     {
       title: 'Completed',
@@ -54,14 +56,18 @@ export function StepCheckStatus() {
   ]
 
   useEffect(() => {
-    if (document.status === 'completed') {
+    if (document.status === DocumentStatuses.SENT) {
+      setActiveStep('Sent to participants')
+    }
+    if (
+      document.status === DocumentStatuses.COMPLETED ||
+      document.status === DocumentStatuses.SIGNED ||
+      document.status === DocumentStatuses.BLOCKCHAINED
+    ) {
       setActiveStep('Completed')
     }
-    if (document.status === 'signing') {
+    if (document.status === DocumentStatuses.PARTIALLY_SIGNED || document.status === DocumentStatuses.DELIVERED) {
       setActiveStep(signedBy)
-    }
-    if (document.status === 'uploaded') {
-      setActiveStep('Document uploaded')
     }
   }, [document.status])
 

@@ -1,29 +1,46 @@
 export type Signature = {
   id?: string
   signed: boolean
+  signFont?: string
   signDate?: string // ISO dateTimeString with TZ
   notified: boolean
   lastNotifyDate?: string // ISO dateTimeString with TZ
+  yCoordinate?: number
+  pageNumber?: number
 }
 
 export type User = {
   id?: string
   name?: string
   email: string
-  readDocument?: boolean
   agreedWithPolicy?: boolean
+  // todo передавать при проставлении подписи
   readRecordsDislosure?: boolean
+  firstToHear?: boolean
   role: 'signer' | 'watcher'
-  signature?: Signature
+  signatures?: Signature[]
 }
 
 export type UserInfo = {
   name?: string
   email: string
   role: 'signer' | 'watcher'
+  // todo прокинуть в addUsersToDocument
+  // agreedWithPolicy: boolean
+  // firstToHear: boolean
 }
 
-export type StatusDocumentType = 'draft' | 'uploaded' | 'signing' | 'completed' // todo add statuses
+export enum DocumentStatuses {
+  DRAFT = 'draft',
+  UPLOADED = 'uploaded',
+  RECIPIENT_ADDED = 'recipient added',
+  SENT = 'sent',
+  DELIVERED = 'delivered',
+  PARTIALLY_SIGNED = 'partially signed',
+  SIGNED = 'signed',
+  COMPLETED = 'completed',
+  BLOCKCHAINED = 'blockchained',
+}
 
 export type DocumentType = {
   id: string
@@ -33,8 +50,8 @@ export type DocumentType = {
   blockchainTransaction: string
   fileStorageId: string
   signedBy: number
-  status: StatusDocumentType
-  file: string // document download link
+  status: DocumentStatuses
+  file: string // todo document download link
   linkExpiredAt?: string // ISO dateTimeString with TZ
   users: User[]
 

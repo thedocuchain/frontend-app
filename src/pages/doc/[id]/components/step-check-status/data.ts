@@ -1,4 +1,4 @@
-import { DocumentType, User } from 'src/store/reducers/document/types'
+import { DocumentStatuses, DocumentType, User } from 'src/store/reducers/document/types'
 
 export const signersData: User[] = [
   {
@@ -15,134 +15,150 @@ export const signersData: User[] = [
     email: 'zig.moore@example.com',
     role: 'signer',
 
-    signature: {
-      signed: true,
-      notified: true,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-      signDate: '2024-05-08T23:41:54.000Z',
-    },
+    signatures: [
+      {
+        signed: true,
+        notified: true,
+        lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
+        signDate: '2024-05-08T23:41:54.000Z',
+      },
+    ],
   },
   {
     name: 'Charlotte Moore',
     email: 'charlotte.moore@example.com',
     role: 'signer',
 
-    signature: {
-      signed: true,
-      notified: true,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-      signDate: '2024-05-08T23:41:54.000Z',
-    },
+    signatures: [
+      {
+        signed: true,
+        notified: true,
+        lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
+        signDate: '2024-05-08T23:41:54.000Z',
+      },
+    ],
   },
   {
     name: 'Benjamin Carter',
     email: 'benjamin.carter@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: true,
+        notified: true,
+        lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
+        signDate: '2024-05-08T23:41:54.000Z',
+      },
+    ],
   },
   {
     name: 'Alex Johnson',
     email: 'maria.smith@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Ava Martin',
     email: 'ava.martin@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Ethan Brown',
     email: 'ethan.brown@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Liam Taylor',
     email: 'liam.taylor@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Maria Smith',
     email: 'maria.smith@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Noah Miller',
     email: 'noah.miller@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Olivia Wilson',
     email: 'olivia.wilson@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Tim Cook',
     email: 'drandom.traveler42@example.com',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
   {
     name: 'Konstantin Konstantinopolsky',
     email: 'creative.mindset98@example.net',
     role: 'signer',
 
-    signature: {
-      signed: false,
-      notified: false,
-      lastNotifyDate: '2024-05-27T15:00:00.000000+03:00',
-    },
+    signatures: [
+      {
+        signed: false,
+        notified: false,
+      },
+    ],
   },
 ]
 
@@ -157,8 +173,8 @@ export const documentMock: DocumentType = {
   blockchainTransaction: '91f775524508900f300ffff6872bb5f806398440',
   fileStorageId: 'fc027ff1-5e94-4933-9875-78d1b8a9676f',
   name: 'Contractor Agreement',
-  // status: 'uploaded',
-  status: 'signing',
+  status: DocumentStatuses.UPLOADED,
+  // status: DocumentStatuses.PARTIALLY_SIGNED,
   xOffset: 480,
   file: 'https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/pdfreference1.0.pdf',
   // file: 'https://pdfobject.com/pdf/pdf_open_parameters_acro8.pdf',

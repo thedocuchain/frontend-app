@@ -10,6 +10,8 @@ import styles from './styles.module.css'
 
 export function DocumentPreview(props: { document: DocumentType }) {
   const { shortId, users, pages } = props.document
+  const signers = users.filter((el) => el.role === 'signer')
+
   return (
     <Column>
       <RowCenter className={styles.wrapperImage}>
@@ -23,7 +25,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
         </Row>
         <Row className={styles.iconBlock}>
           <IconUsers />
-          <Text theme={'body-3'}>{users.length} signers</Text>
+          <Text theme={'body-3'}>{signers.length} signers</Text>
         </Row>
         <Row className={styles.iconBlock}>
           <IconFile />

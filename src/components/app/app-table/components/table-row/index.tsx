@@ -17,9 +17,9 @@ export function TableRow(props: {
   isDoneSigned: boolean
   participant: User
 }) {
-  const { name, email, role, signature } = props.participant
+  const { name, email, role, signatures } = props.participant
   const isSigner = role === 'signer'
-  const status = signature?.signed ? 'signed' : 'awaiting'
+  const status = signatures && signatures[0]?.signed ? 'signed' : 'awaiting'
   const isLastRow = props.index + 1 === props.participantLength
 
   return (

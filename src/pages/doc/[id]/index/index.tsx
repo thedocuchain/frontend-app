@@ -6,7 +6,7 @@ import { PageDescription, PageHead, usePageHead } from 'src/components/common/pa
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
 import { Flex } from 'src/components/ui/grid'
-import { UserInfo } from 'src/store/reducers/document/types'
+import { DocumentStatuses, UserInfo } from 'src/store/reducers/document/types'
 import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
 import { StepAddRecipients } from 'src/pages/doc/[id]/components/step-add-recipients'
@@ -131,11 +131,27 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'document-view' }
   }
 
-  if (document.status === 'uploaded') {
+  if (document.status === DocumentStatuses.UPLOADED || document.status === DocumentStatuses.DRAFT) {
     return { step: 'add-recipients' }
   }
 
-  if (document.status === 'completed' || document.status === 'signing') {
+  if (document.status === DocumentStatuses.RECIPIENT_ADDED) {
+    return { step: 'preview-and-send' }
+  }
+
+  if (document.status === DocumentStatuses.SENT) {
+    return { step: 'success-send' }
+  }
+
+  if (
+    document.status === DocumentStatuses.SIGNED ||
+    document.status === DocumentStatuses.COMPLETED ||
+    document.status === DocumentStatuses.BLOCKCHAINED
+  ) {
+    return { step: 'success-all-signed' }
+  }
+
+  if (document.status === DocumentStatuses.DELIVERED || document.status === DocumentStatuses.PARTIALLY_SIGNED) {
     return { step: 'check-status' }
   }
 }

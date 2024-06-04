@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { ValidatorRule } from '@coxy/react-validator'
 
-import { User } from 'src/store/reducers/document/types'
+import { User, UserInfo } from 'src/store/reducers/document/types'
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { Input } from 'src/components/ui/input'
 import { useValidatorRules } from 'src/utils/use/use-validator-rules'
@@ -23,8 +24,9 @@ export function RecepientForm(props: {
   isShowError: boolean
   onDelete: (index: number) => void
   onAddRecepient: (form: Partial<User>, index: number) => void
+  signers: UserInfo[]
 }) {
-  const { signer, index, isShowError, onDelete, onAddRecepient } = props
+  const { signer, index, isShowError, onDelete, onAddRecepient, signers } = props
   const rules = useValidatorRules()
 
   const [form, setValue] = useStateForm({
@@ -72,6 +74,11 @@ export function RecepientForm(props: {
   const indexColor = indexToColorIndex(props.index)
   const color = colorsBorders[indexColor]
 
+  const uniqueEmailRule: ValidatorRule = {
+    rule: (value) => (signer.role === 'signer' ? signers.filter((el) => el.email === value).length === 1 : true),
+    message: 'Signers email must be unique',
+  }
+
   return (
     <div className={styles.blockWrapper}>
       <RowBetweenCenter>
@@ -106,7 +113,7 @@ export function RecepientForm(props: {
         <InputValidatorField
           id={'email'}
           required
-          rules={rules.email}
+          rules={[...rules.email, uniqueEmailRule]}
           value={form.email}
           isVisibleErrors={isShowError}
           className={styles.formWrapper}

@@ -42,6 +42,7 @@ export function StepAddRecipients(props: ComponentProps) {
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
 
   const handleAddOneRecipient = useEvent(() => {
+    setIsShowError(false)
     setSigners([
       ...signers,
       {
@@ -54,6 +55,7 @@ export function StepAddRecipients(props: ComponentProps) {
   const isNoSigners = useMemo(() => signers.every((el) => el.role === 'watcher'), [signers])
 
   const handleAddRecipients = useEvent((form: User, indexFind: number) => {
+    setIsShowError(false)
     setSigners(signers.map((el, index) => (index === indexFind ? form : el)))
   })
 
@@ -152,6 +154,7 @@ export function StepAddRecipients(props: ComponentProps) {
             index={index}
             isShowError={isShowError}
             onAddRecepient={handleAddRecipients}
+            signers={signers.filter((el) => el.role === 'signer')}
           />
         ))}
       </ValidatorWrapper>
