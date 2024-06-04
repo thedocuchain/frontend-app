@@ -13,17 +13,7 @@ export function AppTable(props: { participants: User[] }) {
   const [sortType, setSortType] = useState<SortType>('role')
   const [sortOrder, setOrder] = useState<SortOrder>('ASC')
   const [isDoneSigned, setDoneSigned] = useState(false)
-  const awaiting = useMemo(
-    () =>
-      [...participants]
-        .filter((el) => el.signature?.signed !== undefined && !el.signature.signed)
-        .sort((a, b) => a.name?.localeCompare(b?.name)),
-    [participants],
-  )
-  const signed = useMemo(
-    () => [...participants].filter((el) => el.signature?.signed).sort((a, b) => a.name?.localeCompare(b?.name)),
-    [participants],
-  )
+
   const watchers = useMemo(
     () => [...participants].filter((el) => el.role === 'watcher').sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
@@ -32,9 +22,20 @@ export function AppTable(props: { participants: User[] }) {
     () => [...participants].filter((el) => el.role === 'signer').sort((a, b) => a.name?.localeCompare(b?.name)),
     [participants],
   )
+  const awaiting = useMemo(
+    () =>
+      [...signers]
+        .filter((el) => el.signatures[0].signed !== undefined && !el.signatures[0].signed)
+        .sort((a, b) => a.name?.localeCompare(b?.name)),
+    [signers],
+  )
+  const signed = useMemo(
+    () => [...signers].filter((el) => el.signatures[0]?.signed).sort((a, b) => a.name?.localeCompare(b?.name)),
+    [signers],
+  )
 
   useEffect(() => {
-    const isDone = participants.filter((el) => el.role === 'signer').every((el) => el.signature?.signed)
+    const isDone = participants.filter((el) => el.role === 'signer').every((el) => el.signatures[0]?.signed)
     setDoneSigned(isDone)
   }, [participants])
 

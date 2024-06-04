@@ -136,12 +136,12 @@ type ParticipantSignatureDetailsProps = {
 }
 
 export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsProps) {
-  const { name, email, signature } = props.participant
+  const { name, email, signatures } = props.participant
   const { isJustCreated, isEdited, isError } = props
   const [isSigned, setSigned] = useState(false)
   const [date, setDate] = useState('')
   const index = indexToColorIndex(props.index)
-  const dateSigned = signature?.signDate
+  const dateSigned = signatures[0]?.signDate
 
   return (
     <Row className={styles.participantWrapper}>

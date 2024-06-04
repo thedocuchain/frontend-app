@@ -21,7 +21,7 @@ export function DotsTable(props: { user: User }) {
   const { user } = props
   const documentId = useAppSelector(selectedDocument).id
   const title = `Actions for ${user.name}`
-  const lastNotifyDate = user?.signature?.lastNotifyDate
+  const lastNotifyDate = user?.signatures[0]?.lastNotifyDate
   const isMobile = useIsMobile()
   const [isVisible, setVisible] = useState(false)
   const refTimer = useRef<TimeoutId>()
@@ -42,7 +42,7 @@ export function DotsTable(props: { user: User }) {
       await remind({
         userId: user.id,
         documentId,
-        signatureId: user.signature.id,
+        signatureId: user.signatures[0].id,
       })
       if (isSuccess) {
         setIsSuccessSent(true)
@@ -63,7 +63,7 @@ export function DotsTable(props: { user: User }) {
     })
   })
 
-  const stringLastRemind = isMoreThan24HoursString(lastRemind)
+  const stringLastRemind = lastRemind && isMoreThan24HoursString(lastRemind)
   const [isSuccessSent, setIsSuccessSent] = useState(false)
 
   function TextRemindComponent() {

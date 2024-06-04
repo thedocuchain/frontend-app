@@ -10,9 +10,9 @@ export default function MyTemplate() {
   const meeting = {
     id: 'Y16334',
     title: 'Contractor Agreement',
-    status: 'signing',
+    name: 'Elon Musk',
   }
-  const { title, id } = meeting || {}
+  const { title, id, name } = meeting || {}
 
   return (
     <Html
@@ -47,7 +47,9 @@ export default function MyTemplate() {
 
             <Row>
               {/* <Text style={titleText}>You have {title} to review and sign in Docuchain</Text> */}
-              <Text style={titleText}>🖊 New signature! Elon Musk signed {title}</Text>
+              <Text style={titleText}>
+                🖊 New signature! {name} signed {title}
+              </Text>
               {/* <Text style={titleText}>🎉 All signers completed with {title}</Text> */}
             </Row>
             <Signers />
