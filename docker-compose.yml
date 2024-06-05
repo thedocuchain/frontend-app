@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     container_name: docuchain-frontend-app
     image: docuchain-frontend:latest
+    entrypoint: ["yarn", "start"]
     env_file: .env
     ports:
       - "3000:3000"
