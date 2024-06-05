@@ -83,6 +83,7 @@
   padding: 0 60px;
   justify-content: space-between;
   margin-bottom: 40px;
+  position: relative;
   z-index: 1000;
 }
 

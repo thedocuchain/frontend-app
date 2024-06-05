@@ -15,8 +15,6 @@ import { StepsDocumentPage, StepWizardType } from 'src/pages/doc/[id]/index'
 import styles from './styles.module.css'
 
 type HeaderProps = {
-  step?: 'check-status' | 'new-document'
-  setStep?: (step: 'check-status' | 'new-document') => void
   isTransparent?: boolean
   isDocumentPreview?: boolean
   isStepsWizard?: boolean
@@ -26,12 +24,10 @@ type HeaderProps = {
 }
 
 export function Header(props: HeaderProps) {
-  const { step, setStep, isTransparent, isDocumentPreview, isStepsWizard, stepsWizard, activeStepWizard, title } = props
+  const { isTransparent, isDocumentPreview, isStepsWizard, stepsWizard, activeStepWizard, title } = props
   const isMobile = useIsMobile()
   const [hasScrolled, setHasScrolled] = useState(false)
-  const isNewDocument = step === 'new-document'
   const router = useRouter()
-  const queryCheckId = router.query.searchId as string
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,22 +50,8 @@ export function Header(props: HeaderProps) {
     }
   }, [])
 
-  useEffect(() => {
-    if (queryCheckId) {
-      setStep('check-status')
-    }
-  }, [])
-
-  const handleSetStep = useEvent(async () => {
-    if (router.pathname !== '/') {
-      void router.push('/')
-      return
-    }
-    if (step === 'new-document') {
-      setStep('check-status')
-      return
-    }
-    setStep('new-document')
+  const handleNewDocument = useEvent(async () => {
+    void router.push('https://www.docuchain.io/')
   })
 
   return (
@@ -95,18 +77,12 @@ export function Header(props: HeaderProps) {
             </div>
           )}
 
-          {isNewDocument ? (
-            <Button theme='secondary' size='sm' onClick={handleSetStep}>
-              Check status
-            </Button>
-          ) : (
-            <Button theme='secondary' size='sm' onClick={handleSetStep}>
-              <ButtonIcon>
-                <IconPlusBlack />
-              </ButtonIcon>
-              {isMobile ? 'Document' : 'New document'}
-            </Button>
-          )}
+          <Button theme='secondary' size='sm' onClick={handleNewDocument}>
+            <ButtonIcon>
+              <IconPlusBlack />
+            </ButtonIcon>
+            {isMobile ? 'Document' : 'New document'}
+          </Button>
         </div>
 
         {isStepsWizard && stepsWizard && (

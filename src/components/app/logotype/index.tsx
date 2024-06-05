@@ -8,7 +8,7 @@ export function Logotype(props: { className?: string }) {
   const { className } = props
 
   return (
-    <a href={'/'}>
+    <a href={'https://www.docuchain.io/'}>
       <IconLogo className={cn(styles.logo, className)} width={168} />
     </a>
   )
