@@ -117,7 +117,7 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
   const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
   const state = store.getState()
   const document = selectedDocument(state)
-
+  // todo переход на корень?
   if (!isMatchId) {
     if (context.res) {
       context.res.writeHead(302, { Location: '/' })

@@ -141,7 +141,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
   const [isSigned, setSigned] = useState(false)
   const [date, setDate] = useState('')
   const index = indexToColorIndex(props.index)
-  const dateSigned = signatures[0]?.signDate
+  const dateSigned = signatures && signatures[0]?.signDate
 
   return (
     <Row className={styles.participantWrapper}>

@@ -46,7 +46,7 @@ export function StatusScreenTemplate(props: {
   // const dispatch = useAppDispatch()
 
   const handleNewDocument = useEvent(() => {
-    void router.push('/')
+    void router.push('https://www.docuchain.io/')
   })
 
   const handleCheckStatus = useEvent(() => {
@@ -94,7 +94,7 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button href='/' className={styles.buttonHome}>
+                <Button href='https://www.docuchain.io/' className={styles.buttonHome}>
                   Refresh
                 </Button>
               </Row>
@@ -115,7 +115,7 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button href='/' className={styles.buttonHome}>
+                <Button href='https://www.docuchain.io/' className={styles.buttonHome}>
                   Take me home
                 </Button>
               </Row>
@@ -236,7 +236,7 @@ export function StatusScreenTemplate(props: {
             <Text theme={'body-3'} className={'color-text-secondary'}>
               Want to send a document like this one?
             </Text>
-            <AppLink href={'/'} theme={'primary'} className='underline-hover'>
+            <AppLink href={'https://www.docuchain.io/'} theme={'primary'} className='underline-hover'>
               Check out DocuChain.
             </AppLink>
           </div>
