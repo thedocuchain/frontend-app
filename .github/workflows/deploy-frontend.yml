@@ -16,7 +16,7 @@ jobs:
         persist-credentials: false
         
     - name: Build docker image
-      run: make build
+      run: make build-prod
 
     - name: Start application
       run: source /home/deployer/ansible/bin/activate && cd ansible && ansible-playbook deploy-frontend.yml -e ansible_user=deployer -b -v
