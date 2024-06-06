@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Column, Link, Row, Section, Text } from '@react-email/components'
 
 export default function Preview(): JSX.Element {
-  const url = 'https://docuchain.io'
+  const url = 'https://docuchain.io/app/doc/Y16334'
   const img = 'https://i.pinimg.com/736x/bc/f4/99/bcf4998f6f8e094b339492ba8bc0621c.jpg'
 
   return (

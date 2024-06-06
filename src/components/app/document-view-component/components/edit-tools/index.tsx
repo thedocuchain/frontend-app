@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { format } from 'date-fns'
 import { randomNumber } from '@coxy/utils'
+import { useRouter } from 'next/router'
 
 import { colorsBorders, indexToColorIndex } from 'src/components/app/avatar'
 import { Text } from 'src/components/ui/typography'
-import { Column, Row, RowCenter } from 'src/components/ui/grid'
+import { Column, RowCenter } from 'src/components/ui/grid'
 import { IconEdit, IconRefreshSignature } from 'src/icons'
 import { User } from 'src/store/reducers/document/types'
 import { Space } from 'src/components/ui/space'
@@ -14,6 +15,7 @@ import { TextSize } from 'src/components/ui/text-size'
 import { Tooltip } from 'src/components/ui/tooltip'
 import { fontsSignatures } from 'src/components/app/document-view-component/components/edit-tools/fonts'
 import { toIsoString } from 'src/utils/convert-time'
+import { usePageRatio } from 'src/utils/use/use-page-ratio'
 
 import styles from './styles.module.css'
 
@@ -133,26 +135,39 @@ type ParticipantSignatureDetailsProps = {
   isJustCreated?: boolean
   isEdited?: boolean
   isError?: boolean
+  isLoading?: boolean
+  pageWidth: number
 }
 
 export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsProps) {
-  const { name, email, signatures } = props.participant
-  const { isJustCreated, isEdited, isError } = props
-  const [isSigned, setSigned] = useState(false)
+  const { name, signatures, id } = props.participant
+  const { isJustCreated, isEdited, isError, isLoading, pageWidth } = props
+  const [isSigned, setSigned] = useState(signatures[0].signed)
   const [date, setDate] = useState('')
   const index = indexToColorIndex(props.index)
   const dateSigned = signatures && signatures[0]?.signDate
 
-  return (
-    <Row className={styles.participantWrapper}>
-      <Column>
-        <Space size={9} />
-        <Text theme={'headline-4'}>{name}</Text>
-        <Space size={5} />
-        <Text theme={'body-3'}>{email}</Text>
-      </Column>
+  const router = useRouter()
+  const signerId = router.query.signerId as string
 
-      <Row>
+  const [pageRatio, right] = usePageRatio(isLoading, pageWidth)
+
+  // todo fix pdfRatio
+  const pdfRatio = 1103 / 842
+
+  return (
+    <div
+      id={'participant-wrapper'}
+      className={cn('flex-row', styles.participantWrapper)}
+      style={{
+        transform: `scale(${pageRatio})`,
+        bottom: signatures[0].yCoordinate * pdfRatio * pageRatio - 60 * pageRatio,
+        right: `-${right}px`,
+      }}
+    >
+      <Column />
+
+      <div className='flex-row' id={signerId === id ? 'target-id' : ''}>
         <DateBlock
           date={date}
           isJustCreated={isJustCreated}
@@ -173,7 +188,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
             name={name}
           />
         </Tooltip>
-      </Row>
-    </Row>
+      </div>
+    </div>
   )
 }

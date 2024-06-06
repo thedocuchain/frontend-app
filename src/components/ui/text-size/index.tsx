@@ -20,7 +20,8 @@ export const calculateFontSizeByLength = (value: string, { minSize, maxLen }: Co
 
 export function TextSize({ children, maxLen, className, minSize, ...props }: PropsWithChildren<ComponentProps>) {
   const fontSize = calculateFontSizeByLength(getInnerText(children), { maxLen, className, minSize })
-
+  // console.log(fontSize, 'fontSize')
+  // todo text size
   return (
     <span {...props} className={cn(`fs${fontSize}`, className)}>
       {children}

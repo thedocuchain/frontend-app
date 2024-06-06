@@ -1,6 +1,7 @@
 .container {
   box-sizing: content-box;
-  width: var(--page-width-size);
+  width: 100%;
+  max-width: var(--page-width-size);
 }
 
 @media (min-width: 1090px) {
@@ -24,8 +25,7 @@
 
 @media (--mobile) {
   .container {
-    width: 100%;
-    max-width: var(--page-width-size);
+    min-width: 290px;
   }
 
   .textColumn {

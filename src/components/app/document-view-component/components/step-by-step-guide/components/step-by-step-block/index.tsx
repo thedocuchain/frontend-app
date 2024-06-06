@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { wait } from '@coxy/utils'
+import { useRouter } from 'next/router'
 
 import { Text } from 'src/components/ui/typography'
 import { Button, ButtonIcon } from 'src/components/ui/button'
@@ -50,6 +51,17 @@ export function StepByStepBlock(props: ComponentProps) {
   const [checkBoxConsents, setCheckBoxConsents] = useState(false)
   const [checkBoxError, setCheckBoxError] = useState(false)
 
+  const router = useRouter()
+  const isSignPage = router.pathname.includes('sign')
+
+  useEffect(() => {
+    // if you need to scroll to signature
+    if (activeStep + 1 === stepsLength && isSignPage) {
+      const element = document.getElementById('target-id')
+      element?.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' })
+    }
+  }, [activeStep])
+
   const handleNextStep = useEvent(async () => {
     if (isSignatureMobileBlock && isMobile && !isSigned) {
       setError(true)
@@ -84,8 +96,8 @@ export function StepByStepBlock(props: ComponentProps) {
     setSigned(true)
   })
 
-  const document = useAppSelector(selectedDocument)
-  const recipient = document.users[0]
+  const documentSelected = useAppSelector(selectedDocument)
+  const recipient = documentSelected.users[0]
   const [isSigned, setSigned] = useState(false)
   const [isError, setError] = useState(false)
   const indexRecipient = indexToColorIndex(10)

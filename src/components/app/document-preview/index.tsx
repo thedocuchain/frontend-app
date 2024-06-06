@@ -9,7 +9,7 @@ import { PdfViewPage } from 'src/components/app/pdf-view-page'
 import styles from './styles.module.css'
 
 export function DocumentPreview(props: { document: DocumentType }) {
-  const { shortId, users, pages } = props.document
+  const { shortId, users, pagesCount } = props.document
   const signers = users.filter((el) => el.role === 'signer')
 
   return (
@@ -29,7 +29,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
         </Row>
         <Row className={styles.iconBlock}>
           <IconFile />
-          <Text theme={'body-3'}>{pages} pages</Text>
+          <Text theme={'body-3'}>{pagesCount} pages</Text>
         </Row>
       </Column>
     </Column>

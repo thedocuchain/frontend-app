@@ -17,7 +17,7 @@ export const uploadDocument = createAsyncThunk(
       const fd = new FormData()
       fd.append('file', payload.file)
 
-      const { data } = await api.post('/api/v1/documents', fd, {
+      const { data } = await api.post('/api/v1/documents/upload', fd, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

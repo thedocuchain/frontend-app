@@ -17,9 +17,8 @@ import 'src/styles/globals.css'
 import { RouterLoader } from 'src/components/common/router-loader'
 import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
-import { patchDocumentState } from 'src/store/reducers/document'
-import { documentMock } from 'src/pages/doc/[id]/components/step-check-status/data'
 import { ErrorBoundary } from 'src/components/common/error-boundary'
+import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
@@ -89,8 +88,7 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
   const isServer = !!context.ctx.res
   const dispatch = store.dispatch as ApiDispatch
 
-  // const documentId = context.ctx.query.id as string
-  // const userId = context.ctx.query.userId as string
+  const documentId = context.ctx.query.id as string
 
   let cookies
   if (isServer) {
@@ -103,25 +101,10 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
     cookies = getCookies()
   }
 
-  // todo change for getDocument or getDocumentByUser
   if (isServer) {
-    // if (userId) {
-    //   await dispatch(
-    //     getDocumentByUser({
-    //       documentId,
-    //       userId,
-    //     }),
-    //   )
-    // } else {
-    //   await dispatch(
-    //     getDocument({
-    //       id: documentId,
-    //     }),
-    //   )
-    // }
     await dispatch(
-      patchDocumentState({
-        document: documentMock,
+      getDocument({
+        id: documentId,
       }),
     )
   }

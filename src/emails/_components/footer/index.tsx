@@ -31,26 +31,6 @@ export default function Footer(): JSX.Element {
             the to the document&apos;s creator by emailing them directly.
           </Text>
         </Row>
-        <Row align='left'>
-          <Text style={text}>Stop receiving this email</Text>
-          <Text style={description}>
-            <Link href='https://docuchain.io' style={link}>
-              Report this email
-            </Link>{' '}
-            or read more about{' '}
-            <Link href='https://docuchain.io' style={link}>
-              Declining to sign
-            </Link>{' '}
-            and{' '}
-            <Link href='https://docuchain.io' style={link}>
-              Managing notifications.
-            </Link>{' '}
-            If you are having trouble signing the document,{' '}
-            <Link href='https://docuchain.io' style={link}>
-              please contact us →
-            </Link>
-          </Text>
-        </Row>
       </Section>
     </>
   )
