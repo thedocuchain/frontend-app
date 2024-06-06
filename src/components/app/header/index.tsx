@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { useRouter } from 'next/router'
 
 import { Logotype } from 'src/components/app/logotype'
 import { Button, ButtonIcon } from 'src/components/ui/button'
@@ -27,7 +26,6 @@ export function Header(props: HeaderProps) {
   const { isTransparent, isDocumentPreview, isStepsWizard, stepsWizard, activeStepWizard, title } = props
   const isMobile = useIsMobile()
   const [hasScrolled, setHasScrolled] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +49,7 @@ export function Header(props: HeaderProps) {
   }, [])
 
   const handleNewDocument = useEvent(async () => {
-    void router.push('https://www.docuchain.io/')
+    window.open('https://docuchain.io/', '_self')
   })
 
   return (

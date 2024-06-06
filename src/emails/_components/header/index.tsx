@@ -7,7 +7,7 @@ export default function Header(props: { id: string }): JSX.Element {
       <Section style={header}>
         <Column align='left' width={150}>
           <Link href={'https://docuchain.io'}>
-            <Img src={'https://docuchain.io/assets/logo.inline.svg'} width={151} height={33} alt='' />
+            <Img src={'https://docuchain.io/app/assets/logo.inline.svg'} width={151} height={33} alt='' />
           </Link>
         </Column>
         <Column align='right' width={450}>

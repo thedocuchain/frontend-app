@@ -26,7 +26,7 @@ export default function Preview(): JSX.Element {
                 {/* Review and Sign */}
                 View completed document
                 {/* <Img */}
-                {/*  src={'https://docuchain.io/assets/arrow-right.svg'} */}
+                {/*  src={'https://docuchain.io/app/assets/arrow-right.svg'} */}
                 {/*  width={15} */}
                 {/*  alt='' */}
                 {/*  style={{ display: 'inline', marginLeft: 6, marginBottom: -4 }} */}

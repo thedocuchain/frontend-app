@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 
 export default function IndexPage(): JSX.Element {
   const { title } = usePageHead({ title: 'Title' })
-
+  // todo delete page
   return (
     <>
       <PageHead>{title}</PageHead>
