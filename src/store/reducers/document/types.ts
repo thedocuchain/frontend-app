@@ -17,11 +17,11 @@ export type User = {
   position?: number
   role: 'signer' | 'watcher'
   signatures?: Signature[]
+  firstToHear?: boolean
 
-  // todo где передаем?
+  // todo agreedWithPolicy and readRecordsDisclosure
   agreedWithPolicy?: boolean
   readRecordsDislosure?: boolean
-  firstToHear?: boolean
 }
 
 export type UserInfo = {

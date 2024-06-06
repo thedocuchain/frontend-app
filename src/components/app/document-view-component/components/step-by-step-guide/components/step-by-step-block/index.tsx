@@ -14,10 +14,16 @@ import { AppLink } from 'src/components/ui/app-link'
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { Signature } from 'src/components/app/document-view-component/components/edit-tools'
 import { Tooltip } from 'src/components/ui/tooltip'
-import { indexToColorIndex } from 'src/components/app/avatar'
-import { useIsMobile } from 'src/utils/use/use-is-mobile'
-import { useAppSelector } from 'src/store/hooks'
+import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import {
+  selectedIsSigned,
+  selectedIsSignError,
+  selectSettingState,
+  setSignatureError,
+} from 'src/store/reducers/signature'
+import { useApi } from 'src/utils/use/use-api'
+import { signDocument } from 'src/store/reducers/document/actions/sign-document'
 
 import styles from './styles.module.css'
 
@@ -43,8 +49,10 @@ export function StepByStepBlock(props: ComponentProps) {
   const { title, isCheckBoxTermsAndPrivacy, isCheckBoxConsents, isSignatureMobileBlock, buttonText } = props.item
   const { stepsLength, activeStep, index, setActiveStep, isOpen, setSuccessPage } = props
   const isVisible = activeStep === index
+  const isLastStep = activeStep + 1 === stepsLength
   const [isDeleted, setDeleted] = useState(false)
-  const isMobile = useIsMobile()
+  const isSigned = useAppSelector(selectedIsSigned)
+  const dispatch = useAppDispatch()
 
   const [checkBoxTermsPolicy, setCheckBoxTermsPolicy] = useState(false)
   const [checkBoxAds, setCheckBoxAds] = useState(true)
@@ -53,18 +61,29 @@ export function StepByStepBlock(props: ComponentProps) {
 
   const router = useRouter()
   const isSignPage = router.pathname.includes('sign')
+  const signerId = router.query.userId as string
+
+  const [sentToSign, { isSuccess, isLoading }] = useApi(signDocument)
+  const documentData = useAppSelector(selectedDocument)
+  const signatureData = useAppSelector(selectSettingState)
 
   useEffect(() => {
     // if you need to scroll to signature
-    if (activeStep + 1 === stepsLength && isSignPage) {
+    if (isLastStep && isSignPage) {
       const element = document.getElementById('target-id')
       element?.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' })
     }
   }, [activeStep])
 
+  const handleFinish = useEvent(async () => {
+    setDeleted(true)
+    await wait(200)
+    setSuccessPage()
+  })
+
   const handleNextStep = useEvent(async () => {
-    if (isSignatureMobileBlock && isMobile && !isSigned) {
-      setError(true)
+    if (isLastStep && !isSigned && isSignPage) {
+      dispatch(setSignatureError(true))
       return
     }
 
@@ -78,29 +97,36 @@ export function StepByStepBlock(props: ComponentProps) {
       return
     }
 
-    if (activeStep + 1 === stepsLength) {
-      setDeleted(true)
-      await wait(200)
+    if (isLastStep) {
+      if (isSignPage) {
+        await sentToSign({
+          documentId: documentData.id,
+          userId: signerId,
+          readRecordsDislosure: checkBoxConsents,
+          signFont: signatureData.signatureFont,
+          fontSize: signatureData.fontSize,
+          signDate: signatureData.signDate,
+        })
+        return
+      }
       // todo add function that changed document status to 'Sent' and checkBoxAds
-      setSuccessPage()
+      void handleFinish()
       return
     }
 
     setActiveStep(activeStep + 1)
   })
 
-  const handleSigned = useEvent(async () => {
-    if (isSignatureMobileBlock && isMobile && !isSigned) {
-      setError(false)
+  useEffect(() => {
+    if (isSuccess) {
+      void handleFinish()
     }
-    setSigned(true)
-  })
+  }, [isSuccess])
 
   const documentSelected = useAppSelector(selectedDocument)
-  const recipient = documentSelected.users[0]
-  const [isSigned, setSigned] = useState(false)
-  const [isError, setError] = useState(false)
-  const indexRecipient = indexToColorIndex(10)
+  const activeSigner = signerId && documentSelected.users.find((user) => user.id === signerId)
+  const isSignError = useAppSelector(selectedIsSignError)
+  const style = null
 
   return (
     <div
@@ -115,16 +141,10 @@ export function StepByStepBlock(props: ComponentProps) {
 
         {isSignatureMobileBlock && (
           <div className={styles.signatureWrapper}>
-            <Space size={16} />
+            <Space size={28} />
 
-            <Tooltip isError={isError} isShow={isError} content={'Signature is required.'}>
-              <Signature
-                setSigned={handleSigned}
-                isSigned={isSigned}
-                isEdited={true}
-                index={indexRecipient}
-                name={recipient.name}
-              />
+            <Tooltip isError={isSignError} isShow={isSignError} content={'Signature is required.'}>
+              <Signature isActiveSignature={true} style={style} name={activeSigner?.name} />
             </Tooltip>
           </div>
         )}
@@ -194,7 +214,7 @@ export function StepByStepBlock(props: ComponentProps) {
         </Text>
         <Space horizontal size={24} />
 
-        <Button onClick={handleNextStep}>
+        <Button className={styles.button} isLoading={isLoading} onClick={handleNextStep}>
           {buttonText}
           <ButtonIcon>
             <IconArrowRightLong />
