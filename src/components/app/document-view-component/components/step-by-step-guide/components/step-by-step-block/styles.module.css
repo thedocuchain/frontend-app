@@ -25,6 +25,10 @@
   align-self: flex-end;
 }
 
+.button {
+  min-width: 130px;
+}
+
 .signatureWrapper {
   display: none;
 }

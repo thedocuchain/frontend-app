@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
@@ -84,23 +84,30 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
 }
 
 DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
-  const documentId = context.query.id as string
-  // todo fix match
-  const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
   const state = store.getState()
   const document = selectedDocument(state)
-  // todo переход на корень?
-  if (!isMatchId) {
-    if (context.res) {
-      context.res.writeHead(302, { Location: '/' })
-      context.res.end()
-    } else {
-      void Router.replace('/')
-    }
+
+  // const documentId = context.query.id as string
+  const signerId = context.query.userId as string
+  const isAlreadySigned = document.users.find((user) => user.id === signerId)?.signatures[0].signed
+
+  // todo fix match
+  // const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
+  // if (!isMatchId) {
+  //   if (context.res) {
+  //     context.res.writeHead(302, { Location: 'https://docuchain.io/' })
+  //     context.res.end()
+  //   } else {
+  //     window.open('https://docuchain.io/', '_self')
+  //   }
+  // }
+
+  if (!document || !signerId) {
+    return { step: 'expired-link' }
   }
 
-  if (!document) {
-    return { step: 'expired-link' }
+  if (isAlreadySigned) {
+    return { step: 'success-sign' }
   }
 
   return { step: 'sign-the-document' }

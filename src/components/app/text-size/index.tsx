@@ -3,7 +3,7 @@ import cn from 'classnames'
 
 import { getInnerText } from 'src/utils/react'
 import { useAppDispatch } from 'src/store/hooks'
-import { setFont } from 'src/store/reducers/signature'
+import { setFontSize } from 'src/store/reducers/signature'
 
 type ComponentProps = {
   maxLen: number
@@ -25,7 +25,7 @@ export function TextSize({ children, maxLen, className, minSize, ...props }: Pro
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setFont(fontSize))
+    dispatch(setFontSize(fontSize))
   }, [fontSize])
 
   return (

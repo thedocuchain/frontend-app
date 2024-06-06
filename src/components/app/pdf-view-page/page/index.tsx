@@ -15,14 +15,15 @@ import styles from './styles.module.css'
 export function PageView(props: { isLoading?: boolean; index: number; containerWidth?: number; maxWidth: number }) {
   const { index, containerWidth, maxWidth, isLoading } = props
   const documentData = useAppSelector(selectedDocument)
-  const signers = documentData.users.filter((el) => el.role === 'signer')
+  const signers = documentData.users.filter((el) => el.role === 'signer' && !el.signatures[0].signed)
   const isSignersOnPage = signers.some((el) => el.signatures[0].pageNumber === index + 1)
   const isJustCreated = documentData.status === DocumentStatuses.RECIPIENT_ADDED
+
   const router = useRouter()
-  const signerId = router.query.signerId as string
+  const signerId = router.query.userId as string
   const width = containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
 
-  // todo fix
+  // todo fix pdfRatio
   const pdfRatio = 1103 / 842
 
   return (
@@ -36,9 +37,8 @@ export function PageView(props: { isLoading?: boolean; index: number; containerW
               )}
 
               <ParticipantSignatureDetails
-                isJustCreated={isJustCreated && !signerId && !item.signatures[0].signed}
-                isEdited={!isJustCreated && signerId === item.id && !item.signatures[0].signed}
-                isError={false}
+                isJustCreated={isJustCreated && !signerId}
+                isActiveSignature={!isJustCreated && signerId === item.id}
                 participant={item}
                 index={index}
                 isLoading={isLoading}

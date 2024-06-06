@@ -10,6 +10,7 @@
   user-select: none;
   transition: all 0.2s ease;
   cursor: auto;
+  color: var(--text-signature-color-1);
 }
 
 .isEdited {
@@ -39,21 +40,6 @@
 .changeBlock {
   position: absolute;
   bottom: 4px;
-}
-
-.isSignedDone {
-  display: flex;
-  justify-content: center;
-  width: 216px;
-  height: 80px;
-  border-radius: 0;
-  border: none;
-  background: none;
-  user-select: auto;
-  box-shadow: none;
-  background: transparent !important;
-  padding: 4px;
-  cursor: auto;
 }
 
 .dateWrapper {

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import Router from 'next/router'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
@@ -111,21 +110,22 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
 }
 
 DocumentPage.getInitialProps = async (context, store: AppStore) => {
-  const documentId = context.query.id as string
-  const isDocumentViewPage = context.query.view as string
-  // todo fix match
-  const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
   const state = store.getState()
   const document = selectedDocument(state)
-  // todo переход на корень?
-  if (!isMatchId) {
-    if (context.res) {
-      context.res.writeHead(302, { Location: '/' })
-      context.res.end()
-    } else {
-      void Router.replace('/')
-    }
-  }
+  const isDocumentViewPage = context.query.view as string
+
+  // const documentId = context.query.id as string
+  // todo fix match
+  // const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
+  //
+  // if (!isMatchId) {
+  //   if (context.res) {
+  //     context.res.writeHead(302, { Location: 'https://docuchain.io/' })
+  //     context.res.end()
+  //   } else {
+  //     window.open('https://docuchain.io/', '_self')
+  //   }
+  // }
 
   if (isDocumentViewPage) {
     return { step: 'document-view' }
