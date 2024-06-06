@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
 
 import { Column } from 'src/components/ui/grid'
@@ -9,12 +9,29 @@ import { Space } from 'src/components/ui/space'
 import { Button } from 'src/components/ui/button'
 import { FileUploadProgress } from 'src/components/app/file-upload-progress'
 import { isFormatAllowedFn } from 'src/utils/files'
+import { useAppDispatch } from 'src/store/hooks'
+import { uploadDocument } from 'src/store/reducers/document/actions/files'
 
 import styles from './styles.module.css'
 
 export function StepNewDocument(): JSX.Element {
   const [file, setFile] = useState<File | null>(null)
   const inputRef = React.useRef(null)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    ;(async () => {
+      if (file) {
+        const response = await dispatch(uploadDocument({ file })).unwrap()
+
+        if (response.redirectUrl) {
+          const id = response.redirectUrl.slice(29)
+          const link = `https://docuchain.io/app/doc/${id}`
+          window.open(link, '_self')
+        }
+      }
+    })()
+  }, [file])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isFormatAllowed = isFormatAllowedFn(e.target.files[0].type)
