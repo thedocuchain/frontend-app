@@ -1,7 +1,9 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 import cn from 'classnames'
 
 import { getInnerText } from 'src/utils/react'
+import { useAppDispatch } from 'src/store/hooks'
+import { setFont } from 'src/store/reducers/signature'
 
 type ComponentProps = {
   maxLen: number
@@ -20,8 +22,12 @@ export const calculateFontSizeByLength = (value: string, { minSize, maxLen }: Co
 
 export function TextSize({ children, maxLen, className, minSize, ...props }: PropsWithChildren<ComponentProps>) {
   const fontSize = calculateFontSizeByLength(getInnerText(children), { maxLen, className, minSize })
-  // console.log(fontSize, 'fontSize')
-  // todo text size
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(setFont(fontSize))
+  }, [fontSize])
+
   return (
     <span {...props} className={cn(`fs${fontSize}`, className)}>
       {children}
