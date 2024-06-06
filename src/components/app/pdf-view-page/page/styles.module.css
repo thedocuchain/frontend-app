@@ -29,12 +29,6 @@
   }
 }
 
-.mockSignatures {
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-}
-
 @media (--mobile) {
   .page {
     width: 100%;

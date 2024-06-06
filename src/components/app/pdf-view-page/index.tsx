@@ -79,7 +79,7 @@ export function PdfViewPage(props: ComponentProps) {
   }
 
   const documentData = useAppSelector(selectedDocument)
-  const url = documentData.file
+  const url = documentData.downloadLink
 
   if (isDocumentPreview)
     return (
@@ -138,7 +138,7 @@ export function PdfViewPage(props: ComponentProps) {
           <>
             {Array.from(new Array(numPages), (el, index) => (
               <div id={`page_${index + 1}`} key={`page_${index + 1}`}>
-                <PageView index={index} containerWidth={containerWidth} maxWidth={maxWidth} />
+                <PageView isLoading={isLoading} index={index} containerWidth={containerWidth} maxWidth={maxWidth} />
               </div>
             ))}
           </>

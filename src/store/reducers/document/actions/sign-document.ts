@@ -12,7 +12,6 @@ export type SignDocumentRequest = {
   firstToHear: boolean
   signed: boolean
   signDate: string // ISO dateTimeString with TZ,
-  file: File // todo formData with new sign todo fix type ot delete
 }
 
 export const signDocument = createAsyncThunk(
@@ -26,7 +25,6 @@ export const signDocument = createAsyncThunk(
         firstToHear: payload.firstToHear,
         signed: payload.signed,
         signDate: payload.signDate,
-        file: payload.file,
       })
 
       return data

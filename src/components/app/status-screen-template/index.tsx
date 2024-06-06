@@ -10,9 +10,10 @@ import { RateUs } from 'src/components/app/rate-us'
 import { Share } from 'src/components/app/share'
 import { AppLink } from 'src/components/ui/app-link'
 import { IconExpired, IconPlaneColor, IconSuccessfullySigned } from 'src/icons'
-import { useAppSelector } from 'src/store/hooks'
+import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { GradientBg } from 'src/components/ui/gradient-bg'
+import { downloadDocument } from 'src/store/reducers/document/actions/files'
 
 import Image404Mobile from './images/404-image-mobile.png'
 import Image404 from './images/404-image-desktop.png'
@@ -43,7 +44,7 @@ export function StatusScreenTemplate(props: {
   const document = useAppSelector(selectedDocument)
   const checkId = document?.id
   const documentName = document?.name
-  // const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch()
 
   const handleNewDocument = useEvent(() => {
     void router.push('https://www.docuchain.io/')
@@ -64,12 +65,11 @@ export function StatusScreenTemplate(props: {
   })
 
   const handleDownload = useEvent(async () => {
-    // todo handleDownload
-    // const response = await dispatch(downloadDocument({ id: document.id })).unwrap()
-    //
-    // if (response?.fileLink) {
-    //   window.open(response.fileLink)
-    // }
+    const response = await dispatch(downloadDocument({ id: document.id })).unwrap()
+
+    if (response?.fileLink) {
+      window.open(response.fileLink)
+    }
   })
 
   return (

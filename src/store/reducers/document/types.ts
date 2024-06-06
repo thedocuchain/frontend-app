@@ -2,6 +2,7 @@ export type Signature = {
   id?: string
   signed: boolean
   signFont?: string
+  fontSize?: number
   signDate?: string // ISO dateTimeString with TZ
   notified: boolean
   lastNotifyDate?: string // ISO dateTimeString with TZ
@@ -13,21 +14,20 @@ export type User = {
   id?: string
   name?: string
   email: string
-  agreedWithPolicy?: boolean
-  // todo передавать при проставлении подписи
-  readRecordsDislosure?: boolean
-  firstToHear?: boolean
+  position?: number
   role: 'signer' | 'watcher'
   signatures?: Signature[]
+
+  // todo где передаем?
+  agreedWithPolicy?: boolean
+  readRecordsDislosure?: boolean
+  firstToHear?: boolean
 }
 
 export type UserInfo = {
   name?: string
   email: string
   role: 'signer' | 'watcher'
-  // todo прокинуть в addUsersToDocument
-  // agreedWithPolicy: boolean
-  // firstToHear: boolean
 }
 
 export enum DocumentStatuses {
@@ -51,12 +51,12 @@ export type DocumentType = {
   fileStorageId: string
   signedBy: number
   status: DocumentStatuses
-  file: string // todo document download link
   linkExpiredAt?: string // ISO dateTimeString with TZ
   users: User[]
+  downloadLink: string
+  pagesCount: number
 
   // todo add on backend
   shortId: string
-  pages: number
-  xOffset: number
+  previewImage?: string
 }

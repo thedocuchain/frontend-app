@@ -103,5 +103,5 @@ const form = {
   backgroundColor: '#FFFFFF',
   border: '1px solid #D0D5DD',
   borderRadius: 16,
-  padding: '20px 24px 60px',
+  padding: '20px 24px 20px',
 }

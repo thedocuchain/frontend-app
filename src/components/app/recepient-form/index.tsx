@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
@@ -22,17 +22,22 @@ export function RecepientForm(props: {
   signer: Partial<User>
   index: number
   isShowError: boolean
+  setIsShowError: (boolean) => void
   onDelete: (index: number) => void
   onAddRecepient: (form: Partial<User>, index: number) => void
   signers: UserInfo[]
 }) {
-  const { signer, index, isShowError, onDelete, onAddRecepient, signers } = props
+  const { signer, index, isShowError, setIsShowError, onDelete, onAddRecepient, signers } = props
   const rules = useValidatorRules()
 
   const [form, setValue] = useStateForm({
     name: signer.name,
     email: signer.email,
   })
+
+  useEffect(() => {
+    setIsShowError(false)
+  }, [form])
 
   const roles = [
     { name: 'signer', description: 'Reviews and signs the document.' },
@@ -75,8 +80,11 @@ export function RecepientForm(props: {
   const color = colorsBorders[indexColor]
 
   const uniqueEmailRule: ValidatorRule = {
-    rule: (value) => (signer.role === 'signer' ? signers.filter((el) => el.email === value).length === 1 : true),
-    message: 'Signers email must be unique',
+    rule: (value) =>
+      signer.role === 'signer'
+        ? signers.filter((el) => el.role === 'signer').filter((el) => el.email === value).length === 1
+        : signers.filter((el) => el.role === 'watcher').filter((el) => el.email === value).length === 1,
+    message: signer.role === 'signer' ? 'Signers emails must be unique' : 'Watchers emails must be unique',
   }
 
   return (

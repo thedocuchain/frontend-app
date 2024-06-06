@@ -17,6 +17,8 @@ import { RecepientForm } from 'src/components/app/recepient-form'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StepsDocumentPage } from 'src/pages/doc/[id]/index'
+import { useApi } from 'src/utils/use/use-api'
+import { addUsersToDocument } from 'src/store/reducers/document/actions/add-users-to-document'
 
 import styles from './styles.module.css'
 
@@ -30,10 +32,9 @@ export function StepAddRecipients(props: ComponentProps) {
   const { signers, setSigners, setActiveStep } = props
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
-  // const [addUsers, { isSuccess }] = useApi(addUsersToDocument)
-
+  const [addUsers, { isSuccess, isLoading }] = useApi(addUsersToDocument)
   const document = useAppSelector(selectedDocument)
-  const documentShortId = document.shortId
+  const documentShortId = document?.shortId
   const documentName = document.name
 
   const [form, setValue] = useStateForm({
@@ -42,7 +43,6 @@ export function StepAddRecipients(props: ComponentProps) {
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
 
   const handleAddOneRecipient = useEvent(() => {
-    setIsShowError(false)
     setSigners([
       ...signers,
       {
@@ -55,7 +55,6 @@ export function StepAddRecipients(props: ComponentProps) {
   const isNoSigners = useMemo(() => signers.every((el) => el.role === 'watcher'), [signers])
 
   const handleAddRecipients = useEvent((form: User, indexFind: number) => {
-    setIsShowError(false)
     setSigners(signers.map((el, index) => (index === indexFind ? form : el)))
   })
 
@@ -105,17 +104,18 @@ export function StepAddRecipients(props: ComponentProps) {
       return
     }
 
-    // todo addUsers
-    // await addUsers({
-    //   id: documentId,
-    //   name: form.documentName,
-    //   users: signers,
-    // })
-    // if (isSuccess) {
-    //   setActiveStep('preview-and-send')
-    // }
-    setActiveStep('preview-and-send')
+    await addUsers({
+      id: document.id,
+      name: form.documentName,
+      users: signers,
+    })
   })
+
+  useEffect(() => {
+    if (isSuccess) {
+      setActiveStep('preview-and-send')
+    }
+  }, [isSuccess])
 
   useEffect(() => {
     setIsShowError(false)
@@ -153,8 +153,9 @@ export function StepAddRecipients(props: ComponentProps) {
             signer={el}
             index={index}
             isShowError={isShowError}
+            setIsShowError={setIsShowError}
             onAddRecepient={handleAddRecipients}
-            signers={signers.filter((el) => el.role === 'signer')}
+            signers={signers}
           />
         ))}
       </ValidatorWrapper>
@@ -167,7 +168,7 @@ export function StepAddRecipients(props: ComponentProps) {
           Add recepient
         </Button>
 
-        <Button onClick={handleCheckRecipients} theme={'primary'} className={styles.button}>
+        <Button isLoading={isLoading} onClick={handleCheckRecipients} theme={'primary'} className={styles.button}>
           Review and send
           <ButtonIcon>
             <IconArrowRightLong />
