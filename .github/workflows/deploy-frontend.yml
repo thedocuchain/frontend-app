@@ -1,65 +1,22 @@
-name: Build and deploy DocuChain frontend
+name: Build and deploy Docuchain frontend
 
 on:
   push:
-    branches: [ "main" ]
-
-env:
-  NODE_ENV: ${{ vars.NODE_ENV }}
+    branches: [ "main", "cicd" ]
 
 jobs:
+
   deploy:
-    runs-on: self-hosted
+
+    runs-on: [ "self-hosted", "prod" ]
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Send start build message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          message: |
-            ⏳ *Start deploy Frontend*
-            💬 Commit message: ${{ github.event.commits[0].message }}
-            🧑‍💻 Developer: *${{github.actor}}*
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+        
+    - name: Build docker image
+      run: make build-prod
 
-      - name: Copy repo to base dir
-
-        run: |
-          sudo mkdir -p /root/app/frontend
-          sudo cp -r * /root/app/frontend/
-
-      - name: Run ansible
-        run: cd ansible && ansible-playbook deploy-frontend.yml -e ansible_user=deployer -b -v
-
-  notify:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send failure message
-        if: ${{ needs.deploy.result == 'failure' }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ❌ *Frontend job has been failed!*
-            💬 Commit message: ${{ github.event.commits[0].message }}
-            🧑‍💻 Developer: *${{github.actor}}*
-            🔗 Href: https://github.com/${{github.repository}}
-          format: markdown
-          disable_web_page_preview: "True"
-
-      - name: Send success message
-        if: ${{ needs.deploy.result != 'failure' }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ✅ *Frontend job has been completed.*
-            💬 Commit message: ${{ github.event.commits[0].message }}
-            🧑‍💻 Developer: *${{github.actor}}*
-            🔗 Href: https://github.com/${{github.repository}}
-          format: markdown
-          disable_web_page_preview: "True"
+    - name: Start application
+      run: source /home/deployer/ansible/bin/activate && cd ansible && ansible-playbook deploy-frontend.yml -e ansible_user=deployer -b -v
