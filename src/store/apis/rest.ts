@@ -4,8 +4,7 @@ import { Store } from '@reduxjs/toolkit'
 import { selectedAccessToken } from 'src/store/reducers/auth'
 import { VERSION } from 'src/configs/version'
 
-export const BASE_URL = 'http://141.95.33.165:3001/'
-// export const BASE_URL = 'https://api.docuchain.io/'
+export const BASE_URL = 'https://api.docuchain.io/'
 
 export const api = axios.create({
   baseURL: BASE_URL,
