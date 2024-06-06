@@ -1,7 +1,6 @@
 import type { ReactElement, ReactNode, ButtonHTMLAttributes, MouseEvent, PropsWithChildren } from 'react'
 
 import cn from 'classnames'
-import { useRouter } from 'next/router'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { Loader } from 'src/components/ui/loader'
@@ -46,7 +45,6 @@ type ComponentProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
-  const router = useRouter()
   const { isLoading, className, href, onClick, theme, size, ...otherProps } = props
   const cs = cn(styles.button, className, {
     [styles.primary]: theme === undefined || theme === 'primary',
@@ -59,7 +57,7 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
 
   const handleClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
     if (href) {
-      void router.push(href)
+      window.open(href, '_self')
       return
     }
 

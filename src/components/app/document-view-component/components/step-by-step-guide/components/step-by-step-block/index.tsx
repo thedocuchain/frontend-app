@@ -140,11 +140,11 @@ export function StepByStepBlock(props: ComponentProps) {
                 onChange={setCheckBoxConsents}
               >
                 I read the{' '}
-                <AppLink target={'_blank'} href={'https://www.docuchain.io/electronic_records'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/electronic_records'}>
                   Electronic Records
                 </AppLink>{' '}
                 and{' '}
-                <AppLink target={'_blank'} href={'https://www.docuchain.io/signature_dislosure'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/signature_dislosure'}>
                   Signature Dislosure
                 </AppLink>{' '}
                 <div className='hide-mobile'>
@@ -169,11 +169,11 @@ export function StepByStepBlock(props: ComponentProps) {
                 onChange={setCheckBoxTermsPolicy}
               >
                 I agree with the{' '}
-                <AppLink target={'_blank'} href={'https://www.docuchain.io/terms'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/terms'}>
                   Terms of use
                 </AppLink>{' '}
                 and{' '}
-                <AppLink target={'_blank'} href={'https://www.docuchain.io/policy'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/policy'}>
                   Privacy Policy.
                 </AppLink>
               </CheckboxSquare>
