@@ -170,7 +170,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
       className={cn('flex-row', styles.participantWrapper)}
       style={{
         transform: `scale(${pageRatio})`,
-        bottom: signatures[0].yCoordinate * pdfRatio * pageRatio - 60 * pageRatio,
+        bottom: signatures[0].yCoordinate * pdfRatio * pageRatio - 60,
         right: `-${right}px`,
       }}
     >

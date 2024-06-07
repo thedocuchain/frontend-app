@@ -71,36 +71,14 @@
   z-index: 1000;
 }
 
+@media (max-width: 600px) {
+  .participantWrapper {
+    margin-bottom: 0.5em;
+  }
+}
+
 @media (max-width: 470px) {
   .participantWrapper {
-    margin-right: 1em;
-
-    /* todo доделать */
-
-    /* margin-top: 1em; */
-  }
-}
-
-@media (max-width: 450px) {
-  .participantWrapper {
-    margin-right: 2em;
-  }
-}
-
-@media (max-width: 420px) {
-  .participantWrapper {
-    margin-right: 3em;
-  }
-}
-
-@media (max-width: 380px) {
-  .participantWrapper {
-    margin-right: 3.5em;
-  }
-}
-
-@media (max-width: 350px) {
-  .participantWrapper {
-    margin-right: 4em;
+    margin-bottom: 0.8em;
   }
 }

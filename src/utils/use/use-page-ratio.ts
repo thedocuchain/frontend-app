@@ -13,6 +13,23 @@ export const usePageRatio = (isLoading: boolean, pageWidth: number) => {
       setRight(0)
       return
     }
+    if (pageRatio < 0.39) {
+      setRight(((pageWidthElement - rect?.width) / 2) * pageRatio)
+      return
+    }
+    if (pageRatio < 0.453) {
+      setRight(((pageWidthElement - rect?.width) / 2) * (pageRatio + 0.1))
+      return
+    }
+    if (pageRatio < 0.5) {
+      setRight(((pageWidthElement - rect?.width) / 2) * (pageRatio + 0.2))
+      return
+    }
+    if (pageRatio < 0.56) {
+      setRight(((pageWidthElement - rect?.width) / 2) * (pageRatio + 0.3))
+      return
+    }
+
     setRight((pageWidthElement - rect?.width) / 2)
   }
 
