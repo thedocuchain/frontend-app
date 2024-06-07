@@ -7,35 +7,31 @@ export default function Preview(): JSX.Element {
 
   return (
     <Section>
-      <Row
-        style={{
-          ...wrapper,
-          // green gradient
-          backgroundImage: `linear-gradient(rgba(245,253,241,0.5) 0%, rgba(245,253,241,1) 100%),
-        url(${img})`,
-          // white gradient
-          // backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%),
-          // url(${img})`,
-        }}
-      >
-        <Link href={url}>
+      <Link href={url}>
+        <Row
+          style={{
+            ...wrapper,
+            position: 'relative',
+            // green gradient
+            backgroundImage: `linear-gradient(rgba(245,253,241,0.5) 0%, rgba(245,253,241,1) 100%),
+            url(${img})`,
+            //   white gradient
+            //   backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%),
+            // url(${img})`,
+          }}
+        >
           <Column height={330} align={'center'} valign={'bottom'}>
             <Button href={url} style={button}>
               <Text style={text}>
                 {/* View status */}
                 {/* Review and Sign */}
                 View completed document
-                {/* <Img */}
-                {/*  src={'https://docuchain.io/app/assets/arrow-right.svg'} */}
-                {/*  width={15} */}
-                {/*  alt='' */}
-                {/*  style={{ display: 'inline', marginLeft: 6, marginBottom: -4 }} */}
-                {/* /> */}
+                <span style={{ marginLeft: 6 }}>→</span>
               </Text>
             </Button>
           </Column>
-        </Link>
-      </Row>
+        </Row>
+      </Link>
     </Section>
   )
 }

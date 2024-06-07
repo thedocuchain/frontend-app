@@ -47,6 +47,7 @@ export default function MyTemplate() {
 
             <Row>
               {/* <Text style={titleText}>You have {title} to review and sign in Docuchain</Text> */}
+              {/* <Text style={titleText}>You have been assigned as a Watcher of {title}</Text> */}
               <Text style={titleText}>
                 🖊 New signature! {name} signed {title}
               </Text>
