@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
+import { ConfettiComponent } from 'src/components/app/confetti'
 
 import Image404Mobile from './images/404-image-mobile.png'
 import Image404 from './images/404-image-desktop.png'
@@ -72,8 +73,12 @@ export function StatusScreenTemplate(props: {
     }
   })
 
+  const isSuccessPage = isAllSigned || isOneSigned || isSend
+
   return (
     <>
+      {isSuccessPage && <ConfettiComponent />}
+
       <GradientBg>
         <Column
           className={cn(styles.wrapper, 'column-center', {
@@ -124,7 +129,7 @@ export function StatusScreenTemplate(props: {
 
           {isSend && (
             <>
-              <IconPlaneColor className={styles.iconPlane} />
+              <IconPlaneColor width={181} className={styles.iconPlane} />
               <Text theme={'display-text'} className={styles.name}>
                 {documentName}
               </Text>
@@ -149,7 +154,7 @@ export function StatusScreenTemplate(props: {
 
           {isOneSigned && (
             <>
-              <IconSuccessfullySigned className={styles.iconSuccessfullySigned} />
+              <IconSuccessfullySigned width={200} className={styles.iconSuccessfullySigned} />
               <Text theme={'display-text'} className={styles.name}>
                 You’ve successfully
               </Text>
@@ -174,7 +179,7 @@ export function StatusScreenTemplate(props: {
 
           {isExpired && (
             <>
-              <IconExpired className={styles.iconExpired} />
+              <IconExpired width={200} className={styles.iconExpired} />
 
               <Text theme={'display-text'} className={styles.name}>
                 Expired signing link
@@ -194,7 +199,7 @@ export function StatusScreenTemplate(props: {
 
           {isAllSigned && (
             <>
-              <IconSuccessfullySigned className={styles.iconSuccessfullySigned} />
+              <IconSuccessfullySigned width={200} className={styles.iconSuccessfullySigned} />
 
               <Text theme={'display-text'} className={styles.name}>
                 {documentName}
