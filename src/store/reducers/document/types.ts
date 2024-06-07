@@ -59,4 +59,6 @@ export type DocumentType = {
   // todo add on backend
   shortId: string
   previewImage?: string
+  pdfWidth?: number
+  pdfHeight?: number
 }
