@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useMemo } from 'react'
 import { ValidatorWrapper } from '@coxy/react-validator'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { uniqBy } from '@coxy/utils'
 
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { ToastContext } from 'src/components/common/toast/context'
@@ -66,6 +67,7 @@ export function StepAddRecipients(props: ComponentProps) {
   const handleCheckRecipients = useEvent(async () => {
     setIsShowError(false)
     const { isValid, message, errors } = validate()
+    const uniqueErrors = errors ? uniqBy(errors, (item) => item.message) : []
 
     if (validator.current) {
       validator.current.clearCustomErrors()
@@ -74,7 +76,7 @@ export function StepAddRecipients(props: ComponentProps) {
     if (!isValid || isNoSigners) {
       setIsShowError(true)
 
-      if (errors?.length === 1 && !isNoSigners) {
+      if (uniqueErrors?.length === 1 && !isNoSigners) {
         toast.addToast({
           text: message,
         })
@@ -95,7 +97,7 @@ export function StepAddRecipients(props: ComponentProps) {
         }
       }
 
-      if ((isNoSigners && errors?.length >= 1) || errors?.length > 1) {
+      if ((isNoSigners && uniqueErrors?.length >= 1) || uniqueErrors?.length > 1) {
         toast.addToast({
           text: 'Check all fields are correct',
         })
