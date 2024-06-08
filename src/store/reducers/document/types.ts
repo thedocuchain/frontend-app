@@ -18,10 +18,8 @@ export type User = {
   role: 'signer' | 'watcher'
   signatures?: Signature[]
   firstToHear?: boolean
-
-  // todo agreedWithPolicy and readRecordsDisclosure
   agreedWithPolicy?: boolean
-  readRecordsDislosure?: boolean
+  readRecordsDisclosure?: boolean
 }
 
 export type UserInfo = {
@@ -56,6 +54,8 @@ export type DocumentType = {
   downloadLink: string
   pagesCount: number
 
+  // todo agreedWithPolicy
+  agreedWithPolicy?: boolean
   // todo add on backend
   shortId: string
   previewImage?: string
