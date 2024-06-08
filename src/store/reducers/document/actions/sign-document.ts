@@ -7,7 +7,8 @@ import { getDocument } from 'src/store/reducers/document/actions/get-document'
 export type SignDocumentRequest = {
   documentId: string
   userId: string
-  readRecordsDislosure: boolean
+  readRecordsDislosureAndTerms: boolean
+  firstToHear: boolean
   signFont: string
   fontSize: number
   signDate: string // ISO dateTimeString with TZ
@@ -18,10 +19,9 @@ export const signDocument = createAsyncThunk(
   async (payload: SignDocumentRequest, thunkAPI): Promise<SuccessApiResponse | DefaultApiResponse> => {
     try {
       const { data } = await api.post(`/api/v1/documents/${payload.documentId}/users/${payload.userId}/sign`, {
-        readRecordsDislosure: payload.readRecordsDislosure,
-        // todo agreedWithPolicy and readRecordsDisclosure
-        agreedWithPolicy: true,
-        readRecordsDisclosure: true,
+        readRecordsDisclosure: payload.readRecordsDislosureAndTerms,
+        agreedWithPolicy: payload.readRecordsDislosureAndTerms,
+        firstToHear: payload.firstToHear,
         signed: true,
         signFont: payload.signFont,
         fontSize: payload.fontSize,

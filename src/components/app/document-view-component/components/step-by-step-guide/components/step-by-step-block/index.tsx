@@ -54,9 +54,9 @@ export function StepByStepBlock(props: ComponentProps) {
   const isSigned = useAppSelector(selectedIsSigned)
   const dispatch = useAppDispatch()
 
-  const [checkBoxTermsPolicy, setCheckBoxTermsPolicy] = useState(false)
-  const [checkBoxAds, setCheckBoxAds] = useState(true)
-  const [checkBoxConsents, setCheckBoxConsents] = useState(false)
+  const [checkBoxTermsPolicyCreatingDoc, setCheckBoxTermsPolicyCreatingDoc] = useState(false)
+  const [checkBoxFirstToHear, setCheckBoxFirstToHear] = useState(true)
+  const [checkBoxConsentsESDTermsPolicy, setCheckBoxConsentsESDTermsPolicy] = useState(false)
   const [checkBoxError, setCheckBoxError] = useState(false)
 
   const router = useRouter()
@@ -87,12 +87,12 @@ export function StepByStepBlock(props: ComponentProps) {
       return
     }
 
-    if (isCheckBoxTermsAndPrivacy && !checkBoxTermsPolicy) {
+    if (isCheckBoxTermsAndPrivacy && !checkBoxTermsPolicyCreatingDoc) {
       setCheckBoxError(true)
       return
     }
 
-    if (isCheckBoxConsents && !checkBoxConsents) {
+    if (isCheckBoxConsents && !checkBoxConsentsESDTermsPolicy) {
       setCheckBoxError(true)
       return
     }
@@ -102,14 +102,15 @@ export function StepByStepBlock(props: ComponentProps) {
         await sentToSign({
           documentId: documentData.id,
           userId: signerId,
-          readRecordsDislosure: checkBoxConsents,
+          readRecordsDislosureAndTerms: checkBoxConsentsESDTermsPolicy,
+          firstToHear: checkBoxFirstToHear,
           signFont: signatureData.signatureFont,
           fontSize: signatureData.fontSize,
           signDate: signatureData.signDate,
         })
         return
       }
-      // todo add function that changed document status to 'Sent' and checkBoxAds
+      // todo SEND FOR SIGNING function that changed document status to 'Sent' and checkBoxTermsPolicy
       void handleFinish()
       return
     }
@@ -155,25 +156,29 @@ export function StepByStepBlock(props: ComponentProps) {
 
             <Column className='gap12'>
               <CheckboxSquare
-                isVisibleError={checkBoxError && !checkBoxConsents}
-                checked={checkBoxConsents}
-                onChange={setCheckBoxConsents}
+                isVisibleError={checkBoxError && !checkBoxConsentsESDTermsPolicy}
+                checked={checkBoxConsentsESDTermsPolicy}
+                onChange={setCheckBoxConsentsESDTermsPolicy}
               >
-                I read the{' '}
-                <AppLink target={'_blank'} href={'https://docuchain.io/electronic_records'}>
-                  Electronic Records
+                I agree with the{' '}
+                <AppLink target={'_blank'} href={'https://docuchain.io/terms'}>
+                  Terms of use,
+                </AppLink>{' '}
+                <AppLink target={'_blank'} href={'https://docuchain.io/electronic_signature_dislosure'}>
+                  Electronic Signature Disclosure
                 </AppLink>{' '}
                 and{' '}
-                <AppLink target={'_blank'} href={'https://docuchain.io/signature_dislosure'}>
-                  Signature Dislosure
+                <AppLink target={'_blank'} href={'https://docuchain.io/policy'}>
+                  Privacy Policy
                 </AppLink>{' '}
-                <div className='hide-mobile'>
-                  <br />
-                </div>
                 and agree to use electronic record and signatures.
               </CheckboxSquare>
 
               <GuideLabel title={'Accept'} />
+
+              <CheckboxSquare checked={checkBoxFirstToHear} onChange={setCheckBoxFirstToHear}>
+                First to hear DocuChain&apos;s new features.
+              </CheckboxSquare>
             </Column>
           </>
         )}
@@ -184,9 +189,9 @@ export function StepByStepBlock(props: ComponentProps) {
 
             <Column className='gap12'>
               <CheckboxSquare
-                isVisibleError={checkBoxError && !checkBoxTermsPolicy}
-                checked={checkBoxTermsPolicy}
-                onChange={setCheckBoxTermsPolicy}
+                isVisibleError={checkBoxError && !checkBoxTermsPolicyCreatingDoc}
+                checked={checkBoxTermsPolicyCreatingDoc}
+                onChange={setCheckBoxTermsPolicyCreatingDoc}
               >
                 I agree with the{' '}
                 <AppLink target={'_blank'} href={'https://docuchain.io/terms'}>
@@ -199,10 +204,6 @@ export function StepByStepBlock(props: ComponentProps) {
               </CheckboxSquare>
 
               <GuideLabel title={'Accept'} />
-
-              <CheckboxSquare checked={checkBoxAds} onChange={setCheckBoxAds}>
-                First to hear DocuChain&apos;s new features.
-              </CheckboxSquare>
             </Column>
           </>
         )}
