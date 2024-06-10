@@ -24,9 +24,7 @@ export function StepNewDocument(): JSX.Element {
         const response = await dispatch(uploadDocument({ file })).unwrap()
 
         if (response.redirectUrl) {
-          const id = response.redirectUrl.slice(29)
-          const link = `https://docuchain.io/app/doc/${id}`
-          window.open(link, '_self')
+          window.open(response.redirectUrl, '_self')
         }
       }
     })()
