@@ -10,7 +10,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head />
+        <Head>
+          <link rel='preload' href='/app/fonts/Caveat-Regular.ttf' as='font' crossOrigin='' type='font/woff2' />
+        </Head>
         <body>
           <Main />
           <NextScript />
