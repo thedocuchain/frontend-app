@@ -23,6 +23,10 @@
   gap: 4px;
 }
 
+.space {
+  height: 136px;
+}
+
 @media (--mobile) {
   .container {
     min-width: 290px;
@@ -35,5 +39,9 @@
   .textWrapper {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .space {
+    height: 190px;
   }
 }

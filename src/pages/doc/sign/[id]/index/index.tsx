@@ -92,7 +92,7 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const isAlreadySigned = document.users.find((user) => user.id === signerId)?.signatures[0].signed
 
   // todo fix match
-  // const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
+  // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
   // if (!isMatchId) {
   //   if (context.res) {
   //     context.res.writeHead(302, { Location: 'https://docuchain.io/' })

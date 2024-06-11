@@ -116,7 +116,7 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
 
   // const documentId = context.query.id as string
   // todo fix match
-  // const isMatchId = documentId.match(/[a-zA-Z0-9]{6}/)
+  // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
   //
   // if (!isMatchId) {
   //   if (context.res) {

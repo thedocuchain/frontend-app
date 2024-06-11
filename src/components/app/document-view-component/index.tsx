@@ -4,7 +4,6 @@ import cn from 'classnames'
 import { Column, Container, RowBetween } from 'src/components/ui/grid'
 import { Text } from 'src/components/ui/typography'
 import { SidePanelPagesPreview } from 'src/components/app/document-view-component/components/side-panel-pages-preview'
-import { Space } from 'src/components/ui/space'
 import { StepByStepGuideWrapper } from 'src/components/app/document-view-component/components/step-by-step-guide'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
 import { useAppSelector } from 'src/store/hooks'
@@ -43,7 +42,7 @@ export function DocumentViewComponent(props: {
         <PdfViewPage setErrorLoadingPdf={setErrorLoadingPdf} />
       </Container>
 
-      <Space size={136} />
+      <div className={styles.space} />
     </StepByStepGuideWrapper>
   )
 }

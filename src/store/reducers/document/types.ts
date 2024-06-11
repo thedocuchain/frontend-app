@@ -54,8 +54,6 @@ export type DocumentType = {
   downloadLink: string
   pagesCount: number
 
-  // todo agreedWithPolicy
-  agreedWithPolicy?: boolean
   // todo add on backend
   shortId: string
   previewImage?: string

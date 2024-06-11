@@ -15,6 +15,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
 import { ConfettiComponent } from 'src/components/app/confetti'
+import { Space } from 'src/components/ui/space'
 
 import Image404Mobile from './images/404-image-mobile.png'
 import Image404 from './images/404-image-desktop.png'
@@ -57,6 +58,11 @@ export function StatusScreenTemplate(props: {
       return
     }
     void router.push(`/doc/${checkId}`)
+  })
+
+  // todo delete
+  const handleSign = useEvent(() => {
+    void router.push(`/doc/sign/${checkId}?userId=${document.users.filter((el) => el.role === 'signer')[0].id}`)
   })
 
   const handleViewDocument = useEvent(() => {
@@ -149,6 +155,12 @@ export function StatusScreenTemplate(props: {
                   Check status
                 </Button>
               </Row>
+
+              {/* todo delete */}
+              <Space />
+              <Button theme='secondary' onClick={handleSign}>
+                Sign document
+              </Button>
             </>
           )}
 

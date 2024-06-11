@@ -79,9 +79,9 @@ export function PdfViewPage(props: ComponentProps) {
   }
 
   const documentData = useAppSelector(selectedDocument)
-  const url = documentData.downloadLink
+  const url = documentData?.downloadLink
 
-  // todo fix?
+  // todo fix error?
   if (!url) return null
 
   if (isDocumentPreview)
