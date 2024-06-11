@@ -94,7 +94,11 @@ export function PdfViewPage(props: ComponentProps) {
     )
 
   return (
-    <div className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })} ref={setContainerRef}>
+    <div
+      id={isSidePanel ? '' : 'pages-container'}
+      className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })}
+      ref={setContainerRef}
+    >
       {isLoading && isSidePanel && <Loader />}
       {isLoading && !isSidePanel && <OverlayBlur title={'Loading file...'} />}
 
