@@ -107,9 +107,11 @@ export function PdfViewPage(props: ComponentProps) {
         className={isLoading ? 'display-none' : null}
         loading={null}
         error={
-          <MockPage containerWidth={containerWidth} maxWidth={maxWidth}>
-            <EmptyState type={'error'} />
-          </MockPage>
+          isSidePanel ? null : (
+            <MockPage containerWidth={containerWidth} maxWidth={maxWidth}>
+              <EmptyState type={'error'} />
+            </MockPage>
+          )
         }
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={onDocumentLoadError}
