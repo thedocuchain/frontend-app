@@ -1,0 +1,33 @@
+.mockPage {
+  width: 146px;
+  height: 194px;
+  background: var(--text-white);
+  box-shadow: var(--shadow-level-2);
+  margin: 0 auto 26px;
+  -webkit-animation: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.icon {
+  transform: scale(0.7);
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

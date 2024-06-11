@@ -18,6 +18,7 @@ import { OverlayBlur } from 'src/components/app/overlay-blur'
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
 import { MockPage } from 'src/components/ui/mock-page'
 import { EmptyState } from 'src/components/ui/empty-state'
+import { MockPageSidePanel } from 'src/components/ui/mock-page-side-panel'
 
 import styles from './styles.module.css'
 
@@ -107,7 +108,9 @@ export function PdfViewPage(props: ComponentProps) {
         className={isLoading ? 'display-none' : null}
         loading={null}
         error={
-          isSidePanel ? null : (
+          isSidePanel ? (
+            <MockPageSidePanel />
+          ) : (
             <MockPage containerWidth={containerWidth} maxWidth={maxWidth}>
               <EmptyState type={'error'} />
             </MockPage>
