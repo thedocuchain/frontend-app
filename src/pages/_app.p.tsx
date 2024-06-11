@@ -18,7 +18,6 @@ import { RouterLoader } from 'src/components/common/router-loader'
 import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
 import { ErrorBoundary } from 'src/components/common/error-boundary'
-import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
@@ -88,8 +87,6 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
   const isServer = !!context.ctx.res
   const dispatch = store.dispatch as ApiDispatch
 
-  const documentId = context.ctx.query.id as string
-
   let cookies
   if (isServer) {
     cookies = getCookies({
@@ -99,14 +96,6 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
     await dispatch(hydrateCookies(cookies as CookiesPayload))
   } else {
     cookies = getCookies()
-  }
-
-  if (isServer) {
-    await dispatch(
-      getDocument({
-        id: documentId,
-      }),
-    )
   }
 
   let pageProps = {}

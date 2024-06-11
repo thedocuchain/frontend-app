@@ -12,6 +12,7 @@ import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
+import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 import styles from './styles.module.css'
 
@@ -84,12 +85,9 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
 }
 
 DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
-  const state = store.getState()
-  const document = selectedDocument(state)
-
-  // const documentId = context.query.id as string
+  const dispatch = store.dispatch
+  const documentId = context.query.id as string
   const signerId = context.query.userId as string
-  const isAlreadySigned = document.users.find((user) => user.id === signerId)?.signatures[0].signed
 
   // todo fix match
   // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
@@ -101,6 +99,14 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   //     window.open('https://docuchain.io/', '_self')
   //   }
   // }
+
+  const document = await dispatch(
+    getDocument({
+      id: documentId,
+    }),
+  ).unwrap()
+
+  const isAlreadySigned = document?.users.find((user) => user.id === signerId)?.signatures[0].signed
 
   if (!document || !signerId) {
     return { step: 'expired-link' }
