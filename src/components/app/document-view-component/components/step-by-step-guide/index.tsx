@@ -15,6 +15,7 @@ export function StepByStepGuideWrapper(
 ) {
   const steps = props.steps
   const [activeStep, setActiveStep] = useState(0)
+  const [checkBoxFirstToHear, setCheckBoxFirstToHear] = useState(true)
 
   if (props.isViewPage) return <>{props.children}</>
 
@@ -32,6 +33,8 @@ export function StepByStepGuideWrapper(
           key={`${step.title}${index}`}
           stepsLength={steps.length}
           isOpen={props.isOpen}
+          checkBoxFirstToHear={checkBoxFirstToHear}
+          setCheckBoxFirstToHear={setCheckBoxFirstToHear}
         />
       ))}
     </>

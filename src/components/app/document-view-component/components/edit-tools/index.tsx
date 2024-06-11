@@ -98,8 +98,10 @@ export function Signature(props: SignatureProps) {
   }, [fontStyle])
 
   useEffect(() => {
-    dispatch(setSignatureFont(font))
-  }, [font])
+    if (isActiveSignature) {
+      dispatch(setSignatureFont(font))
+    }
+  }, [font, isActiveSignature])
 
   return (
     <div className={cl} style={style} onClick={handeSignDocument}>

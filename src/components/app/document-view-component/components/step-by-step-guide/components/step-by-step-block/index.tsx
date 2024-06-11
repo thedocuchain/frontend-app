@@ -43,29 +43,38 @@ export type ComponentProps = {
   index: number
   isOpen: boolean
   setSuccessPage: () => void
+  checkBoxFirstToHear: boolean
+  setCheckBoxFirstToHear: (boolean) => void
 }
 
 export function StepByStepBlock(props: ComponentProps) {
   const { title, isCheckBoxTermsAndPrivacy, isCheckBoxConsents, isSignatureMobileBlock, buttonText } = props.item
-  const { stepsLength, activeStep, index, setActiveStep, isOpen, setSuccessPage } = props
+  const {
+    stepsLength,
+    activeStep,
+    index,
+    setActiveStep,
+    isOpen,
+    setSuccessPage,
+    checkBoxFirstToHear,
+    setCheckBoxFirstToHear,
+  } = props
   const isVisible = activeStep === index
   const isLastStep = activeStep + 1 === stepsLength
   const [isDeleted, setDeleted] = useState(false)
+  const documentData = useAppSelector(selectedDocument)
+  const signatureData = useAppSelector(selectSettingState)
   const isSigned = useAppSelector(selectedIsSigned)
   const dispatch = useAppDispatch()
+  const [sentToSign, { isSuccess, isLoading }] = useApi(signDocument)
 
   const [checkBoxTermsPolicyCreatingDoc, setCheckBoxTermsPolicyCreatingDoc] = useState(false)
-  const [checkBoxFirstToHear, setCheckBoxFirstToHear] = useState(true)
   const [checkBoxConsentsESDTermsPolicy, setCheckBoxConsentsESDTermsPolicy] = useState(false)
   const [checkBoxError, setCheckBoxError] = useState(false)
 
   const router = useRouter()
   const isSignPage = router.pathname.includes('sign')
   const signerId = router.query.userId as string
-
-  const [sentToSign, { isSuccess, isLoading }] = useApi(signDocument)
-  const documentData = useAppSelector(selectedDocument)
-  const signatureData = useAppSelector(selectSettingState)
 
   useEffect(() => {
     // if you need to scroll to signature
@@ -102,7 +111,7 @@ export function StepByStepBlock(props: ComponentProps) {
         await sentToSign({
           documentId: documentData.id,
           userId: signerId,
-          readRecordsDislosureAndTerms: checkBoxConsentsESDTermsPolicy,
+          readRecordsDislosureAndTerms: true,
           firstToHear: checkBoxFirstToHear,
           signFont: signatureData.signatureFont,
           fontSize: signatureData.fontSize,
@@ -110,7 +119,7 @@ export function StepByStepBlock(props: ComponentProps) {
         })
         return
       }
-      // todo SEND FOR SIGNING function that changed document status to 'Sent' and checkBoxTermsPolicy
+      // todo SEND FOR SIGNING function that changed document status to 'Sent'
       void handleFinish()
       return
     }
