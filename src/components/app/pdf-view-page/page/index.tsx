@@ -14,8 +14,9 @@ import styles from './styles.module.css'
 export function PageView(props: { isLoading?: boolean; index: number; containerWidth?: number; maxWidth: number }) {
   const { index, containerWidth, maxWidth, isLoading } = props
   const documentData = useAppSelector(selectedDocument)
-  const signers = documentData.users.filter((el) => el.role === 'signer' && !el.signatures[0].signed)
-  const isSignersOnPage = signers.some((el) => el.signatures[0].pageNumber === index + 1)
+  const signers = documentData.users.filter(
+    (el) => el.role === 'signer' && !el.signatures[0].signed && el.signatures[0].pageNumber === index + 1,
+  )
 
   const router = useRouter()
   const isJustCreated = !router.pathname.includes('sign')
@@ -30,7 +31,7 @@ export function PageView(props: { isLoading?: boolean; index: number; containerW
 
   return (
     <Page className={styles.page} width={width} pageNumber={index + 1}>
-      {isSignersOnPage && (
+      {signers && (
         <>
           {signers.map((item, index) => (
             <React.Fragment key={item.id}>
