@@ -21,3 +21,11 @@
   font-weight: 700;
   src: url("/app/fonts/Nacelle-Bold.otf");
 }
+
+@font-face {
+  font-display: swap;
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/app/fonts/Caveat-Regular.ttf");
+}
