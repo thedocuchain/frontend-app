@@ -181,6 +181,9 @@ export function StepByStepBlock(props: ComponentProps) {
                 <AppLink target={'_blank'} href={'https://docuchain.io/electronic_signature_dislosure'}>
                   Electronic Signature Disclosure
                 </AppLink>{' '}
+                <span className={'hide-mobile'}>
+                  <br />
+                </span>
                 and{' '}
                 <AppLink target={'_blank'} href={'https://docuchain.io/policy'}>
                   Privacy Policy

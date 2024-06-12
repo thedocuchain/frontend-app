@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
+import { useRouter } from 'next/router'
 
 import { Column } from 'src/components/ui/grid'
 import { UploadCardBg } from 'src/components/app/upload-card-bg'
@@ -17,6 +18,7 @@ export function StepNewDocument(): JSX.Element {
   const [file, setFile] = useState<File | null>(null)
   const inputRef = React.useRef(null)
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   useEffect(() => {
     ;(async () => {
@@ -24,7 +26,11 @@ export function StepNewDocument(): JSX.Element {
         const response = await dispatch(uploadDocument({ file })).unwrap()
 
         if (response.redirectUrl) {
-          window.open(response.redirectUrl, '_self')
+          // window.open(response.redirectUrl, '_self')
+
+          const id = response.redirectUrl.slice(29)
+          const link = `/doc/${id}`
+          void router.push(link)
         }
       }
     })()
