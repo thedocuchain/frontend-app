@@ -28,6 +28,7 @@ export type StepsDocumentPage =
   | 'success-all-signed'
   | 'check-status'
   | 'document-view'
+  | 'document-error'
 export type StepWizardType = {
   title: string
   value: StepsDocumentPage
@@ -81,6 +82,13 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
           </>
         )}
 
+        {activeStep === 'document-error' && (
+          <>
+            <Header isTransparent />
+            <StatusScreenTemplate is404Document />
+          </>
+        )}
+
         {activeStep === 'document-view' && <StepViewDocument />}
 
         {activeStep === 'check-status' && <StepCheckStatus />}
@@ -119,12 +127,7 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
   // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
   //
   // if (!isMatchId) {
-  //   if (context.res) {
-  //     context.res.writeHead(302, { Location: 'https://docuchain.io/' })
-  //     context.res.end()
-  //   } else {
-  //     window.open('https://docuchain.io/', '_self')
-  //   }
+  //   return { step: 'document-error' }
   // }
 
   const document = await dispatch(
@@ -134,12 +137,7 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
   ).unwrap()
 
   if (!document) {
-    if (context.res) {
-      context.res.writeHead(302, { Location: 'https://docuchain.io/' })
-      context.res.end()
-    } else {
-      window.open('https://docuchain.io/', '_self')
-    }
+    return { step: 'document-error' }
   }
 
   if (isDocumentViewPage) {

@@ -35,15 +35,10 @@
   height: 124px;
 }
 
-.imgMobile {
-  display: none;
-  width: 100%;
-  max-width: 200px;
-}
-
 .img {
   width: 100%;
   display: block;
+  max-width: 720px;
 }
 
 .name {
@@ -97,17 +92,13 @@
 }
 
 @media (--mobile) {
-  .imgMobile {
-    display: block;
-  }
-
-  .img {
-    display: none;
-  }
-
   .iconPlane {
     width: 130px;
     height: 46px;
+  }
+
+  .img {
+    max-width: 200px;
   }
 
   .iconSuccessfullySigned {

@@ -26,6 +26,7 @@ export function StatusScreenTemplate(props: {
   isOneSigned?: boolean
   isSend?: boolean
   is404Page?: boolean
+  is404Document?: boolean
   isServerErrorPage?: boolean
   isExpired?: boolean
   setCheckStatusPage?: () => void
@@ -35,6 +36,7 @@ export function StatusScreenTemplate(props: {
     isAllSigned,
     isOneSigned,
     is404Page,
+    is404Document,
     isServerErrorPage,
     isSend,
     isExpired,
@@ -89,7 +91,7 @@ export function StatusScreenTemplate(props: {
         <Column
           className={cn(styles.wrapper, 'column-center', {
             [styles.wrapperOneSigned]: isOneSigned,
-            [styles.wrapper404]: is404Page || isServerErrorPage,
+            [styles.wrapper404]: is404Page || isServerErrorPage || is404Document,
           })}
         >
           {isServerErrorPage && (
@@ -114,8 +116,10 @@ export function StatusScreenTemplate(props: {
 
           {is404Page && (
             <>
-              <img src={Image404Mobile.src} width={184} className={styles.imgMobile} alt='' />
-              <img src={Image404.src} width={720} className={styles.img} alt='' />
+              <picture>
+                <source srcSet={Image404Mobile.src} width={184} media='(max-width: 640px)' type='image/png' />
+                <img src={Image404.src} className={styles.img} width={720} alt='' />
+              </picture>
 
               <Text theme='display-text' header='h1' className={styles.name}>
                 Page not found
@@ -123,6 +127,29 @@ export function StatusScreenTemplate(props: {
 
               <Text theme='body-1' className={cn(styles.desc, 'color-text-secondary text-center')}>
                 Allow us to point you in a different direction.
+              </Text>
+
+              <Row className={styles.buttonsContainer}>
+                <Button href='https://docuchain.io/' className={styles.buttonHome}>
+                  Take me home
+                </Button>
+              </Row>
+            </>
+          )}
+
+          {is404Document && (
+            <>
+              <picture>
+                <source srcSet={Image404Mobile.src} width={184} media='(max-width: 640px)' type='image/png' />
+                <img src={Image404.src} className={styles.img} width={720} alt='' />
+              </picture>
+
+              <Text theme='display-text' header='h1' className={styles.name}>
+                Document not found
+              </Text>
+
+              <Text theme='body-1' className={cn(styles.desc, 'color-text-secondary text-center')}>
+                You may have entered the wrong ID
               </Text>
 
               <Row className={styles.buttonsContainer}>

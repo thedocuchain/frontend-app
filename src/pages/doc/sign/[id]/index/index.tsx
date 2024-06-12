@@ -92,12 +92,7 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   // todo fix match
   // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
   // if (!isMatchId) {
-  //   if (context.res) {
-  //     context.res.writeHead(302, { Location: 'https://docuchain.io/' })
-  //     context.res.end()
-  //   } else {
-  //     window.open('https://docuchain.io/', '_self')
-  //   }
+  //   return { step: 'document-error' }
   // }
 
   const document = await dispatch(
