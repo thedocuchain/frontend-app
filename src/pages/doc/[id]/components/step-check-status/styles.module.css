@@ -60,6 +60,10 @@
   max-height: 72px;
 }
 
+.space {
+  margin-top: 70px;
+}
+
 @media (--tablet) {
   .wrapper {
     margin-top: calc(var(--header-size) + 24px);
@@ -103,5 +107,9 @@
   .containerDone {
     margin-top: 0;
     margin-bottom: 8px;
+  }
+
+  .space {
+    margin-top: 40px;
   }
 }

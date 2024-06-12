@@ -6,7 +6,6 @@ import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import { Header } from 'src/components/app/header'
 import { Column, Flex } from 'src/components/ui/grid'
 import { AppTable } from 'src/components/app/app-table'
-import { Footer } from 'src/components/app/footer'
 import { DocumentPreview } from 'src/components/app/document-preview'
 import { Text } from 'src/components/ui/typography'
 import { StepsProgressBar } from 'src/components/app/steps-progress-bar'
@@ -204,14 +203,10 @@ export function StepCheckStatus() {
             </Text>
             <AppTable participants={users} />
 
-            <div className='hide-mobile'>
-              <Space size={76} />
-            </div>
+            <div className={styles.space} />
           </Column>
         </div>
       </Flex>
-
-      <Footer />
     </>
   )
 }
