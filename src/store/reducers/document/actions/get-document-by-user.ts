@@ -9,7 +9,7 @@ export const getDocumentByUser = createAsyncThunk(
   'document/get-by-user',
   async (payload: { documentId: string; userId: string }, thunkAPI): Promise<DocumentType | DefaultApiResponse> => {
     try {
-      const { data } = await api.get(`/api/v1/documents/${payload.documentId}/users/${payload.userId}`)
+      const { data } = await api.get(`/v1/documents/${payload.documentId}/users/${payload.userId}`)
 
       await thunkAPI.dispatch(patchDocumentState({ document: data }))
       return data

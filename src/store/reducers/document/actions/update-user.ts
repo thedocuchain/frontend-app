@@ -8,7 +8,7 @@ export const updateUser = createAsyncThunk(
   'user/update',
   async (payload: { user: Partial<User> }): Promise<User | DefaultApiResponse> => {
     try {
-      const { data } = await api.patch(`/api/v1/users/${payload.user.id}`, payload.user)
+      const { data } = await api.patch(`/v1/users/${payload.user.id}`, payload.user)
 
       return data
     } catch (ignore) {
