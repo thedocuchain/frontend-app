@@ -1,5 +1,4 @@
 export { default as IconSearch } from 'src/icons/inline/search.inline.svg'
-export { default as IconPlus } from 'src/icons/inline/plus.inline.svg'
 export { default as IconArrowDown } from 'src/icons/inline/arrow-down.inline.svg'
 export { default as IconArrowDownLong } from 'src/icons/inline/arrow-down-long.inline.svg'
 export { default as IconArrowRightLong } from 'src/icons/inline/arrow-right-long.inline.svg'
@@ -28,8 +27,6 @@ export { default as IconCheckDot } from 'src/icons/inline/check-dot.inline.svg'
 export { default as IconBottomSheet } from 'src/icons/inline/bottom-sheet.inline.svg'
 export { default as IconCheckCircle } from 'src/icons/inline/check-circle.inline.svg'
 export { default as IconInfoCircle } from 'src/icons/inline/info-circle.inline.svg'
-
-export { default as IconUpload } from 'src/icons/inline/upload-cloud.inline.svg'
 
 export { default as IconXLogo } from 'src/icons/socials/x.inline.svg'
 export { default as IconLinkedinLogo } from 'src/icons/socials/in.inline.svg'

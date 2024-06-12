@@ -3,12 +3,9 @@ import cn from 'classnames'
 import { useRouter } from 'next/router'
 
 import { Column } from 'src/components/ui/grid'
-import { UploadCardBg } from 'src/components/app/upload-card-bg'
 import { Text } from 'src/components/ui/typography'
-import { IconPlus, IconUpload } from 'src/icons'
 import { Space } from 'src/components/ui/space'
 import { Button } from 'src/components/ui/button'
-import { FileUploadProgress } from 'src/components/app/file-upload-progress'
 import { useAppDispatch } from 'src/store/hooks'
 import { uploadDocument } from 'src/store/reducers/document/actions/files'
 
@@ -77,9 +74,6 @@ export function StepNewDocument(): JSX.Element {
           onDrop={handleDrop}
           className={cn(styles.wrapperFile, { [styles.wrapperFileDisplay]: dragActive })}
         >
-          <div className={styles.plus}>
-            <IconPlus />
-          </div>
           <Space size={32} />
           <Text theme={'display-text'}>Drop your files here!</Text>
         </div>
@@ -103,13 +97,9 @@ export function StepNewDocument(): JSX.Element {
             <Space size={32} />
           </div>
 
-          {file && <FileUploadProgress file={file} setFile={setFile} />}
-
           {!file && (
-            <UploadCardBg>
+            <div className={styles.card}>
               <Column className='column-center text-center w100-p'>
-                <IconUpload />
-                <Space size={12} />
                 <Text theme={'body-1'} className='hide-mobile'>
                   Drag and drop or click to upload
                 </Text>
@@ -138,7 +128,7 @@ export function StepNewDocument(): JSX.Element {
                   Upload document
                 </Button>
               </label>
-            </UploadCardBg>
+            </div>
           )}
         </label>
       </form>

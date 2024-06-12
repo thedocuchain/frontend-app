@@ -47,7 +47,7 @@ export function StepCheckStatus() {
     },
     {
       title: signedBy,
-      value: valueSigners,
+      value: valueSigners === 0 ? 5 : valueSigners,
     },
     {
       title: 'Completed',
