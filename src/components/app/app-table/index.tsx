@@ -5,6 +5,7 @@ import { TableRow } from 'src/components/app/app-table/components/table-row'
 import { SortOrder, SortType, TableHead } from 'src/components/app/app-table/components/table-head'
 import { SortingTag } from 'src/components/app/app-table/components/sorting-tag'
 import { User } from 'src/store/reducers/document/types'
+import { TableHeadWithoutSort } from 'src/components/app/app-table/components/table-head-without-sort'
 
 import styles from './styles.module.css'
 
@@ -80,18 +81,25 @@ export function AppTable(props: { participants: User[] }) {
 
   return (
     <div className={styles.tableContainer}>
-      <div className='show-mobile'>
-        <SortingTag sortType={sortType} setSortType={handleSetSortType} sortOrder={sortOrder} setOrder={setOrder} />
-      </div>
+      {participants.length > 1 && (
+        <div className='show-mobile'>
+          <SortingTag sortType={sortType} setSortType={handleSetSortType} sortOrder={sortOrder} setOrder={setOrder} />
+        </div>
+      )}
 
       <table className={styles.table}>
-        <TableHead
-          isDoneSigned={isDoneSigned}
-          sortType={sortType}
-          setSortType={handleSetSortType}
-          sortOrder={sortOrder}
-          setOrder={setOrder}
-        />
+        {participants.length > 1 ? (
+          <TableHead
+            isDoneSigned={isDoneSigned}
+            sortType={sortType}
+            setSortType={handleSetSortType}
+            sortOrder={sortOrder}
+            setOrder={setOrder}
+          />
+        ) : (
+          <TableHeadWithoutSort isDoneSigned={isDoneSigned} />
+        )}
+
         <tbody>
           {sortedList?.map((item, index) => (
             <TableRow

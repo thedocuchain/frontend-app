@@ -36,7 +36,7 @@ export function TableHead(props: {
 
   return (
     <thead>
-      <tr>
+      <tr className={styles.tr}>
         <td style={{ width: '60%' }} onClick={() => handleSetSortType('participants')}>
           <Row className={styles.row}>
             <Text
