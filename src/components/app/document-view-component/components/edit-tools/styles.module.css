@@ -10,7 +10,7 @@
   user-select: none;
   transition: all 0.2s ease;
   cursor: auto;
-  color: var(--text-signature-color-1);
+  color: var(--text-primary);
 }
 
 .isEdited {
