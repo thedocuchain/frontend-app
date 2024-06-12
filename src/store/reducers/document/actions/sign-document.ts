@@ -18,7 +18,7 @@ export const signDocument = createAsyncThunk(
   'document/sign',
   async (payload: SignDocumentRequest, thunkAPI): Promise<SuccessApiResponse | DefaultApiResponse> => {
     try {
-      const { data } = await api.post(`/api/v1/documents/${payload.documentId}/users/${payload.userId}/sign`, {
+      const { data } = await api.post(`/v1/documents/${payload.documentId}/users/${payload.userId}/sign`, {
         readRecordsDisclosure: payload.readRecordsDislosureAndTerms,
         agreedWithPolicy: payload.readRecordsDislosureAndTerms,
         firstToHear: payload.firstToHear,

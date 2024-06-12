@@ -21,7 +21,7 @@ export const addUsersToDocument = createAsyncThunk(
         .map((el, index) => ({ ...el, position: index + 1 }))
       const watchers = payload.users.filter((el) => el.role === 'watcher').map((el) => ({ ...el, position: 0 }))
       const payloadUsers = [...signers, ...watchers]
-      const { data } = await api.patch(`/api/v1/documents/${payload.id}`, { name: payload.name, users: payloadUsers })
+      const { data } = await api.patch(`/v1/documents/${payload.id}`, { name: payload.name, users: payloadUsers })
 
       await thunkAPI.dispatch(
         getDocument({

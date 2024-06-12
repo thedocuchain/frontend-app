@@ -9,7 +9,7 @@ export const getDocument = createAsyncThunk(
   'document/get',
   async (payload: { id: string }, thunkAPI): Promise<DocumentType | DefaultApiResponse> => {
     try {
-      const { data } = await api.get(`/api/v1/documents/${payload.id}`)
+      const { data } = await api.get(`/v1/documents/${payload.id}`)
 
       await thunkAPI.dispatch(patchDocumentState({ document: data }))
       return data
