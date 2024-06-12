@@ -139,10 +139,7 @@ export function StatusScreenTemplate(props: {
 
           {is404Document && (
             <>
-              <picture>
-                <source srcSet={Image404Mobile.src} width={184} media='(max-width: 640px)' type='image/png' />
-                <img src={Image404.src} className={styles.img} width={720} alt='' />
-              </picture>
+              <img src={Image404Mobile.src} width={184} className={''} alt='' />
 
               <Text theme='display-text' header='h1' className={styles.name}>
                 Document not found
