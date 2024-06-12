@@ -8,7 +8,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Allison";
+  font-family: Allison;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Allison-Regular.ttf");
@@ -16,7 +16,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Allura";
+  font-family: Allura;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Allura-Regular.ttf");
@@ -40,7 +40,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Arizonia";
+  font-family: Arizonia;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Arizonia-Regular.ttf");
@@ -72,7 +72,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Calligraffitti";
+  font-family: Calligraffitti;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Calligraffitti-Regular.ttf");
@@ -80,7 +80,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Caveat";
+  font-family: Caveat;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Caveat-Regular.ttf");
@@ -96,7 +96,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Charm";
+  font-family: Charm;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Charm-Regular.ttf");
@@ -104,7 +104,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Charmonman";
+  font-family: Charmonman;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Charmonman-Regular.ttf");
@@ -128,7 +128,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Cookie";
+  font-family: Cookie;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Cookie-Regular.ttf");
@@ -136,7 +136,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Courgette";
+  font-family: Courgette;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Courgette-Regular.ttf");
@@ -176,7 +176,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Dekko";
+  font-family: Dekko;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Dekko-Regular.ttf");
@@ -200,7 +200,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Engagement";
+  font-family: Engagement;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Engagement-Regular.ttf");
@@ -208,7 +208,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Ephesis";
+  font-family: Ephesis;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Ephesis-Regular.ttf");
@@ -216,7 +216,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Estonia";
+  font-family: Estonia;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Estonia-Regular.ttf");
@@ -232,7 +232,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Fasthand";
+  font-family: Fasthand;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Fasthand-Regular.ttf");
@@ -280,7 +280,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Handlee";
+  font-family: Handlee;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Handlee-Regular.ttf");
@@ -304,7 +304,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Hurricane";
+  font-family: Hurricane;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Hurricane-Regular.ttf");
@@ -320,7 +320,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Italianno";
+  font-family: Italianno;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Italianno-Regular.ttf");
@@ -328,7 +328,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Julee";
+  font-family: Julee;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Julee-Regular.ttf");
@@ -352,7 +352,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Kalam";
+  font-family: Kalam;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Kalam-Regular.ttf");
@@ -376,7 +376,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Kristi";
+  font-family: Kristi;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Kristi-Regular.ttf");
@@ -400,7 +400,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Licorice";
+  font-family: Licorice;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Licorice-Regular.ttf");
@@ -440,7 +440,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Meddon";
+  font-family: Meddon;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Meddon-Regular.ttf");
@@ -448,7 +448,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "MedievalSharp";
+  font-family: MedievalSharp;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/MedievalSharp-Regular.ttf");
@@ -464,7 +464,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Merienda";
+  font-family: Merienda;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Merienda-Regular.ttf");
@@ -472,7 +472,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Miniver";
+  font-family: Miniver;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Miniver-Regular.ttf");
@@ -480,7 +480,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Montez";
+  font-family: Montez;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Montez-Regular.ttf");
@@ -536,7 +536,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Neonderthaw";
+  font-family: Neonderthaw;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Neonderthaw-Regular.ttf");
@@ -544,7 +544,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Neucha";
+  font-family: Neucha;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Neucha-Regular.ttf");
@@ -584,7 +584,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Pacifico";
+  font-family: Pacifico;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Pacifico-Regular.ttf");
@@ -592,7 +592,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Parisienne";
+  font-family: Parisienne;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Parisienne-Regular.ttf");
@@ -608,7 +608,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Playball";
+  font-family: Playball;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Playball-Regular.ttf");
@@ -616,7 +616,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Qwigley";
+  font-family: Qwigley;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Qwigley-Regular.ttf");
@@ -632,7 +632,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Rancho";
+  font-family: Rancho;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Rancho-Regular.ttf");
@@ -648,7 +648,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Rochester";
+  font-family: Rochester;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Rochester-Regular.ttf");
@@ -664,7 +664,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Sacramento";
+  font-family: Sacramento;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Sacramento-Regular.ttf");
@@ -672,7 +672,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Satisfy";
+  font-family: Satisfy;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Satisfy-Regular.ttf");
@@ -680,7 +680,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Schoolbell";
+  font-family: Schoolbell;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Schoolbell-Regular.ttf");
@@ -712,7 +712,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Shalimar";
+  font-family: Shalimar;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Shalimar-Regular.ttf");
@@ -720,7 +720,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Smooch";
+  font-family: Smooch;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Smooch-Regular.ttf");
@@ -736,7 +736,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Stalemate";
+  font-family: Stalemate;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Stalemate-Regular.ttf");
@@ -752,7 +752,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Sunshiney";
+  font-family: Sunshiney;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Sunshiney-Regular.ttf");
@@ -768,7 +768,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Tangerine";
+  font-family: Tangerine;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Tangerine-Regular.ttf");
@@ -792,7 +792,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Yellowtail";
+  font-family: Yellowtail;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Yellowtail-Regular.ttf");
@@ -800,7 +800,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Zeyada";
+  font-family: Zeyada;
   font-style: normal;
   font-weight: 400;
   src: url("/app/fonts/Zeyada-Regular.ttf");
