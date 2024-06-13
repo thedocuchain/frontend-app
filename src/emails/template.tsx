@@ -11,8 +11,10 @@ export default function MyTemplate() {
     id: 'Y16334',
     title: 'Contractor Agreement',
     name: 'Carol Example',
+    imageLink:
+      'https://example.com/preview.png',
   }
-  const { title, id, name } = meeting || {}
+  const { title, id, name, imageLink } = meeting || {}
 
   return (
     <Html
@@ -43,7 +45,7 @@ export default function MyTemplate() {
         <Container>
           <Section style={form}>
             <Header id={id} />
-            <Preview />
+            <Preview imageLink={imageLink} />
 
             <Row>
               <Text style={titleText}>

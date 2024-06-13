@@ -24,6 +24,7 @@ import {
 } from 'src/store/reducers/signature'
 import { useApi } from 'src/utils/use/use-api'
 import { signDocument } from 'src/store/reducers/document/actions/sign-document'
+import { sendDocumentNotify } from 'src/store/reducers/document/actions/send-document'
 
 import styles from './styles.module.css'
 
@@ -67,6 +68,7 @@ export function StepByStepBlock(props: ComponentProps) {
   const isSigned = useAppSelector(selectedIsSigned)
   const dispatch = useAppDispatch()
   const [sentToSign, { isSuccess, isLoading }] = useApi(signDocument)
+  const [sendDocNotify, sendDocNotifyStatus] = useApi(sendDocumentNotify)
 
   const [checkBoxTermsPolicyCreatingDoc, setCheckBoxTermsPolicyCreatingDoc] = useState(false)
   const [checkBoxConsentsESDTermsPolicy, setCheckBoxConsentsESDTermsPolicy] = useState(false)
@@ -124,8 +126,7 @@ export function StepByStepBlock(props: ComponentProps) {
         })
         return
       }
-      // todo SEND FOR SIGNING function that changed document status to 'Sent'
-      void handleFinish()
+      await sendDocNotify({ documentId: documentData.id })
       return
     }
 
@@ -133,10 +134,14 @@ export function StepByStepBlock(props: ComponentProps) {
   })
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && isSignPage) {
       void handleFinish()
     }
-  }, [isSuccess])
+
+    if (sendDocNotifyStatus.isSuccess && !isSignPage) {
+      void handleFinish()
+    }
+  }, [isSuccess, sendDocNotifyStatus.isSuccess])
 
   const documentSelected = useAppSelector(selectedDocument)
   const activeSigner = signerId && documentSelected.users.find((user) => user.id === signerId)
@@ -232,7 +237,11 @@ export function StepByStepBlock(props: ComponentProps) {
         </Text>
         <Space horizontal size={24} />
 
-        <Button className={styles.button} isLoading={isLoading} onClick={handleNextStep}>
+        <Button
+          className={styles.button}
+          isLoading={isLoading || sendDocNotifyStatus.isLoading}
+          onClick={handleNextStep}
+        >
           {buttonText}
           <ButtonIcon>
             <IconArrowRightLong />

@@ -1,4 +1,4 @@
-import React, { FocusEvent, MouseEvent, useRef, useState } from 'react'
+import React, { FocusEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 import { format } from 'date-fns'
@@ -21,7 +21,7 @@ export function DotsTable(props: { user: User }) {
   const { user } = props
   const documentId = useAppSelector(selectedDocument).id
   const title = `Actions for ${user.name}`
-  const lastNotifyDate = user?.signatures[0]?.lastNotifyDate
+  const lastNotifyDate = user?.lastNotifyDate
   const isMobile = useIsMobile()
   const [isVisible, setVisible] = useState(false)
   const refTimer = useRef<TimeoutId>()
@@ -42,13 +42,15 @@ export function DotsTable(props: { user: User }) {
       await remind({
         userId: user.id,
         documentId,
-        signatureId: user.signatures[0].id,
       })
-      if (isSuccess) {
-        setIsSuccessSent(true)
-      }
     }
   })
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSuccessSent(true)
+    }
+  }, [isSuccess])
 
   const handleOpen = useEvent((event?: MouseEvent<HTMLElement> | FocusEvent<HTMLDivElement>) => {
     if (event) {

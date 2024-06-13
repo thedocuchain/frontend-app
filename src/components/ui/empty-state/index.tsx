@@ -1,6 +1,5 @@
 import React from 'react'
 import cn from 'classnames'
-import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { Text } from 'src/components/ui/typography'
 import { Button } from 'src/components/ui/button'
@@ -20,10 +19,6 @@ export function EmptyState(props: EmptyStateProps) {
 
   const cl = cn(styles.wrapper, className)
 
-  const handleContactSupport = useEvent(() => {
-    // ...
-  })
-
   return (
     <div className={cl}>
       {type === 'error' && (
@@ -38,7 +33,7 @@ export function EmptyState(props: EmptyStateProps) {
           </Text>
 
           <Space size={16} />
-          <Button theme={'link-primary'} onClick={handleContactSupport}>
+          <Button theme={'link-primary'} href={'mailto:support@docuchain.io'}>
             Contact support
           </Button>
         </Column>

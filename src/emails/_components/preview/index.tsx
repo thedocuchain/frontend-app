@@ -1,10 +1,8 @@
 import React from 'react'
 import { Button, Column, Link, Row, Section, Text } from '@react-email/components'
 
-export default function Preview(): JSX.Element {
+export default function Preview({ imageLink }: { imageLink: string }): JSX.Element {
   const url = 'https://docuchain.io/app/doc/Y16334'
-  const img = 'https://i.pinimg.com/736x/bc/f4/99/bcf4998f6f8e094b339492ba8bc0621c.jpg'
-
   return (
     <Section>
       <Link href={url}>
@@ -14,10 +12,10 @@ export default function Preview(): JSX.Element {
             position: 'relative',
             // green gradient
             backgroundImage: `linear-gradient(rgba(245,253,241,0.5) 0%, rgba(245,253,241,1) 100%),
-            url(${img})`,
+            url(${imageLink})`,
             //   white gradient
             //   backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%),
-            // url(${img})`,
+            // url(${imageLink})`,
           }}
         >
           <Column height={330} align={'center'} valign={'bottom'}>

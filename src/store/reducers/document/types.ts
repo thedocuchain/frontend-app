@@ -4,8 +4,6 @@ export type Signature = {
   signFont?: string
   fontSize?: number
   signDate?: string // ISO dateTimeString with TZ
-  notified: boolean
-  lastNotifyDate?: string // ISO dateTimeString with TZ
   yCoordinate?: number
   pageNumber?: number
 }
@@ -17,9 +15,13 @@ export type User = {
   position?: number
   role: 'signer' | 'watcher'
   signatures?: Signature[]
+
   firstToHear?: boolean
   agreedWithPolicy?: boolean
   readRecordsDisclosure?: boolean
+
+  lastNotifyDate?: string // ISO dateTimeString with TZ
+  notifyStatus?: 'delivered' | 'not sent'
 }
 
 export type UserInfo = {
@@ -53,10 +55,10 @@ export type DocumentType = {
   users: User[]
   downloadLink: string
   pagesCount: number
+  imageLink: string
+  shortId: string
 
   // todo add on backend
-  shortId: string
-  previewImage?: string
   pdfWidth?: number
   pdfHeight?: number
 }

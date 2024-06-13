@@ -1,35 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
+import cn from 'classnames'
 
-import { Column, Row, RowCenter } from 'src/components/ui/grid'
+import { Column, Row } from 'src/components/ui/grid'
 import { DocumentType } from 'src/store/reducers/document/types'
 import { Text } from 'src/components/ui/typography'
 import { IconFile, IconUsers } from 'src/icons'
-import { PdfViewPage } from 'src/components/app/pdf-view-page'
+import { Loader } from 'src/components/ui/loader'
+import { MockPageSidePanel } from 'src/components/ui/mock-page-side-panel'
 
 import styles from './styles.module.css'
 
 export function DocumentPreview(props: { document: DocumentType }) {
-  const { shortId, users, pagesCount } = props.document
+  const { shortId, users, pagesCount, imageLink } = props.document
   const signers = users.filter((el) => el.role === 'signer')
+  const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   return (
     <Column>
-      <RowCenter className={styles.wrapperImage}>
-        {/* todo change to image png */}
-        <PdfViewPage isDocumentPreview />
-      </RowCenter>
+      <div className={styles.wrapperImage}>
+        {isLoading && <Loader size={32} />}
+        {isError && !isLoading && <MockPageSidePanel className={styles.wrapperError} />}
+        <img
+          className={cn(styles.img, { [styles.imgLoaded]: !isLoading })}
+          onLoad={() => {
+            setLoading(false)
+            setError(false)
+          }}
+          onError={() => {
+            setLoading(false)
+            setError(true)
+          }}
+          width={146}
+          src={imageLink}
+          alt=''
+        />
+      </div>
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>
           <Text theme={'label-2'}>Document ID:</Text>
-          <Text theme={'body-3'}>{shortId?.toUpperCase()}</Text>
+          <Text theme={'body-3'}>{shortId.toUpperCase()}</Text>
         </Row>
         <Row className={styles.iconBlock}>
           <IconUsers />
-          <Text theme={'body-3'}>{signers.length} signers</Text>
+          <Text theme={'body-3'}>
+            {signers.length} {signers.length > 1 ? 'signers' : 'signer'}
+          </Text>
         </Row>
         <Row className={styles.iconBlock}>
           <IconFile />
-          <Text theme={'body-3'}>{pagesCount} pages</Text>
+          <Text theme={'body-3'}>
+            {pagesCount} {pagesCount > 1 ? 'pages' : 'page'}
+          </Text>
         </Row>
       </Column>
     </Column>
