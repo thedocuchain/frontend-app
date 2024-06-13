@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { format } from 'date-fns'
 import { randomNumber } from '@coxy/utils'
@@ -62,7 +62,6 @@ type SignatureProps = {
 
 export function Signature(props: SignatureProps) {
   const { style, isActiveSignature, name } = props
-
   const isSigned = useAppSelector(selectedIsSigned) && isActiveSignature
   const dispatch = useAppDispatch()
 
@@ -73,35 +72,21 @@ export function Signature(props: SignatureProps) {
 
   const handeSignDocument = useEvent(() => {
     if (!isActiveSignature) return
+    const newIndex = randomNumber(0, fonts.length)
 
     if (isSigned) {
-      const newIndex = randomNumber(0, fonts.length)
-      setFontIndex(newIndex)
-      setFont(fonts[newIndex])
-
+      dispatch(setSignatureFont(fonts[newIndex]))
       return
     }
 
     dispatch(setSigned(true))
+    dispatch(setSignatureFont(fonts[newIndex]))
     const isoDate = toIsoString(new Date())
     dispatch(setSignDate(isoDate))
   })
 
   const fonts = fontsSignatures
-  const randomIndex = randomNumber(0, fonts.length)
-  const [fontIndex, setFontIndex] = useState(randomIndex)
   const fontStyle = useAppSelector(selectedSignatureFont)
-  const [font, setFont] = useState(fonts[fontIndex])
-
-  useEffect(() => {
-    setFont(fontStyle)
-  }, [fontStyle])
-
-  useEffect(() => {
-    if (isActiveSignature) {
-      dispatch(setSignatureFont(font))
-    }
-  }, [font, isActiveSignature])
 
   return (
     <div className={cl} style={style} onClick={handeSignDocument}>
@@ -116,7 +101,7 @@ export function Signature(props: SignatureProps) {
 
       {isSigned && isActiveSignature && (
         <Column className='align-center jc-between h100-p text-center'>
-          <TextSize maxLen={20} className={font} minSize={16}>
+          <TextSize maxLen={20} className={fontStyle} minSize={16}>
             {name}
           </TextSize>
 
