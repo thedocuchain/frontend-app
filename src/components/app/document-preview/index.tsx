@@ -16,27 +16,30 @@ export function DocumentPreview(props: { document: DocumentType }) {
   const signers = users.filter((el) => el.role === 'signer')
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
-
   return (
     <Column>
       <div className={styles.wrapperImage}>
-        {isLoading && <Loader size={32} />}
-        {isError && !isLoading && <MockPageSidePanel className={styles.wrapperError} />}
-        <Image
-          className={cn(styles.img, { [styles.imgLoaded]: !isLoading })}
-          onLoad={() => {
-            setLoading(false)
-            setError(false)
-          }}
-          onError={() => {
-            setLoading(false)
-            setError(true)
-          }}
-          width={146}
-          height={190}
-          src={imageLink}
-          alt=''
-        />
+        {isLoading && (
+          <div className={styles.loader}>
+            <Loader size={32} />
+          </div>
+        )}
+        {isError && <MockPageSidePanel className={styles.wrapperError} />}
+        <div className={cn(styles.img, { [styles.imgError]: isError })}>
+          <Image
+            onLoadingComplete={() => {
+              setLoading(false)
+            }}
+            onError={() => {
+              setError(true)
+              setLoading(false)
+            }}
+            width={146}
+            height={190}
+            src={`${imageLink}`}
+            alt=''
+          />
+        </div>
       </div>
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>
