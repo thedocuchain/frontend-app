@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <link rel='preload' href='/app/fonts/Caveat-Regular.ttf' as='font' crossOrigin='' type='font/woff2' />
+          <link rel='preload' href='/fonts/Caveat-Regular.ttf' as='font' crossOrigin='' type='font/woff2' />
         </Head>
         <body>
           <Main />
