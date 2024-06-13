@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React from 'react'
+import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { format } from 'date-fns'
 import { randomNumber } from '@coxy/utils'
@@ -64,25 +64,29 @@ export function Signature(props: SignatureProps) {
   const { style, isActiveSignature, name } = props
   const isSigned = useAppSelector(selectedIsSigned) && isActiveSignature
   const dispatch = useAppDispatch()
+  const [isLoading, setIsLoading] = useState(false)
 
   const cl = cn(styles.signatureWrapper, {
     [styles.isEdited]: isActiveSignature,
     [styles.isSigned]: isSigned,
   })
 
-  const handeSignDocument = useEvent(() => {
+  const handeSignDocument = useEvent(async () => {
     if (!isActiveSignature) return
+    setIsLoading(true)
     const newIndex = randomNumber(0, fonts.length)
+    const isoDate = toIsoString(new Date())
 
     if (isSigned) {
-      dispatch(setSignatureFont(fonts[newIndex]))
+      await dispatch(setSignatureFont(fonts[newIndex]))
+      setIsLoading(false)
       return
     }
 
-    dispatch(setSigned(true))
-    dispatch(setSignatureFont(fonts[newIndex]))
-    const isoDate = toIsoString(new Date())
-    dispatch(setSignDate(isoDate))
+    await dispatch(setSigned(true))
+    await dispatch(setSignatureFont(fonts[newIndex]))
+    await dispatch(setSignDate(isoDate))
+    setIsLoading(false)
   })
 
   const fonts = fontsSignatures
@@ -101,9 +105,11 @@ export function Signature(props: SignatureProps) {
 
       {isSigned && isActiveSignature && (
         <Column className='align-center jc-between h100-p text-center'>
-          <TextSize maxLen={20} className={fontStyle} minSize={16}>
-            {name}
-          </TextSize>
+          {!isLoading && (
+            <TextSize maxLen={20} className={fontStyle} minSize={16}>
+              {name}
+            </TextSize>
+          )}
 
           <RowCenter className={cn('gap6', styles.changeBlock)}>
             <IconRefreshSignature className={styles.iconEdited} />
