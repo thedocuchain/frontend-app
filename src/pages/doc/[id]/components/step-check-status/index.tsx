@@ -79,6 +79,12 @@ export function StepCheckStatus() {
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
   const rules = useValidatorRules()
 
+  useEffect(() => {
+    if (isSuccess) {
+      form.email = ''
+    }
+  }, [isSuccess])
+
   const handleSubmitForm = useEvent(async () => {
     const { isValid, message } = validate()
 

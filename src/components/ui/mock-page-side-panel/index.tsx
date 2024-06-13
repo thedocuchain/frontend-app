@@ -1,4 +1,5 @@
 import React from 'react'
+import cn from 'classnames'
 
 import { IconEmptyContentError } from 'src/icons'
 import { Space } from 'src/components/ui/space'
@@ -7,9 +8,9 @@ import { Column } from 'src/components/ui/grid'
 
 import styles from './styles.module.css'
 
-export function MockPageSidePanel() {
+export function MockPageSidePanel(props: { className?: string }) {
   return (
-    <div className={styles.mockPage}>
+    <div className={cn(styles.mockPage, props.className)}>
       <Column className='column-center'>
         <Space size={20} />
 

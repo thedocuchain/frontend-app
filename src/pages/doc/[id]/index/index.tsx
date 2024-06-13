@@ -36,7 +36,7 @@ export type StepWizardType = {
 
 export function DocumentPage({ step }: { step: StepsDocumentPage }) {
   const document = useAppSelector(selectedDocument)
-  const { title } = usePageHead({ title: ` | ${document?.name}` })
+  const { title } = usePageHead({ title: ` | ${document?.name || 'Document not found'}` })
   const [signers, setSigners] = useState<UserInfo[]>([
     {
       name: '',

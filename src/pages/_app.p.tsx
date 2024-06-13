@@ -87,6 +87,12 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
   const isServer = !!context.ctx.res
   const dispatch = store.dispatch as ApiDispatch
 
+  // todo token
+  // const token = context.ctx.query.token
+  // if (token) {
+  //   await dispatch(setAccessToken(token))
+  // }
+
   let cookies
   if (isServer) {
     cookies = getCookies({
