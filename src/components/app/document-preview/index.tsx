@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import cn from 'classnames'
+import Image from 'next/image'
 
 import { Column, Row } from 'src/components/ui/grid'
 import { DocumentType } from 'src/store/reducers/document/types'
@@ -21,7 +22,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
       <div className={styles.wrapperImage}>
         {isLoading && <Loader size={32} />}
         {isError && !isLoading && <MockPageSidePanel className={styles.wrapperError} />}
-        <img
+        <Image
           className={cn(styles.img, { [styles.imgLoaded]: !isLoading })}
           onLoad={() => {
             setLoading(false)
@@ -32,6 +33,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
             setError(true)
           }}
           width={146}
+          height={190}
           src={imageLink}
           alt=''
         />
