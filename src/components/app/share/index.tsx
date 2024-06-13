@@ -25,21 +25,21 @@ export function Share() {
       </Text>
       <Space size={12} />
       <RowCenter className={styles.row}>
-        <ButtonWrapper href={'https://twitter.com/'}>
+        <ButtonWrapper href={'https://x.com/thedocuchain'}>
           <IconXLogo className={styles.iconX} />
         </ButtonWrapper>
-        <ButtonWrapper href={'https://www.facebook.com/'}>
+        <ButtonWrapper href={'https://www.facebook.com/profile.php?id=61558223463250'}>
           <IconFacebookLogo className={styles.iconFb} />
         </ButtonWrapper>
-        <ButtonWrapper href={'https://instagram.com/'}>
+        <ButtonWrapper href={'https://www.instagram.com/docuchain/'}>
           <span onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             {hover ? <IconInstagramLogo /> : <IconInstagramDefaultLogo />}
           </span>
         </ButtonWrapper>
-        <ButtonWrapper href={'https://t.me/'}>
+        <ButtonWrapper href={'https://t.me/docuchainio'}>
           <IconTelegramLogo className={styles.iconTg} />
         </ButtonWrapper>
-        <ButtonWrapper href={'https://www.linkedin.com/'}>
+        <ButtonWrapper href={'https://www.linkedin.com/in/docuchain-service-96124a302/'}>
           <IconLinkedinLogo className={styles.iconIn} />
         </ButtonWrapper>
       </RowCenter>
