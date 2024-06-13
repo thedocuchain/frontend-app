@@ -56,15 +56,15 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
         <title>DocuChain</title>
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1' />
-        <link rel='apple-touch-icon' sizes='180x180' href='/app/icons/apple-touch-icon.png' />
-        <link rel='icon' type='image/png' sizes='32x32' href='/app/icons/favicon-32x32.png' />
-        <link rel='icon' type='image/png' sizes='16x16' href='/app/icons/favicon-16x16.png' />
-        <link rel='mask-icon' href='/app/icons/safari-pinned-tab.svg' color='#5bbad5' />
-        <link rel='manifest' href='/app/site.webmanifest' />
+        <link rel='apple-touch-icon' sizes='180x180' href='/icons/apple-touch-icon.png' />
+        <link rel='icon' type='image/png' sizes='32x32' href='/icons/favicon-32x32.png' />
+        <link rel='icon' type='image/png' sizes='16x16' href='/icons/favicon-16x16.png' />
+        <link rel='mask-icon' href='/icons/safari-pinned-tab.svg' color='#5bbad5' />
+        <link rel='manifest' href='/site.webmanifest' />
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
         <meta name='color-scheme' content='only light' />
-        <link rel='manifest' href='/app/manifest.json' />
+        <link rel='manifest' href='/manifest.json' />
       </Head>
       <Provider store={store}>
         <Metrics />

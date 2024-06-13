@@ -115,7 +115,7 @@ export function StepCheckStatus() {
   })
 
   const handleViewDocument = useEvent(() => {
-    window.open(`/app/doc/${document.id}?view=true`, '_blank')
+    window.open(`/doc/${document.id}?view=true`, '_blank')
   })
 
   return (

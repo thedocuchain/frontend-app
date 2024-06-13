@@ -16,7 +16,7 @@ import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 import styles from './styles.module.css'
 
-export type StepsSignPage = 'sign-the-document' | 'success-sign' | 'expired-link'
+export type StepsSignPage = 'sign-the-document' | 'success-sign' | 'expired-link' | 'document-error'
 
 export function DocumentSignPage({ step }: { step: StepsSignPage }) {
   const document = useAppSelector(selectedDocument)
@@ -40,9 +40,6 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
   ]
 
   const [activeStep, setActiveStep] = useState<StepsSignPage>(step)
-  // const [activeStep, setActiveStep] = useState<StepsSignPage>('sign-the-document')
-  // const [activeStep, setActiveStep] = useState<StepsSignPage>('expired-link')
-  // const [activeStep, setActiveStep] = useState<StepsSignPage>('success-sign')
 
   const handleSetSuccessPage = useEvent(() => {
     setActiveStep('success-sign')
@@ -56,6 +53,13 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
     <>
       <PageHead>{title}</PageHead>
       <PageDescription>Description</PageDescription>
+
+      {activeStep === 'document-error' && (
+        <PageWrapper>
+          <Header isTransparent />
+          <StatusScreenTemplate is404Document />
+        </PageWrapper>
+      )}
 
       {activeStep === 'sign-the-document' && (
         <PageWrapper className={'column'}>
@@ -89,11 +93,10 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const documentId = context.query.id as string
   const signerId = context.query.userId as string
 
-  // todo fix match
-  // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
-  // if (!isMatchId) {
-  //   return { step: 'document-error' }
-  // }
+  const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
+  if (!isMatchId) {
+    return { step: 'document-error' }
+  }
 
   const document = await dispatch(
     getDocument({
