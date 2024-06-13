@@ -21,7 +21,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>
           <Text theme={'label-2'}>Document ID:</Text>
-          <Text theme={'body-3'}>{shortId}</Text>
+          <Text theme={'body-3'}>{shortId?.toUpperCase()}</Text>
         </Row>
         <Row className={styles.iconBlock}>
           <IconUsers />

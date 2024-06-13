@@ -69,7 +69,7 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
       {documentShortId && (
         <div className={styles.id}>
           <Text className={'color-text-secondary'} theme={'body-3'}>
-            Document ID: {documentShortId}
+            Document ID: {documentShortId?.toUpperCase()}
           </Text>
         </div>
       )}

@@ -50,12 +50,6 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
     { title: 'Preview and send', value: 'preview-and-send' },
   ]
   const [activeStep, setActiveStep] = useState<StepsDocumentPage>(step)
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('add-recipients')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('preview-and-send')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-send')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('success-all-signed')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('check-status')
-  // const [activeStep, setActiveStep] = useState<StepsDocumentPage>('document-view')
 
   const activeStepTitle = steps.find((el) => el.value === activeStep)
 
@@ -123,12 +117,10 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
   const isDocumentViewPage = context.query.view as string
   const documentId = context.query.id as string
 
-  // todo fix match
-  // const isMatchId = documentId.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/)
-  //
-  // if (!isMatchId) {
-  //   return { step: 'document-error' }
-  // }
+  const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
+  if (!isMatchId) {
+    return { step: 'document-error' }
+  }
 
   const document = await dispatch(
     getDocument({

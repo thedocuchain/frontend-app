@@ -31,7 +31,7 @@ export function DocumentViewComponent(props: {
           <RowBetween className={styles.textWrapper}>
             <Text theme={'headline-1'}>{document.name}</Text>
             <Text theme={'body-3'} className='color-text-secondary white-space-nowrap'>
-              Document ID: {document?.shortId}
+              Document ID: {document?.shortId?.toUpperCase()}
             </Text>
           </RowBetween>
           <Text theme={'body-3'} className='color-text-secondary'>

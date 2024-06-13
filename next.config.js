@@ -19,7 +19,6 @@ module.exports = pwa({
     ENV: process.env.NODE_ENV,
   },
   distDir: './dist/app',
-  basePath: '/app',
   reactStrictMode: false,
   trailingSlash: false,
   i18n: {
