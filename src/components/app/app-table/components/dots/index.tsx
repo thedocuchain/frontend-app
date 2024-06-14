@@ -68,6 +68,12 @@ export function DotsTable(props: { user: User }) {
   const stringLastRemind = lastRemind && isMoreThan24HoursString(lastRemind)
   const [isSuccessSent, setIsSuccessSent] = useState(false)
 
+  useEffect(() => {
+    if (isSuccessSent) {
+      setTimeout(() => setIsSuccessSent(false), 2000)
+    }
+  }, [isSuccessSent])
+
   function TextRemindComponent() {
     return (
       <>

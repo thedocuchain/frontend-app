@@ -39,11 +39,12 @@ const maxWidth = 800
 type ComponentProps = {
   isOpenSidePanel?: boolean
   isSidePanel?: boolean
+  isDocumentPreview?: boolean
   setErrorLoadingPdf?: (boolean) => void
 }
 
 export function PdfViewPage(props: ComponentProps) {
-  const { isOpenSidePanel, isSidePanel, setErrorLoadingPdf } = props
+  const { isOpenSidePanel, isSidePanel, isDocumentPreview, setErrorLoadingPdf } = props
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
@@ -83,6 +84,21 @@ export function PdfViewPage(props: ComponentProps) {
 
   // todo fix loading pdf error?
   if (!url) return null
+
+  if (isDocumentPreview)
+    return (
+      <div ref={setContainerRef}>
+        <Document
+          file={url}
+          error={<MockPageSidePanel />}
+          loading={<Loader />}
+          onLoadSuccess={onDocumentLoadSuccess}
+          options={options}
+        >
+          <ThumbnailView index={0} pageId={'page_1'} />
+        </Document>
+      </div>
+    )
 
   return (
     <div

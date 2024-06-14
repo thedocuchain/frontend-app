@@ -25,6 +25,7 @@ import {
 import { useApi } from 'src/utils/use/use-api'
 import { signDocument } from 'src/store/reducers/document/actions/sign-document'
 import { sendDocumentNotify } from 'src/store/reducers/document/actions/send-document'
+import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 import styles from './styles.module.css'
 
@@ -127,6 +128,11 @@ export function StepByStepBlock(props: ComponentProps) {
         return
       }
       await sendDocNotify({ documentId: documentData.id })
+      await dispatch(
+        getDocument({
+          id: documentData.id,
+        }),
+      )
       return
     }
 
