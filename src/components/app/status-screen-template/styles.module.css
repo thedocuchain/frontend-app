@@ -145,7 +145,7 @@
   }
 
   .wrapper {
-    padding: 0 16px;
+    padding: var(--header-size) 16px 0;
     margin: auto;
   }
 }
