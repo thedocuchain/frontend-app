@@ -89,7 +89,7 @@ export function Signature(props: SignatureProps) {
     setIsLoading(false)
   })
 
-  const fonts = fontsSignatures
+  const fonts = Object.keys(fontsSignatures)
   const fontStyle = useAppSelector(selectedSignatureFont)
 
   return (
