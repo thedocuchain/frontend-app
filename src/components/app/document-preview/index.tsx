@@ -1,45 +1,44 @@
-import React, { useState } from 'react'
-import cn from 'classnames'
-import Image from 'next/image'
+import React from 'react'
 
 import { Column, Row } from 'src/components/ui/grid'
 import { DocumentType } from 'src/store/reducers/document/types'
 import { Text } from 'src/components/ui/typography'
 import { IconFile, IconUsers } from 'src/icons'
-import { Loader } from 'src/components/ui/loader'
-import { MockPageSidePanel } from 'src/components/ui/mock-page-side-panel'
+import { PdfViewPage } from 'src/components/app/pdf-view-page'
 
 import styles from './styles.module.css'
 
 export function DocumentPreview(props: { document: DocumentType }) {
-  const { shortId, users, pagesCount, imageLink } = props.document
+  const { shortId, users, pagesCount } = props.document
   const signers = users.filter((el) => el.role === 'signer')
-  const [isLoading, setLoading] = useState(true)
-  const [isError, setError] = useState(false)
+  // const [isLoading, setLoading] = useState(true)
+  // const [isError, setError] = useState(false)
   return (
     <Column>
       <div className={styles.wrapperImage}>
-        {isLoading && (
-          <div className={styles.loader}>
-            <Loader size={32} />
-          </div>
-        )}
-        {isError && <MockPageSidePanel className={styles.wrapperError} />}
-        <div className={cn(styles.img, { [styles.imgError]: isError })}>
-          <Image
-            onLoadingComplete={() => {
-              setLoading(false)
-            }}
-            onError={() => {
-              setError(true)
-              setLoading(false)
-            }}
-            width={146}
-            height={190}
-            src={`${imageLink}`}
-            alt=''
-          />
-        </div>
+        <PdfViewPage isDocumentPreview />
+
+        {/* {isLoading && ( */}
+        {/*  <div className={styles.loader}> */}
+        {/*    <Loader size={32} /> */}
+        {/*  </div> */}
+        {/* )} */}
+        {/* {isError && <MockPageSidePanel className={styles.wrapperError} />} */}
+        {/* <div className={cn(styles.img, { [styles.imgError]: isError })}> */}
+        {/*  <Image */}
+        {/*    onLoadingComplete={() => { */}
+        {/*      setLoading(false) */}
+        {/*    }} */}
+        {/*    onError={() => { */}
+        {/*      setError(true) */}
+        {/*      setLoading(false) */}
+        {/*    }} */}
+        {/*    width={146} */}
+        {/*    height={190} */}
+        {/*    src={imageLink} */}
+        {/*    alt='' */}
+        {/*  /> */}
+        {/* </div> */}
       </div>
       <Column className={styles.textBlock}>
         <Row className={styles.textBlock}>
