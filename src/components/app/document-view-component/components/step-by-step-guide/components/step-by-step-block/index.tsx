@@ -185,21 +185,20 @@ export function StepByStepBlock(props: ComponentProps) {
                 checked={checkBoxConsentsESDTermsPolicy}
                 onChange={setCheckBoxConsentsESDTermsPolicy}
               >
-                I agree with the{' '}
+                I read and agree with the{' '}
                 <AppLink target={'_blank'} href={'https://docuchain.io/terms'}>
                   Terms of use,
                 </AppLink>{' '}
+                <span className={'show-mobile'}>
+                  <br />
+                </span>
                 <AppLink target={'_blank'} href={'https://docuchain.io/electronic_signature_dislosure'}>
                   Electronic Signature Disclosure
                 </AppLink>{' '}
-                <span className={'hide-mobile'}>
-                  <br />
-                </span>
                 and{' '}
                 <AppLink target={'_blank'} href={'https://docuchain.io/policy'}>
-                  Privacy Policy
-                </AppLink>{' '}
-                and agree to use electronic record and signatures.
+                  Privacy Policy.
+                </AppLink>
               </CheckboxSquare>
 
               <GuideLabel title={'Accept'} />
