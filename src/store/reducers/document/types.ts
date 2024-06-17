@@ -57,8 +57,6 @@ export type DocumentType = {
   pagesCount: number
   imageLink: string
   shortId: string
-
-  // todo add on backend
-  pdfWidth?: number
-  pdfHeight?: number
+  width?: number
+  height?: number
 }

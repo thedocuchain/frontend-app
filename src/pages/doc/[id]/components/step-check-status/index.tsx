@@ -16,7 +16,7 @@ import { Alert } from 'src/components/ui/alert'
 import { Input } from 'src/components/ui/input'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
-import { subscribeUser } from 'src/store/reducers/document/actions/subscribe'
+import { subscribeDocument } from 'src/store/reducers/document/actions/subscribe'
 import { useApi } from 'src/utils/use/use-api'
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { useFormValidator } from 'src/utils/use/use-form-validator'
@@ -28,7 +28,7 @@ import { DocumentStatuses } from 'src/store/reducers/document/types'
 import styles from './styles.module.css'
 
 export function StepCheckStatus() {
-  const [subscribe, { isSuccess, isLoading }] = useApi(subscribeUser)
+  const [subscribe, { isSuccess, isLoading }] = useApi(subscribeDocument)
   const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
   const users = document.users
@@ -73,17 +73,11 @@ export function StepCheckStatus() {
   const [activeStep, setActiveStep] = useState(signedBy)
   const isCompleted = activeStep === 'Completed'
 
-  const [form, setValue] = useStateForm({
+  const [form, setValue, clear] = useStateForm({
     email: '',
   })
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
   const rules = useValidatorRules()
-
-  useEffect(() => {
-    if (isSuccess) {
-      form.email = ''
-    }
-  }, [isSuccess])
 
   const handleSubmitForm = useEvent(async () => {
     const { isValid, message } = validate()
@@ -118,6 +112,7 @@ export function StepCheckStatus() {
     }
 
     await subscribe({ documentId: document.id, userEmail: form.email })
+    clear()
   })
 
   const handleViewDocument = useEvent(() => {
