@@ -24,8 +24,8 @@ export function PageView(props: { isLoading?: boolean; index: number; containerW
   const signerId = router.query.userId as string
   const width = containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
 
-  // todo fix pdfRatio
-  const pdfRatio = 1103 / 842
+  const document = useAppSelector(selectedDocument)
+  const heightRatio = (780 * (document.height / document.width) * 9) / 9 / document.height
 
   return (
     <Page className={styles.page} width={width} pageNumber={index + 1}>
@@ -34,7 +34,7 @@ export function PageView(props: { isLoading?: boolean; index: number; containerW
           {signers.map((item, index) => (
             <React.Fragment key={item.id}>
               {signerId === item.id && (
-                <GuideLabel positionY={item.signatures[0].yCoordinate * pdfRatio} title={'Sign'} />
+                <GuideLabel positionY={item.signatures[0].yCoordinate * heightRatio} title={'Sign'} />
               )}
 
               <ParticipantSignatureDetails
