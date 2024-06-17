@@ -26,6 +26,7 @@ import {
   setSignDate,
   setSigned,
 } from 'src/store/reducers/signature'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -149,21 +150,23 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
   const router = useRouter()
   const signerId = router.query.userId as string
 
-  // todo fix pdfRatio
-  const pdfRatio = 1103 / 842
+  const document = useAppSelector(selectedDocument)
   const [pageRatio, right] = usePageRatio(isLoading, pageWidth)
+  const heightRatio = (780 * (document.height / document.width) * 9) / 9 / document.height
 
   const index = indexToColorIndex(props.index)
   const colorBorder = colorsBorders[index]
   const style = isJustCreated ? { backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}` } : null
+
+  const scale = heightRatio < 1 && document.height > document.width ? pageRatio - 0.25 : pageRatio
 
   return (
     <div
       id={'participant-wrapper'}
       className={cn('flex-row', styles.participantWrapper)}
       style={{
-        transform: `scale(${pageRatio})`,
-        bottom: signatures[0].yCoordinate * pdfRatio * pageRatio - 60,
+        transform: `scale(${scale})`,
+        bottom: signatures[0].yCoordinate * heightRatio * pageRatio - 60,
         right: `-${right}px`,
       }}
     >
