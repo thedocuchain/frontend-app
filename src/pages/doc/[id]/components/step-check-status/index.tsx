@@ -176,7 +176,6 @@ export function StepCheckStatus() {
                       className={styles.formWrapper}
                     >
                       <Input
-                        id={'email'}
                         isEmail
                         value={form.email}
                         onChange={setValue('email')}
