@@ -29,14 +29,6 @@ module.exports = pwa({
   pageExtensions: ['p.ts', 'p.tsx'],
   images: {
     formats: ['image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'storage.googleapis.com',
-        port: '',
-        pathname: '/docuchain-bucket/**',
-      },
-    ],
   },
   async headers() {
     return formats.map((format) => ({
