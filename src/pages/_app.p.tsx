@@ -18,6 +18,7 @@ import { RouterLoader } from 'src/components/common/router-loader'
 import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
 import { ErrorBoundary } from 'src/components/common/error-boundary'
+import { AppWrapper } from 'src/components/common/app-wrapper'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
@@ -69,12 +70,14 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
       <Provider store={store}>
         <Metrics />
         <RouterLoader />
-        <I18nWrapper>
-          <ToastsProvider>
-            <RenderLayoutComponent Component={Component} pageProps={pageProps} />
-            <Toasts />
-          </ToastsProvider>
-        </I18nWrapper>
+        <AppWrapper>
+          <I18nWrapper>
+            <ToastsProvider>
+              <RenderLayoutComponent Component={Component} pageProps={pageProps} />
+              <Toasts />
+            </ToastsProvider>
+          </I18nWrapper>
+        </AppWrapper>
       </Provider>
     </ErrorBoundary>
   )
@@ -86,12 +89,6 @@ MyCustomApp.getInitialProps = async (context: AppContext) => {
 
   const isServer = !!context.ctx.res
   const dispatch = store.dispatch as ApiDispatch
-
-  // todo token
-  // const token = context.ctx.query.token
-  // if (token) {
-  //   await dispatch(setAccessToken(token))
-  // }
 
   let cookies
   if (isServer) {
