@@ -6,9 +6,9 @@ import { useRouter } from 'next/router'
 
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { useAppSelector } from 'src/store/hooks'
-import { ParticipantSignatureDetails } from 'src/components/app/document-view-component/components/edit-tools'
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { DocumentStatuses } from 'src/store/reducers/document/types'
+import { ParticipantSignatureDetails } from 'src/components/app/document-view-component/components/participant-signature-details'
 
 import styles from './styles.module.css'
 

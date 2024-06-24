@@ -15,7 +15,7 @@ export interface SignatureState {
 
 const initialState: SignatureState = {
   signatureFont: undefined,
-  fontSize: undefined,
+  fontSize: 20,
   signDate: undefined,
   isSigned: false,
   isError: false,

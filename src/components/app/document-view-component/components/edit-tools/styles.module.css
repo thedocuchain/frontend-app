@@ -1,10 +1,6 @@
 .signatureWrapper {
   display: flex;
-  width: 216px;
-  height: 80px;
-  padding: 8px 10px;
   align-items: flex-start;
-  border-radius: 10px;
   border: 1px solid var(--bg-grey-5);
   background: var(--bg-grey-8);
   user-select: none;
@@ -14,19 +10,24 @@
 }
 
 .isEdited {
-  box-shadow: var(--shadow-focus-accent);
-  border: 1px solid var(--bg-accent);
   background: var(--bg-white);
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0 10px 2px;
 }
 
 .isEdited:hover .textHover {
   transition: all 0.2s ease;
-  font-size: 16px !important;
+  transform: scale(1.1);
+  margin-left: 0.5dvw;
   color: #2f35c2 !important;
+}
+
+@media (--mobile) {
+  .isEdited:hover .textHover {
+    transform: scale(1);
+    margin-left: unset;
+  }
 }
 
 .iconEdited {
@@ -44,41 +45,18 @@
 
 .dateWrapper {
   display: flex;
-  width: 110px;
-  height: 36px;
-  padding: 8px 10px;
+  min-width: fit-content !important;
   align-items: center;
-  border-radius: 10px;
   border: 1px solid var(--bg-grey-5);
   background: var(--bg-grey-8);
   user-select: none;
+  position: absolute;
 }
 
 .dateWrapperSigned {
-  width: 110px;
-  padding: 8px 10px;
+  position: absolute;
 }
 
 .icon {
   stroke: var(--bg-grey-2-opacity);
-}
-
-.participantWrapper {
-  position: absolute;
-  width: 100%;
-  padding-right: 3em;
-  justify-content: space-between;
-  z-index: 1000;
-}
-
-@media (max-width: 600px) {
-  .participantWrapper {
-    margin-bottom: 0.5em;
-  }
-}
-
-@media (max-width: 470px) {
-  .participantWrapper {
-    margin-bottom: 0.8em;
-  }
 }
