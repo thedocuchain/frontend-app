@@ -41,7 +41,7 @@ export function DateBlock(props: DateBlockProps) {
   }
 
   const fontSizeStyle = {
-    fontSize: `calc(17px * ${scaleSize})`,
+    fontSize: `calc(18px * ${scaleSize})`,
   }
 
   if (signDate && isActiveSignature)
