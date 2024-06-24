@@ -192,11 +192,11 @@ export function StepByStepBlock(props: ComponentProps) {
                 <span className={'show-mobile'}>
                   <br />
                 </span>
-                <AppLink target={'_blank'} href={'https://docuchain.io/electronic_signature_dislosure'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/esign'}>
                   Electronic Signature Disclosure
                 </AppLink>{' '}
                 and{' '}
-                <AppLink target={'_blank'} href={'https://docuchain.io/policy'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/privacy'}>
                   Privacy Policy.
                 </AppLink>
               </CheckboxSquare>
@@ -225,7 +225,7 @@ export function StepByStepBlock(props: ComponentProps) {
                   Terms of use
                 </AppLink>{' '}
                 and{' '}
-                <AppLink target={'_blank'} href={'https://docuchain.io/policy'}>
+                <AppLink target={'_blank'} href={'https://docuchain.io/privacy'}>
                   Privacy Policy.
                 </AppLink>
               </CheckboxSquare>
@@ -243,7 +243,7 @@ export function StepByStepBlock(props: ComponentProps) {
         <Space horizontal size={24} />
 
         <Button
-          className={styles.button}
+          className={buttonText === 'Send for signing' ? styles.buttonSend : styles.buttonFinish}
           isLoading={isLoading || sendDocNotifyStatus.isLoading}
           onClick={handleNextStep}
         >
