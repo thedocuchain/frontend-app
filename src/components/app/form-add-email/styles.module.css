@@ -1,0 +1,47 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.formSendScreen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.button {
+  width: 220px;
+}
+
+.buttonSendScreen {
+  width: 160px;
+}
+
+.formWrapper {
+  height: 72px;
+  min-height: 72px;
+  max-height: 72px;
+}
+
+@media (max-width: 800px) {
+  .button {
+    width: 160px;
+  }
+}
+
+@media (--mobile) {
+  .form {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .buttonSendScreen {
+    width: 124px;
+  }
+}

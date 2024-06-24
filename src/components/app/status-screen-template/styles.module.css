@@ -86,12 +86,26 @@
   margin-top: 40px;
 }
 
+.formBlock {
+  max-width: 492px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 40px auto;
+  text-align: center;
+}
+
 .rateBlock {
   margin-bottom: 40px;
   margin-top: 40px;
 }
 
 @media (--mobile) {
+  .formBlock {
+    margin: 28px auto;
+    padding: 0 16px;
+  }
+
   .iconPlane {
     width: 130px;
     height: 46px;
@@ -145,7 +159,7 @@
   }
 
   .wrapper {
-    padding: var(--header-size) 16px 0;
+    padding: calc(var(--header-size) + 10px) 16px 0;
     margin: auto;
   }
 }

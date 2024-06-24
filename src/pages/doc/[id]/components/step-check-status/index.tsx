@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { ValidatorWrapper } from '@coxy/react-validator'
-import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 
 import { Header } from 'src/components/app/header'
 import { Column, Flex } from 'src/components/ui/grid'
@@ -13,23 +11,14 @@ import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconEye } from 'src/icons'
 import { Space } from 'src/components/ui/space'
 import { Alert } from 'src/components/ui/alert'
-import { Input } from 'src/components/ui/input'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
-import { subscribeDocument } from 'src/store/reducers/document/actions/subscribe'
-import { useApi } from 'src/utils/use/use-api'
-import { InputValidatorField } from 'src/components/ui/input-wrapper'
-import { useFormValidator } from 'src/utils/use/use-form-validator'
-import { useValidatorRules } from 'src/utils/use/use-validator-rules'
-import { ToastContext } from 'src/components/common/toast/context'
-import { InputSuccess } from 'src/components/ui/input-success'
 import { DocumentStatuses } from 'src/store/reducers/document/types'
+import { FormAddEmail } from 'src/components/app/form-add-email'
 
 import styles from './styles.module.css'
 
 export function StepCheckStatus() {
-  const [subscribe, { isSuccess, isLoading }] = useApi(subscribeDocument)
-  const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
   const users = document.users
   const signers = users.filter((el) => el.role === 'signer')
@@ -72,48 +61,6 @@ export function StepCheckStatus() {
 
   const [activeStep, setActiveStep] = useState(signedBy)
   const isCompleted = activeStep === 'Completed'
-
-  const [form, setValue, clear] = useStateForm({
-    email: '',
-  })
-  const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
-  const rules = useValidatorRules()
-
-  const handleSubmitForm = useEvent(async () => {
-    const { isValid, message } = validate()
-
-    if (validator.current) {
-      validator.current.clearCustomErrors()
-    }
-
-    if (!isValid) {
-      setIsShowError(true)
-
-      toast.addToast({
-        text: message,
-      })
-
-      return
-    }
-
-    const isDuplicateEmail = document.users.some((el) => el.email === form.email)
-    if (isDuplicateEmail) {
-      setIsShowError(true)
-      await validator.current.setCustomError({
-        id: 'email',
-        message: 'You’ve already subscribed to updates.',
-        isValid: false,
-      })
-
-      toast.addToast({
-        text: 'You’ve already subscribed to updates.',
-      })
-      return
-    }
-
-    await subscribe({ documentId: document.id, userEmail: form.email })
-    clear()
-  })
 
   const handleViewDocument = useEvent(() => {
     window.open(`/doc/${document.id}?view=true`, '_blank')
@@ -165,36 +112,7 @@ export function StepCheckStatus() {
 
             {!isCompleted && (
               <Alert title='Enter your email to receive updates on the signing process.' className={styles.alert}>
-                <div className={styles.form}>
-                  <ValidatorWrapper ref={validator}>
-                    <InputValidatorField
-                      id={'email'}
-                      required
-                      rules={rules.email}
-                      value={form.email}
-                      isVisibleErrors={isShowError}
-                      className={styles.formWrapper}
-                    >
-                      <Input
-                        isEmail
-                        value={form.email}
-                        onChange={setValue('email')}
-                        placeholder={'john.doe@gmail.com'}
-                      />
-                      <InputSuccess isVisibleSuccess={isSuccess}>
-                        You’ve successfully subscribed to updates!
-                      </InputSuccess>
-                    </InputValidatorField>
-                    <Button
-                      isLoading={isLoading}
-                      onClick={handleSubmitForm}
-                      theme='secondary'
-                      className={styles.button}
-                    >
-                      Confirm
-                    </Button>
-                  </ValidatorWrapper>
-                </div>
+                <FormAddEmail />
               </Alert>
             )}
 
