@@ -10,6 +10,7 @@ import { useAppSelector } from 'src/store/hooks'
 import { selectedIsSignError } from 'src/store/reducers/signature'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { DateBlock, Signature } from 'src/components/app/document-view-component/components/edit-tools'
+import { getScaleFactor } from 'src/utils/page-ratio'
 
 import styles from './styles.module.css'
 
@@ -38,10 +39,9 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
   const colorBorder = colorsBorders[index]
   const style = isJustCreated ? { backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}` } : null
 
-  // todo ПОДПИСЬ scale factor for f3 and horizontal documents
-  // const isNeedToScale = heightRatio < 1 || document.width > document.height
-  // const scaleSize = isNeedToScale ? pageRatio - 0.3 : pageRatio
-  const scaleSize = pageRatio
+  const isNeedToScale = heightRatio < 1 || document.width > document.height
+  const scaleFactor = getScaleFactor(pageRatio)
+  const scaleSize = isNeedToScale ? heightRatio - (1 - pageRatio) - scaleFactor : pageRatio
 
   return (
     <div
