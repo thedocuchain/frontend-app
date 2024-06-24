@@ -15,6 +15,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
 import { ConfettiComponent } from 'src/components/app/confetti'
+import { FormAddEmail } from 'src/components/app/form-add-email'
 
 import Image404Mobile from './images/404-image-mobile.png'
 import Image404 from './images/404-image-desktop.png'
@@ -248,9 +249,22 @@ export function StatusScreenTemplate(props: {
           )}
         </Column>
 
-        {(isSend || isAllSigned) && (
+        {isAllSigned && (
           <div className={styles.shareBlock}>
             <Share />
+          </div>
+        )}
+
+        {isSend && (
+          <div className={styles.formBlock}>
+            <Text theme={'headline-2'}>
+              Don&apos;t lose access: provide your email{' '}
+              <div className='show-mobile'>
+                <br />
+              </div>
+              to stay updated
+            </Text>
+            <FormAddEmail isSendScreen />
           </div>
         )}
 
