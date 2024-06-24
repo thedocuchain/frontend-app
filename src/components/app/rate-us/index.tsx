@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import cn from 'classnames'
 
@@ -20,6 +20,15 @@ export function RateUs() {
   const handleRateStar = useEvent((index: number) => {
     setRateStar(index)
   })
+
+  useEffect(() => {
+    if (rateStar >= 4) {
+      window.open('https://www.trustpilot.com/', '_blank')
+    }
+    if (rateStar < 4) {
+      window.open('https://www.trustpilot.com/', '_blank')
+    }
+  }, [rateStar])
 
   return (
     <Column className='column-center'>
