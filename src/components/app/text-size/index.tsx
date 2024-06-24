@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, useEffect } from 'react'
-import cn from 'classnames'
 
 import { getInnerText } from 'src/utils/react'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
@@ -20,7 +19,16 @@ export const calculateFontSizeByLength = (value: string, { minSize, maxLen }: Co
   return Math.ceil(Math.max(size, minSize || 0))
 }
 
-export function TextSize({ children, maxLen, className, minSize, ...props }: PropsWithChildren<ComponentProps>) {
+export function TextSize({
+  children,
+  maxLen,
+  className,
+  minSize,
+  style,
+  ...props
+}: PropsWithChildren<ComponentProps> & {
+  style?: React.CSSProperties
+}) {
   const fontSize = calculateFontSizeByLength(getInnerText(children), { maxLen, className, minSize })
   const dispatch = useAppDispatch()
   const fs = useAppSelector(selectedFontSize)
@@ -32,7 +40,7 @@ export function TextSize({ children, maxLen, className, minSize, ...props }: Pro
   }, [fontSize])
 
   return (
-    <span {...props} className={cn(`fs${fontSize}`, className)}>
+    <span {...props} style={style} className={className}>
       {children}
     </span>
   )

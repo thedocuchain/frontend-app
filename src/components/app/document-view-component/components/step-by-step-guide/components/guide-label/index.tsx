@@ -9,7 +9,7 @@ export function GuideLabel(props: { title: string; positionY?: number }) {
   const { positionY } = props
   const style =
     positionY !== undefined
-      ? { bottom: positionY - 35, left: '-78px' }
+      ? { bottom: positionY - 20, left: '-78px' }
       : { right: 'calc(100% + 8px + 12px)', marginTop: '-6px' }
 
   return (
