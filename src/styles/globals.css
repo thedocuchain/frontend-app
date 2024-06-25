@@ -3,6 +3,7 @@
 @import url("variables.css");
 @import url("grid.css");
 @import url("colors.css");
+@import url("animations.css");
 
 :root {
   color-scheme: only light;

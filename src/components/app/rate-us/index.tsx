@@ -12,6 +12,7 @@ import styles from './styles.module.css'
 export function RateUs() {
   const [activeStar, setActiveStar] = useState<number>()
   const [rateStar, setRateStar] = useState<number>()
+  // const [isVisiblePopup, openPopup, closePopup] = useTogglePopup(false)
 
   const handleActiveStar = useEvent((index: number) => {
     setActiveStar(index)
@@ -23,32 +24,37 @@ export function RateUs() {
 
   useEffect(() => {
     if (rateStar >= 4) {
-      window.open('https://www.trustpilot.com/', '_blank')
+      window.open('https://www.trustpilot.com/review/docuchain.io', '_blank')
     }
-    if (rateStar < 4) {
-      window.open('https://www.trustpilot.com/', '_blank')
-    }
+    // todo feedback form
+    // if (rateStar < 4) {
+    //   openPopup()
+    // }
   }, [rateStar])
 
   return (
-    <Column className='column-center'>
-      <Text theme={'headline-3'} className={styles.text}>
-        Rate us
-      </Text>
-      <Space size={12} />
-      <RowCenter className={styles.stars}>
-        {[1, 2, 3, 4, 5].map((star) => (
-          <div
-            key={star}
-            className={cn({ [styles.activeStar]: activeStar >= star, [styles.fullStar]: rateStar >= star })}
-            onClick={() => handleRateStar(star)}
-            onMouseEnter={() => handleActiveStar(star)}
-            onMouseLeave={() => handleActiveStar(undefined)}
-          >
-            {rateStar >= star ? <IconStarFull /> : <IconStar />}
-          </div>
-        ))}
-      </RowCenter>
-    </Column>
+    <>
+      <Column className='column-center'>
+        <Text theme={'headline-3'} className={styles.text}>
+          Rate us
+        </Text>
+        <Space size={12} />
+        <RowCenter className={styles.stars}>
+          {[1, 2, 3, 4, 5].map((star) => (
+            <div
+              key={star}
+              className={cn({ [styles.activeStar]: activeStar >= star, [styles.fullStar]: rateStar >= star })}
+              onClick={() => handleRateStar(star)}
+              onMouseEnter={() => handleActiveStar(star)}
+              onMouseLeave={() => handleActiveStar(undefined)}
+            >
+              {rateStar >= star ? <IconStarFull /> : <IconStar />}
+            </div>
+          ))}
+        </RowCenter>
+      </Column>
+
+      {/* <PopupFeedback visible={isVisiblePopup} onClose={closePopup} /> */}
+    </>
   )
 }

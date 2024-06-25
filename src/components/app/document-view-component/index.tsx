@@ -35,7 +35,7 @@ export function DocumentViewComponent(props: {
             </Text>
           </RowBetween>
           <Text theme={'body-3'} className='color-text-secondary'>
-            {document.pagesCount} pages
+            {document.pagesCount} {document.pagesCount > 1 ? 'pages' : 'page'}
           </Text>
         </Column>
 
