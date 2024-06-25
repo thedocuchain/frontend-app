@@ -1,0 +1,57 @@
+.fade-out-popup {
+  -webkit-animation: fade-out 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both !important;
+  animation: fade-out 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both !important;
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    background: rgb(0 0 0 / 40%);
+  }
+
+  100% {
+    background: transparent;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    background: rgb(0 0 0 / 40%);
+  }
+
+  100% {
+    background: transparent;
+  }
+}
+
+.slide-out-popup {
+  -webkit-animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both !important;
+  animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both !important;
+}
+
+@-webkit-keyframes slide-out-bottom {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translate(-50%, 600px);
+    transform: translate(-50%, 600px);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out-bottom {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translate(-50%, 600px);
+    transform: translate(-50%, 600px);
+    opacity: 0;
+  }
+}
