@@ -25,7 +25,7 @@ export function __setApiStore(store: Store) {
 
 api.interceptors.request.use((config) => {
   const state = locallyStore.getState()
-  config.headers.Authorization = `Bearer: ${selectedAccessToken(state)}`
+  config.headers.Authorization = `Bearer ${selectedAccessToken(state)}`
 
   return config
 })
