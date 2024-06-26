@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import cn from 'classnames'
+import { useRouter } from 'next/router'
 
 import { Column, RowCenter } from 'src/components/ui/grid'
 import { Text } from 'src/components/ui/typography'
@@ -12,7 +13,7 @@ import styles from './styles.module.css'
 export function RateUs() {
   const [activeStar, setActiveStar] = useState<number>()
   const [rateStar, setRateStar] = useState<number>()
-  // const [isVisiblePopup, openPopup, closePopup] = useTogglePopup(false)
+  const router = useRouter()
 
   const handleActiveStar = useEvent((index: number) => {
     setActiveStar(index)
@@ -26,35 +27,30 @@ export function RateUs() {
     if (rateStar >= 4) {
       window.open('https://www.trustpilot.com/review/docuchain.io', '_blank')
     }
-    // todo feedback form
-    // if (rateStar < 4) {
-    //   openPopup()
-    // }
+    if (rateStar < 4) {
+      void router.push('/feedback')
+    }
   }, [rateStar])
 
   return (
-    <>
-      <Column className='column-center'>
-        <Text theme={'headline-3'} className={styles.text}>
-          Rate us
-        </Text>
-        <Space size={12} />
-        <RowCenter className={styles.stars}>
-          {[1, 2, 3, 4, 5].map((star) => (
-            <div
-              key={star}
-              className={cn({ [styles.activeStar]: activeStar >= star, [styles.fullStar]: rateStar >= star })}
-              onClick={() => handleRateStar(star)}
-              onMouseEnter={() => handleActiveStar(star)}
-              onMouseLeave={() => handleActiveStar(undefined)}
-            >
-              {rateStar >= star ? <IconStarFull /> : <IconStar />}
-            </div>
-          ))}
-        </RowCenter>
-      </Column>
-
-      {/* <PopupFeedback visible={isVisiblePopup} onClose={closePopup} /> */}
-    </>
+    <Column className='column-center'>
+      <Text theme={'headline-3'} className={styles.text}>
+        Rate us
+      </Text>
+      <Space size={12} />
+      <RowCenter className={styles.stars}>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <div
+            key={star}
+            className={cn({ [styles.activeStar]: activeStar >= star, [styles.fullStar]: rateStar >= star })}
+            onClick={() => handleRateStar(star)}
+            onMouseEnter={() => handleActiveStar(star)}
+            onMouseLeave={() => handleActiveStar(undefined)}
+          >
+            {rateStar >= star ? <IconStarFull /> : <IconStar />}
+          </div>
+        ))}
+      </RowCenter>
+    </Column>
   )
 }
