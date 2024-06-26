@@ -9,3 +9,13 @@ services:
     env_file: .env
     ports:
       - "3000:3000"
+  local-nginx:
+      container_name: local-nginx
+      image: nginx:latest
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+        - "4000:4000"
+      depends_on:
+        - app
+        
