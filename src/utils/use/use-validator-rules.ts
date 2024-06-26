@@ -33,6 +33,12 @@ export const useValidatorRules = () => {
         message: t('name-invalid'),
       },
     ],
+    message: [
+      {
+        rule: (value) => !!value && value !== '' && value.length !== 0,
+        message: t('field-required'),
+      },
+    ],
     id: [
       {
         rule: (value) => !!value && value !== '' && value.length !== 0,
