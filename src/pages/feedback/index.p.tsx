@@ -21,6 +21,8 @@ import { ToastContext } from 'src/components/common/toast/context'
 import { useApi } from 'src/utils/use/use-api'
 import { sendFeedback } from 'src/store/reducers/document/actions/send-feedback'
 import { EmptyState } from 'src/components/ui/empty-state'
+import { useAppSelector } from 'src/store/hooks'
+import { selectedDocument } from 'src/store/reducers/document/selectors'
 
 import styles from './styles.module.css'
 
@@ -31,6 +33,7 @@ export default function FeedbackPage() {
   const toast = useContext(ToastContext)
   const [isSuccessSent, setIsSuccessSent] = useState(false)
   const [send, { isSuccess, isLoading }] = useApi(sendFeedback)
+  const documentId = useAppSelector(selectedDocument)?.id
 
   const [form, setValue] = useStateForm({
     email: '',
@@ -46,6 +49,10 @@ export default function FeedbackPage() {
   }, [isSuccess])
 
   const handleBack = useEvent(() => {
+    if (documentId) {
+      void router.push(`/doc/${documentId}`)
+      return
+    }
     router.back()
   })
 
