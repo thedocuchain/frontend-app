@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
@@ -12,11 +12,12 @@ import { StepAddRecipients } from 'src/pages/doc/[id]/components/step-add-recipi
 import { StepPreviewAndSend } from 'src/pages/doc/[id]/components/step-preview-and-send'
 import { StepCheckStatus } from 'src/pages/doc/[id]/components/step-check-status'
 import { StepViewDocument } from 'src/pages/doc/[id]/components/step-view-document'
-import { useAppSelector } from 'src/store/hooks'
+import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
+import { isNeedToUpdateDocument } from 'src/utils/check-document-statuses'
 
 import styles from './styles.module.css'
 
@@ -36,6 +37,7 @@ export type StepWizardType = {
 
 export function DocumentPage({ step }: { step: StepsDocumentPage }) {
   const document = useAppSelector(selectedDocument)
+  const dispatch = useAppDispatch()
   const { title } = usePageHead({ title: ` | ${document?.name || 'Document not found'}` })
   const [signers, setSigners] = useState<UserInfo[]>([
     {
@@ -56,6 +58,22 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
   const handleSetCheckStatusPage = useEvent(() => {
     setActiveStep('check-status')
   })
+
+  useEffect(() => {
+    let interval
+
+    if (activeStep === 'check-status' && document && isNeedToUpdateDocument(document.status)) {
+      interval = setInterval(() => {
+        dispatch(
+          getDocument({
+            id: document.id,
+          }),
+        )
+      }, 3000)
+    }
+
+    return () => clearInterval(interval)
+  }, [document?.status, activeStep])
 
   return (
     <>
