@@ -6,7 +6,7 @@ import { StepNewDocument } from 'src/pages/upload/components/step-new-document'
 
 import styles from './styles.module.css'
 
-export default function IndexPage(): JSX.Element {
+export default function UploadPage(): JSX.Element {
   const { title } = usePageHead({ title: 'Title' })
   // todo delete page
   return (

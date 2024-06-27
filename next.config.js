@@ -31,6 +31,15 @@ module.exports = pwa({
   images: {
     formats: ['image/webp'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: 'https://docuchain.io/',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return formats.map((format) => ({
       source: format,
