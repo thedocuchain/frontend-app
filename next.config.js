@@ -38,6 +38,11 @@ module.exports = pwa({
         destination: 'https://docuchain.io/',
         permanent: true,
       },
+      {
+        source: '/app',
+        destination: 'https://docuchain.io/',
+        permanent: true,
+      },
     ]
   },
   async headers() {
