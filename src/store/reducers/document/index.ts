@@ -8,10 +8,12 @@ export const storeKey = '@redux/document'
 
 export interface DocumentState {
   document: undefined | DocumentType
+  imageLinkMemo: string
 }
 
 const initialState: DocumentState = {
   document: undefined,
+  imageLinkMemo: undefined,
 }
 
 export const whitelist = objectKeys(initialState)
