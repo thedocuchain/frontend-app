@@ -130,6 +130,7 @@ export default function FeedbackPage() {
                       >
                         <Input
                           label={'Email'}
+                          isEmail
                           placeholder='john.doe@gmail.com'
                           value={form.email}
                           onChange={setValue('email')}
