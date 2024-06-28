@@ -158,7 +158,13 @@ export default function FeedbackPage() {
                   <Button theme='secondary' size='sm' onClick={handleBack}>
                     Cancel
                   </Button>
-                  <Button isLoading={isLoading} theme='primary' size='sm' onClick={handleSend}>
+                  <Button
+                    isLoading={isLoading}
+                    theme='primary'
+                    size='sm'
+                    onClick={handleSend}
+                    className={styles.buttonSend}
+                  >
                     Send message
                   </Button>
                 </div>
