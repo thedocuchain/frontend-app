@@ -8,22 +8,34 @@ import { useAppSelector } from 'src/store/hooks'
 import { selectedImageLinkMemo } from 'src/store/reducers/document/selectors'
 import { IconFile, IconUsers } from 'src/icons'
 import { DocumentType } from 'src/store/reducers/document/types'
+import { Loader } from 'src/components/ui/loader'
 
 import styles from './styles.module.css'
 
 export function DocumentPreview(props: { document: DocumentType }) {
   const { shortId, users, pagesCount } = props.document
   const signers = users.filter((el) => el.role === 'signer')
+  const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
   const imageLink = useAppSelector(selectedImageLinkMemo)
+
   return (
     <Column>
       <div className={styles.wrapperImage}>
+        {isLoading && (
+          <div className={styles.loader}>
+            <Loader size={32} />
+          </div>
+        )}
         {isError && <MockPageSidePanel className={styles.wrapperError} />}
-        <div className={cn(styles.img, { [styles.imgError]: isError })}>
+        <div className={cn(styles.img, { [styles.imgError]: isError || isLoading })}>
           <img
             onError={() => {
               setError(true)
+              setLoading(false)
+            }}
+            onLoad={() => {
+              setLoading(false)
             }}
             width={146}
             height={190}
