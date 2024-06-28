@@ -61,10 +61,10 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
         <link rel='icon' type='image/png' sizes='32x32' href='/app/icons/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/app/icons/favicon-16x16.png' />
         <link rel='icon' href='/app/icons/myfavicon.ico?' type='image/x-icon' />
-        <link rel='mask-icon' href='/app/icons/safari-pinned-tab.svg' color='#5bbad5' />
+        <link rel='mask-icon' href='/app/icons/safari-pinned-tab.svg' color='#9fe870' />
         <link rel='manifest' href='/app/site.webmanifest' />
         <link rel='manifest' href='/app/manifest.json' />
-        <meta name='msapplication-TileColor' content='#da532c' />
+        <meta name='msapplication-TileColor' content='#9fe870' />
         <meta name='theme-color' content='#ffffff' />
         <meta name='color-scheme' content='only light' />
       </Head>
