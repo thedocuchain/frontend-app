@@ -65,6 +65,7 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
         <link rel='manifest' href='/app/site.webmanifest' />
         <link rel='manifest' href='/app/manifest.json' />
         <meta name='msapplication-TileColor' content='#9fe870' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='#ffffff' />
         <meta name='theme-color' content='#ffffff' />
         <meta name='color-scheme' content='only light' />
       </Head>
