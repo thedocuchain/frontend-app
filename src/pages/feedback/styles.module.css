@@ -41,6 +41,10 @@
   align-self: flex-end;
 }
 
+.buttonSend {
+  min-width: 136px;
+}
+
 .empty {
   margin: auto;
 }
