@@ -60,7 +60,7 @@ export default function MyCustomApp({ Component, pageProps, initialState }: AppP
         <link rel='apple-touch-icon' sizes='180x180' href='/app/icons/apple-touch-icon.png' />
         <link rel='icon' type='image/png' sizes='32x32' href='/app/icons/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/app/icons/favicon-16x16.png' />
-        <link rel='icon' href='/app/icons/favicon.ico?' type='image/x-icon' />
+        <link rel='icon' href='/app/icons/myfavicon.ico?' type='image/x-icon' />
         <link rel='mask-icon' href='/app/icons/safari-pinned-tab.svg' color='#5bbad5' />
         <link rel='manifest' href='/app/site.webmanifest' />
         <link rel='manifest' href='/app/manifest.json' />
