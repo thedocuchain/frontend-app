@@ -87,8 +87,8 @@ export function StepByStepBlock(props: ComponentProps) {
     }
 
     if (activeStep === 1) {
-      const container = document.getElementById('pages-container')
-      container?.scrollIntoView({ behavior: 'auto', block: 'end', inline: 'nearest' })
+      const container = document.getElementById('participant-wrapper')
+      container?.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' })
     }
   }, [activeStep])
 
