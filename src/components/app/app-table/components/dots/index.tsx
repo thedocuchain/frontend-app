@@ -38,6 +38,8 @@ export function DotsTable(props: { user: User }) {
       event.stopPropagation()
     }
 
+    if (user.notifyStatus === 'not sent') return
+
     if (!stringLastRemind && !isSuccessSent) {
       await remind({
         userId: user.id,
