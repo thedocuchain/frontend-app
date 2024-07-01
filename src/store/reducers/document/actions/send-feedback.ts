@@ -11,10 +11,10 @@ export const sendFeedback = createAsyncThunk(
     message: string
   }): Promise<SuccessApiResponse | DefaultApiResponse> => {
     try {
-      const { data } = await api.post(`/v1/feedback`, {
+      const { data } = await api.post(`/v1/feedbacks`, {
         email: payload.email,
-        name: payload.name,
-        message: payload.message,
+        username: payload.name,
+        description: payload.message,
       })
 
       return data

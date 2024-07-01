@@ -6,7 +6,7 @@ import { Text } from 'src/components/ui/typography'
 import { Button } from 'src/components/ui/button'
 import { Column } from 'src/components/ui/grid'
 import { Space } from 'src/components/ui/space'
-import { IconEmptyContentError, IconEmptyContent } from 'src/icons'
+import { IconEmptyContentError, IconEmptyContentSuccess } from 'src/icons'
 
 import styles from './styles.module.css'
 
@@ -48,7 +48,7 @@ export function EmptyState(props: EmptyStateProps) {
       )}
       {type === 'success-send-feedback' && (
         <Column className='w100-p column-center'>
-          <IconEmptyContent />
+          <IconEmptyContentSuccess />
           <Space size={20} />
 
           <Text theme={'headline-2'}>We have received your message</Text>
