@@ -40,4 +40,5 @@ export { default as IconPlaneColor } from 'src/icons/inline/plane-color.inline.s
 export { default as IconExpired } from 'src/icons/inline/icon-expired.inline.svg'
 
 export { default as IconEmptyContent } from 'src/icons/inline/empty-content-icon.inline.svg'
+export { default as IconEmptyContentSuccess } from 'src/icons/inline/empty-content-icon-success.inline.svg'
 export { default as IconEmptyContentError } from 'src/icons/inline/empty-content-error-icon.inline.svg'
