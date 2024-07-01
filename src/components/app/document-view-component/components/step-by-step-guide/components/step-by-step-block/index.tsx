@@ -81,12 +81,12 @@ export function StepByStepBlock(props: ComponentProps) {
 
   useEffect(() => {
     // if you need to scroll to signature
-    if (isLastStep && isSignPage) {
+    if ((isLastStep || activeStep === 1) && isSignPage) {
       const element = document.getElementById('target-id')
       element?.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' })
     }
 
-    if (activeStep === 1) {
+    if (activeStep === 1 && !isSignPage) {
       const container = document.getElementById('participant-wrapper')
       container?.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' })
     }
