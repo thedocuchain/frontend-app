@@ -45,7 +45,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
 
   return (
     <div
-      id={'participant-wrapper'}
+      id={index === 0 ? 'participant-wrapper' : ''}
       className={cn('flex-row', styles.participantWrapper)}
       style={{
         bottom: signatures[0].yCoordinate * heightRatio * pageRatio - 60,
