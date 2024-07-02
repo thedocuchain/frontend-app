@@ -129,3 +129,7 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   appearance: textfield;
 }
+
+.grecaptcha-badge {
+  z-index: 1000;
+}
