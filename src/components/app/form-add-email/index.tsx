@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { ValidatorWrapper } from '@coxy/react-validator'
-import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 
 import { Button } from 'src/components/ui/button'
 import { Input } from 'src/components/ui/input'
@@ -22,10 +21,8 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
   const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
 
-  const [form, setValue] = useStateForm({
-    email: '',
-  })
-  const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
+  const [email, setEmail] = useState('')
+  const [validator, validate, isShowError, setIsShowError] = useFormValidator(email)
   const rules = useValidatorRules()
 
   const handleSubmitForm = useEvent(async () => {
@@ -45,7 +42,7 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
       return
     }
 
-    const isDuplicateEmail = document.users.some((el) => el.email === form.email)
+    const isDuplicateEmail = document.users.some((el) => el.email === email)
     if (isDuplicateEmail) {
       setIsShowError(true)
       await validator.current.setCustomError({
@@ -60,8 +57,14 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
       return
     }
 
-    await subscribe({ documentId: document.id, userEmail: form.email })
+    await subscribe({ documentId: document.id, userEmail: email })
   })
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => setEmail(''), 2000)
+    }
+  }, [isSuccess])
 
   return (
     <div className={props.isSendScreen ? styles.formSendScreen : styles.form}>
@@ -70,15 +73,15 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
           id={'email'}
           required
           rules={rules.email}
-          value={form.email}
+          value={email}
           isVisibleErrors={isShowError}
           className={styles.formWrapper}
         >
           <Input
             onEnter={handleSubmitForm}
             isEmail
-            value={form.email}
-            onChange={setValue('email')}
+            value={email}
+            onChange={setEmail}
             placeholder={'john.doe@gmail.com'}
           />
           <InputSuccess isVisibleSuccess={isSuccess}>You’ve successfully subscribed to updates!</InputSuccess>

@@ -6,8 +6,10 @@ import { useI18N } from 'src/utils/use-i18n'
 import locales from './index.i18n.json'
 
 const emailReg =
-  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-const userNameReg = /[A-Za-z0-9_-]+/
+  /^(([^<>()А-Яа-я[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const userNameReg = /^[A-Za-z0-9]*$/
+const messageReg = /^[-!@#$%^&*()_=+'"/\\.,;?:\s0-9a-zA-Zа-яА-Я]*$/gi
+const docReg = /^[-'".,_?!:; А-Яа-яA-Za-z0-9]*$/
 
 export const useValidatorRules = () => {
   const { t } = useI18N(locales)
@@ -33,10 +35,20 @@ export const useValidatorRules = () => {
         message: t('name-invalid'),
       },
     ],
+    role: [
+      {
+        rule: (value) => !!value && value !== '' && value.length !== 0,
+        message: t('field-required'),
+      },
+    ],
     message: [
       {
         rule: (value) => !!value && value !== '' && value.length !== 0,
         message: t('field-required'),
+      },
+      {
+        rule: (value) => messageReg.test(trim(String(value).toLowerCase())),
+        message: t('invalid-character'),
       },
     ],
     id: [
@@ -49,6 +61,10 @@ export const useValidatorRules = () => {
       {
         rule: (value) => !!value && value !== '' && value.length !== 0,
         message: t('document-required'),
+      },
+      {
+        rule: (value) => docReg.test(trim(String(value).toLowerCase())),
+        message: t('invalid-character'),
       },
     ],
   }

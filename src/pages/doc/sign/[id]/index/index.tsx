@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { useRouter } from 'next/router'
+import { isAfter } from 'date-fns'
 
 import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
@@ -13,6 +14,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
+import { remindUser } from 'src/store/reducers/document/actions/remind'
 
 import styles from './styles.module.css'
 
@@ -92,6 +94,9 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const dispatch = store.dispatch
   const documentId = context.query.id as string
   const signerId = context.query.userId as string
+  const expiredAt = context.query.expiredAt as string
+  const today = new Date()
+  const isExpired = isAfter(today, Number(expiredAt))
 
   const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
   if (!isMatchId) {
@@ -106,7 +111,16 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
 
   const isAlreadySigned = document?.users.find((user) => user.id === signerId)?.signatures[0].signed
 
-  if (!document || !signerId) {
+  if (!document || !signerId || !expiredAt || isExpired) {
+    if (isExpired && documentId && signerId) {
+      await dispatch(
+        remindUser({
+          userId: signerId,
+          documentId,
+        }),
+      )
+    }
+
     return { step: 'expired-link' }
   }
 

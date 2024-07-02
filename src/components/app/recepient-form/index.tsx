@@ -138,7 +138,7 @@ export function RecepientForm(props: {
 
         <InputValidatorField
           id={'role'}
-          rules={rules.name}
+          rules={rules.role}
           value={selectedRole}
           isVisibleErrors={isShowError}
           className={styles.formWrapper}

@@ -31,9 +31,6 @@ module.exports = pwa({
   images: {
     formats: ['image/webp'],
   },
-  api: {
-    externalResolver: true,
-  },
   async redirects() {
     return [
       {
