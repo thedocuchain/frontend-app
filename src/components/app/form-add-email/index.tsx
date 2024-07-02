@@ -22,7 +22,7 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
   const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
 
-  const [form, setValue, clear] = useStateForm({
+  const [form, setValue] = useStateForm({
     email: '',
   })
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
@@ -61,7 +61,6 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
     }
 
     await subscribe({ documentId: document.id, userEmail: form.email })
-    clear()
   })
 
   return (

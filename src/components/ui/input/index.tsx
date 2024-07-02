@@ -25,7 +25,7 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
 
   const onChangeInput = useEvent((e: ChangeEvent<HTMLInputElement>) => {
     // email and name regExp
-    const regExp = isEmail ? /^(?!\s*$)[0-9a-zA-Z@._-]*/gi : /[ A-Za-z0-9_-]+/gi
+    const regExp = isEmail ? /^(?!\s*$)[0-9a-zA-Z+@._-]*/gi : /[ A-Za-z0-9_-]+/gi
     const newStr = e.target.value.match(regExp)
 
     if (!newStr && onChange) {
@@ -69,7 +69,7 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
         </>
       )}
       <input
-        type='text'
+        type={isEmail ? 'email' : 'text'}
         spellCheck='false'
         onKeyDown={onKeyDownInput}
         onChange={onChangeInput}
