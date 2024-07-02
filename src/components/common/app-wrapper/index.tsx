@@ -8,13 +8,13 @@ export function AppWrapper(props: PropsWithChildren) {
   const token = useAppSelector(selectedAccessToken)
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const apiKey = router.query.apiKey as string
+  const newToken = router.query.token as string
 
   useEffect(() => {
-    if (apiKey && apiKey !== token) {
-      dispatch(setAccessToken(apiKey))
+    if (newToken && newToken !== token) {
+      dispatch(setAccessToken(newToken))
     }
-  }, [apiKey])
+  }, [newToken])
 
   return <>{props.children}</>
 }

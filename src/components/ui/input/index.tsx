@@ -3,6 +3,7 @@ import type { Dispatch, ChangeEvent, InputHTMLAttributes, ReactElement, SetState
 import React, { KeyboardEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { trim } from '@coxy/utils'
 
 import { IconSearch } from 'src/icons'
 import { Text } from 'src/components/ui/typography'
@@ -24,17 +25,8 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
   const { onChange, className, value, onEnter, isVisibleError, isSearch, isEmail, label, hint, ...otherProps } = props
 
   const onChangeInput = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-    // email and name regExp
-    const regExp = isEmail ? /^(?!\s*$)[0-9a-zA-Z+@._-]*/gi : /[ A-Za-z0-9_-]+/gi
-    const newStr = e.target.value.match(regExp)
-
-    if (!newStr && onChange) {
-      onChange('')
-      return
-    }
-
     if (onChange) {
-      onChange(newStr[0])
+      onChange(trim(e.target.value))
     }
   })
 

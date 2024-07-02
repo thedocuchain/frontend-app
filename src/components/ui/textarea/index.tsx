@@ -3,6 +3,7 @@ import type { ReactElement, ChangeEvent, SetStateAction, Dispatch, InputHTMLAttr
 import React, { useId } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { trim } from '@coxy/utils'
 
 import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
@@ -24,10 +25,6 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
   const id = useId()
 
   const onChangeTextarea = useEvent((e: ChangeEvent<HTMLTextAreaElement>) => {
-    // document name regExp
-    const regExp = /[-'".,_?!:; A-Za-z0-9]+/gi
-    const newStr = e.target.value.match(regExp)
-
     const textField = document.getElementById(id)
     if (textField.clientHeight < textField.scrollHeight) {
       textField.style.height = `${textField.scrollHeight}px`
@@ -36,13 +33,8 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
       }
     }
 
-    if (!newStr && onChange) {
-      onChange('')
-      return
-    }
-
     if (onChange) {
-      onChange(newStr[0])
+      onChange(trim(e.target.value))
     }
   })
 

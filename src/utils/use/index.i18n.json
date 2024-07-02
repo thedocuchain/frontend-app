@@ -4,6 +4,7 @@
     "email-invalid": "Use a format like info@gmail.com",
     "id-required": "Please enter ID",
     "document-required": "Please enter a document name",
-    "name-invalid": "Name is invalid"
+    "name-invalid": "Name is invalid",
+    "invalid-character": "Invalid character"
   }
 }
