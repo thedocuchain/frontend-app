@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { ValidatorWrapper } from '@coxy/react-validator'
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 
 import { Button } from 'src/components/ui/button'
 import { Input } from 'src/components/ui/input'
@@ -60,9 +61,14 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
     await subscribe({ documentId: document.id, userEmail: email })
   })
 
+  const refTimer = useRef<TimeoutId>()
+
   useEffect(() => {
     if (isSuccess) {
-      setTimeout(() => setEmail(''), 2000)
+      refTimer.current = setTimeout(() => setEmail(''), 2000)
+    }
+    return () => {
+      clearTimeout(refTimer.current)
     }
   }, [isSuccess])
 
@@ -84,7 +90,7 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
             onChange={setEmail}
             placeholder={'john.doe@gmail.com'}
           />
-          <InputSuccess isVisibleSuccess={isSuccess}>You’ve successfully subscribed to updates!</InputSuccess>
+          <InputSuccess isVisibleSuccess={isSuccess}>This email has successfully subscribed to updates.</InputSuccess>
         </InputValidatorField>
         <Button
           isLoading={isLoading}
