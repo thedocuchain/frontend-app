@@ -99,7 +99,9 @@ export function RecepientForm(props: {
         </Button>
       </RowBetweenCenter>
       <div className={styles.block}>
-        <IconCloseCircle onClick={() => onDelete(index)} className={cn(styles.iconClose, 'on-click')} />
+        {signers.length > 1 && (
+          <IconCloseCircle onClick={() => onDelete(index)} className={cn(styles.iconClose, 'on-click')} />
+        )}
         <div className={styles.leftColorPanel} style={{ background: color }} />
         <InputValidatorField
           id={'name'}

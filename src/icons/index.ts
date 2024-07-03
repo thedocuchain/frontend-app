@@ -27,6 +27,7 @@ export { default as IconCheckDot } from 'src/icons/inline/check-dot.inline.svg'
 export { default as IconBottomSheet } from 'src/icons/inline/bottom-sheet.inline.svg'
 export { default as IconCheckCircle } from 'src/icons/inline/check-circle.inline.svg'
 export { default as IconInfoCircle } from 'src/icons/inline/info-circle.inline.svg'
+export { default as IconDownload } from 'src/icons/inline/download.inline.svg'
 
 export { default as IconXLogo } from 'src/icons/socials/x.inline.svg'
 export { default as IconLinkedinLogo } from 'src/icons/socials/in.inline.svg'
