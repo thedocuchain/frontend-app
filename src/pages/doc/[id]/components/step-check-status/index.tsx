@@ -8,18 +8,20 @@ import { DocumentPreview } from 'src/components/app/document-preview'
 import { Text } from 'src/components/ui/typography'
 import { StepsProgressBar } from 'src/components/app/steps-progress-bar'
 import { Button, ButtonIcon } from 'src/components/ui/button'
-import { IconEye } from 'src/icons'
+import { IconDownload, IconEye } from 'src/icons'
 import { Space } from 'src/components/ui/space'
 import { Alert } from 'src/components/ui/alert'
-import { useAppSelector } from 'src/store/hooks'
+import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { DocumentStatuses } from 'src/store/reducers/document/types'
 import { FormAddEmail } from 'src/components/app/form-add-email'
+import { downloadDocument } from 'src/store/reducers/document/actions/files'
 
 import styles from './styles.module.css'
 
 export function StepCheckStatus() {
   const document = useAppSelector(selectedDocument)
+  const dispatch = useAppDispatch()
   const users = document.users
   const signers = users.filter((el) => el.role === 'signer')
   const signedBy = `Signed by ${signers.filter((el) => el.signatures[0]?.signed).length} of ${signers.length}`
@@ -66,6 +68,14 @@ export function StepCheckStatus() {
     window.open(`/app/doc/${document.id}?view=true`, '_blank')
   })
 
+  const handleDownload = useEvent(async () => {
+    const response = await dispatch(downloadDocument({ id: document.id })).unwrap()
+
+    if (response?.fileLink) {
+      window.open(response.fileLink)
+    }
+  })
+
   return (
     <>
       <Header />
@@ -80,6 +90,19 @@ export function StepCheckStatus() {
               </ButtonIcon>
               View document
             </Button>
+
+            {isCompleted && (
+              <>
+                <Space size={8} />
+
+                <Button theme='primary' size={'sm'} className={'w100-p'} onClick={handleDownload}>
+                  <ButtonIcon>
+                    <IconDownload />
+                  </ButtonIcon>
+                  Download
+                </Button>
+              </>
+            )}
           </Column>
           <Column className={styles.secondColumn}>
             <Text theme={'headline-1'} className={styles.name}>
@@ -108,6 +131,18 @@ export function StepCheckStatus() {
                 </ButtonIcon>
                 View document
               </Button>
+              {isCompleted && (
+                <>
+                  <Space size={8} />
+
+                  <Button theme='primary' className={'w100-p'} onClick={handleDownload}>
+                    <ButtonIcon>
+                      <IconDownload />
+                    </ButtonIcon>
+                    Download
+                  </Button>
+                </>
+              )}
             </div>
 
             {!isCompleted && (

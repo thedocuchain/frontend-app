@@ -9,7 +9,7 @@ const emailReg =
   /^(([^<>()А-Яа-я[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const userNameReg = /^[A-Za-z0-9]*$/
 const messageReg = /^[-!@#$%^&*()_=+'"/\\.,;?:\s0-9a-zA-Zа-яА-Я]*$/gi
-const docReg = /^[-'".,_?!:; А-Яа-яA-Za-z0-9]*$/
+const docReg = /^[-'".,_?!:; ()А-Яа-яA-Za-z0-9]*$/
 
 export const useValidatorRules = () => {
   const { t } = useI18N(locales)
