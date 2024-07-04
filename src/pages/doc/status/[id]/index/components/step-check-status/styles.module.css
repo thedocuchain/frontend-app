@@ -1,12 +1,3 @@
-.bg {
-  background-image: url("images/bg-pattern-bottom.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right;
-  width: 100%;
-  height: 100%;
-}
-
 .wrapper {
   margin: calc(var(--header-size) + 76px) auto 0;
   position: relative;
@@ -59,11 +50,6 @@
     flex-direction: column;
     padding: 0 16px;
     margin-top: var(--header-size);
-  }
-
-  .bg {
-    background-position: bottom;
-    background-image: url("images/bg-pattern-bottom-mobile.png");
   }
 
   .firstColumn {

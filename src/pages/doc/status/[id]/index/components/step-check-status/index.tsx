@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { Header } from 'src/components/app/header'
-import { Column, Flex } from 'src/components/ui/grid'
+import { Column } from 'src/components/ui/grid'
 import { AppTable } from 'src/components/app/app-table'
 import { DocumentPreview } from 'src/components/app/document-preview'
 import { Text } from 'src/components/ui/typography'
@@ -16,6 +16,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { DocumentStatuses } from 'src/store/reducers/document/types'
 import { FormAddEmail } from 'src/components/app/form-add-email'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
+import { GradientBg } from 'src/components/ui/gradient-bg'
 
 import styles from './styles.module.css'
 
@@ -72,7 +73,7 @@ export function StepCheckStatus() {
   const isCompleted = activeStep === 'Completed'
 
   const handleViewDocument = useEvent(() => {
-    window.open(`/app/doc/${document.id}?view=true`, '_blank')
+    window.open(`/app/doc/view/${document.id}`, '_blank')
   })
 
   const handleDownload = useEvent(async () => {
@@ -86,7 +87,7 @@ export function StepCheckStatus() {
   return (
     <>
       <Header />
-      <Flex flex='1' className={styles.bg}>
+      <GradientBg>
         <div className={styles.wrapper}>
           <Column className={styles.firstColumn}>
             <DocumentPreview document={document} />
@@ -166,7 +167,7 @@ export function StepCheckStatus() {
             <div className={styles.space} />
           </Column>
         </div>
-      </Flex>
+      </GradientBg>
     </>
   )
 }

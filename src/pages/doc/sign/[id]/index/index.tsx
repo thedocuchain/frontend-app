@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { useRouter } from 'next/router'
 import { isAfter } from 'date-fns'
 
-import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
+import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
@@ -18,12 +17,16 @@ import { remindUser } from 'src/store/reducers/document/actions/remind'
 
 import styles from './styles.module.css'
 
-export type StepsSignPage = 'sign-the-document' | 'success-sign' | 'expired-link' | 'document-error'
+export type StepsSignPage =
+  | 'sign-the-document'
+  | 'success-sign'
+  | 'success-all-signed'
+  | 'expired-link'
+  | 'document-error'
 
 export function DocumentSignPage({ step }: { step: StepsSignPage }) {
   const document = useAppSelector(selectedDocument)
   const { title } = usePageHead({ title: document ? ` | ${document?.name}` : ' | Link expired' })
-  const router = useRouter()
   const stepsHints: StepByStepBlockType[] = [
     {
       title: 'Please check the document before giving the required consents and sending.',
@@ -45,16 +48,13 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
 
   const handleSetSuccessPage = useEvent(() => {
     setActiveStep('success-sign')
-  })
-
-  const handleSetDocumentView = useEvent(() => {
-    void router.push(`/doc/${document.id}?view=true`)
+    // todo написать логику
+    // setActiveStep('success-all-signed')
   })
 
   return (
     <>
       <PageHead>{title}</PageHead>
-      <PageDescription>Description</PageDescription>
 
       {activeStep === 'document-error' && (
         <PageWrapper>
@@ -76,7 +76,14 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
       {activeStep === 'success-sign' && (
         <PageWrapper>
           <Header isTransparent />
-          <StatusScreenTemplate isOneSigned setDocumentViewPage={handleSetDocumentView} />
+          <StatusScreenTemplate isOneSigned />
+        </PageWrapper>
+      )}
+
+      {activeStep === 'success-all-signed' && (
+        <PageWrapper>
+          <Header isTransparent />
+          <StatusScreenTemplate isAllSigned />
         </PageWrapper>
       )}
 
@@ -126,6 +133,7 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
 
   if (isAlreadySigned) {
     return { step: 'success-sign' }
+    // todo дописать логику return { step: 'success-all-signed' }
   }
 
   return { step: 'sign-the-document' }
