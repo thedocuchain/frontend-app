@@ -21,7 +21,7 @@ export type User = {
   readRecordsDisclosure?: boolean
 
   lastNotifyDate?: string // ISO dateTimeString with TZ
-  notifyStatus?: 'delivered' | 'not sent'
+  notifyStatus?: 'delivered' | 'not sent' | 'error'
 }
 
 export type UserInfo = {

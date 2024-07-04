@@ -6,12 +6,12 @@
 
 .item {
   padding: 10px 8px;
-  cursor: pointer;
   border-radius: 8px;
   width: 100%;
 }
 
-.item:hover {
+.itemHover:hover {
+  cursor: pointer;
   background-color: var(--bg-accent-extra-light);
 }
 
