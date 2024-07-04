@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
-import { useEvent } from '@coxy/utils/dist/use/use-event'
+import { Link } from '@react-email/components'
 
 import { Logotype } from 'src/components/app/logotype'
 import { Button, ButtonIcon } from 'src/components/ui/button'
@@ -48,10 +48,6 @@ export function Header(props: HeaderProps) {
     }
   }, [])
 
-  const handleNewDocument = useEvent(async () => {
-    window.open('https://docuchain.io/', '_self')
-  })
-
   return (
     <div className={cn(styles.wrapper, { [styles.transparent]: isTransparent })}>
       <header
@@ -75,12 +71,14 @@ export function Header(props: HeaderProps) {
             </div>
           )}
 
-          <Button theme='secondary' size='sm' onClick={handleNewDocument}>
-            <ButtonIcon>
-              <IconPlusBlack />
-            </ButtonIcon>
-            {isMobile ? 'Document' : 'New document'}
-          </Button>
+          <Link href={'https://docuchain.io/'} target={'_self'}>
+            <Button theme='secondary' size='sm'>
+              <ButtonIcon>
+                <IconPlusBlack />
+              </ButtonIcon>
+              {isMobile ? 'Document' : 'New document'}
+            </Button>
+          </Link>
         </div>
 
         {isStepsWizard && stepsWizard && (
