@@ -50,7 +50,7 @@ export default function FeedbackPage() {
 
   const handleBack = useEvent(() => {
     if (documentId) {
-      void router.push(`/doc/${documentId}`)
+      void router.push(`/doc/status/${documentId}`)
       return
     }
     router.back()

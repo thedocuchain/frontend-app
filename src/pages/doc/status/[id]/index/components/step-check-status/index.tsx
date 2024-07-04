@@ -159,10 +159,14 @@ export function StepCheckStatus() {
               </Alert>
             )}
 
-            <Text theme={'headline-2'} className={styles.titleSecondary}>
-              Signing status
-            </Text>
-            <AppTable participants={users} />
+            {users.length > 0 && (
+              <>
+                <Text theme={'headline-2'} className={styles.titleSecondary}>
+                  Signing status
+                </Text>
+                <AppTable participants={users} />
+              </>
+            )}
 
             <div className={styles.space} />
           </Column>
