@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { Text } from 'src/components/ui/typography'
 import { Button } from 'src/components/ui/button'
 import { Column, Row } from 'src/components/ui/grid'
-import { IconCheckCircle, IconInfoCircle } from 'src/icons'
+import { IconCheckCircle, IconMail } from 'src/icons'
 import { Space } from 'src/components/ui/space'
 
 import styles from './styles.module.css'
@@ -43,7 +43,7 @@ export function Alert(
   return (
     <div className={cl}>
       <div className={styles.icon}>
-        {type !== 'success' && <IconInfoCircle />}
+        {type !== 'success' && <IconMail />}
         {type === 'success' && <IconCheckCircle />}
       </div>
 
