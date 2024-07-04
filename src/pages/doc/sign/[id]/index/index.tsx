@@ -46,7 +46,8 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
     },
   ]
 
-  const isLastSigner = document.users.filter((user) => user.role === 'signer' && !user.signatures[0].signed).length <= 1
+  const isLastSigner =
+    document.users.filter((user) => user.role === 'signer' && !user.signatures[0].signed).length === 0
 
   const handleSetSuccessPage = useEvent(() => {
     if (isLastSigner) {
