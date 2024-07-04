@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useEvent } from '@coxy/utils/dist/use/use-event'
+import React, { useState } from 'react'
 
-import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
+import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
 import { Flex } from 'src/components/ui/grid'
@@ -10,26 +9,15 @@ import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
 import { StepAddRecipients } from 'src/pages/doc/[id]/components/step-add-recipients'
 import { StepPreviewAndSend } from 'src/pages/doc/[id]/components/step-preview-and-send'
-import { StepCheckStatus } from 'src/pages/doc/[id]/components/step-check-status'
-import { StepViewDocument } from 'src/pages/doc/[id]/components/step-view-document'
-import { useAppDispatch, useAppSelector } from 'src/store/hooks'
+import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
-import { isNeedToUpdateDocument } from 'src/utils/check-document-statuses'
 
 import styles from './styles.module.css'
 
-export type StepsDocumentPage =
-  | 'upload'
-  | 'add-recipients'
-  | 'preview-and-send'
-  | 'success-send'
-  | 'success-all-signed'
-  | 'check-status'
-  | 'document-view'
-  | 'document-error'
+export type StepsDocumentPage = 'upload' | 'add-recipients' | 'preview-and-send' | 'success-send' | 'document-error'
 export type StepWizardType = {
   title: string
   value: StepsDocumentPage
@@ -37,7 +25,6 @@ export type StepWizardType = {
 
 export function DocumentPage({ step }: { step: StepsDocumentPage }) {
   const document = useAppSelector(selectedDocument)
-  const dispatch = useAppDispatch()
   const { title } = usePageHead({ title: ` | ${document?.name || 'Document not found'}` })
   const [signers, setSigners] = useState<UserInfo[]>([
     {
@@ -55,42 +42,14 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
 
   const activeStepTitle = steps.find((el) => el.value === activeStep)
 
-  const handleSetCheckStatusPage = useEvent(() => {
-    setActiveStep('check-status')
-  })
-
-  useEffect(() => {
-    let interval
-
-    if (activeStep === 'check-status' && document && isNeedToUpdateDocument(document.status)) {
-      interval = setInterval(() => {
-        dispatch(
-          getDocument({
-            id: document.id,
-          }),
-        )
-      }, 3000)
-    }
-
-    return () => clearInterval(interval)
-  }, [document?.status, activeStep])
-
   return (
     <>
       <PageHead>{title}</PageHead>
-      <PageDescription>Description</PageDescription>
       <PageWrapper className={'column'}>
         {activeStep === 'success-send' && (
           <>
             <Header isTransparent />
-            <StatusScreenTemplate setCheckStatusPage={handleSetCheckStatusPage} isSend />
-          </>
-        )}
-
-        {activeStep === 'success-all-signed' && (
-          <>
-            <Header isTransparent />
-            <StatusScreenTemplate setCheckStatusPage={handleSetCheckStatusPage} isAllSigned />
+            <StatusScreenTemplate isSend />
           </>
         )}
 
@@ -100,10 +59,6 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
             <StatusScreenTemplate is404Document />
           </>
         )}
-
-        {activeStep === 'document-view' && <StepViewDocument />}
-
-        {activeStep === 'check-status' && <StepCheckStatus />}
 
         {(activeStep === 'preview-and-send' || activeStep === 'add-recipients') && (
           <>
@@ -132,7 +87,6 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
 
 DocumentPage.getInitialProps = async (context, store: AppStore) => {
   const dispatch = store.dispatch
-  const isDocumentViewPage = context.query.view as string
   const documentId = context.query.id as string
 
   const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
@@ -150,10 +104,6 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'document-error' }
   }
 
-  if (isDocumentViewPage) {
-    return { step: 'document-view' }
-  }
-
   if (document.status === DocumentStatuses.UPLOADED || document.status === DocumentStatuses.DRAFT) {
     return { step: 'add-recipients' }
   }
@@ -162,19 +112,5 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'preview-and-send' }
   }
 
-  if (document.status === DocumentStatuses.SENT) {
-    return { step: 'success-send' }
-  }
-
-  if (
-    document.status === DocumentStatuses.SIGNED ||
-    document.status === DocumentStatuses.COMPLETED ||
-    document.status === DocumentStatuses.BLOCKCHAINED
-  ) {
-    return { step: 'success-all-signed' }
-  }
-
-  if (document.status === DocumentStatuses.DELIVERED || document.status === DocumentStatuses.PARTIALLY_SIGNED) {
-    return { step: 'check-status' }
-  }
+  return { step: 'success-send' }
 }

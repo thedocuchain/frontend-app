@@ -4,7 +4,7 @@ import { ValidatorWrapper } from '@coxy/react-validator'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
-import { PageDescription, PageHead, usePageHead } from 'src/components/common/page-head'
+import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
 import { GradientBg } from 'src/components/ui/gradient-bg'
@@ -83,7 +83,6 @@ export default function FeedbackPage() {
   return (
     <>
       <PageHead>{title}</PageHead>
-      <PageDescription>Description</PageDescription>
 
       <PageWrapper>
         <Header isTransparent />

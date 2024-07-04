@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { useRouter } from 'next/router'
+import { Link } from '@react-email/components'
 
 import { Column, Row } from 'src/components/ui/grid'
 import { Text } from 'src/components/ui/typography'
@@ -29,44 +29,12 @@ export function StatusScreenTemplate(props: {
   is404Document?: boolean
   isServerErrorPage?: boolean
   isExpired?: boolean
-  setCheckStatusPage?: () => void
-  setDocumentViewPage?: () => void
-}): JSX.Element {
-  const {
-    isAllSigned,
-    isOneSigned,
-    is404Page,
-    is404Document,
-    isServerErrorPage,
-    isSend,
-    isExpired,
-    setCheckStatusPage,
-    setDocumentViewPage,
-  } = props
-  const router = useRouter()
-
+}) {
+  const { isAllSigned, isOneSigned, is404Page, is404Document, isServerErrorPage, isSend, isExpired } = props
   const document = useAppSelector(selectedDocument)
   const checkId = document?.id
   const documentName = document?.name
   const dispatch = useAppDispatch()
-
-  const handleNewDocument = useEvent(() => {
-    window.open('https://docuchain.io/', '_self')
-  })
-
-  const handleCheckStatus = useEvent(() => {
-    if (setCheckStatusPage) {
-      setCheckStatusPage()
-      return
-    }
-    void router.push(`/doc/${checkId}`)
-  })
-
-  const handleViewDocument = useEvent(() => {
-    if (setDocumentViewPage) {
-      setDocumentViewPage()
-    }
-  })
 
   const handleDownload = useEvent(async () => {
     const response = await dispatch(downloadDocument({ id: document.id })).unwrap()
@@ -167,12 +135,11 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button theme='secondary' className={styles.button} onClick={handleNewDocument}>
-                  New document
-                </Button>
-                <Button theme='primary' className={styles.button} onClick={handleCheckStatus}>
-                  Check status
-                </Button>
+                <Link href={`/app/doc/status/${checkId}`} target={'_self'}>
+                  <Button theme='primary' className={styles.button}>
+                    Check status
+                  </Button>
+                </Link>
               </Row>
             </>
           )}
@@ -192,12 +159,17 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button theme='secondary' className={styles.button} onClick={handleViewDocument}>
-                  View document
-                </Button>
-                <Button theme='primary' className={styles.button} onClick={handleCheckStatus}>
-                  Check status
-                </Button>
+                <Link href={`/app/doc/view/${document.id}`} target={'_self'}>
+                  <Button theme='secondary' className={styles.button}>
+                    View document
+                  </Button>
+                </Link>
+
+                <Link href={`/app/doc/status/${checkId}`} target={'_self'}>
+                  <Button theme='primary' className={styles.button}>
+                    Check status
+                  </Button>
+                </Link>
               </Row>
             </>
           )}
@@ -215,7 +187,7 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button theme='primary' className={styles.buttonHome} onClick={handleNewDocument}>
+                <Button href='https://docuchain.io/' theme='primary' className={styles.buttonHome}>
                   Back to home
                 </Button>
               </Row>
@@ -238,9 +210,12 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button theme='secondary' className={styles.button} onClick={handleCheckStatus}>
-                  More details
-                </Button>
+                <Link href={`/app/doc/status/${checkId}`} target={'_self'}>
+                  <Button theme='secondary' className={styles.button}>
+                    More details
+                  </Button>
+                </Link>
+
                 <Button theme='primary' className={styles.button} onClick={handleDownload}>
                   Download
                 </Button>
