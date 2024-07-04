@@ -26,6 +26,14 @@ export function StepCheckStatus() {
   const signers = users.filter((el) => el.role === 'signer')
   const signedBy = `Signed by ${signers.filter((el) => el.signatures[0]?.signed).length} of ${signers.length}`
   const valueSigners = (signers.filter((el) => el.signatures[0]?.signed).length / signers.length) * 100
+  const [activeStep, setActiveStep] = useState('Document uploaded')
+
+  const signedByValue = () => {
+    if (activeStep !== signedBy) return 0
+    if (valueSigners === 0) return 5
+    return valueSigners
+  }
+
   const steps = [
     {
       title: 'Document uploaded',
@@ -33,11 +41,11 @@ export function StepCheckStatus() {
     },
     {
       title: 'Sent to participants',
-      value: 100,
+      value: activeStep === 'Sent to participants' || activeStep === signedBy ? 100 : 0,
     },
     {
       title: signedBy,
-      value: valueSigners === 0 ? 5 : valueSigners,
+      value: signedByValue(),
     },
     {
       title: 'Completed',
@@ -61,7 +69,6 @@ export function StepCheckStatus() {
     }
   }, [document.status])
 
-  const [activeStep, setActiveStep] = useState(signedBy)
   const isCompleted = activeStep === 'Completed'
 
   const handleViewDocument = useEvent(() => {

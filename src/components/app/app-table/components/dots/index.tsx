@@ -2,6 +2,7 @@ import React, { FocusEvent, MouseEvent, useEffect, useRef, useState } from 'reac
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 import { format } from 'date-fns'
+import cn from 'classnames'
 
 import { useIsMobile } from 'src/utils/use/use-is-mobile'
 import { BottomSheet } from 'src/components/ui/dropdown/components/bottomsheet-mobile'
@@ -27,6 +28,9 @@ export function DotsTable(props: { user: User }) {
   const refTimer = useRef<TimeoutId>()
   const lastRemind = lastNotifyDate && format(new Date(lastNotifyDate), 'yyyy-MM-dd HH:mm')
   const [remind, { isSuccess }] = useApi(remindUser)
+  const isError = user.notifyStatus === 'error'
+  const isNotDelivered = user.notifyStatus === 'not sent'
+  const isHover = user.notifyStatus === 'delivered' && !isMoreThan24HoursString(lastRemind)
 
   const handleClose = useEvent(() => {
     setVisible(false)
@@ -38,7 +42,8 @@ export function DotsTable(props: { user: User }) {
       event.stopPropagation()
     }
 
-    if (user.notifyStatus === 'not sent') return
+    if (isError) return
+    if (isNotDelivered) return
 
     if (!stringLastRemind && !isSuccessSent) {
       await remind({
@@ -77,6 +82,19 @@ export function DotsTable(props: { user: User }) {
   }, [isSuccessSent])
 
   function TextRemindComponent() {
+    if (isError)
+      return (
+        <Text theme={'body-2'} className='color-text-warning'>
+          We can&apos;t deliver email to this address. Please check the email is correct.
+        </Text>
+      )
+    if (isNotDelivered)
+      return (
+        <Text theme={'body-2'}>
+          We are trying to deliver this email. <br />
+          Please wait.
+        </Text>
+      )
     return (
       <>
         {!isSuccessSent && (
@@ -111,7 +129,7 @@ export function DotsTable(props: { user: User }) {
 
       {!isMobile && isVisible && (
         <div onClick={handleRemind} className={styles.listContainer}>
-          <div className={styles.item}>
+          <div className={cn(styles.item, { [styles.itemHover]: isHover })}>
             <Column>
               <TextRemindComponent />
             </Column>
@@ -121,7 +139,7 @@ export function DotsTable(props: { user: User }) {
 
       {isMobile && (
         <BottomSheet title={title} onClose={handleClose} visible={isVisible}>
-          <div onClick={handleRemind} className={styles.item}>
+          <div onClick={handleRemind} className={cn(styles.item, { [styles.itemHover]: isHover })}>
             <Column>
               <TextRemindComponent />
             </Column>
