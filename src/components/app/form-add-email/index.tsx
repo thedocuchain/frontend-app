@@ -22,6 +22,7 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
   const toast = useContext(ToastContext)
   const document = useAppSelector(selectedDocument)
 
+  const [isVisibleSuccess, setIsVisibleSuccess] = useState(false)
   const [email, setEmail] = useState('')
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(email)
   const rules = useValidatorRules()
@@ -65,7 +66,11 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
 
   useEffect(() => {
     if (isSuccess) {
-      refTimer.current = setTimeout(() => setEmail(''), 2000)
+      setIsVisibleSuccess(true)
+      refTimer.current = setTimeout(() => {
+        setIsVisibleSuccess(false)
+        setEmail('')
+      }, 3000)
     }
     return () => {
       clearTimeout(refTimer.current)
@@ -90,7 +95,9 @@ export function FormAddEmail(props: { isSendScreen?: boolean }) {
             onChange={setEmail}
             placeholder={'john.doe@gmail.com'}
           />
-          <InputSuccess isVisibleSuccess={isSuccess}>This email has successfully subscribed to updates.</InputSuccess>
+          <InputSuccess isVisibleSuccess={isVisibleSuccess}>
+            This email has successfully subscribed to updates.
+          </InputSuccess>
         </InputValidatorField>
         <Button
           isLoading={isLoading}
