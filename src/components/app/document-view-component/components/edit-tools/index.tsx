@@ -96,9 +96,6 @@ export function Signature(props: SignatureProps) {
   const fonts = Object.keys(fontsSignatures)
   const fontStyle = useAppSelector(selectedSignatureFont)
 
-  // todo ПОДПИСЬ проверить fontStyle после Славы
-  // const fontStyle = 'engagement-regular'
-
   const cl = cn(styles.signatureWrapper, {
     [styles.isEdited]: isActiveSignature,
     [styles.isSigned]: isSigned,
@@ -149,9 +146,6 @@ export function Signature(props: SignatureProps) {
               className={fontStyle}
             >
               {name}
-              {/* alisa */}
-              {/* http://localhost:3000/doc/sign/8a131f53-8231-459a-9b78-6c3d4492e99f?userId=7e5f4770-5e35-4ce4-baa3-ef6e4f6c80c7 */}
-              {/* todo ПОДПИСЬ проверить размер блока и ставится ли подпись посередине блока после Славы */}
             </div>
           )}
 

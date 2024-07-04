@@ -26,7 +26,9 @@ export type StepsSignPage =
 
 export function DocumentSignPage({ step }: { step: StepsSignPage }) {
   const document = useAppSelector(selectedDocument)
+  const [activeStep, setActiveStep] = useState<StepsSignPage>(step)
   const { title } = usePageHead({ title: document ? ` | ${document?.name}` : ' | Link expired' })
+
   const stepsHints: StepByStepBlockType[] = [
     {
       title: 'Please check the document before giving the required consents and sending.',
@@ -44,12 +46,14 @@ export function DocumentSignPage({ step }: { step: StepsSignPage }) {
     },
   ]
 
-  const [activeStep, setActiveStep] = useState<StepsSignPage>(step)
+  const isLastSigner = document.users.filter((user) => user.role === 'signer' && !user.signatures[0].signed).length <= 1
 
   const handleSetSuccessPage = useEvent(() => {
+    if (isLastSigner) {
+      setActiveStep('success-all-signed')
+      return
+    }
     setActiveStep('success-sign')
-    // todo написать логику
-    // setActiveStep('success-all-signed')
   })
 
   return (
@@ -117,6 +121,9 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   ).unwrap()
 
   const isAlreadySigned = document?.users.find((user) => user.id === signerId)?.signatures[0].signed
+  const isAllSigned = document?.users
+    .filter((user) => user.role === 'signer')
+    .every((user) => user.signatures[0].signed)
 
   if (!document || !signerId || !expiredAt || isExpired) {
     if (isExpired && documentId && signerId) {
@@ -131,9 +138,12 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'expired-link' }
   }
 
+  if (isAllSigned) {
+    return { step: 'success-all-signed' }
+  }
+
   if (isAlreadySigned) {
     return { step: 'success-sign' }
-    // todo дописать логику return { step: 'success-all-signed' }
   }
 
   return { step: 'sign-the-document' }
