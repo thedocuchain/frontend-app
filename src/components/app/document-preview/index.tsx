@@ -40,6 +40,7 @@ export function DocumentPreview(props: { document: DocumentType }) {
             width={146}
             height={190}
             src={imageLink}
+            className={styles.image}
             alt=''
           />
         </div>
