@@ -154,7 +154,7 @@ export function Signature(props: SignatureProps) {
             <Text
               style={fontSizeStyle}
               theme={'button-standard'}
-              className={cn('color-link-default', styles.textHover)}
+              className={cn('color-link-default', 'white-space-nowrap', styles.textHover)}
             >
               Change signature
             </Text>
