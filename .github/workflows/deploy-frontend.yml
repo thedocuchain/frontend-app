@@ -20,3 +20,5 @@ jobs:
 
     - name: Start application
       run: source /home/deployer/ansible/bin/activate && cd ansible && ansible-playbook deploy-frontend.yml -e ansible_user=deployer -b -v
+      env:
+        RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
