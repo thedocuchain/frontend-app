@@ -3,7 +3,6 @@ import type { ReactElement, ChangeEvent, SetStateAction, Dispatch, InputHTMLAttr
 import React, { useId } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { trim } from '@coxy/utils'
 
 import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
@@ -34,7 +33,7 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
     }
 
     if (onChange) {
-      onChange(trim(e.target.value))
+      onChange(e.target.value)
     }
   })
 

@@ -3,7 +3,6 @@ import type { Dispatch, ChangeEvent, InputHTMLAttributes, ReactElement, SetState
 import React, { KeyboardEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { trim } from '@coxy/utils'
 
 import { IconSearch } from 'src/icons'
 import { Text } from 'src/components/ui/typography'
@@ -26,7 +25,7 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
 
   const onChangeInput = useEvent((e: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
-      onChange(trim(e.target.value))
+      onChange(e.target.value)
     }
   })
 
