@@ -108,11 +108,24 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const signerId = context.query.userId as string
   const expiredAt = context.query.expiredAt as string
   const today = new Date()
-  const isExpired = isAfter(today, Number(expiredAt))
+  const isExpired = isAfter(today, new Date(Number(expiredAt)))
 
   const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
-  if (!isMatchId) {
+  if (!isMatchId || !signerId || !expiredAt) {
     return { step: 'document-error' }
+  }
+
+  if (isExpired) {
+    if (documentId && signerId) {
+      await dispatch(
+        remindUser({
+          userId: signerId,
+          documentId,
+        }),
+      )
+    }
+
+    return { step: 'expired-link' }
   }
 
   const document = await dispatch(
@@ -126,17 +139,8 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
     .filter((user) => user.role === 'signer')
     .every((user) => user.signatures[0].signed)
 
-  if (!document || !signerId || !expiredAt || isExpired) {
-    if (isExpired && documentId && signerId) {
-      await dispatch(
-        remindUser({
-          userId: signerId,
-          documentId,
-        }),
-      )
-    }
-
-    return { step: 'expired-link' }
+  if (!document) {
+    return { step: 'document-error' }
   }
 
   if (isAllSigned) {
