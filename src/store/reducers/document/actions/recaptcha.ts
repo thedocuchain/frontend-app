@@ -8,7 +8,9 @@ export const getRecaptchaToken = createAsyncThunk(
     // eslint-disable-next-line no-console
     console.log(RECAPTCHA_PUBLIC, 'RECAPTCHA_PUBLIC')
     // eslint-disable-next-line no-console
-    console.log(process.env.RECAPTCHA_SITE_KEY)
+    console.log(process.env.RECAPTCHA_SITE_KEY, 'process.env.RECAPTCHA_SITE_KEY')
+    // eslint-disable-next-line no-console
+    console.log(process.env.NODE_ENV, 'process.env.NODE_ENV')
     const captchaToken: string = await new Promise((resolve) => {
       grecaptcha.ready(() => {
         grecaptcha.execute(RECAPTCHA_PUBLIC, { action }).then((token) => {
