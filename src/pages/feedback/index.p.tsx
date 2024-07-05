@@ -23,6 +23,8 @@ import { sendFeedback } from 'src/store/reducers/document/actions/send-feedback'
 import { EmptyState } from 'src/components/ui/empty-state'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { loadScript } from 'src/utils/load-script'
+import { RECAPTCHA_PUBLIC } from 'src/configs/api'
 
 import styles from './styles.module.css'
 
@@ -47,6 +49,10 @@ export default function FeedbackPage() {
       setIsSuccessSent(true)
     }
   }, [isSuccess])
+
+  useEffect(() => {
+    void loadScript(`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_PUBLIC}`)
+  }, [])
 
   const handleBack = useEvent(() => {
     if (documentId) {
