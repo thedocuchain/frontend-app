@@ -17,7 +17,7 @@ const pwa = withPWA({
 module.exports = pwa({
   env: {
     ENV: process.env.NODE_ENV,
-    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   },
   distDir: './dist/app',
   basePath: '/app',

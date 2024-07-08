@@ -1,1 +1,1 @@
-export const RECAPTCHA_PUBLIC = process.env.RECAPTCHA_SITE_KEY
+export const RECAPTCHA_PUBLIC = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
