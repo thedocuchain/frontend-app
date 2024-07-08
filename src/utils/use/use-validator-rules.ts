@@ -5,11 +5,10 @@ import { useI18N } from 'src/utils/use-i18n'
 
 import locales from './index.i18n.json'
 
-const emailReg =
-  /^(([^<>()А-Яа-я[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/
 const userNameReg = /^[A-Za-z0-9 ]*$/
-const messageReg = /^[-!@#$%^&*()_=+'"/\\.,;?:\s0-9a-zA-Zа-яА-Я]*$/gi
-const docReg = /^[-'".,_?!:; ()А-Яа-яA-Za-z0-9]*$/
+const messageReg = /^[-()? /.",#№:;+'*<>&\s0-9a-zA-Zа-яА-Я]*$/
+const docReg = /^[-()? /.",#№:;+'*<>&А-Яа-яA-Za-z0-9]*$/
 
 export const useValidatorRules = () => {
   const { t } = useI18N(locales)
@@ -47,7 +46,7 @@ export const useValidatorRules = () => {
         message: t('field-required'),
       },
       {
-        rule: (value) => messageReg.test(trim(String(value).toLowerCase())),
+        rule: (value) => messageReg.test(trim(String(value))),
         message: t('invalid-character'),
       },
     ],
