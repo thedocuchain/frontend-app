@@ -5,6 +5,6 @@
     "id-required": "Please enter ID",
     "document-required": "Please enter a document name",
     "name-invalid": "Name is invalid",
-    "invalid-character": "Only letters, numbers, and symbols ()? /.\",#№:;-+'*<>&"
+    "invalid-character": "Only letters, numbers, and symbols ()? /.\",#№:;-+'*<>&_"
   }
 }
