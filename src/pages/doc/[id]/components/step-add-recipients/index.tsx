@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo } from 'react'
 import { ValidatorWrapper } from '@coxy/react-validator'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
-import { uniqBy } from '@coxy/utils'
+import { trim, uniqBy } from '@coxy/utils'
 
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
 import { ToastContext } from 'src/components/common/toast/context'
@@ -108,7 +108,7 @@ export function StepAddRecipients(props: ComponentProps) {
 
     await addUsers({
       id: document.id,
-      name: form.documentName,
+      name: trim(form.documentName),
       users: signers,
     })
   })
