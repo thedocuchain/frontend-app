@@ -66,6 +66,7 @@ export function Textarea(props: TextareaProps): ReactElement<HTMLTextAreaElement
       )}
       <textarea
         id={id}
+        spellCheck='true'
         onChange={onChangeTextarea}
         className={textareaStyle}
         value={value}
