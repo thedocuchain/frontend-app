@@ -94,9 +94,11 @@ export function RecepientForm(props: {
           Recepient {index + 1}
         </Text>
 
-        <Button onClick={() => onDelete(index)} theme={'link-secondary'} className={'show-mobile'}>
-          Delete
-        </Button>
+        {signers.length > 1 && (
+          <Button onClick={() => onDelete(index)} theme={'link-secondary'} className={'show-mobile'}>
+            Delete
+          </Button>
+        )}
       </RowBetweenCenter>
       <div className={styles.block}>
         {signers.length > 1 && (
