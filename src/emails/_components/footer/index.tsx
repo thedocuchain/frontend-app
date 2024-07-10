@@ -1,7 +1,10 @@
 import React from 'react'
-import { Hr, Link, Row, Section, Text } from '@react-email/components'
+import { Button, Column, Hr, Link, Row, Section, Text } from '@react-email/components'
 
 export default function Footer(): JSX.Element {
+  const downloadUrl =
+    'https://example.com/download'
+
   return (
     <>
       <Hr style={separator} />
@@ -30,6 +33,17 @@ export default function Footer(): JSX.Element {
             If you need to modify the document or have questions about the details in the document, please reach out to
             the to the document&apos;s creator by emailing them directly.
           </Text>
+        </Row>
+
+        <Row>
+          <Column align={'center'} valign={'bottom'}>
+            <Button href={downloadUrl} style={button}>
+              <Text style={textButton}>
+                Download document
+                <span style={{ marginLeft: 6, display: 'inline-block' }}>&#8595;</span>
+              </Text>
+            </Button>
+          </Column>
         </Row>
       </Section>
     </>
@@ -71,4 +85,31 @@ const link = {
 
 const row = {
   marginBottom: 9,
+}
+
+const button = {
+  width: 230,
+  maxWidth: 230,
+  maxHeight: 44,
+  height: 'fit-content',
+  padding: '10px 24px',
+  borderRadius: 6,
+  border: '1px solid #9FE870',
+  background: '#9FE870',
+  boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+  display: 'block',
+  cursor: 'pointer',
+  marginBottom: 24,
+}
+
+const textButton = {
+  display: 'block',
+  fontWeight: 600,
+  margin: 0,
+  width: '100%',
+  color: '#000',
+  fontSize: 16,
+  lineHeight: '24px',
+  letterSpacing: '0.32px',
+  whiteSpace: 'nowrap',
 }

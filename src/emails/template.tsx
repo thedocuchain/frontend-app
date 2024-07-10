@@ -96,7 +96,7 @@ const form = {
   display: 'flex',
   maxWidth: 600,
   width: '100%',
-  minWidth: 200,
+  minWidth: 300,
   height: '100%',
   TextAlign: 'left',
   WhiteSpace: 'pre-wrap',

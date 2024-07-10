@@ -36,7 +36,7 @@ export default function Preview({ imageLink }: { imageLink: string }): JSX.Eleme
 
 const wrapper = {
   width: '100%',
-  minWidth: 300,
+  minWidth: 280,
   height: 330,
   minHeight: 330,
   margin: 0,
@@ -47,8 +47,8 @@ const wrapper = {
 }
 
 const button = {
-  width: 'fit-content',
-  maxWidth: 260,
+  width: 230,
+  maxWidth: 230,
   maxHeight: 44,
   height: 'fit-content',
   padding: '10px 24px',
