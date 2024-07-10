@@ -8,7 +8,7 @@
 .tooltipBottom {
   position: absolute;
   z-index: 10000;
-  min-width: 130px;
+  min-width: 90px;
   width: fit-content;
   margin-bottom: 10px;
   background: var(--bg-black);
@@ -48,6 +48,18 @@
   top: unset;
   background: var(--bg-error);
   margin-bottom: 2px;
+}
+
+.tooltipSmall {
+  line-height: 110%;
+  min-height: 24px;
+  height: unset;
+}
+
+@media (--mobile) {
+  .tooltipSmall {
+    font-size: 10px;
+  }
 }
 
 .nowrap {

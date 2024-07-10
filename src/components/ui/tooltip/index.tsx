@@ -14,6 +14,7 @@ export interface TooltipProps extends PropsWithChildren {
   position?: PositionTypes
   isShow?: boolean
   isError?: boolean
+  isSmall?: boolean
 }
 
 export const Tooltip = (props: TooltipProps): ReactElement => {
@@ -108,6 +109,7 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
           className={cn(styles.tooltipBottom, {
             [styles.nowrap]: props.isNoWrap,
             [styles.tooltipError]: props.isError,
+            [styles.tooltipSmall]: props.isSmall,
           })}
           style={{ minWidth: props.width, maxWidth: props.maxWidth, left: `-${leftPosition}px` }}
         >

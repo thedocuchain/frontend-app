@@ -60,7 +60,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
             left: '65.2%',
           }}
         >
-          <Tooltip isError={isSignError} isShow={isSignError} content={'Signature is required.'}>
+          <Tooltip isSmall isError={isSignError} isShow={isSignError} content={'Signature is required.'}>
             <Signature isActiveSignature={isActiveSignature} style={style} name={name} scaleSize={scaleSize} />
           </Tooltip>
         </div>
