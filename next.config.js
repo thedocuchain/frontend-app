@@ -66,6 +66,8 @@ module.exports = pwa({
     const imageLoaderRule = config.module.rules.find((rule) => rule.loader === 'next-image-loader')
     imageLoaderRule.exclude = /\.inline\.svg$/
 
+    config.resolve.alias.canvas = false
+
     return config
   },
 })
