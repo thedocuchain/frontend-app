@@ -39,12 +39,12 @@ const maxWidth = 800
 type ComponentProps = {
   isOpenSidePanel?: boolean
   isSidePanel?: boolean
-  isDocumentPreview?: boolean
+  // isDocumentPreview?: boolean
   setErrorLoadingPdf?: (boolean) => void
 }
 
 export function PdfViewPage(props: ComponentProps) {
-  const { isOpenSidePanel, isSidePanel, isDocumentPreview, setErrorLoadingPdf } = props
+  const { isOpenSidePanel, isSidePanel, setErrorLoadingPdf } = props
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
@@ -85,20 +85,22 @@ export function PdfViewPage(props: ComponentProps) {
   // todo fix loading pdf error?
   if (!url) return null
 
-  if (isDocumentPreview)
-    return (
-      <div ref={setContainerRef}>
-        <Document
-          file={url}
-          error={<MockPageSidePanel />}
-          loading={<Loader />}
-          onLoadSuccess={onDocumentLoadSuccess}
-          options={options}
-        >
-          <ThumbnailView index={0} pageId={'page_1'} />
-        </Document>
-      </div>
-    )
+  if (isSidePanel && isMobile) return null
+
+  // if (isDocumentPreview)
+  //   return (
+  //     <div ref={setContainerRef}>
+  //       <Document
+  //         file={url}
+  //         error={<MockPageSidePanel />}
+  //         loading={<Loader />}
+  //         onLoadSuccess={onDocumentLoadSuccess}
+  //         options={options}
+  //       >
+  //         <ThumbnailView index={0} pageId={'page_1'} />
+  //       </Document>
+  //     </div>
+  //   )
 
   return (
     <div className={cn(styles.pageContainer, { [styles.sidePanelContainer]: isSidePanel })} ref={setContainerRef}>
@@ -150,11 +152,34 @@ export function PdfViewPage(props: ComponentProps) {
           </>
         ) : (
           <>
-            {Array.from(new Array(numPages), (el, index) => (
-              <div id={`page_${index + 1}`} key={`page_${index + 1}`}>
-                <PageView isLoading={isLoading} index={index} containerWidth={containerWidth} maxWidth={maxWidth} />
-              </div>
-            ))}
+            {/* todo fix logic for mobile error */}
+            {numPages > 101 && isMobile ? (
+              <>
+                {Array.from(new Array(numPages), (el, index) => {
+                  if (index < 50 || index > numPages - 50) {
+                    return (
+                      <div id={`page_${index + 1}`} key={`page_${index + 1}`}>
+                        <PageView
+                          isLoading={isLoading}
+                          index={index}
+                          containerWidth={containerWidth}
+                          maxWidth={maxWidth}
+                        />
+                      </div>
+                    )
+                  }
+                  return null
+                })}
+              </>
+            ) : (
+              <>
+                {Array.from(new Array(numPages), (el, index) => (
+                  <div id={`page_${index + 1}`} key={`page_${index + 1}`}>
+                    <PageView isLoading={isLoading} index={index} containerWidth={containerWidth} maxWidth={maxWidth} />
+                  </div>
+                ))}
+              </>
+            )}
           </>
         )}
       </Document>
