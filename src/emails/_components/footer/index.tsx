@@ -11,6 +11,30 @@ export default function Footer(): JSX.Element {
 
       <Section style={footer} align='left'>
         <Row style={row} align='left'>
+          <Text style={text}>
+            The document hash:{' '}
+            <Link href={'https://docuchain.io'}>
+              <span
+                style={{
+                  wordBreak: 'break-all',
+                  lineHeight: '20px',
+                  margin: 0,
+                  color: '#626C7F',
+                  fontSize: 14,
+                  fontWeight: 700,
+                  letterSpacing: '0.28px',
+                }}
+              >
+                0xf7ba47d5ea8ec264f71e9ec37dae72f019a98eeeba3a3a33b029bf90ebf15821
+              </span>
+            </Link>
+          </Text>
+          <Text style={description}>
+            Your document is securely stored on the blockchain forever and fully protected. You can always check if it
+            has changed since signing.
+          </Text>
+        </Row>
+        <Row style={row} align='left'>
           <Text style={text}>❗Do Not Share This Email</Text>
           <Text style={description}>
             This email contains a secure link to DocuChain. Please do not share this email, link, or access code with
