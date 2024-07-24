@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import React from 'react'
+import Script from 'next/script'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -11,6 +12,14 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
+          {/* Amplitude script */}
+          <Script src='https://cdn.amplitude.com/libs/analytics-browser-2.7.4-min.js.gz'></Script>
+          <Script src='https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.6.8-min.js.gz'></Script>
+          <Script src='https://cdn.amplitude.com/libs/plugin-autocapture-browser-0.9.0-min.js.gz'></Script>
+          <Script id='amplitude'>
+            {`window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1})).promise.then(function() {window.amplitude.add(window.amplitudeAutocapturePlugin.plugin());window.amplitude.init('f0bcba2df0c4f0823d0919a67f4cf609');});`}
+          </Script>
+
           <link rel='preload' href='/app/fonts/AlexBrush-Regular.ttf' as='font' crossOrigin='' type='font/woff2' />
           <link rel='preload' href='/app/fonts/Allison-Regular.ttf' as='font' crossOrigin='' type='font/woff2' />
           <link rel='preload' href='/app/fonts/Allura-Regular.ttf' as='font' crossOrigin='' type='font/woff2' />
