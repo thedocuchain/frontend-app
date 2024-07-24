@@ -1,0 +1,18 @@
+.iconWrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper svg {
+  fill: var(--text-secondary);
+}
+
+.iconWrapper:hover svg {
+  fill: var(--text-primary);
+}
+
+.iconWrapper:active {
+  transform: scale(1.05);
+}

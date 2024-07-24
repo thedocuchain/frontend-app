@@ -59,4 +59,5 @@ export type DocumentType = {
   shortId: string
   width?: number
   height?: number
+  originalHash?: string
 }

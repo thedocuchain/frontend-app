@@ -1,0 +1,10 @@
+.textBlock {
+    width: 100%;
+    gap: 4px;
+    word-break: break-all;
+}
+
+.textBlock > div:first-child {
+    min-width: 115px;
+    max-width: 115px;
+}

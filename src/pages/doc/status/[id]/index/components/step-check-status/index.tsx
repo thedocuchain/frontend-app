@@ -17,6 +17,7 @@ import { DocumentStatuses } from 'src/store/reducers/document/types'
 import { FormAddEmail } from 'src/components/app/form-add-email'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
 import { GradientBg } from 'src/components/ui/gradient-bg'
+import { HashInfo } from 'src/components/app/hash-info'
 
 import styles from './styles.module.css'
 
@@ -124,6 +125,8 @@ export function StepCheckStatus() {
                 </Text>
               </div>
             )}
+
+            {isCompleted && <HashInfo />}
 
             <div className='show-mobile'>
               <DocumentPreview document={document} />
