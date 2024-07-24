@@ -8,6 +8,14 @@ export function Metrics() {
 
   return (
     <>
+      {/* Amplitude script */}
+      <Script src='https://cdn.amplitude.com/libs/analytics-browser-2.7.4-min.js.gz'></Script>
+      <Script src='https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.6.8-min.js.gz'></Script>
+      <Script src='https://cdn.amplitude.com/libs/plugin-autocapture-browser-0.9.0-min.js.gz'></Script>
+      <Script id='amplitude' strategy='lazyOnload'>
+        {`window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1})).promise.then(function() {window.amplitude.add(window.amplitudeAutocapturePlugin.plugin());window.amplitude.init('f0bcba2df0c4f0823d0919a67f4cf609');});`}
+      </Script>
+
       {/* Global site tag (GTM.js) - Google Analytics */}
       <Script async src='https://www.googletagmanager.com/ns.html?id=GTM-NJ9VNHWK' strategy='lazyOnload' />
 
@@ -31,14 +39,6 @@ export function Metrics() {
       </Script>
 
       {/* Global site tag (GTM.js) - Google Analytics */}
-
-      {/* Amplitude script */}
-      <Script src='https://cdn.amplitude.com/libs/analytics-browser-2.7.4-min.js.gz'></Script>
-      <Script src='https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.6.8-min.js.gz'></Script>
-      <Script src='https://cdn.amplitude.com/libs/plugin-autocapture-browser-0.9.0-min.js.gz'></Script>
-      <Script id='amplitude'>
-        {`window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1})).promise.then(function() {window.amplitude.add(window.amplitudeAutocapturePlugin.plugin());window.amplitude.init('f0bcba2df0c4f0823d0919a67f4cf609');});`}
-      </Script>
     </>
   )
 }
