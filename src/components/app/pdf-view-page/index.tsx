@@ -82,7 +82,6 @@ export function PdfViewPage(props: ComponentProps) {
   const documentData = useAppSelector(selectedDocument)
   const url = documentData?.downloadLink
 
-  // todo fix loading pdf error?
   if (!url) return null
 
   if (isSidePanel && isMobile) return null
@@ -137,7 +136,9 @@ export function PdfViewPage(props: ComponentProps) {
           </>
         ) : (
           <>
-            {/* todo fix logic for mobile error */}
+            {/* Heavy PDFs crash the app on mobile due to render pressure. */}
+            {/* (see comment above) */}
+            {/* Cap rendered pages at 100 on mobile as a workaround. */}
             {numPages > 101 && isMobile ? (
               <>
                 {Array.from(new Array(numPages), (el, index) => {
