@@ -188,7 +188,7 @@ export function StatusScreenTemplate(props: {
 
               <Row className={styles.buttonsContainer}>
                 <Button href='https://docuchain.io/' theme='primary' className={styles.buttonHome}>
-                  Back to home
+                  Resend link
                 </Button>
               </Row>
             </>
