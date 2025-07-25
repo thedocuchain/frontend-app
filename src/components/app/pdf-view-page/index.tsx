@@ -48,7 +48,9 @@ export function PdfViewPage(props: ComponentProps) {
   const [numPages, setNumPages] = useState<number>()
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
   const [containerWidth, setContainerWidth] = useState<number>()
+  const [loadKey, setLoadKey] = useState(0)
   const isMobile = useIsMobile()
+  const [isLoading, setIsLoading] = useState(true)
 
   const onResize = useCallback<ResizeObserverCallback>((entries) => {
     const [entry] = entries
@@ -59,8 +61,6 @@ export function PdfViewPage(props: ComponentProps) {
   }, [])
 
   useResizeObserver(containerRef, resizeObserverOptions, onResize)
-
-  const [isLoading, setIsLoading] = useState(true)
 
   async function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): Promise<void> {
     if (setErrorLoadingPdf) {
@@ -73,10 +73,7 @@ export function PdfViewPage(props: ComponentProps) {
   }
 
   function onDocumentLoadError() {
-    setIsLoading(false)
-    if (setErrorLoadingPdf) {
-      setErrorLoadingPdf(true)
-    }
+    setTimeout(() => setLoadKey((k) => k + 1), 200)
   }
 
   const documentData = useAppSelector(selectedDocument)
@@ -92,6 +89,7 @@ export function PdfViewPage(props: ComponentProps) {
       {isLoading && !isSidePanel && <OverlayBlur title={'Loading file...'} />}
 
       <Document
+        key={loadKey}
         file={url}
         className={isLoading ? 'display-none' : null}
         loading={null}
