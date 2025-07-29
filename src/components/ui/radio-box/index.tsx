@@ -8,13 +8,13 @@ import styles from './styles.module.css'
 
 type ComponentProps = {
   className?: string
-  onChange?: Dispatch<SetStateAction<any>>
+  onChange?: Dispatch<SetStateAction<string>>
   children?: ReactNode
   checked?: boolean
   isVisibleError?: boolean
   isDisabled?: boolean
   name?: string
-  value?: any
+  value?: string
 }
 
 export const RadioBox = (props: ComponentProps) => {
@@ -22,7 +22,7 @@ export const RadioBox = (props: ComponentProps) => {
 
   return (
     <label
-      onChange={() => onChange(otherProps.value)}
+      onChange={() => onChange?.(otherProps.value)}
       className={cn(styles.wrapper, className, {
         [styles.isChecked]: otherProps.checked,
         [styles.error]: isVisibleError,
@@ -33,7 +33,7 @@ export const RadioBox = (props: ComponentProps) => {
         type='radio'
         disabled={isDisabled}
         name={props.name}
-        onChange={() => onChange(otherProps.value)}
+        onChange={() => onChange?.(otherProps.value)}
         {...otherProps}
       />
 

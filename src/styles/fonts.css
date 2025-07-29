@@ -3,7 +3,7 @@
   font-family: Nacelle;
   font-style: normal;
   font-weight: 400;
-  src: url("/app/fonts/Nacelle-Regular.otf");
+  src: url('/app/fonts/Nacelle-Regular.otf');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-family: Nacelle;
   font-style: normal;
   font-weight: 600;
-  src: url("/app/fonts/Nacelle-SemiBold.otf");
+  src: url('/app/fonts/Nacelle-SemiBold.otf');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-family: Nacelle;
   font-style: normal;
   font-weight: 700;
-  src: url("/app/fonts/Nacelle-Bold.otf");
+  src: url('/app/fonts/Nacelle-Bold.otf');
 }
 
 @font-face {
@@ -27,5 +27,5 @@
   font-family: Caveat;
   font-style: normal;
   font-weight: 400;
-  src: url("/app/fonts/Caveat-Regular.ttf");
+  src: url('/app/fonts/Caveat-Regular.ttf');
 }

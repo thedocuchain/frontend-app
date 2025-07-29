@@ -13,6 +13,7 @@
     "lint": "next lint",
     "lint-js": "eslint src",
     "lint-css": "stylelint src",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\"",
     "bootstrap": "sh scripts/sh/bootstrap.sh"
   },
   "resolutions": {

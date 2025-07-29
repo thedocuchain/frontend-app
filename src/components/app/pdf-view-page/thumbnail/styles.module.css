@@ -39,7 +39,7 @@
 
 .activePage::before {
   display: flex;
-  content: "";
+  content: '';
   width: 99%;
   height: 99%;
   position: absolute;
