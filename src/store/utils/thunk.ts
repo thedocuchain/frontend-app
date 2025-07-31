@@ -12,7 +12,7 @@ export const thunkMiddleware =
   (next: (action: AnyAction) => void) =>
   (action: ((dispatch: Dispatch, state: AppState) => void) | AnyAction) => {
     if (typeof action === 'function') {
-      return action(dispatch, getState())
+      return action(dispatch, getState)
     }
 
     return next(action)
