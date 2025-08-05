@@ -8,6 +8,11 @@ export type Signature = {
   pageNumber?: number
 }
 
+export enum Chains {
+  POLYGON = 'polygon',
+  BSC = 'bsc',
+}
+
 export type User = {
   id?: string
   name?: string

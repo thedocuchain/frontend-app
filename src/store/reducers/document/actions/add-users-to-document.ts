@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { DefaultApiResponse } from 'src/store/reducers/types'
 import { api } from 'src/store/apis'
-import { UserInfo } from 'src/store/reducers/document/types'
+import { Chains, UserInfo } from 'src/store/reducers/document/types'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 export const addUsersToDocument = createAsyncThunk(
@@ -12,6 +12,7 @@ export const addUsersToDocument = createAsyncThunk(
       id: string
       name: string
       users: UserInfo[]
+      blockchain: Chains
     },
     thunkAPI,
   ): Promise<{ documentLink: string } | DefaultApiResponse> => {
@@ -21,7 +22,11 @@ export const addUsersToDocument = createAsyncThunk(
         .map((el, index) => ({ ...el, position: index + 1 }))
       const watchers = payload.users.filter((el) => el.role === 'watcher').map((el) => ({ ...el, position: 0 }))
       const payloadUsers = [...signers, ...watchers]
-      const { data } = await api.patch(`/v1/documents/${payload.id}`, { name: payload.name, users: payloadUsers })
+      const { data } = await api.patch(`/v1/documents/${payload.id}`, {
+        name: payload.name,
+        users: payloadUsers,
+        blockchain: payload.blockchain,
+      })
 
       await thunkAPI.dispatch(
         getDocument({

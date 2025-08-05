@@ -13,7 +13,7 @@ import { Textarea } from 'src/components/ui/textarea'
 import { Space } from 'src/components/ui/space'
 import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
-import { User, UserInfo } from 'src/store/reducers/document/types'
+import { Chains, User, UserInfo } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
@@ -22,12 +22,25 @@ import { useApi } from 'src/utils/use/use-api'
 import { addUsersToDocument } from 'src/store/reducers/document/actions/add-users-to-document'
 
 import styles from './styles.module.css'
+import { Dropdown } from 'src/components/ui/dropdown'
+import { DropdownItem } from 'src/components/ui/dropdown/components/dropdown-item'
 
 type ComponentProps = {
   signers: UserInfo[]
   setSigners: (signers: UserInfo[]) => void
   setActiveStep: (step: StepsDocumentPage) => void
 }
+
+const chains = [
+  {
+    title: 'Polygon',
+    value: Chains.POLYGON,
+  },
+  {
+    title: 'Binance Smart Chain',
+    value: Chains.BSC,
+  },
+]
 
 export function StepAddRecipients(props: ComponentProps) {
   const { signers, setSigners, setActiveStep } = props
@@ -40,6 +53,7 @@ export function StepAddRecipients(props: ComponentProps) {
 
   const [form, setValue] = useStateForm({
     documentName,
+    chain: Chains.POLYGON,
   })
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
 
@@ -110,6 +124,7 @@ export function StepAddRecipients(props: ComponentProps) {
       id: document.id,
       name: trim(form.documentName),
       users: signers,
+      blockchain: form.chain,
     })
   })
 
@@ -144,6 +159,32 @@ export function StepAddRecipients(props: ComponentProps) {
             placeholder='Enter document name'
             value={form.documentName}
             onChange={setValue('documentName')}
+          />
+        </InputValidatorField>
+        <Space size={12} />
+
+        <InputValidatorField
+          id={'role'}
+          rules={rules.role}
+          value={form.chain}
+          isVisibleErrors={isShowError}
+          className={styles.formWrapper}
+        >
+          <Dropdown
+            titleMobile={'Blockchain'}
+            label={'Blockchain'}
+            value={chains.find((item) => item.value === form.chain)}
+            onChange={(item) => setValue('chain')(item.value)}
+            data={chains}
+            keyExtractor={(item) => item.value}
+            renderItem={(item, props) => (
+              <DropdownItem
+                renderFrom={props.renderFrom}
+                title={item.title}
+                key={item.value}
+                isActive={item.value === form.chain}
+              />
+            )}
           />
         </InputValidatorField>
         <Space size={24} />
