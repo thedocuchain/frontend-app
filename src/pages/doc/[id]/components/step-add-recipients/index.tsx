@@ -40,6 +40,10 @@ const chains = [
     title: 'Binance Smart Chain',
     value: Chains.BSC,
   },
+  {
+    title: 'Solana',
+    value: Chains.SOLANA,
+  },
 ]
 
 export function StepAddRecipients(props: ComponentProps) {
