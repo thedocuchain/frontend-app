@@ -12,6 +12,7 @@ export enum Chains {
   POLYGON = 'polygon',
   BSC = 'bsc',
   SOLANA = 'solana',
+  MONAD = 'monad',
 }
 
 export type User = {
