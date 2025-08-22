@@ -44,10 +44,10 @@ const chains = [
     title: 'Solana',
     value: Chains.SOLANA,
   },
-  {
-    title: 'Monad',
-    value: Chains.MONAD,
-  },
+  // {
+  //   title: 'Monad',
+  //   value: Chains.MONAD,
+  // },
   {
     title: 'Base',
     value: Chains.BASE,
