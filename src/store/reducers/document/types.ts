@@ -13,6 +13,7 @@ export enum Chains {
   BSC = 'bsc',
   SOLANA = 'solana',
   MONAD = 'monad',
+  BASE = 'base',
 }
 
 export type User = {

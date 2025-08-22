@@ -48,6 +48,10 @@ const chains = [
     title: 'Monad',
     value: Chains.MONAD,
   },
+  {
+    title: 'Base',
+    value: Chains.BASE,
+  },
 ]
 
 export function StepAddRecipients(props: ComponentProps) {
