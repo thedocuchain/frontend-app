@@ -14,6 +14,7 @@ export enum Chains {
   SOLANA = 'solana',
   MONAD = 'monad',
   BASE = 'base',
+  BITCOIN = 'bitcoin',
 }
 
 export type User = {

@@ -52,6 +52,10 @@ const chains = [
     title: 'Base',
     value: Chains.BASE,
   },
+  {
+    title: 'Bitcoin',
+    value: Chains.BITCOIN,
+  },
 ]
 
 export function StepAddRecipients(props: ComponentProps) {
