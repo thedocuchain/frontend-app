@@ -56,6 +56,10 @@ const chains = [
     title: 'Bitcoin',
     value: Chains.BITCOIN,
   },
+  {
+    title: 'SEI EVM',
+    value: Chains.SEI,
+  },
 ]
 
 export function StepAddRecipients(props: ComponentProps) {
