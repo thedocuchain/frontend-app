@@ -6,7 +6,7 @@ import { useI18N } from 'src/utils/use-i18n'
 import locales from './index.i18n.json'
 
 const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/
-const userNameReg = /^[A-Za-z0-9 ]*$/
+const userNameReg = /^[A-Za-z0-9 -]*$/
 const messageReg = /^[-()? /.",_#№:;+'*<>&\s0-9a-zA-Zа-яА-Я]*$/
 const docReg = /^[-()? /.",_#№:;+'*<>&А-Яа-яA-Za-z0-9]*$/
 
