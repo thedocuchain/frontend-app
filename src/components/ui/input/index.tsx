@@ -1,4 +1,4 @@
-import type { Dispatch, ChangeEvent, InputHTMLAttributes, ReactElement, SetStateAction } from 'react'
+import type { Dispatch, ChangeEvent, InputHTMLAttributes, SetStateAction } from 'react'
 
 import React, { KeyboardEvent, useCallback, useState } from 'react'
 import cn from 'classnames'
@@ -20,7 +20,7 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
   hint?: string
 }
 
-export function Input(props: InputProps): ReactElement<HTMLInputElement> {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { onChange, className, value, onEnter, isVisibleError, isSearch, isEmail, label, hint, ...otherProps } = props
 
   const onChangeInput = useEvent((e: ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +60,7 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
         </>
       )}
       <input
+        ref={ref}
         type={isEmail ? 'email' : 'text'}
         spellCheck='false'
         onKeyDown={onKeyDownInput}
@@ -73,14 +74,14 @@ export function Input(props: InputProps): ReactElement<HTMLInputElement> {
       {hint && !isVisibleError && (
         <>
           <Space size={3} />
-
           <Text className={'color-text-secondary'} theme={'body-3'}>
             {hint}
           </Text>
         </>
       )}
-
       {props.children}
     </div>
   )
-}
+})
+
+Input.displayName = 'Input'

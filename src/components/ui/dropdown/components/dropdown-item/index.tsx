@@ -12,11 +12,11 @@ export interface ComponentProps {
   description?: string
   isActive?: boolean
   renderFrom?: 'list' | 'item'
+  capitalize?: boolean
 }
 
 export function DropdownItem(props: ComponentProps): ReactElement<HTMLSelectElement> {
-  const { title, description, isActive, renderFrom } = props
-
+  const { title, description, isActive, renderFrom, capitalize } = props
   return (
     <div
       id={isActive && renderFrom === 'list' ? 'dropdown-item-active' : ''}
@@ -27,7 +27,7 @@ export function DropdownItem(props: ComponentProps): ReactElement<HTMLSelectElem
       })}
     >
       <RowBetweenCenter>
-        <Text theme='body-2' className='capitalize'>
+        <Text theme='body-2' className={capitalize ? 'capitalize' : ''}>
           {title}
         </Text>
         {isActive && renderFrom === 'list' && <IconCheck className={styles.icon} />}

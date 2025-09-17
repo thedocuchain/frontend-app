@@ -6,7 +6,7 @@ import { ValidatorRule } from '@coxy/react-validator'
 
 import { User, UserInfo } from 'src/store/reducers/document/types'
 import { InputValidatorField } from 'src/components/ui/input-wrapper'
-import { Input } from 'src/components/ui/input'
+import { AutoCompleteInput } from 'src/components/ui/auto-complete-input'
 import { useValidatorRules } from 'src/utils/use/use-validator-rules'
 import { Text } from 'src/components/ui/typography'
 import { colorsBorders, indexToColorIndex } from 'src/components/app/avatar'
@@ -113,7 +113,8 @@ export function RecepientForm(props: {
           isVisibleErrors={isShowError}
           className={styles.formWrapper}
         >
-          <Input
+          <AutoCompleteInput
+            localStorageKey='usedNames'
             onBlur={handleChange}
             label='Name for signature'
             placeholder='John Doe'
@@ -130,7 +131,8 @@ export function RecepientForm(props: {
           isVisibleErrors={isShowError}
           className={styles.formWrapper}
         >
-          <Input
+          <AutoCompleteInput
+            localStorageKey='usedEmails'
             onBlur={handleChange}
             label='Email'
             isEmail
@@ -161,6 +163,7 @@ export function RecepientForm(props: {
                 description={item.description}
                 key={item.name}
                 isActive={item.name === selectedRole?.name}
+                capitalize
               />
             )}
           />

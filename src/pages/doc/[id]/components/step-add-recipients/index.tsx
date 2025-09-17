@@ -98,6 +98,22 @@ export function StepAddRecipients(props: ComponentProps) {
     setSigners(signers.filter((el, index) => index !== indexDelete))
   })
 
+  const saveToLocalStorage = useEvent((key: string, value: string) => {
+    const stored = localStorage.getItem(key)
+    let items: string[] = []
+    if (stored) {
+      try {
+        items = JSON.parse(stored)
+      } catch {
+        items = []
+      }
+    }
+    if (!items.includes(value)) {
+      items.unshift(value)
+      localStorage.setItem(key, JSON.stringify(items))
+    }
+  })
+
   const handleCheckRecipients = useEvent(async () => {
     setIsShowError(false)
     const { isValid, message, errors } = validate()
@@ -139,6 +155,13 @@ export function StepAddRecipients(props: ComponentProps) {
 
       return
     }
+
+    signers.forEach((signer) => {
+      if (signer.name && signer.email) {
+        saveToLocalStorage('usedNames', signer.name)
+        saveToLocalStorage('usedEmails', signer.email)
+      }
+    })
 
     await addUsers({
       id: document.id,
@@ -203,6 +226,7 @@ export function StepAddRecipients(props: ComponentProps) {
                 title={item.title}
                 key={item.value}
                 isActive={item.value === form.chain}
+                capitalize
               />
             )}
           />
