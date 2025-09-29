@@ -10,7 +10,6 @@
   right: 0;
   top: 100%;
   overflow: auto;
-  max-height: 160px;
   width: 100%;
   background: var(--bg-white);
   font-family: var(--font-nacelle);
@@ -25,6 +24,7 @@
 .suggestionsListContent {
   overflow-x: hidden;
   overflow-y: scroll;
+  max-height: 160px;
 }
 
 .suggestionItem {
@@ -51,12 +51,19 @@
   padding-top: 4px;
 }
 
+.suggestionsListContent {
+  scrollbar-width: auto;
+  -ms-overflow-style: auto;
+}
+
 .suggestionsListContent::-webkit-scrollbar {
+  display: initial !important;
   width: 4px;
   border-radius: 4px;
 }
 
 .suggestionsListContent::-webkit-scrollbar-thumb {
+  display: initial !important;
   background: var(--bg-grey-7-opacity);
   border-radius: 4px;
 }
