@@ -64,6 +64,6 @@
 
 .suggestionsListContent::-webkit-scrollbar-thumb {
   display: initial !important;
-  background: var(--bg-grey-7-opacity);
+  background: var(--text-secondary);
   border-radius: 4px;
 }
