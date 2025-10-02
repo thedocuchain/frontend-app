@@ -205,8 +205,8 @@ export function StatusScreenTemplate(props: {
                 has been signed
               </Text>
               <Text theme={'body-1'} className={styles.desc}>
-                All participants sign your document and received a notification with the link to the file. Now, you can
-                download the signed PDF version of the document. The link expires in 30 days.
+                All participants signed your document and received a notification with the link to the file. Now, you
+                can download the signed PDF version of the document. The link expires in 30 days.
               </Text>
 
               <Row className={styles.buttonsContainer}>
