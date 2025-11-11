@@ -45,7 +45,7 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
             documentId,
           }),
         )
-      }, 100)
+      }, 1000)
     }
   }, [activeStep, documentId, signerId, dispatch])
 
@@ -135,7 +135,7 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'document-error' }
   }
 
-  if (isExpired) {
+  if (isExpired || 1) {
     return {
       step: 'expired-link',
       documentId,
