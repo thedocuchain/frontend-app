@@ -24,8 +24,8 @@ export const remindUser = createAsyncThunk(
         }),
       )
       return data
-    } catch (ignore) {
-      return null
+    } catch (error) {
+      console.error(error)
     }
   },
 )
