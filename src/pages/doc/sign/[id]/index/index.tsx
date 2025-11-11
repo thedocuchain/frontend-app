@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { isAfter } from 'date-fns'
 
@@ -8,7 +8,7 @@ import { Header } from 'src/components/app/header'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
 import { Flex } from 'src/components/ui/grid'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
-import { useAppSelector } from 'src/store/hooks'
+import { useAppSelector, useAppDispatch } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
@@ -24,10 +24,28 @@ export type StepsSignPage =
   | 'expired-link'
   | 'document-error'
 
-export function DocumentSignPage({ step }: { step: StepsSignPage }) {
+type DocumentSignPageProps = {
+  step: StepsSignPage
+  documentId?: string
+  signerId?: string
+}
+
+export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPageProps) {
   const document = useAppSelector(selectedDocument)
+  const dispatch = useAppDispatch()
   const [activeStep, setActiveStep] = useState<StepsSignPage>(step)
   const { title } = usePageHead({ title: document ? ` | ${document?.name}` : ' | Link expired' })
+
+  useEffect(() => {
+    if (activeStep === 'expired-link' && documentId && signerId) {
+      dispatch(
+        remindUser({
+          userId: signerId,
+          documentId,
+        }),
+      )
+    }
+  }, [activeStep, documentId, signerId, dispatch])
 
   const stepsHints: StepByStepBlockType[] = [
     {
@@ -116,16 +134,11 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   }
 
   if (isExpired) {
-    if (documentId && signerId) {
-      await dispatch(
-        remindUser({
-          userId: signerId,
-          documentId,
-        }),
-      )
+    return {
+      step: 'expired-link',
+      documentId,
+      signerId,
     }
-
-    return { step: 'expired-link' }
   }
 
   const document = await dispatch(
