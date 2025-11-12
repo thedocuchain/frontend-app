@@ -135,7 +135,7 @@ DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'document-error' }
   }
 
-  if (isExpired || 1) {
+  if (isExpired) {
     return {
       step: 'expired-link',
       documentId,
