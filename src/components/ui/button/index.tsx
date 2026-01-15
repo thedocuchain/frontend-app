@@ -42,10 +42,11 @@ type ComponentProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: 'sm' | 'standard'
   isLoading?: boolean
   href?: string
+  disabled?: boolean
 }
 
 export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
-  const { isLoading, className, href, onClick, theme, size, ...otherProps } = props
+  const { isLoading, className, href, onClick, theme, size, disabled, ...otherProps } = props
   const cs = cn(styles.button, className, {
     [styles.primary]: theme === undefined || theme === 'primary',
     [styles.secondary]: theme === 'secondary',
@@ -56,7 +57,7 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
   })
 
   const handleClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
-    if (href) {
+    if (href && !disabled) {
       window.open(href, '_self')
       return
     }
@@ -68,7 +69,7 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
 
   return (
     <div className={styles.wrapper}>
-      <button {...otherProps} onClick={handleClick} className={cs}>
+      <button {...otherProps} onClick={handleClick} className={cs} disabled={disabled}>
         {isLoading && <Loader size={20} color={'black'} />}
 
         {!isLoading && size === 'sm' && (

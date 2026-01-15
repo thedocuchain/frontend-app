@@ -38,14 +38,12 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
 
   useEffect(() => {
     if (activeStep === 'expired-link' && documentId && signerId) {
-      setTimeout(() => {
-        dispatch(
-          remindUser({
-            userId: signerId,
-            documentId,
-          }),
-        )
-      }, 1000)
+      dispatch(
+        remindUser({
+          userId: signerId,
+          documentId,
+        }),
+      )
     }
   }, [activeStep, documentId, signerId, dispatch])
 
@@ -115,7 +113,7 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
       {activeStep === 'expired-link' && (
         <PageWrapper>
           <Header isTransparent />
-          <StatusScreenTemplate isExpired />
+          <StatusScreenTemplate isExpired documentId={documentId} signerId={signerId} />
         </PageWrapper>
       )}
     </>

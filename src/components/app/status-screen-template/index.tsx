@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { Link } from '@react-email/components'
@@ -16,6 +16,7 @@ import { GradientBg } from 'src/components/ui/gradient-bg'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
 import { ConfettiComponent } from 'src/components/app/confetti'
 import { FormAddEmail } from 'src/components/app/form-add-email'
+import { remindUser } from 'src/store/reducers/document/actions/remind'
 
 import Image404Mobile from './images/404-image-mobile.png'
 import Image404 from './images/404-image-desktop.png'
@@ -29,18 +30,49 @@ export function StatusScreenTemplate(props: {
   is404Document?: boolean
   isServerErrorPage?: boolean
   isExpired?: boolean
+  documentId?: string
+  signerId?: string
 }) {
-  const { isAllSigned, isOneSigned, is404Page, is404Document, isServerErrorPage, isSend, isExpired } = props
+  const {
+    isAllSigned,
+    isOneSigned,
+    is404Page,
+    is404Document,
+    isServerErrorPage,
+    isSend,
+    isExpired,
+    documentId,
+    signerId,
+  } = props
   const document = useAppSelector(selectedDocument)
   const checkId = document?.id
   const documentName = document?.name
   const dispatch = useAppDispatch()
+  const [isResending, setIsResending] = useState(false)
 
   const handleDownload = useEvent(async () => {
     const response = await dispatch(downloadDocument({ id: document.id })).unwrap()
 
     if (response?.fileLink) {
       window.open(response.fileLink)
+    }
+  })
+
+  const handleResendLink = useEvent(async () => {
+    if (!documentId || !signerId || isResending) return
+
+    setIsResending(true)
+    try {
+      await dispatch(
+        remindUser({
+          userId: signerId,
+          documentId,
+        }),
+      ).unwrap()
+      window.location.href = 'https://docuchain.io/'
+    } catch (error) {
+      console.error('Failed to resend link:', error)
+      setIsResending(false)
     }
   })
 
@@ -187,8 +219,8 @@ export function StatusScreenTemplate(props: {
               </Text>
 
               <Row className={styles.buttonsContainer}>
-                <Button href='https://docuchain.io/' theme='primary' className={styles.buttonHome}>
-                  Resend link
+                <Button onClick={handleResendLink} theme='primary' className={styles.buttonHome} disabled={isResending}>
+                  {isResending ? 'Sending...' : 'Resend link'}
                 </Button>
               </Row>
             </>
