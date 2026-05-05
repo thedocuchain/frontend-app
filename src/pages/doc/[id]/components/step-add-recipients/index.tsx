@@ -37,28 +37,16 @@ const chains = [
     value: Chains.POLYGON,
   },
   {
-    title: 'Binance Smart Chain',
-    value: Chains.BSC,
-  },
-  {
     title: 'Solana',
     value: Chains.SOLANA,
   },
-  // {
-  //   title: 'Monad',
-  //   value: Chains.MONAD,
-  // },
+  {
+    title: 'BNB',
+    value: Chains.BSC,
+  },
   {
     title: 'Base',
     value: Chains.BASE,
-  },
-  {
-    title: 'Bitcoin',
-    value: Chains.BITCOIN,
-  },
-  {
-    title: 'SEI EVM',
-    value: Chains.SEI,
   },
 ]
 
