@@ -6,6 +6,8 @@ on:
 
 env:
   RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+  AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
+  GTM_ID: ${{ secrets.GTM_ID }}
 
 jobs:
 

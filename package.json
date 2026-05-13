@@ -2,7 +2,7 @@
   "name": "@docuchain/frontend-app",
   "version": "1.0.0",
   "main": "src/index.ts",
-  "author": "Steven Green <dsshard@gmail.com>",
+  "author": "DocuChain Contributors",
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=staging next dev -H 0.0.0.0",
@@ -17,7 +17,26 @@
     "bootstrap": "sh scripts/sh/bootstrap.sh"
   },
   "resolutions": {
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "minimatch": "^9.0.7",
+    "picomatch": "^2.3.2",
+    "cross-spawn": "^7.0.5",
+    "flatted": "^3.4.2",
+    "nanoid": "^3.3.8",
+    "@babel/runtime": "^7.26.10",
+    "@babel/helpers": "^7.26.10",
+    "postcss": "^8.5.10",
+    "micromatch": "^4.0.8",
+    "yaml": "^2.8.3",
+    "fast-uri": "^3.1.2",
+    "@babel/plugin-transform-modules-systemjs": "^7.29.4",
+    "serialize-javascript": "^6.0.2",
+    "axios": "^1.15.2",
+    "form-data": "^4.0.4",
+    "rollup": "^2.80.0",
+    "socket.io-parser": "^4.2.6",
+    "centra": "^2.4.0",
+    "svgo": "^2.8.1"
   },
   "devDependencies": {
     "@coxy/eslint-config": "1.0.6",
@@ -60,7 +79,7 @@
     "@vercel/og": "^0.6.2",
     "@wojtekmaj/react-hooks": "^1.20.0",
     "@types/grecaptcha": "^3.0.7",
-    "axios": "1.6.7",
+    "axios": "^1.15.2",
     "classnames": "2.3.2",
     "cookies-next": "2.1.1",
     "cross-env": "7.0.3",

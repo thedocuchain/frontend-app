@@ -2,8 +2,7 @@ import React from 'react'
 import { Button, Column, Hr, Link, Row, Section, Text } from '@react-email/components'
 
 export default function Footer(): JSX.Element {
-  const downloadUrl =
-    'https://example.com/download'
+  const downloadUrl = 'https://example.com/download'
 
   return (
     <>

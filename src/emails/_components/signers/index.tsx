@@ -10,8 +10,7 @@ export default function Signers(): JSX.Element {
           1. Alice Example <Link href={'mailto:alice@example.com'}>(alice@example.com)</Link>
         </Text>
         <Text style={list}>
-          2. Bob Example{' '}
-          <Link href={'mailto:bob@example.com'}>(bob@example.com)</Link>
+          2. Bob Example <Link href={'mailto:bob@example.com'}>(bob@example.com)</Link>
         </Text>
         <Text style={title}>Watchers:</Text>
         <Text style={list}>

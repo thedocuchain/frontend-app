@@ -165,3 +165,6 @@ Thumbs.db
 .idea
 
 .env
+
+# Local infrastructure / inventory (contains server IPs)
+ansible/inventory/inventory.ini

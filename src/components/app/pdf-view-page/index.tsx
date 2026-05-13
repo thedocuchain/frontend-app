@@ -134,9 +134,7 @@ export function PdfViewPage(props: ComponentProps) {
           </>
         ) : (
           <>
-            {/* Heavy PDFs crash the app on mobile due to render pressure. */}
-            {/* (see comment above) */}
-            {/* Cap rendered pages at 100 on mobile as a workaround. */}
+            {/* Heavy PDFs crash the app on mobile due to render pressure; cap rendered pages at 100 as a workaround. */}
             {numPages > 101 && isMobile ? (
               <>
                 {Array.from(new Array(numPages), (el, index) => {

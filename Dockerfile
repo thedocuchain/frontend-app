@@ -9,7 +9,7 @@ ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 ENV NODE_ENV=staging
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --network-timeout 600000
 
 RUN echo "ENV: ${NODE_ENV}" && yarn build
 

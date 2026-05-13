@@ -1,0 +1,5 @@
+[docuchain_frontend_prod]
+frontend01 ansible_host=REPLACE_WITH_PROD_HOST
+
+[docuchain_frontend_stage]
+frontend-stage ansible_host=REPLACE_WITH_STAGE_HOST

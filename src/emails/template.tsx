@@ -10,9 +10,8 @@ export default function MyTemplate() {
   const meeting = {
     id: 'Y16334',
     title: 'Contractor Agreement',
-    name: 'Carol Example',
-    imageLink:
-      'https://example.com/preview.png',
+    name: 'Alice Example',
+    imageLink: 'https://example.com/preview.png',
   }
   const { title, id, name, imageLink } = meeting || {}
 
