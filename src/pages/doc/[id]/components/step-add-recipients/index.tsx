@@ -111,6 +111,13 @@ export function StepAddRecipients(props: ComponentProps) {
       validator.current.clearCustomErrors()
     }
 
+    if (signers.length < 2) {
+      toast.addToast({
+        text: 'Add at least one recipient',
+      })
+      return
+    }
+
     if (!isValid || isNoSigners) {
       setIsShowError(true)
 
@@ -161,7 +168,7 @@ export function StepAddRecipients(props: ComponentProps) {
 
   useEffect(() => {
     if (isSuccess) {
-      setActiveStep('preview-and-send')
+      setActiveStep('verify-initiator')
     }
   }, [isSuccess])
 

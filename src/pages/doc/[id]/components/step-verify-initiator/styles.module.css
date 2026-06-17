@@ -1,0 +1,59 @@
+.title {
+  margin-bottom: 8px;
+}
+
+.desc {
+  margin-bottom: 24px;
+}
+
+.resendRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.button {
+  width: 222px;
+}
+
+.backIcon {
+  transform: rotate(180deg);
+}
+
+.modalTitle {
+  margin-bottom: 8px;
+}
+
+.modalText {
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+}
+
+.modalButton {
+  display: block;
+  width: 160px;
+  margin: 0 auto;
+}
+
+@media (--mobile) {
+  .buttonsContainer {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .title {
+    margin-bottom: 4px;
+  }
+}

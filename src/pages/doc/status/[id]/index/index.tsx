@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
+import { ToastContext } from 'src/components/common/toast/context'
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { StepCheckStatus } from 'pages/doc/status/[id]/index/components/step-check-status'
@@ -13,12 +14,25 @@ import { isNeedToUpdateDocument } from 'src/utils/check-document-statuses'
 
 export type StepsDocumentStatusPage = 'success-all-signed' | 'check-status' | 'document-error'
 
-export function DocumentStatusPage({ step }: { step: StepsDocumentStatusPage }) {
+export function DocumentStatusPage({
+  step,
+  reported,
+}: {
+  step: StepsDocumentStatusPage
+  reported?: boolean
+}) {
   const document = useAppSelector(selectedDocument)
   const { title } = usePageHead({ title: ` | ${document?.name || 'Document not found'}` })
   const activeStep = step
 
   const dispatch = useAppDispatch()
+  const toast = useContext(ToastContext)
+
+  useEffect(() => {
+    if (reported) {
+      toast.addToast({ text: 'Thanks — this sender has been reported.' })
+    }
+  }, [])
 
   useEffect(() => {
     let interval
@@ -64,6 +78,7 @@ DocumentStatusPage.getInitialProps = async (context, store: AppStore) => {
   const dispatch = store.dispatch
   const documentId = context.query.id as string
   const isAllSigned = context.query.success as string
+  const reported = Boolean(context.query.reported)
 
   const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
   if (!isMatchId) {
@@ -84,5 +99,5 @@ DocumentStatusPage.getInitialProps = async (context, store: AppStore) => {
     return { step: 'success-all-signed' }
   }
 
-  return { step: 'check-status' }
+  return { step: 'check-status', reported }
 }

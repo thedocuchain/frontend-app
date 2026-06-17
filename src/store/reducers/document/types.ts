@@ -25,6 +25,7 @@ export type User = {
   position?: number
   role: 'signer' | 'watcher'
   signatures?: Signature[]
+  isInitiator?: boolean
 
   firstToHear?: boolean
   agreedWithPolicy?: boolean
@@ -38,6 +39,7 @@ export type UserInfo = {
   name?: string
   email: string
   role: 'signer' | 'watcher'
+  isInitiator?: boolean
 }
 
 export enum DocumentStatuses {
@@ -70,4 +72,5 @@ export type DocumentType = {
   width?: number
   height?: number
   originalHash?: string
+  initiatorVerifiedAt?: string // ISO dateTimeString with TZ
 }

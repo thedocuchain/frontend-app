@@ -8,6 +8,7 @@ import { DocumentStatuses, UserInfo } from 'src/store/reducers/document/types'
 import { Text } from 'src/components/ui/typography'
 import { Space } from 'src/components/ui/space'
 import { StepAddRecipients } from 'src/pages/doc/[id]/components/step-add-recipients'
+import { StepVerifyInitiator } from 'src/pages/doc/[id]/components/step-verify-initiator'
 import { StepPreviewAndSend } from 'src/pages/doc/[id]/components/step-preview-and-send'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
@@ -17,7 +18,13 @@ import { getDocument } from 'src/store/reducers/document/actions/get-document'
 
 import styles from './styles.module.css'
 
-export type StepsDocumentPage = 'upload' | 'add-recipients' | 'preview-and-send' | 'success-send' | 'document-error'
+export type StepsDocumentPage =
+  | 'upload'
+  | 'add-recipients'
+  | 'verify-initiator'
+  | 'preview-and-send'
+  | 'success-send'
+  | 'document-error'
 export type StepWizardType = {
   title: string
   value: StepsDocumentPage
@@ -27,6 +34,11 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
   const document = useAppSelector(selectedDocument)
   const { title } = usePageHead({ title: ` | ${document?.name || 'Document not found'}` })
   const [signers, setSigners] = useState<UserInfo[]>([
+    {
+      name: '',
+      email: '',
+      role: 'watcher',
+    },
     {
       name: '',
       email: '',
@@ -40,7 +52,8 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
   ]
   const [activeStep, setActiveStep] = useState<StepsDocumentPage>(step)
 
-  const activeStepTitle = steps.find((el) => el.value === activeStep)
+  const wizardActiveStep = activeStep === 'verify-initiator' ? 'add-recipients' : activeStep
+  const activeStepTitle = steps.find((el) => el.value === wizardActiveStep)
 
   return (
     <>
@@ -60,13 +73,15 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
           </>
         )}
 
-        {(activeStep === 'preview-and-send' || activeStep === 'add-recipients') && (
+        {(activeStep === 'preview-and-send' ||
+          activeStep === 'add-recipients' ||
+          activeStep === 'verify-initiator') && (
           <>
-            <Header isStepsWizard stepsWizard={steps} activeStepWizard={activeStep} />
+            <Header isStepsWizard stepsWizard={steps} activeStepWizard={wizardActiveStep} />
             <Flex flex='1' className={styles.wrapper}>
               <div className='show-tablet'>
                 <Text theme={'label-2'} className='color-text-secondary'>
-                  Step {steps.findIndex((el) => el.value === activeStep) + 1} of {steps.length} -{' '}
+                  Step {steps.findIndex((el) => el.value === wizardActiveStep) + 1} of {steps.length} -{' '}
                   {activeStepTitle.title}
                 </Text>
                 <Space size={24} />
@@ -75,6 +90,8 @@ export function DocumentPage({ step }: { step: StepsDocumentPage }) {
               {activeStep === 'add-recipients' && (
                 <StepAddRecipients signers={signers} setSigners={setSigners} setActiveStep={setActiveStep} />
               )}
+
+              {activeStep === 'verify-initiator' && <StepVerifyInitiator setActiveStep={setActiveStep} />}
 
               {activeStep === 'preview-and-send' && <StepPreviewAndSend setActiveStep={setActiveStep} />}
             </Flex>
@@ -109,6 +126,10 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
   }
 
   if (document.status === DocumentStatuses.RECIPIENT_ADDED) {
+    const hasInitiator = document.users?.some((user) => user.isInitiator)
+    if (hasInitiator && !document.initiatorVerifiedAt) {
+      return { step: 'verify-initiator' }
+    }
     return { step: 'preview-and-send' }
   }
 

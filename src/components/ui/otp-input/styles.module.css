@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.box {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  text-align: center;
+  font-family: var(--font-nacelle);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--bg-white);
+  border: solid 1px var(--bg-grey-5);
+  border-radius: 16px;
+  box-shadow: var(--shadow-level-1);
+  outline: none !important;
+  transition: all 0.1s ease;
+}
+
+.box:hover,
+.box:focus {
+  border: solid 1px var(--bg-accent);
+  box-shadow: var(--shadow-focus-accent);
+}
+
+.boxError {
+  border: solid 1px var(--border-error);
+}
+
+@media (--mobile) {
+  .wrapper {
+    gap: 6px;
+  }
+
+  .box {
+    height: 48px;
+    font-size: 20px;
+  }
+}

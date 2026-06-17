@@ -91,17 +91,17 @@ export function RecepientForm(props: {
     <div className={styles.blockWrapper}>
       <RowBetweenCenter>
         <Text theme={'label-2'} className='color-text-secondary'>
-          Recepient {index + 1}
+          {index === 0 ? 'Initiator' : `Recepient ${index + 1}`}
         </Text>
 
-        {signers.length > 1 && (
+        {signers.length > 1 && index !== 0 && (
           <Button onClick={() => onDelete(index)} theme={'link-secondary'} className={'show-mobile'}>
             Delete
           </Button>
         )}
       </RowBetweenCenter>
       <div className={styles.block}>
-        {signers.length > 1 && (
+        {signers.length > 1 && index !== 0 && (
           <IconCloseCircle onClick={() => onDelete(index)} className={cn(styles.iconClose, 'on-click')} />
         )}
         <div className={styles.leftColorPanel} style={{ background: color }} />
