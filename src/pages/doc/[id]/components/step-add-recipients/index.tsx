@@ -13,7 +13,7 @@ import { Textarea } from 'src/components/ui/textarea'
 import { Space } from 'src/components/ui/space'
 import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
-import { Chains, User, UserInfo } from 'src/store/reducers/document/types'
+import { Chains, DocumentStatuses, User, UserInfo } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
@@ -54,7 +54,7 @@ export function StepAddRecipients(props: ComponentProps) {
   const { signers, setSigners, setActiveStep } = props
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
-  const [addUsers, { isSuccess, isLoading }] = useApi(addUsersToDocument)
+  const [addUsers, { isSuccess, isLoading, isError }] = useApi(addUsersToDocument)
   const document = useAppSelector(selectedDocument)
   const documentShortId = document?.shortId
   const documentName = document.name
@@ -158,6 +158,23 @@ export function StepAddRecipients(props: ComponentProps) {
       }
     })
 
+    // Recipients were already saved (e.g. the user navigated back from the
+    // verification step). The backend rejects re-submitting the same
+    // recipients, so just move forward instead of silently failing.
+    const recipientsAlreadyAdded =
+      document?.status === DocumentStatuses.RECIPIENT_ADDED &&
+      signers.every((signer) =>
+        document.users?.some(
+          (user) =>
+            user.email?.toLowerCase() === signer.email.trim().toLowerCase() && user.role === signer.role,
+        ),
+      )
+
+    if (recipientsAlreadyAdded) {
+      setActiveStep('verify-initiator')
+      return
+    }
+
     await addUsers({
       id: document.id,
       name: trim(form.documentName),
@@ -171,6 +188,12 @@ export function StepAddRecipients(props: ComponentProps) {
       setActiveStep('verify-initiator')
     }
   }, [isSuccess])
+
+  useEffect(() => {
+    if (isError) {
+      toast.addToast({ text: 'Could not save recipients. Please try again.' })
+    }
+  }, [isError])
 
   useEffect(() => {
     setIsShowError(false)

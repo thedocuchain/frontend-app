@@ -39,7 +39,8 @@ export const addUsersToDocument = createAsyncThunk(
       )
 
       return data
-    } catch (ignore) {
+    } catch (error) {
+      console.error('addUsersToDocument failed:', error?.response?.data ?? error)
       return null
     }
   },
