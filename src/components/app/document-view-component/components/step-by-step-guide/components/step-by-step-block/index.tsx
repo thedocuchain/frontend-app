@@ -68,7 +68,7 @@ export function StepByStepBlock(props: ComponentProps) {
   const signatureData = useAppSelector(selectSettingState)
   const isSigned = useAppSelector(selectedIsSigned)
   const dispatch = useAppDispatch()
-  const [sentToSign, { isSuccess, isLoading }] = useApi(signDocument)
+  const [sentToSign, { isSuccess, isLoading, isError }] = useApi(signDocument)
   const [sendDocNotify, sendDocNotifyStatus] = useApi(sendDocumentNotify)
 
   const [checkBoxTermsPolicyCreatingDoc, setCheckBoxTermsPolicyCreatingDoc] = useState(false)
@@ -124,6 +124,7 @@ export function StepByStepBlock(props: ComponentProps) {
           signFont: signatureData.signatureFont,
           fontSize: signatureData.fontSize,
           signDate: signatureData.signDate,
+          signImage: signatureData.signImage,
         })
         return
       }
@@ -237,6 +238,14 @@ export function StepByStepBlock(props: ComponentProps) {
       </div>
 
       <RowCenter className={styles.buttonNext}>
+        {(isError || sendDocNotifyStatus.isError) && (
+          <>
+            <Text theme={'body-3'} className='color-text-error'>
+              Something went wrong. Please try again.
+            </Text>
+            <Space horizontal size={12} />
+          </>
+        )}
         <Text theme={'body-3'} className='color-text-secondary'>
           {activeStep + 1} of {stepsLength}
         </Text>

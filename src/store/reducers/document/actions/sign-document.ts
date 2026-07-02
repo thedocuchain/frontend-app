@@ -12,6 +12,7 @@ export type SignDocumentRequest = {
   signFont: string
   fontSize: number
   signDate: string // ISO dateTimeString with TZ
+  signImage?: string | null
 }
 
 export const signDocument = createAsyncThunk(
@@ -26,6 +27,7 @@ export const signDocument = createAsyncThunk(
         signFont: payload.signFont,
         fontSize: payload.fontSize,
         signDate: payload.signDate,
+        signImage: payload.signImage || undefined,
       })
 
       await thunkAPI.dispatch(

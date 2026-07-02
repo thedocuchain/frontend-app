@@ -38,9 +38,38 @@
   stroke: #2f35c2 !important;
 }
 
-.changeBlock {
-  position: absolute;
-  bottom: 4px;
+.signImage {
+  object-fit: contain;
+}
+
+.actionsBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.actionRow:hover .actionText {
+  transition: all 0.2s ease;
+  color: #2f35c2 !important;
+}
+
+.actionRow:hover .iconEdited {
+  stroke: #2f35c2 !important;
+}
+
+.fileInput {
+  display: none;
 }
 
 .dateWrapper {

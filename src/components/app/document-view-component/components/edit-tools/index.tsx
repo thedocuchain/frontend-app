@@ -1,23 +1,27 @@
 import cn from 'classnames'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { format } from 'date-fns'
 import { randomNumber } from '@coxy/utils'
 
 import { Text } from 'src/components/ui/typography'
 import { Column, RowCenter } from 'src/components/ui/grid'
-import { IconEdit, IconRefreshSignature } from 'src/icons'
+import { IconEdit, IconRefreshSignature, IconUpload } from 'src/icons'
 import { toIsoString } from 'src/utils/convert-time'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import {
   selectedIsSigned,
   selectedSignatureFont,
   selectedSignDate,
+  selectedSignImage,
   setSignatureFont,
   setSignDate,
+  setSignImage,
   setSigned,
 } from 'src/store/reducers/signature'
 import { fontsSignatures } from 'src/components/app/document-view-component/components/edit-tools/fonts'
+import { DrawSignatureModal } from 'src/components/app/document-view-component/components/edit-tools/draw-signature-modal'
+import { fileToSignatureDataUrl } from 'src/components/app/document-view-component/components/edit-tools/signature-image'
 
 import styles from './styles.module.css'
 
@@ -72,29 +76,73 @@ type SignatureProps = {
 export function Signature(props: SignatureProps) {
   const { style, isActiveSignature, name, scaleSize } = props
   const isSigned = useAppSelector(selectedIsSigned) && isActiveSignature
+  const signImage = useAppSelector(selectedSignImage)
   const dispatch = useAppDispatch()
   const [isLoading, setIsLoading] = useState(false)
-
-  const handeSignDocument = useEvent(async () => {
-    if (!isActiveSignature) return
-    setIsLoading(true)
-    const newIndex = randomNumber(0, fonts.length)
-    const isoDate = toIsoString(new Date())
-
-    if (isSigned) {
-      await dispatch(setSignatureFont(fonts[newIndex]))
-      setIsLoading(false)
-      return
-    }
-
-    await dispatch(setSigned(true))
-    await dispatch(setSignatureFont(fonts[newIndex]))
-    await dispatch(setSignDate(isoDate))
-    setIsLoading(false)
-  })
+  const [isDrawModalVisible, setDrawModalVisible] = useState(false)
+  const [uploadError, setUploadError] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const fonts = Object.keys(fontsSignatures)
   const fontStyle = useAppSelector(selectedSignatureFont)
+
+  const sz = (value: number) => (scaleSize ? `calc(${value}px * ${scaleSize})` : `${value}px`)
+
+  const ensureSigned = async () => {
+    if (isSigned) return
+    await dispatch(setSigned(true))
+    await dispatch(setSignDate(toIsoString(new Date())))
+  }
+
+  const handeSignDocument = useEvent(async () => {
+    if (!isActiveSignature || isSigned) return
+    setIsLoading(true)
+    await dispatch(setSignatureFont(fonts[randomNumber(0, fonts.length - 1)]))
+    await ensureSigned()
+    setIsLoading(false)
+  })
+
+  const handleChangeSignature = useEvent(async (event: React.MouseEvent) => {
+    event.stopPropagation()
+    setIsLoading(true)
+    setUploadError(false)
+    await dispatch(setSignImage(null))
+    await dispatch(setSignatureFont(fonts[randomNumber(0, fonts.length - 1)]))
+    setIsLoading(false)
+  })
+
+  const handleOpenDraw = useEvent((event: React.MouseEvent) => {
+    event.stopPropagation()
+    setDrawModalVisible(true)
+  })
+
+  const handleUploadClick = useEvent((event: React.MouseEvent) => {
+    event.stopPropagation()
+    fileInputRef.current?.click()
+  })
+
+  const applySignatureImage = useEvent(async (dataUrl: string) => {
+    setUploadError(false)
+    await dispatch(setSignImage(dataUrl))
+    if (!fontStyle) {
+      await dispatch(setSignatureFont(fonts[randomNumber(0, fonts.length - 1)]))
+    }
+    await ensureSigned()
+    setDrawModalVisible(false)
+  })
+
+  const handleFileChange = useEvent(async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+
+    try {
+      await applySignatureImage(await fileToSignatureDataUrl(file))
+    } catch (error) {
+      console.error('Failed to process the signature image', error)
+      setUploadError(true)
+    }
+  })
 
   const cl = cn(styles.signatureWrapper, {
     [styles.isEdited]: isActiveSignature,
@@ -104,20 +152,20 @@ export function Signature(props: SignatureProps) {
   // dynamic styles
   const stylesSignature = {
     ...style,
-    width: scaleSize ? `calc(216px * ${scaleSize})` : '216px',
-    height: scaleSize ? `calc(80px * ${scaleSize})` : '80px',
-    padding: scaleSize ? `calc(8px * ${scaleSize}) calc(10px * ${scaleSize})` : '8px 10px',
-    borderRadius: scaleSize ? `calc(10px * ${scaleSize})` : '10px',
+    width: sz(216),
+    height: sz(isSigned ? 136 : 80),
+    padding: `${sz(8)} ${sz(10)}`,
+    borderRadius: sz(10),
   }
 
   const editedStyles = {
     boxShadow: scaleSize ? `0 0 0 calc(4px * ${scaleSize}) #9fe8703d` : 'var(--shadow-focus-accent)',
     border: scaleSize ? `calc(1px * ${scaleSize}) solid var(--bg-accent)` : '1px solid var(--bg-accent)',
-    padding: scaleSize ? `0 calc(10px * ${scaleSize}) calc(2px * ${scaleSize})` : '0 10px 2px',
+    padding: isSigned ? `${sz(8)} ${sz(10)}` : `0 ${sz(10)} ${sz(2)}`,
   }
 
   const fontSizeStyle = {
-    fontSize: scaleSize ? `calc(14px * ${scaleSize})` : '14px',
+    fontSize: sz(14),
     lineHeight: '100%',
   }
 
@@ -139,26 +187,59 @@ export function Signature(props: SignatureProps) {
       )}
 
       {isSigned && isActiveSignature && (
-        <Column className='align-center jc-between h100-p text-center'>
-          {!isLoading && (
-            <div
-              style={{ lineHeight: '120%', fontSize: scaleSize ? `calc(26px * ${scaleSize})` : '26px' }}
-              className={fontStyle}
-            >
-              {name}
-            </div>
-          )}
+        <Column className='align-center jc-between h100-p text-center w100-p'>
+          {!isLoading &&
+            (uploadError ? (
+              <Text theme={'body-3'} className='color-text-error' style={fontSizeStyle}>
+                Unsupported image. Use a PNG or JPEG file.
+              </Text>
+            ) : signImage ? (
+              <img
+                src={signImage}
+                alt='Signature'
+                className={styles.signImage}
+                style={{ maxHeight: sz(44), maxWidth: sz(180) }}
+              />
+            ) : (
+              <div style={{ lineHeight: '120%', fontSize: sz(26) }} className={fontStyle}>
+                {name}
+              </div>
+            ))}
 
-          <RowCenter className={cn('gap6', styles.changeBlock)}>
-            <IconRefreshSignature width={iconSize} height={iconSize} className={styles.iconEdited} />
-            <Text
-              style={fontSizeStyle}
-              theme={'button-standard'}
-              className={cn('color-link-default', 'white-space-nowrap', styles.textHover)}
-            >
-              Change signature
-            </Text>
-          </RowCenter>
+          <div className={styles.actionsBlock} style={{ gap: sz(6) }}>
+            <button className={styles.actionRow} style={{ gap: sz(6) }} onClick={handleChangeSignature}>
+              <IconRefreshSignature width={iconSize} height={iconSize} className={styles.iconEdited} />
+              <Text
+                style={fontSizeStyle}
+                theme={'button-standard'}
+                className={cn('color-link-default', 'white-space-nowrap', styles.actionText)}
+              >
+                Change signature
+              </Text>
+            </button>
+
+            <button className={styles.actionRow} style={{ gap: sz(6) }} onClick={handleOpenDraw}>
+              <IconEdit width={iconSize} height={iconSize} className={styles.iconEdited} />
+              <Text
+                style={fontSizeStyle}
+                theme={'button-standard'}
+                className={cn('color-link-default', 'white-space-nowrap', styles.actionText)}
+              >
+                Draw signature
+              </Text>
+            </button>
+
+            <button className={styles.actionRow} style={{ gap: sz(6) }} onClick={handleUploadClick}>
+              <IconUpload width={iconSize} height={iconSize} className={styles.iconEdited} />
+              <Text
+                style={fontSizeStyle}
+                theme={'button-standard'}
+                className={cn('color-link-default', 'white-space-nowrap', styles.actionText)}
+              >
+                Upload signature
+              </Text>
+            </button>
+          </div>
         </Column>
       )}
 
@@ -169,6 +250,24 @@ export function Signature(props: SignatureProps) {
             Click here to sign
           </Text>
         </RowCenter>
+      )}
+
+      {isActiveSignature && (
+        <>
+          <input
+            ref={fileInputRef}
+            type='file'
+            accept='image/png,image/jpeg'
+            className={styles.fileInput}
+            onChange={handleFileChange}
+          />
+
+          <DrawSignatureModal
+            visible={isDrawModalVisible}
+            onClose={() => setDrawModalVisible(false)}
+            onSave={applySignatureImage}
+          />
+        </>
       )}
     </div>
   )

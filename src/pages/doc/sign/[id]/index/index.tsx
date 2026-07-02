@@ -14,6 +14,7 @@ import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
 import { remindUser } from 'src/store/reducers/document/actions/remind'
+import { resetSignature } from 'src/store/reducers/signature'
 
 import styles from './styles.module.css'
 
@@ -35,6 +36,10 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
   const dispatch = useAppDispatch()
   const [activeStep, setActiveStep] = useState<StepsSignPage>(step)
   const { title } = usePageHead({ title: document ? ` | ${document?.name}` : ' | Link expired' })
+
+  useEffect(() => {
+    dispatch(resetSignature())
+  }, [documentId, signerId, dispatch])
 
   useEffect(() => {
     if (activeStep === 'expired-link' && documentId && signerId) {

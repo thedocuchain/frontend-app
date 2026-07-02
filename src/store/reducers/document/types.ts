@@ -2,6 +2,7 @@ export type Signature = {
   id?: string
   signed: boolean
   signFont?: string
+  signImage?: string
   fontSize?: number
   signDate?: string // ISO dateTimeString with TZ
   yCoordinate?: number

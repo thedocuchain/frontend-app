@@ -9,6 +9,7 @@ export interface SignatureState {
   signatureFont: string
   fontSize: number
   signDate: string
+  signImage: string | null
   isSigned: boolean
   isError: boolean
 }
@@ -17,6 +18,7 @@ const initialState: SignatureState = {
   signatureFont: undefined,
   fontSize: 20,
   signDate: undefined,
+  signImage: null,
   isSigned: false,
   isError: false,
 }
@@ -30,6 +32,7 @@ export const signatureSlice = createSlice({
     patchSignatureState: (state, action: PayloadAction<Partial<SignatureState>>) => {
       patchStateReducer(state, action)
     },
+    resetSignature: () => initialState,
     setSignatureFont: (state: SignatureState, action: PayloadAction<string>) => {
       state.signatureFont = action.payload
     },
@@ -38,6 +41,9 @@ export const signatureSlice = createSlice({
     },
     setSignDate: (state: SignatureState, action: PayloadAction<string>) => {
       state.signDate = action.payload
+    },
+    setSignImage: (state: SignatureState, action: PayloadAction<string | null>) => {
+      state.signImage = action.payload
     },
     setSigned: (state: SignatureState, action: PayloadAction<boolean>) => {
       state.isSigned = action.payload
@@ -49,11 +55,20 @@ export const signatureSlice = createSlice({
   },
 })
 
-export const { setSignatureFont, setFontSize, setSignDate, setSigned, setSignatureError } = signatureSlice.actions
+export const {
+  setSignatureFont,
+  setFontSize,
+  setSignDate,
+  setSignImage,
+  setSigned,
+  setSignatureError,
+  resetSignature,
+} = signatureSlice.actions
 
 export const selectSettingState = (state: AppState) => state[storeKey] as SignatureState
 export const selectedSignatureFont = (state: AppState): string => state[storeKey].signatureFont
 export const selectedFontSize = (state: AppState): number => state[storeKey].fontSize
 export const selectedSignDate = (state: AppState): string => state[storeKey].signDate
+export const selectedSignImage = (state: AppState): string | null => state[storeKey].signImage
 export const selectedIsSigned = (state: AppState): boolean => state[storeKey].isSigned
 export const selectedIsSignError = (state: AppState): boolean => state[storeKey].isError
