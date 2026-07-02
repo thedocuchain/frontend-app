@@ -53,5 +53,7 @@
 }
 
 .tryAgainIcon {
+  width: 16px;
+  height: 16px;
   stroke: var(--text-link-default);
 }
