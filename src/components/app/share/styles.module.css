@@ -39,3 +39,11 @@
 .iconIn:hover {
   fill: #0a66c2;
 }
+
+.iconGh {
+  fill: #0a18333d;
+}
+
+.iconGh:hover {
+  fill: #181717;
+}

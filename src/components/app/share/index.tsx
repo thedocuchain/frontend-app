@@ -4,6 +4,7 @@ import { Column, RowCenter } from 'src/components/ui/grid'
 import { Text } from 'src/components/ui/typography'
 import {
   IconFacebookLogo,
+  IconGithubLogo,
   IconInstagramDefaultLogo,
   IconInstagramLogo,
   IconLinkedinLogo,
@@ -41,6 +42,9 @@ export function Share() {
         </ButtonWrapper>
         <ButtonWrapper href={'https://www.linkedin.com/in/docuchain-service-96124a302/'}>
           <IconLinkedinLogo className={styles.iconIn} />
+        </ButtonWrapper>
+        <ButtonWrapper href={'https://github.com/thedocuchain'}>
+          <IconGithubLogo className={styles.iconGh} />
         </ButtonWrapper>
       </RowCenter>
     </Column>

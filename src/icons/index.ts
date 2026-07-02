@@ -36,6 +36,7 @@ export { default as IconInstagramLogo } from 'src/icons/socials/instagram.inline
 export { default as IconInstagramDefaultLogo } from 'src/icons/socials/instagram-default.inline.svg'
 export { default as IconFacebookLogo } from 'src/icons/socials/facebook.inline.svg'
 export { default as IconTelegramLogo } from 'src/icons/socials/tg.inline.svg'
+export { default as IconGithubLogo } from 'src/icons/socials/github.inline.svg'
 
 export { default as IconSuccessfullySigned } from 'src/icons/inline/successfully-signed.inline.svg'
 export { default as IconPlaneColor } from 'src/icons/inline/plane-color.inline.svg'
