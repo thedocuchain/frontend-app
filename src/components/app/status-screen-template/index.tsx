@@ -256,9 +256,14 @@ export function StatusScreenTemplate(props: {
         </Column>
 
         {isAllSigned && (
-          <div className={styles.shareBlock}>
-            <Share />
-          </div>
+          <>
+            <div className={styles.rateBlock}>
+              <RateUs />
+            </div>
+            <div className={styles.shareBlock}>
+              <Share />
+            </div>
+          </>
         )}
 
         {isOneSigned && (
