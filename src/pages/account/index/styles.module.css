@@ -1,0 +1,118 @@
+.topRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-white);
+  border: 1px solid var(--bg-grey-6);
+  border-radius: 12px;
+  box-shadow: var(--shadow-level-1);
+  padding: 16px;
+}
+
+.fileIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-grey-8);
+  border: 1px solid var(--bg-grey-6);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.newBadge {
+  display: flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: 100px;
+  background: #fecdca;
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.statusAwaiting {
+  color: var(--text-warning);
+}
+
+.statusSigned {
+  color: var(--text-accent);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flagButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--bg-grey-6);
+  border-radius: 8px;
+  background: var(--bg-white);
+  cursor: pointer;
+}
+
+.flagIcon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--bg-grey-1);
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  padding: 64px 16px;
+  text-align: center;
+}
+
+@media (--mobile) {
+  .card {
+    flex-wrap: wrap;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

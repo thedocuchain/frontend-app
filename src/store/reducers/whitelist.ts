@@ -3,6 +3,7 @@ import { authSlice, whitelist as authWhitelist } from './auth'
 import { toastsSlice, whitelist as toastsWhitelist } from './toasts'
 import { documentSlice, whitelist as documentWhitelist } from './document'
 import { signatureSlice, whitelist as signatureWhitelist } from './signature'
+import { accountSlice, whitelist as accountWhitelist } from './account'
 
 export const whitelist = {
   [settingsSlice.name]: settingsWhitelist,
@@ -10,4 +11,5 @@ export const whitelist = {
   [toastsSlice.name]: toastsWhitelist,
   [documentSlice.name]: documentWhitelist,
   [signatureSlice.name]: signatureWhitelist,
+  [accountSlice.name]: accountWhitelist,
 }

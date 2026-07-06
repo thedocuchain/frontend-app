@@ -53,17 +53,22 @@ export const indexToColorIndex = (index: number) => {
   return index >= arrayLength ? indexToColorIndex(index - arrayLength) : index
 }
 
-export function Avatar(props: { name: string; index: number; className?: string }) {
-  const { name, className } = props
+export function Avatar(props: { name: string; index: number; className?: string; image?: string; size?: number }) {
+  const { name, className, image, size } = props
   const index = indexToColorIndex(props.index)
 
   const cl = cn(styles.avatar, className)
+  const sizeStyle = size ? { width: size, minWidth: size, maxWidth: size, height: size } : undefined
+
+  if (image) {
+    return <img src={image} alt={name} className={cn(cl, styles.image)} style={sizeStyle} />
+  }
 
   const colorText = colorsText[index]
   const colorBorder = colorsBorders[index]
 
   return (
-    <div className={cl} style={{ backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}` }}>
+    <div className={cl} style={{ backgroundColor: `${colorBorder}14`, borderColor: `${colorBorder}`, ...sizeStyle }}>
       <Text theme='label-2' className='uppercase' style={{ color: colorText }}>
         {nameToIcon(name)}
       </Text>

@@ -1,0 +1,21 @@
+.modalCard {
+  max-width: 440px;
+}
+
+.closeRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  color: var(--text-secondary);
+}
+
+.button {
+  width: 100%;
+}

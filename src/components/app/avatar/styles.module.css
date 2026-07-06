@@ -10,3 +10,9 @@
   justify-content: center;
   border: solid 1px;
 }
+
+.image {
+  padding: 0;
+  object-fit: cover;
+  border-color: var(--bg-grey-6);
+}
