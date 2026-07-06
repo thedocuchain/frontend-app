@@ -15,10 +15,10 @@
 }
 
 .activeStar svg {
-  stroke: var(--bg-warning);
+  stroke: var(--bg-accent);
 }
 
 .fullStar svg {
   stroke: none;
-  fill: var(--bg-warning);
+  fill: var(--bg-accent);
 }
