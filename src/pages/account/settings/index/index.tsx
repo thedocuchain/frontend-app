@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
 import cn from 'classnames'
-import { format } from 'date-fns'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { AppStore } from 'src/store'
@@ -15,32 +13,19 @@ import { Space } from 'src/components/ui/space'
 import { ToastContext } from 'src/components/common/toast/context'
 import { IconChevronRight } from 'src/icons'
 import { useApi } from 'src/utils/use/use-api'
-import { useAppDispatch, useAppSelector } from 'src/store/hooks'
+import { useAppSelector } from 'src/store/hooks'
 import { selectedAccount } from 'src/store/reducers/account'
-import { AccountSessionItem } from 'src/store/reducers/account/types'
-import { updateAccountPassword, updateAccountProfile } from 'src/store/reducers/account/actions/profile'
-import { getAccountSessions, revokeAccountSession } from 'src/store/reducers/account/actions/sessions'
+import { updateAccountProfile } from 'src/store/reducers/account/actions/profile'
 import { fileToAvatarDataUrl } from 'src/utils/avatar-image'
 import { requireAccountAuth } from 'src/utils/account-guard'
 
+import { ChangePasswordModal } from './components/change-password-modal'
+import { SupportModal } from './components/support-modal'
+import { DevicesSection } from './components/devices-section'
 import styles from './styles.module.css'
-
-function formatUserAgent(userAgent: string | null): string {
-  if (!userAgent) return 'Unknown device'
-
-  const browser = ['Edg', 'OPR', 'Firefox', 'Chrome', 'Safari'].find((name) => userAgent.includes(name)) ?? 'Browser'
-  const os =
-    ['iPhone', 'iPad', 'Android', 'Windows', 'Mac OS X', 'Linux'].find((name) => userAgent.includes(name)) ??
-    'Unknown OS'
-
-  const browserNames = { Edg: 'Edge', OPR: 'Opera' }
-  return `${browserNames[browser] ?? browser} · ${os === 'Mac OS X' ? 'macOS' : os}`
-}
 
 export function AccountSettingsPage() {
   const { title } = usePageHead({ title: '| Settings' })
-  const router = useRouter()
-  const dispatch = useAppDispatch()
   const toast = useContext(ToastContext)
   const account = useAppSelector(selectedAccount)
 
@@ -51,33 +36,14 @@ export function AccountSettingsPage() {
   const avatarInputRef = useRef<HTMLInputElement>(null)
   const [saveProfile, { isLoading: isSavingProfile }] = useApi(updateAccountProfile)
 
-  const [openSection, setOpenSection] = useState<'password' | 'sessions' | null>(null)
-  const [currentPassword, setCurrentPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [savePassword, { isLoading: isSavingPassword, errorMessage: passwordError, isError: isPasswordError }] =
-    useApi(updateAccountPassword)
-  const [sessions, setSessions] = useState<AccountSessionItem[] | null>(null)
+  const [securityView, setSecurityView] = useState<'menu' | 'devices'>('menu')
+  const [activeModal, setActiveModal] = useState<'password' | 'support' | null>(null)
 
   useEffect(() => {
     if (account) {
       setName(account.name)
     }
   }, [account?.name])
-
-  const loadSessions = useEvent(async () => {
-    const result = await dispatch(getAccountSessions())
-    if (getAccountSessions.fulfilled.match(result)) {
-      setSessions(result.payload)
-    }
-  })
-
-  const handleToggleSection = useEvent((section: 'password' | 'sessions') => {
-    const next = openSection === section ? null : section
-    setOpenSection(next)
-    if (next === 'sessions' && !sessions) {
-      void loadSessions()
-    }
-  })
 
   const handleAvatarSelected = useEvent(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -107,26 +73,6 @@ export function AccountSettingsPage() {
     }
   })
 
-  const handleSavePassword = useEvent(async () => {
-    if (!currentPassword || newPassword.length < 8) {
-      toast.addToast({ text: 'New password must be at least 8 characters' })
-      return
-    }
-
-    const result = await savePassword({ currentPassword, password: newPassword })
-    if (result !== null) {
-      setCurrentPassword('')
-      setNewPassword('')
-      setOpenSection(null)
-      toast.addToast({ text: 'Password updated' })
-    }
-  })
-
-  const handleRevokeSession = useEvent(async (id: string) => {
-    await dispatch(revokeAccountSession({ id }))
-    void loadSessions()
-  })
-
   return (
     <>
       <PageHead>{title}</PageHead>
@@ -138,7 +84,10 @@ export function AccountSettingsPage() {
           </div>
           <div
             className={cn(styles.tab, { [styles.tabActive]: tab === 'security' })}
-            onClick={() => setTab('security')}
+            onClick={() => {
+              setTab('security')
+              setSecurityView('menu')
+            }}
           >
             <Text theme='label-1'>Security</Text>
           </div>
@@ -181,94 +130,34 @@ export function AccountSettingsPage() {
           </div>
         )}
 
-        {tab === 'security' && (
+        {tab === 'security' && securityView === 'menu' && (
           <div className={styles.card}>
-            <div className={styles.sectionHeader} onClick={() => handleToggleSection('password')}>
+            <div className={styles.sectionHeader} onClick={() => setActiveModal('password')}>
               <Text theme='label-1'>Password</Text>
-              <IconChevronRight
-                className={cn(styles.chevron, { [styles.chevronOpen]: openSection === 'password' })}
-              />
+              <IconChevronRight className={styles.chevron} />
             </div>
-            {openSection === 'password' && (
-              <div className={styles.sectionBody}>
-                <Input
-                  label='Current password'
-                  type='password'
-                  value={currentPassword}
-                  onChange={setCurrentPassword}
-                />
-                <Space size={12} />
-                <Input
-                  label='New password'
-                  type='password'
-                  placeholder='At least 8 characters'
-                  value={newPassword}
-                  onChange={setNewPassword}
-                />
-                {isPasswordError && passwordError && (
-                  <>
-                    <Space size={8} />
-                    <Text theme='body-3' className='color-text-error'>
-                      {passwordError}
-                    </Text>
-                  </>
-                )}
-                <Space size={16} />
-                <div className={styles.saveRow}>
-                  <Button size='sm' onClick={handleSavePassword} isLoading={isSavingPassword}>
-                    Update password
-                  </Button>
-                </div>
-              </div>
-            )}
 
             <div className={styles.divider} />
 
-            <div className={styles.sectionHeader} onClick={() => handleToggleSection('sessions')}>
-              <Text theme='label-1'>Sessions</Text>
-              <IconChevronRight
-                className={cn(styles.chevron, { [styles.chevronOpen]: openSection === 'sessions' })}
-              />
+            <div className={styles.sectionHeader} onClick={() => setSecurityView('devices')}>
+              <Text theme='label-1'>Devices</Text>
+              <IconChevronRight className={styles.chevron} />
             </div>
-            {openSection === 'sessions' && (
-              <div className={styles.sectionBody}>
-                {!sessions && (
-                  <Text theme='body-3' className='color-text-secondary'>
-                    Loading sessions…
-                  </Text>
-                )}
-                {sessions?.map((session) => (
-                  <div key={session.id} className={styles.sessionRow}>
-                    <div className={styles.sessionInfo}>
-                      <Text theme='label-2'>{formatUserAgent(session.userAgent)}</Text>
-                      <Text theme='body-3' className='color-text-secondary'>
-                        {session.ip ?? 'Unknown IP'} · last active{' '}
-                        {format(new Date(session.lastActiveAt), 'MMM d, yyyy HH:mm')}
-                      </Text>
-                    </div>
-                    {session.isCurrent ? (
-                      <span className={styles.currentBadge}>
-                        <Text theme='label-3'>Current</Text>
-                      </span>
-                    ) : (
-                      <Button theme='secondary' size='sm' onClick={() => void handleRevokeSession(session.id)}>
-                        Sign out
-                      </Button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
 
             <div className={styles.divider} />
 
-            <div className={styles.sectionHeader} onClick={() => void router.push('/feedback')}>
+            <div className={styles.sectionHeader} onClick={() => setActiveModal('support')}>
               <Text theme='label-1'>Support</Text>
               <IconChevronRight className={styles.chevron} />
             </div>
           </div>
         )}
+
+        {tab === 'security' && securityView === 'devices' && <DevicesSection onBack={() => setSecurityView('menu')} />}
       </div>
+
+      <ChangePasswordModal visible={activeModal === 'password'} onClose={() => setActiveModal(null)} />
+      <SupportModal visible={activeModal === 'support'} onClose={() => setActiveModal(null)} />
     </>
   )
 }
@@ -277,6 +166,5 @@ AccountSettingsPage.getInitialProps = async (context, store: AppStore) => {
   requireAccountAuth(context, store)
   return {}
 }
-
 
 AccountSettingsPage.getLayout = AccountLayout

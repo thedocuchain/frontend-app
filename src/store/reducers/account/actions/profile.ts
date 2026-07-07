@@ -45,6 +45,39 @@ export const updateAccountPassword = createAsyncThunk<
   }
 })
 
+export const sendPasswordResetCode = createAsyncThunk<void, void, ThunkConfig>(
+  'account/send-password-reset-code',
+  async (_, thunkAPI) => {
+    try {
+      await api.post('/v1/account/password-reset/send')
+    } catch (error) {
+      return thunkAPI.rejectWithValue(toApiErrorPayload(error))
+    }
+  },
+)
+
+export const confirmPasswordReset = createAsyncThunk<void, { code: string; password: string }, ThunkConfig>(
+  'account/confirm-password-reset',
+  async (payload, thunkAPI) => {
+    try {
+      await api.post('/v1/account/password-reset/confirm', payload)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(toApiErrorPayload(error))
+    }
+  },
+)
+
+export const sendSupportTicket = createAsyncThunk<void, { title: string; text: string }, ThunkConfig>(
+  'account/send-support-ticket',
+  async (payload, thunkAPI) => {
+    try {
+      await api.post('/v1/account/support', payload)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(toApiErrorPayload(error))
+    }
+  },
+)
+
 export const saveAccountSignature = createAsyncThunk<
   AccountInfo,
   { signImage?: string; signFont?: string },

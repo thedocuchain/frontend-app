@@ -53,10 +53,6 @@
   cursor: pointer;
 }
 
-.sectionBody {
-  padding: 4px 0 16px;
-}
-
 .divider {
   height: 1px;
   background: var(--bg-grey-7);
@@ -66,29 +62,4 @@
   width: 18px;
   height: 18px;
   stroke: var(--bg-grey-2);
-  transition: transform 0.15s ease;
-}
-
-.chevronOpen {
-  transform: rotate(90deg);
-}
-
-.sessionRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-}
-
-.sessionInfo {
-  min-width: 0;
-}
-
-.currentBadge {
-  display: flex;
-  align-items: center;
-  padding: 2px 10px;
-  border-radius: 100px;
-  background: var(--bg-accent-extra-light);
 }

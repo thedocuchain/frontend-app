@@ -23,6 +23,7 @@ export interface AccountSessionItem {
   id: string
   userAgent: string | null
   ip: string | null
+  country: string | null
   createdAt: string
   lastActiveAt: string
   isCurrent: boolean
