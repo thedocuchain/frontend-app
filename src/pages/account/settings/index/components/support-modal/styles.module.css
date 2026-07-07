@@ -1,5 +1,6 @@
 .modalCard {
   max-width: 420px;
+  text-align: left;
 }
 
 .closeRow {
@@ -15,8 +16,7 @@
   width: 100%;
 }
 
-.forgotRow {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
+textarea.ticketText {
+  height: 140px;
+  max-height: 240px;
 }

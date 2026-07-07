@@ -70,7 +70,14 @@ export function SupportModal(props: SupportModalProps) {
 
       <Input label='Title' placeholder='What is your request about?' value={title} onChange={setTitle} />
       <Space size={12} />
-      <Textarea label='Text' placeholder='Describe your problem' rows={5} value={text} onChange={setText} />
+      <Textarea
+        label='Text'
+        placeholder='Describe your problem'
+        rows={5}
+        className={styles.ticketText}
+        value={text}
+        onChange={setText}
+      />
 
       {error && (
         <>
