@@ -11,6 +11,7 @@ export function StepByStepGuideWrapper(
     isOpen: boolean
     setSuccessPage: () => void
     isViewPage?: boolean
+    inDashboard?: boolean
   },
 ) {
   const steps = props.steps
@@ -35,6 +36,7 @@ export function StepByStepGuideWrapper(
           isOpen={props.isOpen}
           checkBoxFirstToHear={checkBoxFirstToHear}
           setCheckBoxFirstToHear={setCheckBoxFirstToHear}
+          inDashboard={props.inDashboard}
         />
       ))}
     </>

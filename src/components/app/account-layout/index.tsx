@@ -10,7 +10,8 @@ import { selectedAccountToken } from 'src/store/reducers/auth'
 import { selectedAccount, selectedNewDocumentsCount } from 'src/store/reducers/account'
 import { getAccount } from 'src/store/reducers/account/actions/profile'
 import { getAccountDocuments } from 'src/store/reducers/account/actions/documents'
-import { logoutAccount } from 'src/store/reducers/account/actions/auth'
+import { useAccountLogout } from 'src/utils/use/use-account-logout'
+import { ConfirmDialog } from 'src/components/app/confirm-dialog'
 import { IconDocs, IconDollar, IconGear, IconLogout, IconSidebarToggle, IconSignatureNav } from 'src/icons'
 import IconLogo from 'src/components/app/logotype/logo.inline.svg'
 
@@ -31,7 +32,9 @@ export function AccountLayout(props: PropsWithChildren) {
   const accountToken = useAppSelector(selectedAccountToken)
   const account = useAppSelector(selectedAccount)
   const newDocumentsCount = useAppSelector(selectedNewDocumentsCount)
+  const logout = useAccountLogout()
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isLogoutConfirmVisible, setLogoutConfirmVisible] = useState(false)
 
   useEffect(() => {
     setIsCollapsed(localStorage.getItem(COLLAPSED_STORAGE_KEY) === '1')
@@ -56,9 +59,9 @@ export function AccountLayout(props: PropsWithChildren) {
     })
   })
 
-  const handleLogout = useEvent(async () => {
-    await dispatch(logoutAccount())
-    void router.replace('/login')
+  const handleConfirmLogout = useEvent(async () => {
+    setLogoutConfirmVisible(false)
+    await logout()
   })
 
   if (!accountToken) {
@@ -96,7 +99,7 @@ export function AccountLayout(props: PropsWithChildren) {
         <div className={styles.sidebarHeader}>
           {!isCollapsed && (
             <div className={styles.logo}>
-              <IconLogo width={120} />
+              <IconLogo width={150} />
             </div>
           )}
           <button className={styles.collapseButton} onClick={handleToggleCollapsed} aria-label='Toggle sidebar'>
@@ -126,7 +129,10 @@ export function AccountLayout(props: PropsWithChildren) {
           ))}
         </nav>
 
-        <div className={cn(styles.navItem, styles.logoutItem)} onClick={handleLogout}>
+        <div
+          className={cn(styles.navItem, styles.logoutItem)}
+          onClick={() => setLogoutConfirmVisible(true)}
+        >
           <IconLogout className={styles.navIcon} />
           {!isCollapsed && (
             <Text theme='label-2' className={styles.navLabel}>
@@ -137,7 +143,7 @@ export function AccountLayout(props: PropsWithChildren) {
       </aside>
 
       <header className={styles.mobileHeader}>
-        <IconLogo width={110} />
+        <IconLogo width={140} />
         {account && (
           <div className={styles.mobileProfile}>
             <Text theme='label-2'>{account.name}</Text>
@@ -164,15 +170,14 @@ export function AccountLayout(props: PropsWithChildren) {
             </Text>
           </div>
         ))}
-        <div className={styles.tabItem} onClick={handleLogout}>
-          <span className={styles.tabIcon}>
-            <IconLogout className={styles.navIcon} />
-          </span>
-          <Text theme='label-3' className={styles.tabLabel}>
-            Log Out
-          </Text>
-        </div>
       </nav>
+
+      <ConfirmDialog
+        visible={isLogoutConfirmVisible}
+        title='Are you sure you want to log out?'
+        onConfirm={handleConfirmLogout}
+        onClose={() => setLogoutConfirmVisible(false)}
+      />
     </div>
   )
 }

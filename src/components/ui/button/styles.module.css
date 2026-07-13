@@ -28,19 +28,67 @@
 .primary {
   background: var(--bg-accent);
   border-color: var(--bg-grey-7-opacity);
+  transition: transform 0.2s ease;
 }
 
-.primary:hover {
-  background: var(--bg-accent-dark);
-}
-
-.primary:active {
-  background: var(--bg-accent-extra-dark);
+.primary:hover:not(:disabled),
+.primary:active:not(:disabled) {
+  background-image: linear-gradient(-45deg, #33e68c, #40d3d6, #64b4fa, #a67cfa);
+  background-size: 300% 300%;
+  animation: button-shimmer 3s ease infinite;
+  transform: scale(1.02);
 }
 
 .primary:disabled {
   cursor: not-allowed;
   background: var(--bg-accent);
+}
+
+@keyframes button-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover:not(:disabled),
+  .primary:active:not(:disabled) {
+    animation: none;
+    background-image: none;
+    background-color: var(--bg-accent-dark);
+    transform: none;
+  }
+}
+
+.dark {
+  background: var(--bg-black);
+  border-color: var(--bg-black);
+  color: var(--text-white);
+}
+
+.dark * {
+  color: var(--text-white);
+}
+
+.dark:hover:not(:disabled) {
+  background: #10161f;
+}
+
+.dark:active:not(:disabled) {
+  background: #0a0e15;
+}
+
+.dark:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .secondary {

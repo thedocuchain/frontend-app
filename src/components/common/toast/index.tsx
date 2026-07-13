@@ -12,6 +12,7 @@ import {
   selectedToasts,
 } from 'src/store/reducers/toasts'
 import { Text } from 'src/components/ui/typography'
+import { IconCheck } from 'src/icons'
 import { Toast } from 'src/store/reducers/toasts/types'
 
 import { ToastContext } from './context'
@@ -42,6 +43,11 @@ function ToastElement({ toast }: { toast: LocalToast }) {
             <div className={styles.overlay}></div>
 
             <div key={toast.uuid} className={style}>
+              {toast.type === 'success' && (
+                <span className={styles.icon}>
+                  <IconCheck />
+                </span>
+              )}
               <Text theme={'body-2'} className={styles.toastText}>
                 {toast.text}
               </Text>

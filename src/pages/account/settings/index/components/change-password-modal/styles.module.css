@@ -21,3 +21,10 @@
   justify-content: center;
   cursor: pointer;
 }
+
+.resetLink {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--text-primary);
+  text-underline-offset: 2px;
+}

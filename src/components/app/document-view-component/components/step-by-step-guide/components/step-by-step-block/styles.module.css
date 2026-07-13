@@ -54,6 +54,11 @@
     bottom: 0;
   }
 
+  .stepBlock.inDashboard {
+    bottom: calc(66px + env(safe-area-inset-bottom));
+    border-radius: 16px;
+  }
+
   .signatureWrapper {
     display: block;
     margin: 0 auto;

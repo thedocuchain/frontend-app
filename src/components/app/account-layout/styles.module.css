@@ -172,7 +172,7 @@
   bottom: 0;
   background: var(--bg-white);
   border-top: 1px solid var(--bg-grey-6);
-  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  padding: 10px 6px calc(10px + env(safe-area-inset-bottom));
   z-index: 10;
 }
 
@@ -181,9 +181,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 4px 2px;
-  border-radius: 8px;
+  gap: 4px;
+  padding: 6px 2px;
+  border-radius: 10px;
   cursor: pointer;
   color: inherit;
   text-decoration: none;
@@ -199,6 +199,12 @@
   display: flex;
 }
 
+.tabIcon .navIcon {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+}
+
 .tabIcon .navBadge {
   position: absolute;
   top: -6px;
@@ -207,7 +213,7 @@
 
 .tabLabel {
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 @media (--mobile) {
@@ -225,7 +231,7 @@
 
   .content {
     margin-left: 0;
-    padding: 16px 16px 96px;
+    padding: 16px 16px 104px;
     min-height: auto;
   }
 

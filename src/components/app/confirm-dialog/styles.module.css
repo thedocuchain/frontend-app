@@ -1,0 +1,22 @@
+.card {
+  max-width: 400px;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.actions > div {
+  flex: 1;
+}
+
+.actions button {
+  width: 100%;
+}

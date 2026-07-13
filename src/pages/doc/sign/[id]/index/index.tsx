@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { PropsWithChildren, useState, useEffect } from 'react'
+import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { isAfter } from 'date-fns'
 
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
+import { AccountLayout } from 'src/components/app/account-layout'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
 import { Flex } from 'src/components/ui/grid'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
 import { useAppSelector, useAppDispatch } from 'src/store/hooks'
+import { selectedAccountToken } from 'src/store/reducers/auth'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
@@ -33,6 +36,7 @@ type DocumentSignPageProps = {
 
 export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPageProps) {
   const document = useAppSelector(selectedDocument)
+  const inDashboard = !!useAppSelector(selectedAccountToken)
   const dispatch = useAppDispatch()
   const [activeStep, setActiveStep] = useState<StepsSignPage>(step)
   const { title } = usePageHead({ title: document ? ` | ${document?.name}` : ' | Link expired' })
@@ -86,44 +90,60 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
 
       {activeStep === 'document-error' && (
         <PageWrapper>
-          <Header isTransparent />
+          {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate is404Document />
         </PageWrapper>
       )}
 
       {activeStep === 'sign-the-document' && (
         <PageWrapper className={'column'}>
-          <Header isDocumentPreview title={document.name} />
+          {!inDashboard && <Header isDocumentPreview title={document.name} />}
 
-          <Flex flex='1' className={styles.wrapper}>
-            <DocumentViewComponent setSuccessPage={handleSetSuccessPage} stepsHints={stepsHints} />
+          <Flex flex='1' className={cn(styles.wrapper, { [styles.inDashboard]: inDashboard })}>
+            <DocumentViewComponent
+              setSuccessPage={handleSetSuccessPage}
+              stepsHints={stepsHints}
+              inDashboard={inDashboard}
+            />
           </Flex>
         </PageWrapper>
       )}
 
       {activeStep === 'success-sign' && (
         <PageWrapper>
-          <Header isTransparent />
+          {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate isOneSigned />
         </PageWrapper>
       )}
 
       {activeStep === 'success-all-signed' && (
         <PageWrapper>
-          <Header isTransparent />
+          {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate isAllSigned />
         </PageWrapper>
       )}
 
       {activeStep === 'expired-link' && (
         <PageWrapper>
-          <Header isTransparent />
+          {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate isExpired documentId={documentId} signerId={signerId} />
         </PageWrapper>
       )}
     </>
   )
 }
+
+function SignPageLayout({ children }: PropsWithChildren) {
+  const accountToken = useAppSelector(selectedAccountToken)
+
+  if (accountToken) {
+    return <AccountLayout>{children}</AccountLayout>
+  }
+
+  return <>{children}</>
+}
+
+DocumentSignPage.getLayout = SignPageLayout
 
 DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const dispatch = store.dispatch

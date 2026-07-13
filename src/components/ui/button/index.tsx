@@ -38,7 +38,7 @@ export function ButtonWrapper(
 
 type ComponentProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode
-  theme?: 'primary' | 'secondary' | 'link-primary' | 'link-secondary'
+  theme?: 'primary' | 'secondary' | 'link-primary' | 'link-secondary' | 'dark'
   size?: 'sm' | 'standard'
   isLoading?: boolean
   href?: string
@@ -50,6 +50,7 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
   const cs = cn(styles.button, className, {
     [styles.primary]: theme === undefined || theme === 'primary',
     [styles.secondary]: theme === 'secondary',
+    [styles.dark]: theme === 'dark',
     [styles.linkPrimary]: theme === 'link-primary',
     [styles.linkSecondary]: theme === 'link-secondary',
     [styles.sm]: size === 'sm',
@@ -70,7 +71,7 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
   return (
     <div className={styles.wrapper}>
       <button {...otherProps} onClick={handleClick} className={cs} disabled={disabled}>
-        {isLoading && <Loader size={20} color={'black'} />}
+        {isLoading && <Loader size={20} color={theme === 'dark' ? 'white' : 'black'} />}
 
         {!isLoading && size === 'sm' && (
           <Text theme='button-standard' className={styles.text}>

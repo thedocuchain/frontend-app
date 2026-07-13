@@ -47,6 +47,7 @@ export type ComponentProps = {
   setSuccessPage: () => void
   checkBoxFirstToHear: boolean
   setCheckBoxFirstToHear: (boolean) => void
+  inDashboard?: boolean
 }
 
 export function StepByStepBlock(props: ComponentProps) {
@@ -60,6 +61,7 @@ export function StepByStepBlock(props: ComponentProps) {
     setSuccessPage,
     checkBoxFirstToHear,
     setCheckBoxFirstToHear,
+    inDashboard,
   } = props
   const isVisible = activeStep === index
   const isLastStep = activeStep + 1 === stepsLength
@@ -161,6 +163,7 @@ export function StepByStepBlock(props: ComponentProps) {
         [styles.isVisible]: isVisible,
         [styles.slideOut]: isDeleted,
         [styles.containerIfOpen]: isOpen,
+        [styles.inDashboard]: inDashboard,
       })}
     >
       <div>

@@ -29,17 +29,20 @@
 }
 
 .block {
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 8px;
-  margin: 0 16px;
+  top: 16px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   user-select: none;
   z-index: 100;
   background-color: var(--bg-black);
-  width: calc(100% - 32px);
+  width: fit-content;
+  max-width: calc(100% - 32px);
   height: 43px;
   padding: 10px 20px;
   gap: 8px;
@@ -47,6 +50,18 @@
   pointer-events: auto !important;
   -webkit-animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 16px;
+  height: 12px;
+  stroke: var(--bg-accent);
 }
 
 @-webkit-keyframes slide-in-top {
@@ -114,8 +129,3 @@
   }
 }
 
-@media (--mobile) {
-  .block {
-    display: flex;
-  }
-}

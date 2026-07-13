@@ -67,7 +67,7 @@ export function AccountSignaturePage() {
     const result = await save(pending)
     if (result) {
       setPending(null)
-      toast.addToast({ text: 'Signature saved' })
+      toast.addToast({ text: 'Successfully saved', type: 'success' })
     }
   })
 
@@ -91,7 +91,7 @@ export function AccountSignaturePage() {
         </div>
 
         <div className={styles.saveRow}>
-          <Button size='sm' onClick={handleSave} isLoading={isLoading} disabled={!pending}>
+          <Button theme='dark' size='sm' onClick={handleSave} isLoading={isLoading} disabled={!pending}>
             Save
           </Button>
         </div>

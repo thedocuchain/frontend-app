@@ -86,7 +86,7 @@ export function ChangePasswordModal(props: ChangePasswordModalProps) {
     setIsLoading(false)
 
     if (updateAccountPassword.fulfilled.match(result)) {
-      toast.addToast({ text: 'Password updated' })
+      toast.addToast({ text: 'Successfully saved', type: 'success' })
       onClose()
       return
     }
@@ -118,7 +118,7 @@ export function ChangePasswordModal(props: ChangePasswordModalProps) {
     setIsLoading(false)
 
     if (confirmPasswordReset.fulfilled.match(result)) {
-      toast.addToast({ text: 'Password updated' })
+      toast.addToast({ text: 'Successfully saved', type: 'success' })
       onClose()
       return
     }
@@ -210,7 +210,9 @@ export function ChangePasswordModal(props: ChangePasswordModalProps) {
           </Button>
           <Space size={14} />
           <div className={styles.forgotRow} onClick={handleSendResetCode}>
-            <Text theme='link-2'>Forgot your password? Reset it!</Text>
+            <Text theme='link-2'>
+              Forgot your password? <span className={styles.resetLink}>Reset it!</span>
+            </Text>
           </div>
         </>
       )}

@@ -14,8 +14,9 @@ export function SidePanelPagesPreview(props: {
   isOpen: boolean
   setOpen: (boolean) => void
   isErrorLoadingPdf: boolean
+  inDashboard?: boolean
 }) {
-  const { isOpen, setOpen, isErrorLoadingPdf } = props
+  const { isOpen, setOpen, isErrorLoadingPdf, inDashboard } = props
   const [isDeleted, setDeleted] = useState(false)
   const isMobile = useIsMobile()
 
@@ -35,13 +36,13 @@ export function SidePanelPagesPreview(props: {
 
   return (
     <>
-      <div className={cn(styles.iconWrapper, { 'display-none': isOpen })}>
+      <div className={cn(styles.iconWrapper, { 'display-none': isOpen, [styles.inDashboard]: inDashboard })}>
         <div className={cn(styles.icon, 'on-click')} onClick={handleOpen}>
           <IconFileGrey />
         </div>
       </div>
 
-      <div className={cn(styles.wrapper, { 'display-none': !isOpen })}>
+      <div className={cn(styles.wrapper, { 'display-none': !isOpen, [styles.inDashboard]: inDashboard })}>
         <div className={cn(styles.sidePanel, { [styles.slideOutLeft]: isDeleted })}>
           <RowBetweenCenter className={styles.closeBlock}>
             <Text theme={'headline-4'}>Pages</Text>

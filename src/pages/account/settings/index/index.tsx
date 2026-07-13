@@ -7,12 +7,14 @@ import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { AccountLayout } from 'src/components/app/account-layout'
 import { Avatar } from 'src/components/app/avatar'
 import { Text } from 'src/components/ui/typography'
-import { Button } from 'src/components/ui/button'
+import { Button, ButtonIcon } from 'src/components/ui/button'
 import { Input } from 'src/components/ui/input'
 import { Space } from 'src/components/ui/space'
 import { ToastContext } from 'src/components/common/toast/context'
-import { IconChevronRight } from 'src/icons'
+import { ConfirmDialog } from 'src/components/app/confirm-dialog'
+import { IconChevronRight, IconLogout } from 'src/icons'
 import { useApi } from 'src/utils/use/use-api'
+import { useAccountLogout } from 'src/utils/use/use-account-logout'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedAccount } from 'src/store/reducers/account'
 import { updateAccountProfile } from 'src/store/reducers/account/actions/profile'
@@ -28,6 +30,9 @@ export function AccountSettingsPage() {
   const { title } = usePageHead({ title: '| Settings' })
   const toast = useContext(ToastContext)
   const account = useAppSelector(selectedAccount)
+
+  const logout = useAccountLogout()
+  const [isLogoutConfirmVisible, setLogoutConfirmVisible] = useState(false)
 
   const [tab, setTab] = useState<'profile' | 'security'>('profile')
 
@@ -69,8 +74,13 @@ export function AccountSettingsPage() {
     })
     if (result) {
       setAvatarPending(null)
-      toast.addToast({ text: 'Changes saved' })
+      toast.addToast({ text: 'Successfully saved', type: 'success' })
     }
+  })
+
+  const handleConfirmLogout = useEvent(async () => {
+    setLogoutConfirmVisible(false)
+    await logout()
   })
 
   return (
@@ -127,6 +137,15 @@ export function AccountSettingsPage() {
                 Save changes
               </Button>
             </div>
+
+            <div className={styles.divider} />
+            <Space size={20} />
+            <Button theme='secondary' size='sm' onClick={() => setLogoutConfirmVisible(true)}>
+              <ButtonIcon stroke>
+                <IconLogout />
+              </ButtonIcon>
+              Log Out
+            </Button>
           </div>
         )}
 
@@ -158,6 +177,12 @@ export function AccountSettingsPage() {
 
       <ChangePasswordModal visible={activeModal === 'password'} onClose={() => setActiveModal(null)} />
       <SupportModal visible={activeModal === 'support'} onClose={() => setActiveModal(null)} />
+      <ConfirmDialog
+        visible={isLogoutConfirmVisible}
+        title='Are you sure you want to log out?'
+        onConfirm={handleConfirmLogout}
+        onClose={() => setLogoutConfirmVisible(false)}
+      />
     </>
   )
 }

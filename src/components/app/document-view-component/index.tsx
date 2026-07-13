@@ -16,15 +16,27 @@ export function DocumentViewComponent(props: {
   stepsHints?: StepByStepBlockType[]
   setSuccessPage?: () => void
   isViewPage?: boolean
+  inDashboard?: boolean
 }) {
   const document = useAppSelector(selectedDocument)
   const [isOpen, setOpen] = useState(false)
   const [isErrorLoadingPdf, setErrorLoadingPdf] = useState(false)
-  const { stepsHints, setSuccessPage, isViewPage } = props
+  const { stepsHints, setSuccessPage, isViewPage, inDashboard } = props
 
   return (
-    <StepByStepGuideWrapper isViewPage={isViewPage} setSuccessPage={setSuccessPage} steps={stepsHints} isOpen={isOpen}>
-      <SidePanelPagesPreview isOpen={isOpen} setOpen={setOpen} isErrorLoadingPdf={isErrorLoadingPdf} />
+    <StepByStepGuideWrapper
+      isViewPage={isViewPage}
+      setSuccessPage={setSuccessPage}
+      steps={stepsHints}
+      isOpen={isOpen}
+      inDashboard={inDashboard}
+    >
+      <SidePanelPagesPreview
+        isOpen={isOpen}
+        setOpen={setOpen}
+        isErrorLoadingPdf={isErrorLoadingPdf}
+        inDashboard={inDashboard}
+      />
 
       <Container className={cn(styles.container, 'column', { [styles.containerIfOpen]: isOpen })}>
         <Column className={styles.textColumn}>

@@ -4,10 +4,20 @@
   left: 16px;
 }
 
+.iconWrapper.inDashboard {
+  top: 16px;
+  left: 276px;
+}
+
 .wrapper {
   position: fixed;
   top: var(--header-size);
   left: 0;
+}
+
+.wrapper.inDashboard {
+  top: 0;
+  left: 260px;
 }
 
 .icon {
