@@ -21,6 +21,24 @@ export const getAccountDocuments = createAsyncThunk<AccountDocumentItem[] | null
   },
 )
 
+export const uploadAccountDocument = createAsyncThunk<{ redirectUrl?: string }, { file: File }, ThunkConfig>(
+  'account/upload-document',
+  async (payload, thunkAPI) => {
+    try {
+      const fd = new FormData()
+      fd.append('file', payload.file)
+
+      const { data } = await api.post<{ redirectUrl?: string }>('/v1/account/documents', fd, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+
+      return data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(toApiErrorPayload(error))
+    }
+  },
+)
+
 export const markAccountDocumentSeen = createAsyncThunk<void, { id: string }>(
   'account/mark-document-seen',
   async (payload, thunkAPI) => {

@@ -19,8 +19,9 @@ import {
   getAccountSignLink,
   markAccountDocumentSeen,
   reportAccountDocument,
+  uploadAccountDocument,
 } from 'src/store/reducers/account/actions/documents'
-import { uploadDocument } from 'src/store/reducers/document/actions/files'
+import { ApiErrorPayload } from 'src/store/reducers/account/actions/api-error'
 import { requireAccountAuth } from 'src/utils/account-guard'
 
 import { ReportModal } from './components/report-modal'
@@ -67,15 +68,26 @@ export function AccountDocumentsPage() {
     if (!file) return
 
     setIsUploading(true)
-    const result = await dispatch(uploadDocument({ file }))
+    const result = await dispatch(uploadAccountDocument({ file }))
     setIsUploading(false)
 
-    const redirectUrl = (result.payload as { redirectUrl?: string })?.redirectUrl
-    if (redirectUrl) {
-      window.open(redirectUrl, '_self')
+    if (uploadAccountDocument.fulfilled.match(result)) {
+      const redirectUrl = result.payload?.redirectUrl
+      if (redirectUrl) {
+        window.open(redirectUrl, '_self')
+        return
+      }
+      toast.addToast({ text: 'Could not upload the document. Please try again.' })
       return
     }
-    toast.addToast({ text: 'Could not upload the document. Please try again.' })
+
+    const error = result.payload as ApiErrorPayload | undefined
+    if (error?.code === 'PLAN_LIMIT_DOCS') {
+      toast.addToast({ text: error.message })
+      void router.push('/account/billing')
+      return
+    }
+    toast.addToast({ text: error?.message ?? 'Could not upload the document. Please try again.' })
   })
 
   const handleReport = useEvent(async () => {

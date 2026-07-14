@@ -1,3 +1,5 @@
+export type AccountPlan = 'free' | 'pro' | 'pro_max'
+
 export interface AccountInfo {
   id: string
   email: string
@@ -5,7 +7,16 @@ export interface AccountInfo {
   avatarImage: string | null
   signFont: string | null
   signImage: string | null
+  plan: AccountPlan
   createdAt: string
+}
+
+export interface BillingStatus {
+  billingEnabled: boolean
+  plan: AccountPlan
+  subscriptionStatus: string | null
+  currentPeriodEnd: string | null
+  cancelAtPeriodEnd: boolean
 }
 
 export interface AccountDocumentItem {
