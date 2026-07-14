@@ -5,7 +5,6 @@ import { setAccountToken } from 'src/store/reducers/auth'
 import { actionUserLogout } from 'src/store/reducers/auth/api'
 import { patchAccountState } from 'src/store/reducers/account'
 import { AccountInfo } from 'src/store/reducers/account/types'
-import { getRecaptchaToken } from 'src/store/reducers/document/actions/recaptcha'
 import { ApiErrorPayload, toApiErrorPayload } from 'src/store/reducers/account/actions/api-error'
 
 type AuthResponse = {
@@ -19,8 +18,7 @@ export const registerAccount = createAsyncThunk<void, { name: string; email: str
   'account/register',
   async (payload, thunkAPI) => {
     try {
-      const { captchaToken } = await thunkAPI.dispatch(getRecaptchaToken('account_register')).unwrap()
-      await api.post('/v1/auth/register', { ...payload, recaptchaToken: captchaToken })
+      await api.post('/v1/auth/register', payload)
     } catch (error) {
       return thunkAPI.rejectWithValue(toApiErrorPayload(error))
     }
@@ -58,11 +56,7 @@ export const loginAccount = createAsyncThunk<AuthResponse, { email: string; pass
   'account/login',
   async (payload, thunkAPI) => {
     try {
-      const { captchaToken } = await thunkAPI.dispatch(getRecaptchaToken('account_login')).unwrap()
-      const { data } = await api.post<AuthResponse>('/v1/auth/login', {
-        ...payload,
-        recaptchaToken: captchaToken,
-      })
+      const { data } = await api.post<AuthResponse>('/v1/auth/login', payload)
 
       thunkAPI.dispatch(setAccountToken(data.accessToken))
       thunkAPI.dispatch(patchAccountState({ account: data.account }))
