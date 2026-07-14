@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { getCookies } from 'cookies-next'
 import Head from 'next/head'
 import { Store } from '@reduxjs/toolkit'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement } from 'react'
 import { NextPage } from 'next'
 
 import { __setApiStore } from 'src/store/apis'
@@ -19,8 +19,6 @@ import { Metrics } from 'src/components/common/metrics'
 import { Toasts, ToastsProvider } from 'src/components/common/toast'
 import { ErrorBoundary } from 'src/components/common/error-boundary'
 import { AppWrapper } from 'src/components/common/app-wrapper'
-import { loadScript } from 'src/utils/load-script'
-import { RECAPTCHA_PUBLIC } from 'src/configs/api'
 
 // suppress useLayoutEffect warnings when running outside a browser
 if (typeof window === 'undefined') React.useLayoutEffect = React.useEffect
@@ -51,10 +49,6 @@ function RenderLayoutComponent(props) {
 
 export default function MyCustomApp({ Component, pageProps, initialState }: AppPropsWithLayout) {
   const store = createLocalStore(initialState)
-
-  useEffect(() => {
-    void loadScript(`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_PUBLIC}`)
-  }, [])
 
   return (
     <ErrorBoundary>

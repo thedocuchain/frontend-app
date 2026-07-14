@@ -2409,11 +2409,6 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/grecaptcha@^3.0.7":
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-3.0.9.tgz#9f3b07ec06c8fff221aa6fc124fe5b8a0e2c3349"
-  integrity sha512-fFxMtjAvXXMYTzDFK5NpcVB7WHnrHVLl00QzEGpuFxSAC789io6M+vjcn+g5FTEamIJtJr/IHkCDsqvJxeWDyw==
-
 "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.7.tgz#306e3a3a73828522efa1341159da4846e7573a6c"
@@ -3598,7 +3593,7 @@ canvas@^2.11.2:
     nan "^2.17.0"
     simple-get "^3.0.3"
 
-centra@^1.0.1, centra@^2.4.0:
+centra@^2.4.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/centra/-/centra-2.7.0.tgz#4c8312a58436e8a718302011561db7e6a2b0ec18"
   integrity sha512-PbFMgMSrmgx6uxCdm57RUos9Tc3fclMvhLSATYN39XsDV29B89zZ3KA89jmY0vwSGazyU+uerqwa6t+KaodPcg==
@@ -5375,13 +5370,6 @@ grapheme-splitter@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
-
-grecaptcha@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/grecaptcha/-/grecaptcha-1.0.3.tgz#4634b1626efb3b922a1d527f2046d325bd4d4aa0"
-  integrity sha512-L0yHm3V+p82zBVCqPA7gbBxf+Hvf8nxQ+h3XtVmwEWXQf7pzAQzaSsf6eTUiV/ZoZd0R4+3d7ToEHIVwWHLOzQ==
-  dependencies:
-    centra "^1.0.1"
 
 hard-rejection@^2.1.0:
   version "2.1.0"

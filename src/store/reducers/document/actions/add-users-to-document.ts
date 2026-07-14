@@ -4,7 +4,6 @@ import { DefaultApiResponse } from 'src/store/reducers/types'
 import { api } from 'src/store/apis'
 import { Chains, UserInfo } from 'src/store/reducers/document/types'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
-import { getRecaptchaToken } from 'src/store/reducers/document/actions/recaptcha'
 
 export const addUsersToDocument = createAsyncThunk(
   'document/add-users',
@@ -18,8 +17,6 @@ export const addUsersToDocument = createAsyncThunk(
     thunkAPI,
   ): Promise<{ documentLink: string } | DefaultApiResponse> => {
     try {
-      const { captchaToken } = await thunkAPI.dispatch(getRecaptchaToken('add_recipients')).unwrap()
-
       const users = payload.users.map((el, index) => ({ ...el, isInitiator: index === 0 }))
 
       const signers = users.filter((el) => el.role === 'signer').map((el, index) => ({ ...el, position: index + 1 }))
@@ -29,7 +26,6 @@ export const addUsersToDocument = createAsyncThunk(
         name: payload.name,
         users: payloadUsers,
         blockchain: payload.blockchain,
-        recaptchaToken: captchaToken,
       })
 
       await thunkAPI.dispatch(
