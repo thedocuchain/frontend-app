@@ -5,6 +5,7 @@ export { default as IconArrowRightLong } from 'src/icons/inline/arrow-right-long
 export { default as IconArrowRightLight } from 'src/icons/inline/arrow-right-light.inline.svg'
 export { default as IconArrows } from 'src/icons/inline/arrows.inline.svg'
 export { default as IconCheck } from 'src/icons/inline/check.inline.svg'
+export { default as IconCross } from 'src/icons/inline/cross.inline.svg'
 export { default as IconCloseCircle } from 'src/icons/inline/close.inline.svg'
 export { default as IconClose } from 'src/icons/inline/close-x.inline.svg'
 export { default as IconDots } from 'src/icons/inline/dots.inline.svg'

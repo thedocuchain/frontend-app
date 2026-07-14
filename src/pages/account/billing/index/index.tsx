@@ -12,7 +12,7 @@ import { Button } from 'src/components/ui/button'
 import { Space } from 'src/components/ui/space'
 import { Loader } from 'src/components/ui/loader'
 import { ToastContext } from 'src/components/common/toast/context'
-import { IconCheck, IconClose } from 'src/icons'
+import { IconCheck, IconCross } from 'src/icons'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedAccount } from 'src/store/reducers/account'
 import { AccountPlan, BillingStatus } from 'src/store/reducers/account/types'
@@ -187,7 +187,7 @@ export function AccountBillingPage() {
         <div className={styles.activeBlock}>
           {status?.currentPeriodEnd && (
             <div className={styles.activeText}>
-              <Text theme='label-3'>
+              <Text theme='label-2'>
                 {status.cancelAtPeriodEnd ? 'Cancels on' : 'Active until'} {formatDate(status.currentPeriodEnd)}
               </Text>
               <Text theme='body-3' className='color-text-secondary'>
@@ -322,7 +322,7 @@ export function AccountBillingPage() {
                           className={cn(styles.feature, { [styles.featureOff]: !feature.on })}
                         >
                           <span className={cn(styles.featureIcon, feature.on ? styles.iconOn : styles.iconOff)}>
-                            {feature.on ? <IconCheck /> : <IconClose />}
+                            {feature.on ? <IconCheck /> : <IconCross />}
                           </span>
                           <Text theme='body-3'>{feature.text}</Text>
                         </div>
