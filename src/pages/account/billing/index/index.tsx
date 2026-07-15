@@ -290,7 +290,7 @@ export function AccountBillingPage() {
 
         {tab === 'plans' && (
           <>
-            {!billingEnabled && (
+            {status && !status.billingEnabled && (
               <div className={styles.notice}>
                 <Text theme='body-2' className='color-text-secondary'>
                   Paid plans aren’t available yet — you’re on the Free plan.
