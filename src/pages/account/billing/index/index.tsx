@@ -45,7 +45,7 @@ const PLANS: PlanCard[] = [
   {
     id: 'pro',
     name: 'Pro',
-    price: '$20',
+    price: '$7',
     features: [
       { text: '20 documents per month', on: true },
       { text: 'Up to 4 signers per document', on: true },
@@ -57,7 +57,7 @@ const PLANS: PlanCard[] = [
   {
     id: 'pro_max',
     name: 'Pro Max',
-    price: '$200',
+    price: '$20',
     features: [
       { text: 'Unlimited documents', on: true },
       { text: 'Unlimited signers per document', on: true },
