@@ -15,6 +15,7 @@ import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { AppStore } from 'src/store'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
+import { requireAccountAuthReturn } from 'src/utils/account-guard'
 
 import styles from './styles.module.css'
 
@@ -108,6 +109,12 @@ DocumentPage.getInitialProps = async (context, store: AppStore) => {
 
   const isMatchId = documentId.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
   if (!isMatchId) {
+    return { step: 'document-error' }
+  }
+
+  // Creating/sending a document for signing requires an account. Unauthenticated
+  // users are sent to sign up and returned to this page afterwards.
+  if (!requireAccountAuthReturn(context, store, `/doc/${documentId}`)) {
     return { step: 'document-error' }
   }
 

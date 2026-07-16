@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedAccountToken } from 'src/store/reducers/auth'
 import { loginAccount } from 'src/store/reducers/account/actions/auth'
 import { ApiErrorPayload } from 'src/store/reducers/account/actions/api-error'
+import { safeInternalPath } from 'src/utils/safe-redirect'
 
 import styles from './styles.module.css'
 
@@ -40,9 +41,11 @@ export function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const redirect = safeInternalPath(router.query.redirect)
+
   useEffect(() => {
     if (accountToken) {
-      void router.replace('/account')
+      void router.replace(redirect ?? '/account')
     }
   }, [])
 
@@ -59,13 +62,15 @@ export function LoginPage() {
     setIsLoading(false)
 
     if (loginAccount.fulfilled.match(result)) {
-      void router.replace('/account')
+      void router.replace(redirect ?? '/account')
       return
     }
 
     const payload = result.payload as ApiErrorPayload
     if (payload?.statusCode === 403) {
-      void router.push(`/register?verify=${encodeURIComponent(form.email.trim())}`)
+      const verifyQuery = `verify=${encodeURIComponent(form.email.trim())}`
+      const redirectQuery = redirect ? `&redirect=${encodeURIComponent(redirect)}` : ''
+      void router.push(`/register?${verifyQuery}${redirectQuery}`)
       return
     }
     setError(payload?.message ?? 'Something went wrong. Please try again.')
@@ -128,7 +133,12 @@ export function LoginPage() {
                 <Text theme='body-2' className='color-text-secondary'>
                   Don’t have an account?
                 </Text>
-                <div className='on-click' onClick={() => void router.push('/register')}>
+                <div
+                  className='on-click'
+                  onClick={() =>
+                    void router.push(redirect ? `/register?redirect=${encodeURIComponent(redirect)}` : '/register')
+                  }
+                >
                   <Text theme='link-2'>Sign up</Text>
                 </div>
               </div>

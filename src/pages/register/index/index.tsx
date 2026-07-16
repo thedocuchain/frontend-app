@@ -23,6 +23,7 @@ import {
   verifyAccountEmail,
 } from 'src/store/reducers/account/actions/auth'
 import { ApiErrorPayload } from 'src/store/reducers/account/actions/api-error'
+import { safeInternalPath } from 'src/utils/safe-redirect'
 
 import styles from './styles.module.css'
 
@@ -51,10 +52,11 @@ export function RegisterPage() {
   const [resendCooldown, setResendCooldown] = useState(0)
 
   const verifyEmail = router.query.verify as string
+  const redirect = safeInternalPath(router.query.redirect)
 
   useEffect(() => {
     if (accountToken) {
-      void router.replace('/account')
+      void router.replace(redirect ?? '/account')
     }
   }, [])
 
@@ -105,7 +107,7 @@ export function RegisterPage() {
     setIsLoading(false)
 
     if (verifyAccountEmail.fulfilled.match(result)) {
-      void router.replace('/account')
+      void router.replace(redirect ?? '/account')
       return
     }
     setError((result.payload as ApiErrorPayload)?.message ?? 'Something went wrong. Please try again.')
@@ -197,7 +199,12 @@ export function RegisterPage() {
                     <Text theme='body-2' className='color-text-secondary'>
                       Already have an account?
                     </Text>
-                    <div className='on-click' onClick={() => void router.push('/login')}>
+                    <div
+                      className='on-click'
+                      onClick={() =>
+                        void router.push(redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : '/login')
+                      }
+                    >
                       <Text theme='link-2'>Log in</Text>
                     </div>
                   </div>
