@@ -7,10 +7,10 @@ import { AppStore } from 'src/store'
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { AccountLayout } from 'src/components/app/account-layout'
 import { Text } from 'src/components/ui/typography'
-import { Button, ButtonIcon } from 'src/components/ui/button'
+import { Button } from 'src/components/ui/button'
 import { Loader } from 'src/components/ui/loader'
 import { ToastContext } from 'src/components/common/toast/context'
-import { IconFileGrey, IconFlag, IconPlusBlack } from 'src/icons'
+import { IconFileGrey, IconFlag, IconUploadBox } from 'src/icons'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedAccountDocuments } from 'src/store/reducers/account'
 import { AccountDocumentItem } from 'src/store/reducers/account/types'
@@ -29,6 +29,12 @@ import styles from './styles.module.css'
 
 const SIGNED_STATUSES = ['signed', 'completed', 'blockchained']
 
+const UPLOAD_ACCEPT =
+  '.pdf,.doc,.docx,.xlsx,.odt,.jpg,.jpeg,.png,application/pdf,application/msword,' +
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document,' +
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,' +
+  'application/vnd.oasis.opendocument.text,image/jpeg,image/png'
+
 export function AccountDocumentsPage() {
   const { title } = usePageHead({ title: '| My documents' })
   const router = useRouter()
@@ -38,6 +44,7 @@ export function AccountDocumentsPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isUploading, setIsUploading] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
   const [reportTarget, setReportTarget] = useState<AccountDocumentItem | null>(null)
   const [isReporting, setIsReporting] = useState(false)
 
@@ -59,14 +66,11 @@ export function AccountDocumentsPage() {
   })
 
   const handleCreateNew = useEvent(() => {
+    if (isUploading) return
     fileInputRef.current?.click()
   })
 
-  const handleFileSelected = useEvent(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    event.target.value = ''
-    if (!file) return
-
+  const uploadFile = useEvent(async (file: File) => {
     setIsUploading(true)
     const result = await dispatch(uploadAccountDocument({ file }))
     setIsUploading(false)
@@ -88,6 +92,30 @@ export function AccountDocumentsPage() {
       return
     }
     toast.addToast({ text: error?.message ?? 'Could not upload the document. Please try again.' })
+  })
+
+  const handleFileSelected = useEvent((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (file) void uploadFile(file)
+  })
+
+  const handleDragOver = useEvent((event: React.DragEvent) => {
+    event.preventDefault()
+    if (!isUploading) setIsDragging(true)
+  })
+
+  const handleDragLeave = useEvent((event: React.DragEvent) => {
+    event.preventDefault()
+    setIsDragging(false)
+  })
+
+  const handleDrop = useEvent((event: React.DragEvent) => {
+    event.preventDefault()
+    setIsDragging(false)
+    if (isUploading) return
+    const file = event.dataTransfer.files?.[0]
+    if (file) void uploadFile(file)
   })
 
   const handleReport = useEvent(async () => {
@@ -116,17 +144,36 @@ export function AccountDocumentsPage() {
     <>
       <PageHead>{title}</PageHead>
 
-      <div className={styles.topRow}>
-        <Button size='sm' onClick={handleCreateNew} isLoading={isUploading}>
-          <ButtonIcon stroke>
-            <IconPlusBlack />
-          </ButtonIcon>
-          Create new document
+      <div
+        className={cn(styles.dropzone, { [styles.dragging]: isDragging })}
+        onClick={handleCreateNew}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        <span className={styles.uploadIcon}>
+          <IconUploadBox />
+        </span>
+        <Text theme='headline-4' header='h2' className={styles.dropTitle}>
+          Drag and drop or click to upload
+        </Text>
+        <Text theme='body-2' className={cn('color-text-secondary', styles.dropHint)}>
+          PDF, Word, Excel, ODT or images, up to 50MB
+        </Text>
+        <Button
+          onClick={(event) => {
+            event.stopPropagation()
+            handleCreateNew()
+          }}
+          isLoading={isUploading}
+          className={styles.uploadButton}
+        >
+          Upload document
         </Button>
         <input
           ref={fileInputRef}
           type='file'
-          accept='application/pdf'
+          accept={UPLOAD_ACCEPT}
           style={{ display: 'none' }}
           onChange={handleFileSelected}
         />

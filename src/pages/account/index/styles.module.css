@@ -1,7 +1,42 @@
-.topRow {
+.dropzone {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 24px;
+  padding: 40px 24px;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+    linear-gradient(120deg, #a67cfa, #64b4fa, #40d3d6, #33e68c) border-box;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.dropzone.dragging {
+  background:
+    linear-gradient(var(--bg-accent-extra-light), var(--bg-accent-extra-light)) padding-box,
+    linear-gradient(120deg, #a67cfa, #64b4fa, #40d3d6, #33e68c) border-box;
+  box-shadow: var(--shadow-level-2);
+}
+
+.uploadIcon {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.dropTitle {
+  margin-bottom: 6px;
+}
+
+.dropHint {
   margin-bottom: 24px;
+}
+
+.uploadButton {
+  margin: 0 auto;
 }
 
 .list {

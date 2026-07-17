@@ -18,6 +18,7 @@ export { default as IconPlusBlack } from 'src/icons/inline/plus-black.inline.svg
 export { default as IconRefresh } from 'src/icons/inline/refresh.inline.svg'
 export { default as IconRefreshSignature } from 'src/icons/inline/refresh-signature.inline.svg'
 export { default as IconUpload } from 'src/icons/inline/upload.inline.svg'
+export { default as IconUploadBox } from 'src/icons/inline/upload-box.inline.svg'
 export { default as IconStar } from 'src/icons/inline/star.inline.svg'
 export { default as IconStarFull } from 'src/icons/inline/star-full.inline.svg'
 export { default as IconStepActive } from 'src/icons/inline/step-active.inline.svg'
