@@ -4,9 +4,11 @@ import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { selectedAccountToken } from 'src/store/reducers/auth'
 import { AppStore } from 'src/store'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
 import { Header } from 'src/components/app/header'
+import { DocumentLayout } from 'src/components/app/document-layout'
 import { StatusScreenTemplate } from 'src/components/app/status-screen-template'
 import { StepViewDocument } from 'src/pages/doc/view/[id]/index/components/step-view-document'
 
@@ -14,6 +16,7 @@ export type StepsDocumentStatusPage = 'document-view' | 'document-error'
 
 export function DocumentViewPage({ step }: { step: StepsDocumentStatusPage }) {
   const document = useAppSelector(selectedDocument)
+  const inDashboard = !!useAppSelector(selectedAccountToken)
   const { title } = usePageHead({ title: ` | ${document?.name || 'Document not found'}` })
   const activeStep = step
 
@@ -23,12 +26,12 @@ export function DocumentViewPage({ step }: { step: StepsDocumentStatusPage }) {
       <PageWrapper className={'column'}>
         {activeStep === 'document-error' && (
           <>
-            <Header isTransparent />
+            {!inDashboard && <Header isTransparent />}
             <StatusScreenTemplate is404Document />
           </>
         )}
 
-        {activeStep === 'document-view' && <StepViewDocument />}
+        {activeStep === 'document-view' && <StepViewDocument inDashboard={inDashboard} />}
       </PageWrapper>
     </>
   )
@@ -55,3 +58,5 @@ DocumentViewPage.getInitialProps = async (context, store: AppStore) => {
 
   return { step: 'document-view' }
 }
+
+DocumentViewPage.getLayout = DocumentLayout

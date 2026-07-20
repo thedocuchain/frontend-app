@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { isAfter } from 'date-fns'
@@ -6,7 +6,7 @@ import { isAfter } from 'date-fns'
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { Header } from 'src/components/app/header'
-import { AccountLayout } from 'src/components/app/account-layout'
+import { DocumentLayout } from 'src/components/app/document-layout'
 import { DocumentViewComponent } from 'src/components/app/document-view-component'
 import { Flex } from 'src/components/ui/grid'
 import { StepByStepBlockType } from 'src/components/app/document-view-component/components/step-by-step-guide/components/step-by-step-block'
@@ -133,17 +133,7 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
   )
 }
 
-function SignPageLayout({ children }: PropsWithChildren) {
-  const accountToken = useAppSelector(selectedAccountToken)
-
-  if (accountToken) {
-    return <AccountLayout>{children}</AccountLayout>
-  }
-
-  return <>{children}</>
-}
-
-DocumentSignPage.getLayout = SignPageLayout
+DocumentSignPage.getLayout = DocumentLayout
 
 DocumentSignPage.getInitialProps = async (context, store: AppStore) => {
   const dispatch = store.dispatch

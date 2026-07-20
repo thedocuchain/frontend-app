@@ -6,6 +6,7 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
+import { AuthHeader } from 'src/components/app/auth-header'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { Text } from 'src/components/ui/typography'
 import { Input } from 'src/components/ui/input'
@@ -76,11 +77,16 @@ export function LoginPage() {
     setError(payload?.message ?? 'Something went wrong. Please try again.')
   })
 
+  const handleGoToRegister = useEvent(() => {
+    void router.push(redirect ? `/register?redirect=${encodeURIComponent(redirect)}` : '/register')
+  })
+
   return (
     <>
       <PageHead>{title}</PageHead>
 
       <PageWrapper>
+        <AuthHeader actionLabel='Sign up' onAction={handleGoToRegister} />
         <GradientBg>
           <div className={styles.wrapper}>
             <div className={styles.card}>
@@ -127,21 +133,6 @@ export function LoginPage() {
               <Button onClick={handleSubmit} isLoading={isLoading} className={styles.submit}>
                 Log in
               </Button>
-
-              <Space size={16} />
-              <div className={styles.switchAuth}>
-                <Text theme='body-2' className='color-text-secondary'>
-                  Don’t have an account?
-                </Text>
-                <div
-                  className='on-click'
-                  onClick={() =>
-                    void router.push(redirect ? `/register?redirect=${encodeURIComponent(redirect)}` : '/register')
-                  }
-                >
-                  <Text theme='link-2'>Sign up</Text>
-                </div>
-              </div>
             </div>
           </div>
         </GradientBg>

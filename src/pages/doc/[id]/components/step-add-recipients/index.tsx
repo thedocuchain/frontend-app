@@ -171,7 +171,7 @@ export function StepAddRecipients(props: ComponentProps) {
       )
 
     if (recipientsAlreadyAdded) {
-      setActiveStep('verify-initiator')
+      setActiveStep('preview-and-send')
       return
     }
 
@@ -185,7 +185,7 @@ export function StepAddRecipients(props: ComponentProps) {
 
   useEffect(() => {
     if (isSuccess) {
-      setActiveStep('verify-initiator')
+      setActiveStep('preview-and-send')
     }
   }, [isSuccess])
 

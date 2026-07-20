@@ -6,6 +6,7 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
+import { AuthHeader } from 'src/components/app/auth-header'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { Text } from 'src/components/ui/typography'
 import { Input } from 'src/components/ui/input'
@@ -131,11 +132,16 @@ export function RegisterPage() {
     setStep('form')
   })
 
+  const handleGoToLogin = useEvent(() => {
+    void router.push(redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : '/login')
+  })
+
   return (
     <>
       <PageHead>{title}</PageHead>
 
       <PageWrapper>
+        <AuthHeader actionLabel='Log in' onAction={handleGoToLogin} />
         <GradientBg>
           <div className={styles.wrapper}>
             <div className={styles.card}>
@@ -193,21 +199,6 @@ export function RegisterPage() {
                   <Button onClick={handleRegister} isLoading={isLoading} className={styles.submit}>
                     Create account
                   </Button>
-
-                  <Space size={16} />
-                  <div className={styles.switchAuth}>
-                    <Text theme='body-2' className='color-text-secondary'>
-                      Already have an account?
-                    </Text>
-                    <div
-                      className='on-click'
-                      onClick={() =>
-                        void router.push(redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : '/login')
-                      }
-                    >
-                      <Text theme='link-2'>Log in</Text>
-                    </div>
-                  </div>
                 </>
               )}
 

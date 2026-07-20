@@ -11,6 +11,10 @@
   padding: 0 20px;
 }
 
+.wrapper.inDashboard {
+  margin-top: 32px;
+}
+
 .secondColumn {
   width: 100%;
 }

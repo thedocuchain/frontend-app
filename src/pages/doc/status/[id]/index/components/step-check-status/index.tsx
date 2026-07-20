@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import cn from 'classnames'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { Header } from 'src/components/app/header'
@@ -21,7 +22,7 @@ import { HashInfo } from 'src/components/app/hash-info'
 
 import styles from './styles.module.css'
 
-export function StepCheckStatus() {
+export function StepCheckStatus({ inDashboard }: { inDashboard?: boolean }) {
   const document = useAppSelector(selectedDocument)
   const dispatch = useAppDispatch()
   const users = document.users
@@ -87,9 +88,9 @@ export function StepCheckStatus() {
 
   return (
     <>
-      <Header />
+      {!inDashboard && <Header />}
       <GradientBg>
-        <div className={styles.wrapper}>
+        <div className={cn(styles.wrapper, { [styles.inDashboard]: inDashboard })}>
           <Column className={styles.firstColumn}>
             <DocumentPreview document={document} />
             <Space size={16} />
