@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, ButtonIcon } from 'src/components/ui/button'
+import { Text } from 'src/components/ui/typography'
 import { IconGoogle } from 'src/icons'
 import { BASE_URL } from 'src/store/apis/rest'
 
@@ -21,12 +21,12 @@ export function GoogleAuthButton({ label, redirect }: GoogleAuthButtonProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.divider}>or</div>
-      <Button theme='secondary' onClick={handleClick} className={styles.button}>
-        <ButtonIcon>
-          <IconGoogle />
-        </ButtonIcon>
-        {label}
-      </Button>
+      <button type='button' onClick={handleClick} className={styles.button}>
+        <IconGoogle className={styles.icon} />
+        <Text theme='button-big' className={styles.label}>
+          {label}
+        </Text>
+      </button>
     </div>
   )
 }
