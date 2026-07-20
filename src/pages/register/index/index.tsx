@@ -7,6 +7,7 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { AuthHeader } from 'src/components/app/auth-header'
+import { GoogleAuthButton } from 'src/components/app/google-auth-button'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { Text } from 'src/components/ui/typography'
 import { Input } from 'src/components/ui/input'
@@ -199,6 +200,8 @@ export function RegisterPage() {
                   <Button onClick={handleRegister} isLoading={isLoading} className={styles.submit}>
                     Create account
                   </Button>
+
+                  <GoogleAuthButton label='Sign up with Google' redirect={redirect} />
                 </>
               )}
 

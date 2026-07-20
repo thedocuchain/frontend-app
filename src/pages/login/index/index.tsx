@@ -7,6 +7,7 @@ import { useEvent } from '@coxy/utils/dist/use/use-event'
 import { PageHead, usePageHead } from 'src/components/common/page-head'
 import { PageWrapper } from 'src/components/ui/ui-content'
 import { AuthHeader } from 'src/components/app/auth-header'
+import { GoogleAuthButton } from 'src/components/app/google-auth-button'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { Text } from 'src/components/ui/typography'
 import { Input } from 'src/components/ui/input'
@@ -49,6 +50,12 @@ export function LoginPage() {
       void router.replace(redirect ?? '/account')
     }
   }, [])
+
+  useEffect(() => {
+    if (router.query.error === 'google') {
+      setError('Google sign-in failed. Please try again.')
+    }
+  }, [router.query.error])
 
   const handleSubmit = useEvent(async () => {
     const { isValid } = validate()
@@ -133,6 +140,8 @@ export function LoginPage() {
               <Button onClick={handleSubmit} isLoading={isLoading} className={styles.submit}>
                 Log in
               </Button>
+
+              <GoogleAuthButton label='Continue with Google' redirect={redirect} />
             </div>
           </div>
         </GradientBg>
