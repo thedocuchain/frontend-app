@@ -42,3 +42,26 @@ export function requireAccountAuthReturn(
 
   return false
 }
+
+// Same as above but sends unauthenticated users to log in (not sign up),
+// returning them to `returnTo` afterwards.
+export function requireAccountAuthLoginReturn(
+  context: NextPageContext,
+  store: Store,
+  returnTo: string,
+): boolean {
+  const token = selectedAccountToken(store.getState())
+  if (token) {
+    return true
+  }
+
+  const target = `/login?redirect=${encodeURIComponent(returnTo)}`
+  if (context.res) {
+    context.res.writeHead(302, { Location: `/app${target}` })
+    context.res.end()
+  } else {
+    void Router.replace(target)
+  }
+
+  return false
+}
