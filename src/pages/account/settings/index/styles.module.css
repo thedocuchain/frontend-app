@@ -63,3 +63,7 @@
   height: 18px;
   stroke: var(--bg-grey-2);
 }
+
+.logoutIcon svg path {
+  stroke: var(--text-secondary);
+}

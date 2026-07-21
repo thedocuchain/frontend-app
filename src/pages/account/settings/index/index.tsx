@@ -138,10 +138,11 @@ export function AccountSettingsPage() {
               </Button>
             </div>
 
+            <Space size={20} />
             <div className={styles.divider} />
             <Space size={20} />
             <Button theme='secondary' size='sm' onClick={() => setLogoutConfirmVisible(true)}>
-              <ButtonIcon stroke>
+              <ButtonIcon className={styles.logoutIcon}>
                 <IconLogout />
               </ButtonIcon>
               Log Out
