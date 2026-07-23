@@ -1,0 +1,154 @@
+.page {
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-white);
+}
+
+.content {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 40px 64px;
+}
+
+.title {
+  font-size: 36px;
+  letter-spacing: -1px;
+}
+
+.titleAccent {
+  color: var(--bg-accent-extra-dark);
+}
+
+.searchRow {
+  display: flex;
+  gap: 12px;
+  max-width: 640px;
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 50px;
+  padding: 0 28px;
+  background: var(--bg-link-default);
+  border: none;
+  border-radius: 16px;
+  box-shadow: var(--shadow-level-1);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.searchButton:hover {
+  background: #3a41cc;
+}
+
+.searchButton:active {
+  background: #2f35c2;
+}
+
+.searchButtonLabel {
+  color: var(--text-white);
+}
+
+.searchButtonIcon {
+  display: none;
+  width: 22px;
+  height: 22px;
+  stroke: var(--bg-white);
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 7px 16px;
+  background: var(--bg-white);
+  border: solid 1px var(--bg-grey-5);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.chip:hover {
+  background: var(--bg-grey-8);
+}
+
+.chipActive,
+.chipActive:hover {
+  background: var(--bg-black);
+  border-color: var(--bg-black);
+}
+
+.chipActive .chipLabel {
+  color: var(--text-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.footerHint {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.inlineLink {
+  color: var(--text-link-default);
+  cursor: pointer;
+}
+
+.inlineLink:hover {
+  color: #2f35c2;
+}
+
+@media (--tablet) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (--mobile) {
+  .content {
+    padding: 24px 16px 48px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .searchRow {
+    gap: 8px;
+  }
+
+  .searchButton {
+    width: 50px;
+    padding: 0;
+    border-radius: 14px;
+  }
+
+  .searchButtonLabel {
+    display: none;
+  }
+
+  .searchButtonIcon {
+    display: block;
+  }
+
+  .grid {
+    gap: 12px;
+  }
+}

@@ -1,0 +1,109 @@
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  aspect-ratio: 1 / 1.414;
+  padding: 9% 8%;
+  background: var(--bg-white);
+  border: solid 1px var(--bg-grey-7);
+  border-radius: 8px;
+  box-shadow: var(--shadow-level-2);
+}
+
+.head {
+  margin-bottom: 14px;
+}
+
+.docTitle {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 130%;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-primary);
+}
+
+.docSubtitle {
+  margin-top: 4px;
+  font-size: 9px;
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bar {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--bg-grey-7);
+}
+
+.field {
+  display: block;
+  height: 16px;
+  border: dashed 1px var(--bg-accent-extra-dark);
+  border-radius: 4px;
+  background: #f6fdef;
+}
+
+.fieldFilled {
+  display: block;
+  height: 16px;
+  padding: 0 6px;
+  border: solid 1px var(--bg-accent-light-1);
+  border-radius: 4px;
+  background: var(--bg-accent-light-2);
+  font-size: 9px;
+  line-height: 14px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.heading {
+  margin-bottom: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--text-primary);
+}
+
+.signatures {
+  display: flex;
+  gap: 14%;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.signature {
+  flex: 1;
+}
+
+.signLine {
+  display: block;
+  margin-bottom: 4px;
+  border-top: solid 1px var(--bg-grey-4);
+}
+
+.signLabel {
+  font-size: 8px;
+  color: var(--text-tertiary);
+}

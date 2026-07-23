@@ -1,0 +1,84 @@
+.modalCard {
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  text-align: left;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: solid 1px var(--bg-grey-7);
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  background: var(--bg-white);
+  border: solid 1px var(--bg-grey-6);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.close:hover {
+  background: var(--bg-grey-8);
+}
+
+.close svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--bg-grey-2);
+}
+
+.body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: var(--bg-grey-bg-main);
+}
+
+.doc {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  border-top: solid 1px var(--bg-grey-7);
+}
+
+.footerHint {
+  color: var(--text-secondary);
+}
+
+@media (--mobile) {
+  .modalCard {
+    max-height: calc(100vh - 16px);
+  }
+
+  .footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .footerButton {
+    width: 100%;
+  }
+}

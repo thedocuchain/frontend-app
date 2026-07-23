@@ -38,7 +38,7 @@ export function ButtonWrapper(
 
 type ComponentProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode
-  theme?: 'primary' | 'secondary' | 'link-primary' | 'link-secondary' | 'dark'
+  theme?: 'primary' | 'secondary' | 'link-primary' | 'link-secondary' | 'dark' | 'gradient'
   size?: 'sm' | 'standard'
   isLoading?: boolean
   href?: string
@@ -51,6 +51,7 @@ export function Button(props: ComponentProps): ReactElement<HTMLButtonElement> {
     [styles.primary]: theme === undefined || theme === 'primary',
     [styles.secondary]: theme === 'secondary',
     [styles.dark]: theme === 'dark',
+    [styles.gradient]: theme === 'gradient',
     [styles.linkPrimary]: theme === 'link-primary',
     [styles.linkSecondary]: theme === 'link-secondary',
     [styles.sm]: size === 'sm',

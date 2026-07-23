@@ -1,0 +1,41 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.text {
+  color: inherit !important;
+}
+
+.nda {
+  background: var(--bg-accent-extra-light);
+  color: var(--text-accent);
+}
+
+.employment {
+  background: #eee7ff;
+  color: #6941c6;
+}
+
+.sales {
+  background: #fff0dc;
+  color: var(--text-warning);
+}
+
+.lease {
+  background: #e0efff;
+  color: #1d63c9;
+}
+
+.services {
+  background: #d9fbea;
+  color: var(--text-success);
+}
+
+.freelance {
+  background: #e0f7ff;
+  color: #0e7090;
+}
