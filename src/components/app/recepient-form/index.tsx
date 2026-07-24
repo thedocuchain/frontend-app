@@ -29,6 +29,7 @@ export function RecepientForm(props: {
 }) {
   const { signer, index, isShowError, setIsShowError, onDelete, onAddRecepient, signers } = props
   const rules = useValidatorRules()
+  const isInitiator = index === 0
 
   const [form, setValue] = useStateForm({
     name: signer.name,
@@ -120,6 +121,7 @@ export function RecepientForm(props: {
             placeholder='John Doe'
             value={form.name}
             onChange={setValue('name')}
+            disabled={isInitiator && !!signer.name}
           />
         </InputValidatorField>
 
@@ -139,6 +141,7 @@ export function RecepientForm(props: {
             placeholder='john.doe@gmail.com'
             value={form.email}
             onChange={setValue('email')}
+            disabled={isInitiator && !!signer.email}
           />
         </InputValidatorField>
 

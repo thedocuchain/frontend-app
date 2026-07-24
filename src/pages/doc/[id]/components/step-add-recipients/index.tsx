@@ -17,6 +17,7 @@ import { Chains, DocumentStatuses, User, UserInfo } from 'src/store/reducers/doc
 import { RecepientForm } from 'src/components/app/recepient-form'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
+import { selectedAccount } from 'src/store/reducers/account'
 import { StepsDocumentPage } from 'src/pages/doc/[id]/index'
 import { useApi } from 'src/utils/use/use-api'
 import { addUsersToDocument } from 'src/store/reducers/document/actions/add-users-to-document'
@@ -56,6 +57,7 @@ export function StepAddRecipients(props: ComponentProps) {
   const toast = useContext(ToastContext)
   const [addUsers, { isSuccess, isLoading, isError }] = useApi(addUsersToDocument)
   const document = useAppSelector(selectedDocument)
+  const account = useAppSelector(selectedAccount)
   const documentShortId = document?.shortId
   const documentName = document.name
 
@@ -64,6 +66,13 @@ export function StepAddRecipients(props: ComponentProps) {
     chain: Chains.POLYGON,
   })
   const [validator, validate, isShowError, setIsShowError] = useFormValidator(form)
+
+  useEffect(() => {
+    if (!account) return
+    const initiator = signers[0]
+    if (!initiator || (initiator.name === account.name && initiator.email === account.email)) return
+    setSigners(signers.map((el, index) => (index === 0 ? { ...el, name: account.name, email: account.email } : el)))
+  }, [account, signers])
 
   const handleAddOneRecipient = useEvent(() => {
     setSigners([
@@ -254,7 +263,7 @@ export function StepAddRecipients(props: ComponentProps) {
         {signers?.map((el, index) => (
           <RecepientForm
             onDelete={handleDeleteRecipient}
-            key={`${el.name}${index}`}
+            key={`${el.name}${el.email}${index}`}
             signer={el}
             index={index}
             isShowError={isShowError}
