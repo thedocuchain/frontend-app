@@ -26,7 +26,7 @@ const NAV_ITEMS = [
   { href: '/account/settings', label: 'Settings', icon: IconGear },
 ]
 
-export function AccountLayout(props: PropsWithChildren) {
+export function AccountLayout(props: PropsWithChildren & { flush?: boolean }) {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const accountToken = useAppSelector(selectedAccountToken)
@@ -152,7 +152,7 @@ export function AccountLayout(props: PropsWithChildren) {
         )}
       </header>
 
-      <main className={styles.content}>{props.children}</main>
+      <main className={cn(styles.content, { [styles.flush]: props.flush })}>{props.children}</main>
 
       <nav className={styles.tabBar}>
         {NAV_ITEMS.map((item) => (

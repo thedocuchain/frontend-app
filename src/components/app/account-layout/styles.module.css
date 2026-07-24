@@ -147,6 +147,10 @@
   transition: margin-left 0.15s ease;
 }
 
+.content.flush {
+  padding: 0;
+}
+
 .sidebar.collapsed ~ .content {
   margin-left: 72px;
 }
@@ -235,6 +239,11 @@
     margin-left: 0;
     padding: 16px 16px 104px;
     min-height: auto;
+  }
+
+  .content.flush {
+    padding: 0 0 72px;
+    min-height: 100vh;
   }
 
   .sidebar.collapsed ~ .content {

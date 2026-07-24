@@ -8,7 +8,7 @@ export function DocumentLayout({ children }: PropsWithChildren) {
   const accountToken = useAppSelector(selectedAccountToken)
 
   if (accountToken) {
-    return <AccountLayout>{children}</AccountLayout>
+    return <AccountLayout flush>{children}</AccountLayout>
   }
 
   return <>{children}</>
