@@ -89,7 +89,7 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
       <PageHead>{title}</PageHead>
 
       {activeStep === 'document-error' && (
-        <PageWrapper>
+        <PageWrapper className={'column'}>
           {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate is404Document />
         </PageWrapper>
@@ -110,21 +110,21 @@ export function DocumentSignPage({ step, documentId, signerId }: DocumentSignPag
       )}
 
       {activeStep === 'success-sign' && (
-        <PageWrapper>
+        <PageWrapper className={'column'}>
           {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate isOneSigned />
         </PageWrapper>
       )}
 
       {activeStep === 'success-all-signed' && (
-        <PageWrapper>
+        <PageWrapper className={'column'}>
           {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate isAllSigned />
         </PageWrapper>
       )}
 
       {activeStep === 'expired-link' && (
-        <PageWrapper>
+        <PageWrapper className={'column'}>
           {!inDashboard && <Header isTransparent />}
           <StatusScreenTemplate isExpired documentId={documentId} signerId={signerId} />
         </PageWrapper>
