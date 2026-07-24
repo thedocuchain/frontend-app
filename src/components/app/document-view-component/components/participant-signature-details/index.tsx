@@ -21,11 +21,12 @@ type ParticipantSignatureDetailsProps = {
   isActiveSignature?: boolean
   isLoading?: boolean
   pageWidth: number
+  offsetY?: number
 }
 
 export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsProps) {
   const { name, signatures, id } = props.participant
-  const { isJustCreated, isActiveSignature, isLoading, pageWidth } = props
+  const { isJustCreated, isActiveSignature, isLoading, pageWidth, offsetY = 0 } = props
   const isSignError = useAppSelector(selectedIsSignError) && isActiveSignature
 
   const router = useRouter()
@@ -48,7 +49,7 @@ export function ParticipantSignatureDetails(props: ParticipantSignatureDetailsPr
       id={index === 0 ? 'participant-wrapper' : ''}
       className={cn('flex-row', styles.participantWrapper)}
       style={{
-        bottom: signatures[0].yCoordinate * heightRatio * pageRatio - 60,
+        bottom: (signatures[0].yCoordinate + offsetY) * heightRatio * pageRatio - 60,
       }}
     >
       <div className='flex-row w100-p relative' id={signerId === id ? 'target-id' : ''}>
