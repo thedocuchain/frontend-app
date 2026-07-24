@@ -128,12 +128,6 @@
   cursor: pointer;
 }
 
-.flagButton:disabled {
-  opacity: 0.45;
-  cursor: default;
-  pointer-events: none;
-}
-
 .flagIcon {
   width: 18px;
   height: 18px;

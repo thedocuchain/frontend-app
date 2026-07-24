@@ -228,11 +228,10 @@ export function AccountDocumentsPage() {
                 <Button theme='secondary' size='sm' onClick={() => void handleOpen(document)}>
                   {document.needsMySign ? 'Check' : 'View'}
                 </Button>
-                {!document.isInitiator && (
+                {!document.isInitiator && !isSigned && (
                   <button
                     className={cn(styles.flagButton, 'on-click')}
                     onClick={() => setReportTarget(document)}
-                    disabled={isSigned}
                     aria-label='Report document'
                   >
                     <IconFlag className={styles.flagIcon} />
