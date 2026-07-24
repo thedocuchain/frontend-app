@@ -113,6 +113,10 @@
   color: var(--text-accent);
 }
 
+.statusLocked {
+  color: var(--text-warning);
+}
+
 .actions {
   display: flex;
   align-items: center;

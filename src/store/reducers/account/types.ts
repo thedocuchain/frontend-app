@@ -31,6 +31,7 @@ export interface AccountDocumentItem {
   signedByMe: boolean
   needsMySign: boolean
   isNew: boolean
+  locked: boolean
 }
 
 export interface AccountSessionItem {

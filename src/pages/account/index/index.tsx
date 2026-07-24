@@ -49,6 +49,11 @@ export function AccountDocumentsPage() {
   const [isReporting, setIsReporting] = useState(false)
 
   const handleOpen = useEvent(async (document: AccountDocumentItem) => {
+    if (document.locked) {
+      toast.addToast({ text: 'Please upgrade your plan to open this document.' })
+      return
+    }
+
     void dispatch(markAccountDocumentSeen({ id: document.id }))
 
     if (document.needsMySign) {
@@ -215,18 +220,26 @@ export function AccountDocumentsPage() {
                   )}
                 </div>
                 <div className={styles.statusRow}>
-                  <Text theme='body-3' className='color-text-secondary'>
-                    Status:
-                  </Text>
-                  <Text theme='label-3' className={isSigned ? styles.statusSigned : styles.statusAwaiting}>
-                    {isSigned ? 'Signed' : 'Awaiting'}
-                  </Text>
+                  {document.locked ? (
+                    <Text theme='label-3' className={styles.statusLocked}>
+                      Upgrade to open
+                    </Text>
+                  ) : (
+                    <>
+                      <Text theme='body-3' className='color-text-secondary'>
+                        Status:
+                      </Text>
+                      <Text theme='label-3' className={isSigned ? styles.statusSigned : styles.statusAwaiting}>
+                        {isSigned ? 'Signed' : 'Awaiting'}
+                      </Text>
+                    </>
+                  )}
                 </div>
               </div>
 
               <div className={styles.actions}>
                 <Button theme='secondary' size='sm' onClick={() => void handleOpen(document)}>
-                  {document.needsMySign ? 'Check' : 'View'}
+                  {document.locked ? 'Upgrade to open' : document.needsMySign ? 'Check' : 'View'}
                 </Button>
                 {!document.isInitiator && !isSigned && (
                   <button
