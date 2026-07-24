@@ -6,8 +6,9 @@ import { randomNumber } from '@coxy/utils'
 
 import { Text } from 'src/components/ui/typography'
 import { Column, RowCenter } from 'src/components/ui/grid'
-import { IconEdit, IconRefreshSignature, IconUpload } from 'src/icons'
+import { IconCheck, IconEdit, IconRefreshSignature, IconUpload } from 'src/icons'
 import { toIsoString } from 'src/utils/convert-time'
+import { selectedAccount } from 'src/store/reducers/account'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import {
   selectedIsSigned,
@@ -77,6 +78,8 @@ export function Signature(props: SignatureProps) {
   const { style, isActiveSignature, name, scaleSize } = props
   const isSigned = useAppSelector(selectedIsSigned) && isActiveSignature
   const signImage = useAppSelector(selectedSignImage)
+  const account = useAppSelector(selectedAccount)
+  const savedSignature = account?.signImage || account?.signFont ? account : null
   const dispatch = useAppDispatch()
   const [isLoading, setIsLoading] = useState(false)
   const [isDrawModalVisible, setDrawModalVisible] = useState(false)
@@ -94,8 +97,28 @@ export function Signature(props: SignatureProps) {
     await dispatch(setSignDate(toIsoString(new Date())))
   }
 
+  const applySavedSignature = useEvent(async (event?: React.MouseEvent) => {
+    event?.stopPropagation()
+    if (!savedSignature) return
+    setIsLoading(true)
+    setUploadError(false)
+    if (savedSignature.signImage) {
+      await dispatch(setSignImage(savedSignature.signImage))
+      if (!fontStyle) await dispatch(setSignatureFont(fonts[randomNumber(0, fonts.length - 1)]))
+    } else {
+      await dispatch(setSignImage(null))
+      await dispatch(setSignatureFont(savedSignature.signFont))
+    }
+    await ensureSigned()
+    setIsLoading(false)
+  })
+
   const handeSignDocument = useEvent(async () => {
     if (!isActiveSignature || isSigned) return
+    if (savedSignature) {
+      await applySavedSignature()
+      return
+    }
     setIsLoading(true)
     await dispatch(setSignatureFont(fonts[randomNumber(0, fonts.length - 1)]))
     await ensureSigned()
@@ -207,6 +230,19 @@ export function Signature(props: SignatureProps) {
             ))}
 
           <div className={styles.actionsBlock} style={{ gap: sz(6) }}>
+            {savedSignature && (
+              <button className={styles.actionRow} style={{ gap: sz(6) }} onClick={applySavedSignature}>
+                <IconCheck width={iconSize} height={iconSize} className={styles.iconEdited} />
+                <Text
+                  style={fontSizeStyle}
+                  theme={'button-standard'}
+                  className={cn('color-link-default', 'white-space-nowrap', styles.actionText)}
+                >
+                  Use my signature
+                </Text>
+              </button>
+            )}
+
             <button className={styles.actionRow} style={{ gap: sz(6) }} onClick={handleChangeSignature}>
               <IconRefreshSignature width={iconSize} height={iconSize} className={styles.iconEdited} />
               <Text
