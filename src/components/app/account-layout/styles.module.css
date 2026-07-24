@@ -139,6 +139,8 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   margin-left: 260px;
   padding: 32px;
   min-height: 100vh;
