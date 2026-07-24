@@ -11,11 +11,9 @@ import { StepsProgressBar } from 'src/components/app/steps-progress-bar'
 import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconDownload, IconEye } from 'src/icons'
 import { Space } from 'src/components/ui/space'
-import { Alert } from 'src/components/ui/alert'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { DocumentStatuses } from 'src/store/reducers/document/types'
-import { FormAddEmail } from 'src/components/app/form-add-email'
 import { downloadDocument } from 'src/store/reducers/document/actions/files'
 import { GradientBg } from 'src/components/ui/gradient-bg'
 import { HashInfo } from 'src/components/app/hash-info'
@@ -156,12 +154,6 @@ export function StepCheckStatus({ inDashboard }: { inDashboard?: boolean }) {
                 </>
               )}
             </div>
-
-            {!isCompleted && (
-              <Alert title='Enter your email to receive updates on the signing process.' className={styles.alert}>
-                <FormAddEmail />
-              </Alert>
-            )}
 
             {users.length > 0 && (
               <>

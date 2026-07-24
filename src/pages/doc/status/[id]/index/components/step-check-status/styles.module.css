@@ -19,10 +19,6 @@
   width: 100%;
 }
 
-.alert {
-  margin-top: 24px;
-}
-
 .titleSecondary {
   text-align: left;
   margin-bottom: 12px;
@@ -63,10 +59,6 @@
   .name {
     order: -1;
     margin-bottom: 8px;
-  }
-
-  .alert {
-    margin-top: 36px;
   }
 
   .containerDone {
