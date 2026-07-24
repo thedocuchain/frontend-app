@@ -232,6 +232,7 @@ export function AccountDocumentsPage() {
                   <button
                     className={cn(styles.flagButton, 'on-click')}
                     onClick={() => setReportTarget(document)}
+                    disabled={isSigned}
                     aria-label='Report document'
                   >
                     <IconFlag className={styles.flagIcon} />
