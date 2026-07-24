@@ -34,6 +34,45 @@
   margin-bottom: 16px;
 }
 
+.intervalToggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 20px;
+  background: var(--bg-grey-8);
+  border: 1px solid var(--bg-grey-6);
+  border-radius: 12px;
+}
+
+.intervalOption {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.intervalOption:hover {
+  color: var(--text-primary);
+}
+
+.intervalActive,
+.intervalActive:hover {
+  background: var(--bg-accent-extra-light);
+  color: var(--text-accent);
+}
+
+.intervalActive > * {
+  color: var(--text-accent) !important;
+}
+
+.billedNote {
+  margin-top: -14px;
+  margin-bottom: 16px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

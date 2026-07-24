@@ -22,10 +22,13 @@ import { requireAccountAuth } from 'src/utils/account-guard'
 
 import styles from './styles.module.css'
 
+type BillingInterval = 'month' | 'year'
+
 type PlanCard = {
   id: AccountPlan
   name: string
-  price: string
+  price: Record<BillingInterval, string>
+  docFeature: Record<BillingInterval, string>
   features: { text: string; on: boolean }[]
 }
 
@@ -33,9 +36,9 @@ const PLANS: PlanCard[] = [
   {
     id: 'free',
     name: 'Free',
-    price: '$0',
+    price: { month: '$0', year: '$0' },
+    docFeature: { month: '1 document per month', year: '1 document per month' },
     features: [
-      { text: '1 document per month', on: true },
       { text: 'Up to 2 signers per document', on: true },
       { text: 'AI document review (soon)', on: false },
       { text: 'Email reminders for unsigned documents', on: false },
@@ -45,9 +48,9 @@ const PLANS: PlanCard[] = [
   {
     id: 'pro',
     name: 'Pro',
-    price: '$7',
+    price: { month: '$7', year: '$6.30' },
+    docFeature: { month: '20 documents per month', year: '240 documents per year' },
     features: [
-      { text: '20 documents per month', on: true },
       { text: 'Up to 4 signers per document', on: true },
       { text: 'AI document review (soon)', on: true },
       { text: 'Email reminders for unsigned documents', on: true },
@@ -57,9 +60,9 @@ const PLANS: PlanCard[] = [
   {
     id: 'pro_max',
     name: 'Pro Max',
-    price: '$20',
+    price: { month: '$20', year: '$18' },
+    docFeature: { month: 'Unlimited documents', year: 'Unlimited documents' },
     features: [
-      { text: 'Unlimited documents', on: true },
       { text: 'Unlimited signers per document', on: true },
       { text: 'AI document review (soon)', on: true },
       { text: 'Email reminders for unsigned documents', on: true },
@@ -69,6 +72,7 @@ const PLANS: PlanCard[] = [
 ]
 
 const PLAN_NAMES: Record<AccountPlan, string> = { free: 'Free', pro: 'Pro', pro_max: 'Pro Max' }
+const PLAN_RANK: Record<AccountPlan, number> = { free: 0, pro: 1, pro_max: 2 }
 
 function formatDate(iso: string | null): string {
   if (!iso) return ''
@@ -87,6 +91,8 @@ export function AccountBillingPage() {
 
   const [tab, setTab] = useState<'plans' | 'billing'>('plans')
   const [status, setStatus] = useState<BillingStatus | null>(null)
+  const [interval, setInterval] = useState<BillingInterval>('year')
+  const [intervalPinned, setIntervalPinned] = useState(false)
   const [pending, setPending] = useState<string | null>(null)
   const [confirming, setConfirming] = useState(checkoutResult === 'success')
 
@@ -94,9 +100,18 @@ export function AccountBillingPage() {
     const result = await dispatch(getBillingStatus())
     if (getBillingStatus.fulfilled.match(result) && result.payload) {
       setStatus(result.payload)
+      // Show the interval the subscriber is actually on, unless they've toggled.
+      if (!intervalPinned && result.payload.plan !== 'free' && result.payload.interval) {
+        setInterval(result.payload.interval)
+      }
       return result.payload
     }
     return null
+  })
+
+  const selectInterval = useEvent((next: BillingInterval) => {
+    setIntervalPinned(true)
+    setInterval(next)
   })
 
   useEffect(() => {
@@ -142,7 +157,7 @@ export function AccountBillingPage() {
 
   const handleBuy = useEvent(async (plan: 'pro' | 'pro_max') => {
     setPending(plan)
-    const result = await dispatch(startCheckout({ plan }))
+    const result = await dispatch(startCheckout({ plan, interval }))
     if (startCheckout.fulfilled.match(result) && result.payload?.url) {
       window.open(result.payload.url, '_self')
       return
@@ -205,6 +220,10 @@ export function AccountBillingPage() {
     const planId = plan.id as 'pro' | 'pro_max'
 
     if (hasSubscription) {
+      // Only upgrades are offered — downgrading (e.g. Pro Max → Pro) is hidden.
+      if (PLAN_RANK[plan.id] <= PLAN_RANK[currentPlan]) {
+        return null
+      }
       return (
         <Button theme='secondary' onClick={handlePortal} isLoading={pending === 'portal'} className={styles.action}>
           Switch to {plan.name}
@@ -254,7 +273,9 @@ export function AccountBillingPage() {
                 <Space size={6} />
                 <Text theme='body-2' className='color-text-secondary'>
                   {currentPlan === 'pro'
-                    ? '20 documents a month, 4 signers per document, AI review and email reminders are unlocked.'
+                    ? `${
+                        status?.interval === 'year' ? '240 documents a year' : '20 documents a month'
+                      }, 4 signers per document, AI review and email reminders are unlocked.`
                     : currentPlan === 'pro_max'
                       ? 'Unlimited documents and signers, AI review, email reminders and priority support are unlocked.'
                       : 'Your subscription is being processed.'}
@@ -298,9 +319,27 @@ export function AccountBillingPage() {
               </div>
             )}
 
+            <div className={styles.intervalToggle}>
+              <button
+                type='button'
+                className={cn(styles.intervalOption, { [styles.intervalActive]: interval === 'year' })}
+                onClick={() => selectInterval('year')}
+              >
+                <Text theme='label-1'>Yearly</Text>
+              </button>
+              <button
+                type='button'
+                className={cn(styles.intervalOption, { [styles.intervalActive]: interval === 'month' })}
+                onClick={() => selectInterval('month')}
+              >
+                <Text theme='label-1'>Monthly</Text>
+              </button>
+            </div>
+
             <div className={styles.cards}>
               {PLANS.map((plan) => {
                 const isCurrent = currentPlan === plan.id
+                const isPaid = plan.id !== 'free'
                 return (
                   <div key={plan.id} className={cn(styles.card, { [styles.cardCurrent]: isCurrent })}>
                     <Text theme='headline-4' header='h3'>
@@ -308,14 +347,25 @@ export function AccountBillingPage() {
                     </Text>
                     <div className={styles.priceRow}>
                       <Text theme='headline-2' header='h2'>
-                        {plan.price}
+                        {plan.price[interval]}
                       </Text>
                       <Text theme='body-3' className='color-text-secondary'>
                         / month
                       </Text>
                     </div>
+                    {isPaid && interval === 'year' && (
+                      <Text theme='body-3' className={cn('color-text-secondary', styles.billedNote)}>
+                        billed yearly
+                      </Text>
+                    )}
 
                     <div className={styles.features}>
+                      <div className={styles.feature}>
+                        <span className={cn(styles.featureIcon, styles.iconOn)}>
+                          <IconCheck />
+                        </span>
+                        <Text theme='body-3'>{plan.docFeature[interval]}</Text>
+                      </div>
                       {plan.features.map((feature) => (
                         <div
                           key={feature.text}

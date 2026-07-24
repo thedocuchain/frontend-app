@@ -11,9 +11,12 @@ export interface AccountInfo {
   createdAt: string
 }
 
+export type BillingInterval = 'month' | 'year'
+
 export interface BillingStatus {
   billingEnabled: boolean
   plan: AccountPlan
+  interval: BillingInterval
   subscriptionStatus: string | null
   currentPeriodEnd: string | null
   cancelAtPeriodEnd: boolean

@@ -18,7 +18,11 @@ export const getBillingStatus = createAsyncThunk<BillingStatus | null, void>(
   },
 )
 
-export const startCheckout = createAsyncThunk<{ url: string }, { plan: 'pro' | 'pro_max' }, ThunkConfig>(
+export const startCheckout = createAsyncThunk<
+  { url: string },
+  { plan: 'pro' | 'pro_max'; interval: 'month' | 'year' },
+  ThunkConfig
+>(
   'account/billing-checkout',
   async (payload, thunkAPI) => {
     try {
