@@ -79,9 +79,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .name {
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -90,6 +92,7 @@
 .newBadge {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   padding: 1px 8px;
   border-radius: 100px;
   background: #fecdca;
