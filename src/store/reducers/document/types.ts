@@ -75,3 +75,15 @@ export type DocumentType = {
   originalHash?: string
   initiatorVerifiedAt?: string // ISO dateTimeString with TZ
 }
+
+export type AiReviewStatus = 'pending' | 'streaming' | 'completed' | 'failed'
+
+export type AiReview = {
+  id: string
+  documentId: string
+  status: AiReviewStatus
+  prompt: string
+  content: string
+  error: string | null
+  createdAt: string
+}

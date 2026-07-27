@@ -41,6 +41,8 @@ export { default as IconFlag } from 'src/icons/inline/flag.inline.svg'
 export { default as IconSidebarToggle } from 'src/icons/inline/sidebar-toggle.inline.svg'
 export { default as IconChevronRight } from 'src/icons/inline/chevron-right.inline.svg'
 export { default as IconGoogle } from 'src/icons/inline/google.inline.svg'
+export { default as IconSparkle } from 'src/icons/inline/sparkle.inline.svg'
+export { default as IconArrowBack } from 'src/icons/inline/arrow-back.inline.svg'
 
 export { default as IconXLogo } from 'src/icons/socials/x.inline.svg'
 export { default as IconLinkedinLogo } from 'src/icons/socials/in.inline.svg'

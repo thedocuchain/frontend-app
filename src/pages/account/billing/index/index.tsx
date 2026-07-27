@@ -40,7 +40,7 @@ const PLANS: PlanCard[] = [
     docFeature: { month: '1 document per month', year: '1 document per month' },
     features: [
       { text: 'Up to 2 signers per document', on: true },
-      { text: 'AI document review (soon)', on: false },
+      { text: 'AI document review', on: false },
       { text: 'Email reminders for unsigned documents', on: false },
       { text: 'Priority support', on: false },
     ],
@@ -52,7 +52,7 @@ const PLANS: PlanCard[] = [
     docFeature: { month: '20 documents per month', year: '240 documents per year' },
     features: [
       { text: 'Up to 4 signers per document', on: true },
-      { text: 'AI document review (soon)', on: true },
+      { text: 'AI document review', on: true },
       { text: 'Email reminders for unsigned documents', on: true },
       { text: 'Priority support', on: false },
     ],
@@ -64,7 +64,7 @@ const PLANS: PlanCard[] = [
     docFeature: { month: 'Unlimited documents', year: 'Unlimited documents' },
     features: [
       { text: 'Unlimited signers per document', on: true },
-      { text: 'AI document review (soon)', on: true },
+      { text: 'AI document review', on: true },
       { text: 'Email reminders for unsigned documents', on: true },
       { text: 'Priority support', on: true },
     ],

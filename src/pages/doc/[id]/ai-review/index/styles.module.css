@@ -1,0 +1,139 @@
+.wrapper {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  background: var(--bg-white);
+}
+
+.inDashboard {
+  padding-top: 8px;
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px 20px 64px;
+}
+
+.back {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  background: var(--bg-white);
+  border: solid 1px var(--bg-grey-6-opacity);
+  border-radius: 10px;
+  outline: none;
+}
+
+.back:hover {
+  background: var(--bg-grey-8);
+}
+
+.backIcon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-primary);
+}
+
+.request {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 460px;
+  padding: 14px 16px;
+  background: var(--bg-grey-8);
+  border: solid 1px var(--bg-grey-6-opacity);
+  border-radius: 16px;
+}
+
+.fileChip {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--bg-white);
+  border: solid 1px var(--bg-grey-6-opacity);
+  border-radius: 10px;
+}
+
+.fileIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.fileName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.answer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.aiAvatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 9px;
+}
+
+.answerBody {
+  flex: 1;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.thinking {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.disclaimer {
+  margin-top: 20px;
+  color: var(--text-tertiary) !important;
+  font-size: 12px;
+}
+
+.notice {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--bg-accent-extra-light);
+  border: solid 1px var(--bg-accent-light-2);
+  border-radius: 16px;
+}
+
+@media (--tablet) {
+  .content {
+    padding: 16px 16px 48px;
+  }
+
+  .bubble {
+    max-width: 100%;
+  }
+
+  .notice {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

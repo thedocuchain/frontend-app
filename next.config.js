@@ -61,7 +61,18 @@ module.exports = pwa({
   webpack(config) {
     config.module.rules.push({
       test: /\.inline\.svg$/i,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          // svgo drops viewBox by default, so icons with a hardcoded width/height
+          // get clipped instead of scaled when CSS resizes them.
+          options: {
+            svgoConfig: {
+              plugins: [{ name: 'preset-default', params: { overrides: { removeViewBox: false } } }],
+            },
+          },
+        },
+      ],
     })
 
     const imageLoaderRule = config.module.rules.find((rule) => rule.loader === 'next-image-loader')

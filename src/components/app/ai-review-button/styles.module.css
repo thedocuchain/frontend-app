@@ -1,0 +1,12 @@
+.button > div {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--text-primary);
+}

@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heading {
+  margin-top: 12px;
+}
+
+.heading:first-child {
+  margin-top: 0;
+}
+
+.paragraph {
+  white-space: pre-wrap;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 22px;
+  margin: 0;
+  list-style: disc;
+}
+
+.list li::marker {
+  color: var(--text-tertiary);
+}

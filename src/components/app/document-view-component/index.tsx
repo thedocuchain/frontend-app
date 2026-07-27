@@ -9,6 +9,7 @@ import { StepByStepBlockType } from 'src/components/app/document-view-component/
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { PdfViewPage } from 'src/components/app/pdf-view-page'
+import { AiReviewButton } from 'src/components/app/ai-review-button'
 
 import styles from './styles.module.css'
 
@@ -46,9 +47,12 @@ export function DocumentViewComponent(props: {
               Document ID: {document?.shortId?.toUpperCase()}
             </Text>
           </RowBetween>
-          <Text theme={'body-3'} className='color-text-secondary'>
-            {document.pagesCount} {document.pagesCount > 1 ? 'pages' : 'page'}
-          </Text>
+          <RowBetween className={styles.textWrapper}>
+            <Text theme={'body-3'} className='color-text-secondary'>
+              {document.pagesCount} {document.pagesCount > 1 ? 'pages' : 'page'}
+            </Text>
+            <AiReviewButton documentId={document.id} />
+          </RowBetween>
         </Column>
 
         <PdfViewPage setErrorLoadingPdf={setErrorLoadingPdf} />
