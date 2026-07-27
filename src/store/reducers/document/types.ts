@@ -11,7 +11,7 @@ export type Signature = {
 
 export enum Chains {
   POLYGON = 'polygon',
-  BSC = 'bsc',
+  DIGIBYTE = 'digibyte',
   SOLANA = 'solana',
   MONAD = 'monad',
   BASE = 'base',

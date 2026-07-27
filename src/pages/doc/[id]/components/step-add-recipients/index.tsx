@@ -42,8 +42,8 @@ const chains = [
     value: Chains.SOLANA,
   },
   {
-    title: 'BNB',
-    value: Chains.BSC,
+    title: 'DigiByte',
+    value: Chains.DIGIBYTE,
   },
   {
     title: 'Base',
