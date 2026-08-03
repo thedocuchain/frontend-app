@@ -15,18 +15,20 @@
   <a href="https://github.com/thedocuchain/backend-app">Backend API</a>
 </p>
 
-Built with Next.js, Redux Toolkit, and React Email. Talks to the
+Built with Next.js and Redux Toolkit. Talks to the
 [DocuChain backend](https://github.com/thedocuchain/backend-app) over REST and
-renders signing flows, document previews, and signer notifications.
+renders signing flows, document previews, and account pages.
 
 ## Features
 
+- Accounts with email + password or Google sign-in; creating documents requires an account
 - Drag-and-drop document upload with multi-page PDF preview
 - Multi-signer flows with email invitations
+- Billing page for paid plans (Stripe Checkout and Customer Portal)
+- Contract templates catalog
+- AI document review (paid plans)
 - On-chain signature verification UI (hash lookup against the backend)
 - Mobile-friendly PDF viewer with thumbnail navigation
-- React Email templates for invitations, reminders, and completion notices
-- reCAPTCHA v3 on sensitive actions
 - Optional Amplitude + Google Tag Manager analytics (off unless configured)
 
 ## Quick start
@@ -35,14 +37,13 @@ Requires Node 18+ and Yarn 1.
 
 ```sh
 cp .env.sample .env
-# set NEXT_PUBLIC_RECAPTCHA_SITE_KEY (required for the upload flow)
 yarn install
 yarn dev
 ```
 
 The dev server runs at `http://localhost:3000/app`. It expects the backend at
-`https://api.docuchain.io/` by default — override `BASE_URL` in
-`src/store/apis/rest.ts` if you're running your own.
+`https://api.docuchain.io/` by default — set `NEXT_PUBLIC_API_URL` if you're
+running your own.
 
 ## Configuration
 
@@ -51,7 +52,7 @@ client-side ones are prefixed `NEXT_PUBLIC_`.
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | yes | reCAPTCHA v3 site key |
+| `NEXT_PUBLIC_API_URL` | no | Backend base URL; defaults to `https://api.docuchain.io/` |
 | `NEXT_PUBLIC_AMPLITUDE_API_KEY` | no | Amplitude analytics; tag stays inert if unset |
 | `NEXT_PUBLIC_GTM_ID` | no | Google Tag Manager container; same idle-if-unset behaviour |
 
@@ -60,14 +61,8 @@ client-side ones are prefixed `NEXT_PUBLIC_`.
 ```sh
 yarn build          # production build to ./dist/app
 yarn start          # serve the built app
-yarn lint           # eslint + stylelint
+yarn lint           # eslint
 yarn format         # prettier
-```
-
-## Email templates
-
-```sh
-yarn email-server   # preview React Email templates under ./src/emails
 ```
 
 ## Contributing
