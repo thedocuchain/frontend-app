@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { DefaultApiResponse, SuccessApiResponse } from 'src/store/reducers/types'
+import { SuccessApiResponse } from 'src/store/reducers/types'
 import { api } from 'src/store/apis'
 import { getDocument } from 'src/store/reducers/document/actions/get-document'
+import { ApiErrorPayload, toApiErrorPayload } from 'src/store/reducers/account/actions/api-error'
 
 export type SignDocumentRequest = {
   documentId: string
@@ -15,9 +16,11 @@ export type SignDocumentRequest = {
   signImage?: string | null
 }
 
-export const signDocument = createAsyncThunk(
+type ThunkConfig = { rejectValue: ApiErrorPayload }
+
+export const signDocument = createAsyncThunk<SuccessApiResponse, SignDocumentRequest, ThunkConfig>(
   'document/sign',
-  async (payload: SignDocumentRequest, thunkAPI): Promise<SuccessApiResponse | DefaultApiResponse> => {
+  async (payload, thunkAPI) => {
     try {
       const { data } = await api.post(`/v1/documents/${payload.documentId}/users/${payload.userId}/sign`, {
         readRecordsDisclosure: payload.readRecordsDislosureAndTerms,
@@ -37,8 +40,8 @@ export const signDocument = createAsyncThunk(
       )
 
       return data
-    } catch (ignore) {
-      return null
+    } catch (error) {
+      return thunkAPI.rejectWithValue(toApiErrorPayload(error))
     }
   },
 )

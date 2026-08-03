@@ -14,6 +14,8 @@ import { AppLink } from 'src/components/ui/app-link'
 import { GuideLabel } from 'src/components/app/document-view-component/components/step-by-step-guide/components/guide-label'
 import { Signature } from 'src/components/app/document-view-component/components/edit-tools'
 import { Tooltip } from 'src/components/ui/tooltip'
+import { FrozenModal } from 'src/components/app/frozen-modal'
+import { ACCOUNT_FROZEN_CODE } from 'src/configs/common'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import {
@@ -70,8 +72,9 @@ export function StepByStepBlock(props: ComponentProps) {
   const signatureData = useAppSelector(selectSettingState)
   const isSigned = useAppSelector(selectedIsSigned)
   const dispatch = useAppDispatch()
-  const [sentToSign, { isSuccess, isLoading, isError }] = useApi(signDocument)
+  const [sentToSign, { isSuccess, isLoading, isError, errorCode }] = useApi(signDocument)
   const [sendDocNotify, sendDocNotifyStatus] = useApi(sendDocumentNotify)
+  const [isFrozenModalVisible, setFrozenModalVisible] = useState(false)
 
   const [checkBoxTermsPolicyCreatingDoc, setCheckBoxTermsPolicyCreatingDoc] = useState(false)
   const [checkBoxConsentsESDTermsPolicy, setCheckBoxConsentsESDTermsPolicy] = useState(false)
@@ -151,6 +154,15 @@ export function StepByStepBlock(props: ComponentProps) {
       void handleFinish()
     }
   }, [isSuccess, sendDocNotifyStatus.isSuccess])
+
+  const isFrozenError =
+    errorCode === ACCOUNT_FROZEN_CODE || sendDocNotifyStatus.errorCode === ACCOUNT_FROZEN_CODE
+
+  useEffect(() => {
+    if (isFrozenError) {
+      setFrozenModalVisible(true)
+    }
+  }, [isFrozenError])
 
   const documentSelected = useAppSelector(selectedDocument)
   const activeSigner = signerId && documentSelected.users.find((user) => user.id === signerId)
@@ -241,7 +253,7 @@ export function StepByStepBlock(props: ComponentProps) {
       </div>
 
       <RowCenter className={styles.buttonNext}>
-        {(isError || sendDocNotifyStatus.isError) && (
+        {(isError || sendDocNotifyStatus.isError) && !isFrozenError && (
           <>
             <Text theme={'body-3'} className='color-text-error'>
               Something went wrong. Please try again.
@@ -265,6 +277,8 @@ export function StepByStepBlock(props: ComponentProps) {
           </ButtonIcon>
         </Button>
       </RowCenter>
+
+      <FrozenModal visible={isFrozenModalVisible} onClose={() => setFrozenModalVisible(false)} />
     </div>
   )
 }

@@ -8,6 +8,7 @@ export interface AccountInfo {
   signFont: string | null
   signImage: string | null
   plan: AccountPlan
+  frozen: boolean
   createdAt: string
 }
 
@@ -32,6 +33,7 @@ export interface AccountDocumentItem {
   needsMySign: boolean
   isNew: boolean
   locked: boolean
+  frozen: boolean
 }
 
 export interface AccountSessionItem {

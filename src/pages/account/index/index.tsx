@@ -12,7 +12,7 @@ import { Loader } from 'src/components/ui/loader'
 import { ToastContext } from 'src/components/common/toast/context'
 import { IconFileGrey, IconFlag, IconUploadBox } from 'src/icons'
 import { useAppDispatch, useAppSelector } from 'src/store/hooks'
-import { selectedAccountDocuments } from 'src/store/reducers/account'
+import { selectedAccount, selectedAccountDocuments } from 'src/store/reducers/account'
 import { AccountDocumentItem } from 'src/store/reducers/account/types'
 import {
   getAccountDocuments,
@@ -23,6 +23,8 @@ import {
 } from 'src/store/reducers/account/actions/documents'
 import { ApiErrorPayload } from 'src/store/reducers/account/actions/api-error'
 import { requireAccountAuth } from 'src/utils/account-guard'
+import { ACCOUNT_FROZEN_CODE } from 'src/configs/common'
+import { FrozenModal } from 'src/components/app/frozen-modal'
 
 import { ReportModal } from './components/report-modal'
 import styles from './styles.module.css'
@@ -40,6 +42,7 @@ export function AccountDocumentsPage() {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const toast = useContext(ToastContext)
+  const account = useAppSelector(selectedAccount)
   const documents = useAppSelector(selectedAccountDocuments)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -47,8 +50,16 @@ export function AccountDocumentsPage() {
   const [isDragging, setIsDragging] = useState(false)
   const [reportTarget, setReportTarget] = useState<AccountDocumentItem | null>(null)
   const [isReporting, setIsReporting] = useState(false)
+  const [isFrozenModalVisible, setFrozenModalVisible] = useState(false)
+
+  const isFrozen = account?.frozen === true
 
   const handleOpen = useEvent(async (document: AccountDocumentItem) => {
+    if (document.frozen) {
+      setFrozenModalVisible(true)
+      return
+    }
+
     if (document.locked) {
       toast.addToast({ text: 'Please upgrade your plan to open this document.' })
       return
@@ -63,6 +74,10 @@ export function AccountDocumentsPage() {
         void router.push(`/doc/sign/${document.id}?userId=${userId}&token=${token}&expiredAt=${expiredAt}`)
         return
       }
+      if ((result.payload as ApiErrorPayload | undefined)?.code === ACCOUNT_FROZEN_CODE) {
+        setFrozenModalVisible(true)
+        return
+      }
       toast.addToast({ text: 'Could not open the document. Please try again.' })
       return
     }
@@ -71,6 +86,10 @@ export function AccountDocumentsPage() {
   })
 
   const handleCreateNew = useEvent(() => {
+    if (isFrozen) {
+      setFrozenModalVisible(true)
+      return
+    }
     if (isUploading) return
     fileInputRef.current?.click()
   })
@@ -91,6 +110,10 @@ export function AccountDocumentsPage() {
     }
 
     const error = result.payload as ApiErrorPayload | undefined
+    if (error?.code === ACCOUNT_FROZEN_CODE) {
+      setFrozenModalVisible(true)
+      return
+    }
     if (error?.code === 'PLAN_LIMIT_DOCS') {
       toast.addToast({ text: error.message })
       void router.push('/account/billing')
@@ -118,6 +141,10 @@ export function AccountDocumentsPage() {
   const handleDrop = useEvent((event: React.DragEvent) => {
     event.preventDefault()
     setIsDragging(false)
+    if (isFrozen) {
+      setFrozenModalVisible(true)
+      return
+    }
     if (isUploading) return
     const file = event.dataTransfer.files?.[0]
     if (file) void uploadFile(file)
@@ -149,8 +176,20 @@ export function AccountDocumentsPage() {
     <>
       <PageHead>{title}</PageHead>
 
+      {isFrozen && (
+        <div className={styles.frozenBanner}>
+          <Text theme='label-2' className={styles.frozenBannerTitle}>
+            Your account is frozen
+          </Text>
+          <Text theme='body-3' className={styles.frozenBannerText}>
+            Sending documents and opening new documents is disabled. If you believe this is a mistake, contact{' '}
+            <a href='mailto:support@docuchain.io'>support@docuchain.io</a>
+          </Text>
+        </div>
+      )}
+
       <div
-        className={cn(styles.dropzone, { [styles.dragging]: isDragging })}
+        className={cn(styles.dropzone, { [styles.dragging]: isDragging, [styles.dropzoneFrozen]: isFrozen })}
         onClick={handleCreateNew}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -160,10 +199,10 @@ export function AccountDocumentsPage() {
           <IconUploadBox />
         </span>
         <Text theme='headline-4' header='h2' className={styles.dropTitle}>
-          Drag and drop or click to upload
+          {isFrozen ? 'Uploads are disabled' : 'Drag and drop or click to upload'}
         </Text>
         <Text theme='body-2' className={cn('color-text-secondary', styles.dropHint)}>
-          PDF, Word, Excel, ODT or images, up to 50MB
+          {isFrozen ? 'Your account is frozen, so you can’t upload new documents.' : 'PDF, Word, Excel, ODT or images, up to 50MB'}
         </Text>
         <Button
           onClick={(event) => {
@@ -220,7 +259,11 @@ export function AccountDocumentsPage() {
                   )}
                 </div>
                 <div className={styles.statusRow}>
-                  {document.locked ? (
+                  {document.frozen ? (
+                    <Text theme='label-3' className={styles.statusFrozen}>
+                      Unavailable
+                    </Text>
+                  ) : document.locked ? (
                     <Text theme='label-3' className={styles.statusLocked}>
                       Upgrade to open
                     </Text>
@@ -241,7 +284,7 @@ export function AccountDocumentsPage() {
                 <Button theme='secondary' size='sm' onClick={() => void handleOpen(document)}>
                   {document.locked ? 'Upgrade to open' : document.needsMySign ? 'Check' : 'View'}
                 </Button>
-                {!document.isInitiator && !isSigned && (
+                {!document.frozen && !document.isInitiator && !isSigned && (
                   <button
                     className={cn(styles.flagButton, 'on-click')}
                     onClick={() => setReportTarget(document)}
@@ -263,6 +306,8 @@ export function AccountDocumentsPage() {
         onCheck={handleCheckFromModal}
         onReport={handleReport}
       />
+
+      <FrozenModal visible={isFrozenModalVisible} onClose={() => setFrozenModalVisible(false)} />
     </>
   )
 }

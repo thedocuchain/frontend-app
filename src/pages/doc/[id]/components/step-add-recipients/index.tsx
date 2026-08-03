@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { ValidatorWrapper } from '@coxy/react-validator'
 import { useStateForm } from '@coxy/utils/dist/use/use-state-form'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
@@ -15,6 +15,8 @@ import { Button, ButtonIcon } from 'src/components/ui/button'
 import { IconArrowRightLong, IconUser } from 'src/icons'
 import { Chains, DocumentStatuses, User, UserInfo } from 'src/store/reducers/document/types'
 import { RecepientForm } from 'src/components/app/recepient-form'
+import { FrozenModal } from 'src/components/app/frozen-modal'
+import { ACCOUNT_FROZEN_CODE } from 'src/configs/common'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedDocument } from 'src/store/reducers/document/selectors'
 import { selectedAccount } from 'src/store/reducers/account'
@@ -55,9 +57,10 @@ export function StepAddRecipients(props: ComponentProps) {
   const { signers, setSigners, setActiveStep } = props
   const rules = useValidatorRules()
   const toast = useContext(ToastContext)
-  const [addUsers, { isSuccess, isLoading, isError }] = useApi(addUsersToDocument)
+  const [addUsers, { isSuccess, isLoading, isError, errorCode }] = useApi(addUsersToDocument)
   const document = useAppSelector(selectedDocument)
   const account = useAppSelector(selectedAccount)
+  const [isFrozenModalVisible, setFrozenModalVisible] = useState(false)
   const documentShortId = document?.shortId
   const documentName = document.name
 
@@ -199,10 +202,13 @@ export function StepAddRecipients(props: ComponentProps) {
   }, [isSuccess])
 
   useEffect(() => {
-    if (isError) {
-      toast.addToast({ text: 'Could not save recipients. Please try again.' })
+    if (!isError) return
+    if (errorCode === ACCOUNT_FROZEN_CODE) {
+      setFrozenModalVisible(true)
+      return
     }
-  }, [isError])
+    toast.addToast({ text: 'Could not save recipients. Please try again.' })
+  }, [isError, errorCode])
 
   useEffect(() => {
     setIsShowError(false)
@@ -289,6 +295,8 @@ export function StepAddRecipients(props: ComponentProps) {
           </ButtonIcon>
         </Button>
       </div>
+
+      <FrozenModal visible={isFrozenModalVisible} onClose={() => setFrozenModalVisible(false)} />
     </>
   )
 }

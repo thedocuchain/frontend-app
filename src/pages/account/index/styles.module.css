@@ -1,3 +1,28 @@
+.frozenBanner {
+  max-width: 720px;
+  margin: 0 auto 16px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid #eb8f8f;
+  background: #fef3f2;
+}
+
+.frozenBannerTitle {
+  display: block;
+  margin-bottom: 4px;
+  color: #b42318;
+}
+
+.frozenBannerText {
+  color: #912018;
+}
+
+.frozenBannerText a {
+  color: #912018;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 .dropzone {
   display: flex;
   flex-direction: column;
@@ -13,6 +38,11 @@
     linear-gradient(120deg, #a67cfa, #64b4fa, #40d3d6, #33e68c) border-box;
   cursor: pointer;
   transition: box-shadow 0.15s ease;
+}
+
+.dropzone.dropzoneFrozen {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .dropzone.dragging {
@@ -115,6 +145,10 @@
 
 .statusLocked {
   color: var(--text-warning);
+}
+
+.statusFrozen {
+  color: var(--text-secondary);
 }
 
 .actions {

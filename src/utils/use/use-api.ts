@@ -11,6 +11,7 @@ export const useApi = <R, Params>(thunk: AsyncThunk<R, Params, {}>) => {
   const [isError, setIsError] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [errorCode, setErrorCode] = useState<string | undefined>(undefined)
 
   const resetStatus = useEvent(() => {
     setIsLoading(false)
@@ -33,6 +34,7 @@ export const useApi = <R, Params>(thunk: AsyncThunk<R, Params, {}>) => {
       if (err.message) {
         setErrorMessage(err.message)
       }
+      setErrorCode(err.code)
       setIsError(true)
       setIsSuccess(false)
       setIsLoading(false)
@@ -43,5 +45,5 @@ export const useApi = <R, Params>(thunk: AsyncThunk<R, Params, {}>) => {
     return response
   }, [])
 
-  return [cb, { isLoading, isError, isSuccess, resetStatus, errorMessage }] as const
+  return [cb, { isLoading, isError, isSuccess, resetStatus, errorMessage, errorCode }] as const
 }
