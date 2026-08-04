@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
+import { useRouter } from 'next/router'
 import { useEvent } from '@coxy/utils/dist/use/use-event'
 
 import { AppStore } from 'src/store'
@@ -18,6 +19,7 @@ import { useAccountLogout } from 'src/utils/use/use-account-logout'
 import { useAppSelector } from 'src/store/hooks'
 import { selectedAccount } from 'src/store/reducers/account'
 import { updateAccountProfile } from 'src/store/reducers/account/actions/profile'
+import { deleteAccount } from 'src/store/reducers/account/actions/auth'
 import { fileToAvatarDataUrl } from 'src/utils/avatar-image'
 import { requireAccountAuth } from 'src/utils/account-guard'
 
@@ -29,10 +31,13 @@ import styles from './styles.module.css'
 export function AccountSettingsPage() {
   const { title } = usePageHead({ title: '| Settings' })
   const toast = useContext(ToastContext)
+  const router = useRouter()
   const account = useAppSelector(selectedAccount)
 
   const logout = useAccountLogout()
   const [isLogoutConfirmVisible, setLogoutConfirmVisible] = useState(false)
+  const [isDeleteConfirmVisible, setDeleteConfirmVisible] = useState(false)
+  const [removeAccount, { isLoading: isDeletingAccount }] = useApi(deleteAccount)
 
   const [tab, setTab] = useState<'profile' | 'security'>('profile')
 
@@ -81,6 +86,16 @@ export function AccountSettingsPage() {
   const handleConfirmLogout = useEvent(async () => {
     setLogoutConfirmVisible(false)
     await logout()
+  })
+
+  const handleConfirmDeleteAccount = useEvent(async () => {
+    const result = await removeAccount()
+    if (!result) {
+      toast.addToast({ text: 'Could not delete the account. Please try again later.' })
+      return
+    }
+    setDeleteConfirmVisible(false)
+    void router.replace('/')
   })
 
   return (
@@ -170,6 +185,15 @@ export function AccountSettingsPage() {
               <Text theme='label-1'>Support</Text>
               <IconChevronRight className={styles.chevron} />
             </div>
+
+            <div className={styles.divider} />
+
+            <div className={styles.sectionHeader} onClick={() => setDeleteConfirmVisible(true)}>
+              <Text theme='label-1' className='color-text-error'>
+                Delete account
+              </Text>
+              <IconChevronRight className={styles.chevron} />
+            </div>
           </div>
         )}
 
@@ -183,6 +207,16 @@ export function AccountSettingsPage() {
         title='Are you sure you want to log out?'
         onConfirm={handleConfirmLogout}
         onClose={() => setLogoutConfirmVisible(false)}
+      />
+      <ConfirmDialog
+        visible={isDeleteConfirmVisible}
+        title='Delete your account?'
+        description='Your profile and documents without other participants will be permanently deleted. This cannot be undone.'
+        confirmText='Delete'
+        cancelText='Cancel'
+        isLoading={isDeletingAccount}
+        onConfirm={handleConfirmDeleteAccount}
+        onClose={() => setDeleteConfirmVisible(false)}
       />
     </>
   )

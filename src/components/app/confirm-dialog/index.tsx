@@ -9,6 +9,7 @@ import styles from './styles.module.css'
 type ConfirmDialogProps = {
   visible: boolean
   title: string
+  description?: string
   confirmText?: string
   cancelText?: string
   isLoading?: boolean
@@ -17,13 +18,18 @@ type ConfirmDialogProps = {
 }
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
-  const { visible, title, confirmText = 'Yes', cancelText = 'No', isLoading, onConfirm, onClose } = props
+  const { visible, title, description, confirmText = 'Yes', cancelText = 'No', isLoading, onConfirm, onClose } = props
 
   return (
     <Modal visible={visible} onClose={onClose} className={styles.card}>
       <Text theme='headline-4' header='h2' className={styles.title}>
         {title}
       </Text>
+      {description && (
+        <Text theme='body-3' className={styles.description}>
+          {description}
+        </Text>
+      )}
 
       <div className={styles.actions}>
         <Button theme='secondary' onClick={onClose}>

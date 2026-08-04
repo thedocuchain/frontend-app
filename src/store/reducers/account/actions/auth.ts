@@ -68,6 +68,16 @@ export const loginAccount = createAsyncThunk<AuthResponse, { email: string; pass
   },
 )
 
+export const deleteAccount = createAsyncThunk<true, void, ThunkConfig>('account/delete', async (_, thunkAPI) => {
+  try {
+    await api.delete('/v1/account')
+    thunkAPI.dispatch(actionUserLogout())
+    return true
+  } catch (error) {
+    return thunkAPI.rejectWithValue(toApiErrorPayload(error))
+  }
+})
+
 export const logoutAccount = createAsyncThunk<void, void>('account/logout', async (_, thunkAPI) => {
   try {
     await api.post('/v1/auth/logout')
